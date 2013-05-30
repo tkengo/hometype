@@ -8,6 +8,10 @@ Viewport.prototype.getScrollPosition = function() {
   }
 };
 
+Viewport.prototype.getWindowHeight = function() {
+  return $(window).height();
+};
+
 Viewport.prototype.scrollTo = function(x, y) {
   $(document.body).animate({ scrollTop: y + 'px', scrollLeft: x + 'px' }, 100);
 };

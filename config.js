@@ -1,6 +1,8 @@
 var Config = {
   nmap: {
     J: 'scrollDown',
-    K: 'scrollUp'
+    K: 'scrollUp',
+    D: 'scrollDownHalf',
+    U: 'scrollUpHalf'
   }
 };

@@ -1,6 +1,8 @@
 var KeyCode = {
   74: 'J',
   75: 'K',
+  85: 'U',
+  68: 'D',
   BACKSPACE: 8,
   TAB: 9,
   ENTER: 13,
