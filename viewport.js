@@ -16,6 +16,14 @@ Viewport.prototype.getWindowHeight = function() {
   return window.innerHeight;
 };
 
+Viewport.prototype.getDocumentWidth = function() {
+  return $(document).width();
+};
+
+Viewport.prototype.getDocumentHeight = function() {
+  return $(document).height();
+};
+
 Viewport.prototype.scrollTo = function(x, y) {
   $(document.body).animate({ scrollTop: y + 'px', scrollLeft: x + 'px' }, 100);
 };

@@ -1,10 +1,14 @@
 (function() {
-  KeyMap.assign('j',   'scrollDown');
-  KeyMap.assign('k',   'scrollUp');
-  KeyMap.assign('C-d', 'scrollDownHalf');
-  KeyMap.assign('C-u', 'scrollUpHalf');
-  KeyMap.assign('C-f', 'scrollDownPage');
-  KeyMap.assign('C-b', 'scrollUpPage');
+  KeyMap.assign('j',     'scrollDown');
+  KeyMap.assign('k',     'scrollUp');
+  KeyMap.assign('G',     'scrollToBottom');
+  KeyMap.assign('gg',    'scrollToTop');
+  KeyMap.assign('<C-e>', 'scrollDown');
+  KeyMap.assign('<C-y>', 'scrollUp');
+  KeyMap.assign('<C-d>', 'scrollDownHalf');
+  KeyMap.assign('<C-u>', 'scrollUpHalf');
+  KeyMap.assign('<C-f>', 'scrollDownPage');
+  KeyMap.assign('<C-b>', 'scrollUpPage');
 })();
 
 $(document).ready(function() {
@@ -17,5 +21,8 @@ $(document).ready(function() {
     // }
   // });
   // $(document).on('keydown', KeyManager.onKeyDown);
-  document.addEventListener('keydown', KeyManager.onKeyDown);
+  document.addEventListener('keydown', function(event) {
+    var km = Resource.KeyManager;
+    km.onKeyDown.call(km, event);
+  });
 });

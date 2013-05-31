@@ -23,3 +23,11 @@ Command.scrollDownPage = function() {
 Command.scrollUpPage = function() {
   Resource.Viewport.scrollUp(Resource.Viewport.getWindowHeight());
 };
+
+Command.scrollToTop = function() {
+  Resource.Viewport.scrollTo(0, 0);
+};
+
+Command.scrollToBottom = function() {
+  Resource.Viewport.scrollTo(0, Resource.Viewport.getDocumentHeight());
+};
