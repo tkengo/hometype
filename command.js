@@ -1,19 +1,25 @@
-var Command = function() {
-  this.viewport = new Viewport();
+var Command = {};
+
+Command.scrollDown = function() {
+  Resource.Viewport.scrollDown(50);
 };
 
-Command.prototype.scrollDown = function() {
-  this.viewport.scrollDown(50);
+Command.scrollUp = function() {
+  Resource.Viewport.scrollUp(50);
 };
 
-Command.prototype.scrollUp = function() {
-  this.viewport.scrollUp(50);
+Command.scrollDownHalf = function() {
+  Resource.Viewport.scrollDown(Resource.Viewport.getWindowHeight() / 2);
 };
 
-Command.prototype.scrollDownHalf = function() {
-  this.viewport.scrollDown(this.viewport.getWindowHeight() / 2);
+Command.scrollUpHalf = function() {
+  Resource.Viewport.scrollUp(Resource.Viewport.getWindowHeight() / 2);
 };
 
-Command.prototype.scrollUpHalf = function() {
-  this.viewport.scrollUp(this.viewport.getWindowHeight() / 2);
+Command.scrollDownPage = function() {
+  Resource.Viewport.scrollDown(Resource.Viewport.getWindowHeight());
+};
+
+Command.scrollUpPage = function() {
+  Resource.Viewport.scrollUp(Resource.Viewport.getWindowHeight());
 };

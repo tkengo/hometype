@@ -8,8 +8,12 @@ Viewport.prototype.getScrollPosition = function() {
   }
 };
 
+Viewport.prototype.getWindowWidth = function() {
+  return window.innerWidth;
+};
+
 Viewport.prototype.getWindowHeight = function() {
-  return $(window).height();
+  return window.innerHeight;
 };
 
 Viewport.prototype.scrollTo = function(x, y) {
@@ -24,4 +28,14 @@ Viewport.prototype.scrollDown = function(value) {
 Viewport.prototype.scrollUp = function(value) {
   var pos = this.getScrollPosition();
   this.scrollTo(pos.left, pos.top - value);
+};
+
+Viewport.prototype.scrollLeft = function(value) {
+  var pos = this.getScrollPosition();
+  this.scrollTo(pos.left - value, pos.top);
+};
+
+Viewport.prototype.scrollRight = function(value) {
+  var pos = this.getScrollPosition();
+  this.scrollTo(pos.left + value, pos.top);
 };

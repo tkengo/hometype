@@ -9,10 +9,12 @@
     "matches": [ "<all_urls>" ],
     "js": [
       "jquery-2.0.1.min.js",
-      "keycode.js",
-      "config.js",
+      "key_identifiers.js",
       "viewport.js",
       "command.js",
+      "key_manager.js",
+      "keymap.js",
+      "resource.js",
       "main.js"
     ]
   }]
