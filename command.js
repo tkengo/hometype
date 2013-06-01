@@ -31,3 +31,30 @@ Command.scrollToTop = function() {
 Command.scrollToBottom = function() {
   Resource.Viewport.scrollTo(0, Resource.Viewport.getDocumentHeight());
 };
+
+Command.goToHintMode = function() {
+  Resource.Mode.changeMode(ModeList.HINT_MODE);
+  Resource.Viewport.clickableElement().each(function() {
+    var screenOffsetTop     = Resource.Viewport.scrollPosition().top;
+    var screenOffsetBottom  = screenOffsetTop + Resource.Viewport.getWindowHeight();
+    var elementOffsetTop    = $(this).offset().top;
+    var elementOffsetBottom = elementOffsetTop + $(this).height();
+
+    if (elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop) {
+      $(this).css('background-color', 'yellow');
+
+      $('<div>').css({
+        'position': 'absolute',
+        'top': elementOffsetTop + 'px',
+        'left': $(this).offset().left + 'px'
+      }).text('hoge').appendTo($('body'));
+    }
+    else {
+      $(this).css('background-color', '');
+    }
+
+    // var triggerNodePosition = $(this).offset().top - Resource.Viewport.getWindowHeight();
+    // if (Resource.Viewport.scrollPosition().top > triggerNodePosition) {
+    // }
+  });
+};

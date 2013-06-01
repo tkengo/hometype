@@ -1,18 +1,21 @@
+// キーマッピング
 (function() {
-  KeyMap.assign('j',     'scrollDown');
-  KeyMap.assign('k',     'scrollUp');
-  KeyMap.assign('G',     'scrollToBottom');
-  KeyMap.assign('gg',    'scrollToTop');
-  KeyMap.assign('<C-e>', 'scrollDown');
-  KeyMap.assign('<C-y>', 'scrollUp');
-  KeyMap.assign('<C-d>', 'scrollDownHalf');
-  KeyMap.assign('<C-u>', 'scrollUpHalf');
-  KeyMap.assign('<C-f>', 'scrollDownPage');
-  KeyMap.assign('<C-b>', 'scrollUpPage');
+  KeyMap.nmap('j',     'scrollDown');
+  KeyMap.nmap('k',     'scrollUp');
+  KeyMap.nmap('G',     'scrollToBottom');
+  KeyMap.nmap('gg',    'scrollToTop');
+  KeyMap.nmap('f',     'goToHintMode');
+  KeyMap.nmap('<C-e>', 'scrollDown');
+  KeyMap.nmap('<C-y>', 'scrollUp');
+  KeyMap.nmap('<C-d>', 'scrollDownHalf');
+  KeyMap.nmap('<C-u>', 'scrollUpHalf');
+  KeyMap.nmap('<C-f>', 'scrollDownPage');
+  KeyMap.nmap('<C-b>', 'scrollUpPage');
 })();
 
+// 初期化処理
 $(document).ready(function() {
-  var caretBrowseMode = false;
+  // var caretBrowseMode = false;
 
   // $(document).keydown(function(event) {
     // if (event.keyCode == KeyCode.C) {
@@ -21,6 +24,8 @@ $(document).ready(function() {
     // }
   // });
   // $(document).on('keydown', KeyManager.onKeyDown);
+
+  // イベントハンドラ登録
   document.addEventListener('keydown', function(event) {
     var km = Resource.KeyManager;
     km.onKeyDown.call(km, event);

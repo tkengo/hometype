@@ -1,6 +1,7 @@
 var KeyManager = function() {
   this.keySequece = '';
   this.resetkeySequeceTimerId = -1;
+  this.commandCandidate = {};
 };
 
 KeyManager.prototype.onKeyDown = function(event) {
@@ -13,19 +14,24 @@ KeyManager.prototype.onKeyDown = function(event) {
 
   this.resetTimerForResetKeySequence();
 
-  var command = KeyMap.command(this.keySequece);
-  if (command) {
+  var candidate = KeyMap.candidate('nmap', this.keySequece);
+  if (candidate.length == 1 && candidate[0].key == this.keySequece) {
     this.keySequece = '';
-    command.call();
+    candidate[0].command.call();
   }
   else {
-    this.setTimerForResetKeySequence(500);
+    this.setTimerForResetKeySequence(300);
   }
 };
 
 KeyManager.prototype.setTimerForResetKeySequence = function(interval) {
   this.resetkeySequeceTimerId = setTimeout($.proxy(function() {
+    var command = KeyMap.command('nmap', this.keySequece);
     this.keySequece = '';
+
+    if (command) {
+      command.call();
+    }
   }, this), interval);
 };
 

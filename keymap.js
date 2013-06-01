@@ -1,24 +1,34 @@
 var KeyMap = {};
 
-_nmap = {
+_map = {
+  nmap: {},
+  fmap: {},
+  vmap: {}
 };
 
-KeyMap.assign = function(key, command) {
-  _nmap[key] = command;
+KeyMap.assign = function(mode, key, command) {
+  _map[mode][key] = command;
 };
 
-KeyMap.command = function(key) {
-  var count = 0;
+KeyMap.nmap = function(key, command) {
+  KeyMap.assign('nmap', key, command);
+};
 
-  for (map in _nmap) {
+KeyMap.candidate = function(mode, key) {
+  var result = [];
+
+  for (map in _map[mode]) {
     if (map.indexOf(key) == 0) {
-      count++;
+      result.push({
+        key: map,
+        command: Command[_map[mode][map]]
+      });
     }
   }
 
-  return count == 1 ? Command[_nmap[key]] : undefined;
+  return result;
 };
 
-KeyMap.map = function() {
-  return _nmap;
+KeyMap.command = function(mode, key) {
+  return Command[_map[mode][key]];
 };

@@ -1,7 +1,7 @@
 var Viewport = function() {
 };
 
-Viewport.prototype.getScrollPosition = function() {
+Viewport.prototype.scrollPosition = function() {
   return {
     top: document.body.scrollTop,
     left: document.body.scrollLeft
@@ -25,25 +25,31 @@ Viewport.prototype.getDocumentHeight = function() {
 };
 
 Viewport.prototype.scrollTo = function(x, y) {
-  $(document.body).animate({ scrollTop: y + 'px', scrollLeft: x + 'px' }, 100);
+  // $(document.body).animate({ scrollTop: y + 'px', scrollLeft: x + 'px' }, 100);
+  document.body.scrollTop = y;
+  document.body.scrollLeft = x;
 };
 
 Viewport.prototype.scrollDown = function(value) {
-  var pos = this.getScrollPosition();
+  var pos = this.scrollPosition();
   this.scrollTo(pos.left, pos.top + value);
 };
 
 Viewport.prototype.scrollUp = function(value) {
-  var pos = this.getScrollPosition();
+  var pos = this.scrollPosition();
   this.scrollTo(pos.left, pos.top - value);
 };
 
 Viewport.prototype.scrollLeft = function(value) {
-  var pos = this.getScrollPosition();
+  var pos = this.scrollPosition();
   this.scrollTo(pos.left - value, pos.top);
 };
 
 Viewport.prototype.scrollRight = function(value) {
-  var pos = this.getScrollPosition();
+  var pos = this.scrollPosition();
   this.scrollTo(pos.left + value, pos.top);
+};
+
+Viewport.prototype.clickableElement = function() {
+  return $('a[href], *[onclick]');
 };

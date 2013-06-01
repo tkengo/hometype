@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Chromekey",
-  "description": "vi like key mapping for GoogleChrome",
+  "description": "vi key mapping for GoogleChrome",
   "version": "0.1",
 
   "content_scripts": [{
@@ -14,6 +14,7 @@
       "command.js",
       "key_manager.js",
       "keymap.js",
+      "mode.js",
       "resource.js",
       "main.js"
     ]
