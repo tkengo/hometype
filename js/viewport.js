@@ -53,3 +53,12 @@ Viewport.prototype.scrollRight = function(value) {
 Viewport.prototype.clickableElement = function() {
   return $('a[href], *[onclick]');
 };
+
+Viewport.prototype.isInnerScreen = function(element) {
+  var screenOffsetTop     = Resource.Viewport.scrollPosition().top;
+  var screenOffsetBottom  = screenOffsetTop + Resource.Viewport.getWindowHeight();
+  var elementOffsetTop    = element.offset().top;
+  var elementOffsetBottom = elementOffsetTop + element.height();
+
+  return elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop;
+};

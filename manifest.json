@@ -5,18 +5,28 @@
   "description": "vi key mapping for GoogleChrome",
   "version": "0.1",
 
+  "permissions": [ "tabs" ],
+  
+  "background": {
+    "persistent": true,
+    "page": "background/background.html"
+  },
+
   "content_scripts": [{
     "matches": [ "<all_urls>" ],
+    "css": [
+      "css/main.css"
+    ],
     "js": [
-      "jquery-2.0.1.min.js",
-      "key_identifiers.js",
-      "viewport.js",
-      "command.js",
-      "key_manager.js",
-      "keymap.js",
-      "mode.js",
-      "resource.js",
-      "main.js"
+      "lib/jquery-2.0.1.min.js",
+      "js/key_identifiers.js",
+      "js/viewport.js",
+      "js/command.js",
+      "js/key_manager.js",
+      "js/keymap.js",
+      "js/mode.js",
+      "js/resource.js",
+      "js/main.js"
     ]
   }]
 }

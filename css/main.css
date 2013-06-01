@@ -1,0 +1,10 @@
+.chromekey-hit-a-hint {
+  position:absolute;
+  background-color:#FFFF4D;
+  opacity:0.8;
+  padding:0 3px;
+  border-radius:3px;
+}
+.chromekey-hit-a-hint-area {
+  background-color:#FDFFC3;
+}

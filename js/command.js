@@ -32,29 +32,25 @@ Command.scrollToBottom = function() {
   Resource.Viewport.scrollTo(0, Resource.Viewport.getDocumentHeight());
 };
 
+Command.closeTab = function() {
+  chrome.runtime.sendMessage('closeTab');
+};
+
 Command.goToHintMode = function() {
   Resource.Mode.changeMode(ModeList.HINT_MODE);
-  Resource.Viewport.clickableElement().each(function() {
-    var screenOffsetTop     = Resource.Viewport.scrollPosition().top;
-    var screenOffsetBottom  = screenOffsetTop + Resource.Viewport.getWindowHeight();
-    var elementOffsetTop    = $(this).offset().top;
-    var elementOffsetBottom = elementOffsetTop + $(this).height();
+  $('div.chromekey-hit-a-hint').remove();
 
-    if (elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop) {
-      $(this).css('background-color', 'yellow');
+  Resource.Viewport.clickableElement().each(function() {
+    if (Resource.Viewport.isInnerScreen($(this))) {
+      $(this).addClass('chromekey-hit-a-hint-area');
 
       $('<div>').css({
-        'position': 'absolute',
-        'top': elementOffsetTop + 'px',
-        'left': $(this).offset().left + 'px'
-      }).text('hoge').appendTo($('body'));
+        'top': ($(this).offset().top - 10) + 'px',
+        'left': ($(this).offset().left - 10) + 'px'
+      }).addClass('chromekey-hit-a-hint').text('a').appendTo($('body'));
     }
     else {
-      $(this).css('background-color', '');
+      $(this).removeClass('chromekey-hit-a-hint-area');
     }
-
-    // var triggerNodePosition = $(this).offset().top - Resource.Viewport.getWindowHeight();
-    // if (Resource.Viewport.scrollPosition().top > triggerNodePosition) {
-    // }
   });
 };
