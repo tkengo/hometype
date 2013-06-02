@@ -22,6 +22,7 @@
       "js/key_identifiers.js",
       "js/viewport.js",
       "js/mode/hint_element.js",
+      "js/mode/hint_element_collection.js",
       "js/mode/normal.js",
       "js/mode/hint.js",
       "js/command.js",

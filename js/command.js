@@ -45,9 +45,5 @@ Command.goToHintMode = function() {
   }
 
   var hint = Viewport.createNewHintElement();
-  for (var index in hint.getElements()) {
-    hint.setHintTip(index, hint.nextHintKey());
-  }
-
   hint.show();
 };

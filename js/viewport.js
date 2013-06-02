@@ -64,7 +64,7 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
 };
 
 _Viewport.prototype.createNewHintElement = function() {
-  this.hintElement = new HintElement();
+  this.hintElement = new HintElementCollection();
   return this.hintElement;
 };
 
