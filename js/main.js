@@ -5,6 +5,7 @@
   KeyMap.nmap('G',     'scrollToBottom');
   KeyMap.nmap('gg',    'scrollToTop');
   KeyMap.nmap('f',     'goToHintMode');
+  KeyMap.nmap('F',     'goToNHintMode');
   KeyMap.nmap('x',     'closeTab');
   KeyMap.nmap('<C-e>', 'scrollDown');
   KeyMap.nmap('<C-y>', 'scrollUp');

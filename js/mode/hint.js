@@ -16,14 +16,14 @@ HintMode.prototype.onKeyDown = function(event) {
 
   if (elements.length == 0) {
     hint.removeAllHint();
-    Mode.changeMode(ModeList.NORMAL_MODE);
     this.keySequece = '';
+    Mode.changeMode(ModeList.NORMAL_MODE);
   }
   else if (elements.length == 1) {
-    elements[0].click();
     hint.removeAllHint();
-    Mode.changeMode(ModeList.NORMAL_MODE);
     this.keySequece = '';
+    elements[0].click();
+    Mode.changeMode(ModeList.NORMAL_MODE);
   }
   else {
     hint.hideUnmatchedElements(this.keySequece);

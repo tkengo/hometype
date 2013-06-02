@@ -47,3 +47,15 @@ Command.goToHintMode = function() {
   var hint = Viewport.createNewHintElement();
   hint.show();
 };
+
+Command.goToNHintMode = function() {
+  Mode.changeMode(ModeList.NHINT_MODE);
+
+  var currentHint = Viewport.getCurrentHintElement();
+  if (currentHint) {
+    currentHint.removeAllHint();
+  }
+
+  var hint = Viewport.createNewHintElement();
+  hint.show();
+};

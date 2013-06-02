@@ -34,5 +34,12 @@ HintElement.prototype.hideHintTip = function() {
 };
 
 HintElement.prototype.click = function() {
-  this.getElement().get(0).click();
+  var element = this.getElement();
+
+  if (Mode.getCurrentMode() == ModeList.NHINT_MODE && element.get(0).tagName.toLowerCase() == 'a') {
+    window.open(element.attr('href'), null);
+  }
+  else {
+    element.get(0).click();
+  }
 };

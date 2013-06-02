@@ -45,9 +45,7 @@ HintElementCollection.prototype.hideUnmatchedElements = function(key) {
 };
 
 HintElementCollection.prototype.removeAllHint = function() {
-  $('.chromekey-hit-a-hint').fadeOut(100, function() {
-    $('div.chromekey-hit-a-hint').remove();
-  });
+  $('div.chromekey-hit-a-hint').remove();
   $('.chromekey-hit-a-hint-area').removeClass('chromekey-hit-a-hint-area');;
   $('body').css('overflow', this.originalBodyOverflow);
 };

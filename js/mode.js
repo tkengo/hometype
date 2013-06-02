@@ -1,6 +1,7 @@
 var ModeList = {
   NORMAL_MODE: 'normal',
   HINT_MODE: 'hint',
+  NHINT_MODE: 'nhint',
   VISUAL_MODE: 'visual'
 };
 
@@ -10,8 +11,8 @@ var _Mode = function() {
   this.callbacks = [];
 };
 
-_Mode.prototype.currentMode = function() {
-  this.mode;
+_Mode.prototype.getCurrentMode = function() {
+  return this.mode;
 };
 
 _Mode.prototype.changeMode = function(modeName) {
@@ -32,6 +33,7 @@ _Mode.prototype.factory = function(mode) {
   switch (mode) {
     case ModeList.NORMAL_MODE: return new NormalMode();
     case ModeList.HINT_MODE: return new HintMode();
+    case ModeList.NHINT_MODE: return new HintMode();
     case ModeList.VISUAL_MODE: return new NormalMode();
   }
 };
