@@ -1,13 +1,16 @@
 var HintElement = function(srcElement, index, key) {
+  this.className = Mode.getCurrentMode() == ModeList.NHINT_MODE ?
+    'chromekey-hit-a-hint-n' :
+    'chromekey-hit-a-hint';
   this.index = index;
 
   this.srcElement = srcElement;
-  this.srcElement.addClass('chromekey-hit-a-hint-area');
+  this.srcElement.addClass(this.className + '-area');
 
   this.tipElement = $('<div>').css({
     'top': (srcElement.offset().top - 10) + 'px',
     'left': (srcElement.offset().left - 10) + 'px'
-  }).addClass('chromekey-hit-a-hint');
+  }).addClass(this.className).addClass('chromekey-hit-a-hint-base');
 
   for (var i in key) {
     this.tipElement.append($('<span>').text(key[i]));
@@ -29,7 +32,7 @@ HintElement.prototype.setRedFirstKey = function() {
 };
 
 HintElement.prototype.hideHintTip = function() {
-  this.getElement().removeClass('chromekey-hit-a-hint-area');
+  this.getElement().removeClass(this.className + '-area');
   this.tipElement.fadeOut(100);
 };
 

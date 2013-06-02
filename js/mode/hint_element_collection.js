@@ -45,13 +45,14 @@ HintElementCollection.prototype.hideUnmatchedElements = function(key) {
 };
 
 HintElementCollection.prototype.removeAllHint = function() {
-  $('div.chromekey-hit-a-hint').remove();
+  $('div.chromekey-hit-a-hint-base').remove();
   $('.chromekey-hit-a-hint-area').removeClass('chromekey-hit-a-hint-area');;
+  $('.chromekey-hit-a-hint-n-area').removeClass('chromekey-hit-a-hint-n-area');;
   $('body').css('overflow', this.originalBodyOverflow);
 };
 
 HintElementCollection.prototype.show = function() {
-  $('.chromekey-hit-a-hint').fadeIn(100);
+  $('.chromekey-hit-a-hint-base').fadeIn(100);
 
   this.originalBodyOverflow = $('body').css('overflow');
   $('body').css('overflow', 'hidden');

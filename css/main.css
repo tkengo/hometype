@@ -1,6 +1,5 @@
-.chromekey-hit-a-hint {
+.chromekey-hit-a-hint-base {
   position:absolute;
-  background-color:#FFFF4D;
   border:solid 1px #C4C4C4;
   opacity:0.8;
   padding:3px;
@@ -11,6 +10,15 @@
   font-family:'Osaka-Mono';
   display:none;
 }
+.chromekey-hit-a-hint {
+  background-color:#FFFF4D;
+}
+.chromekey-hit-a-hint-n {
+  background-color:#4DFFFF;
+}
 .chromekey-hit-a-hint-area {
   background-color:#FDFFC3;
+}
+.chromekey-hit-a-hint-n-area {
+  background-color:#CDFFF3;
 }
