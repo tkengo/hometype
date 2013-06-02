@@ -36,6 +36,14 @@ Command.closeTab = function() {
   chrome.runtime.sendMessage('closeTab');
 };
 
+Command.moveLeftTab = function() {
+  chrome.runtime.sendMessage('moveLeftTab');
+};
+
+Command.moveRightTab = function() {
+  chrome.runtime.sendMessage('moveRightTab');
+};
+
 Command.goToHintMode = function() {
   Mode.changeMode(ModeList.HINT_MODE);
 

@@ -13,6 +13,8 @@
   KeyMap.nmap('<C-u>', 'scrollUpHalf');
   KeyMap.nmap('<C-f>', 'scrollDownPage');
   KeyMap.nmap('<C-b>', 'scrollUpPage');
+  KeyMap.nmap('<C-h>', 'moveLeftTab');
+  KeyMap.nmap('<C-l>', 'moveRightTab');
 })();
 
 // 初期化処理
