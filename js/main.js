@@ -19,16 +19,6 @@
 
 // 初期化処理
 $(document).ready(function() {
-  // var caretBrowseMode = false;
-
-  // $(document).keydown(function(event) {
-    // if (event.keyCode == KeyCode.C) {
-    //   caretBrowseMode = !caretBrowseMode;
-    //   $('html').attr('contenteditable', caretBrowseMode);
-    // }
-  // });
-  // $(document).on('keydown', KeyManager.onKeyDown);
-
   // イベントハンドラ登録
   var km = Resource.KeyManager;
   document.addEventListener('keydown', function(event) {
