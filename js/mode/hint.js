@@ -4,26 +4,27 @@ var HintMode = function() {
 
 HintMode.prototype.onKeyDown = function(event) {
   var key = KeyIdentifiers.toChar(event.keyIdentifier);
-  var hint = Viewport.getCurrentHintElement();
+
+  if (key == 'Esc' || (key == 'c' && event.ctrlKey)) {
+    this.finish();
+    return false;
+  }
 
   if (key == undefined || key.length != 1 || !key.match(/[a-z]/)) {
-    return true;
+    return false;
   }
 
   this.keySequece += key;
 
+  var hint = Viewport.getCurrentHintElement();
   var elements = hint.getMatchedElements(this.keySequece);
 
   if (elements.length == 0) {
-    hint.removeAllHint();
-    this.keySequece = '';
-    Mode.changeMode(ModeList.NORMAL_MODE);
+    this.finish();
   }
   else if (elements.length == 1) {
-    hint.removeAllHint();
-    this.keySequece = '';
     elements[0].click();
-    Mode.changeMode(ModeList.NORMAL_MODE);
+    this.finish();
   }
   else {
     hint.hideUnmatchedElements(this.keySequece);
@@ -31,4 +32,10 @@ HintMode.prototype.onKeyDown = function(event) {
       elements[i].setRedFirstKey();
     }
   }
+};
+
+HintMode.prototype.finish = function() {
+  Viewport.getCurrentHintElement().removeAllHint();
+  this.keySequece = '';
+  Mode.changeMode(ModeList.NORMAL_MODE);
 };
