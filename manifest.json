@@ -21,10 +21,13 @@
       "lib/jquery-2.0.1.min.js",
       "js/key_identifiers.js",
       "js/viewport.js",
+      "js/mode/hint_element.js",
+      "js/mode/normal.js",
+      "js/mode/hint.js",
       "js/command.js",
-      "js/key_manager.js",
       "js/keymap.js",
       "js/mode.js",
+      "js/key_manager.js",
       "js/resource.js",
       "js/main.js"
     ]

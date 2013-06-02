@@ -1,35 +1,35 @@
 var Command = {};
 
 Command.scrollDown = function() {
-  Resource.Viewport.scrollDown(50);
+  Viewport.scrollDown(50);
 };
 
 Command.scrollUp = function() {
-  Resource.Viewport.scrollUp(50);
+  Viewport.scrollUp(50);
 };
 
 Command.scrollDownHalf = function() {
-  Resource.Viewport.scrollDown(Resource.Viewport.getWindowHeight() / 2);
+  Viewport.scrollDown(Viewport.getWindowHeight() / 2);
 };
 
 Command.scrollUpHalf = function() {
-  Resource.Viewport.scrollUp(Resource.Viewport.getWindowHeight() / 2);
+  Viewport.scrollUp(Viewport.getWindowHeight() / 2);
 };
 
 Command.scrollDownPage = function() {
-  Resource.Viewport.scrollDown(Resource.Viewport.getWindowHeight());
+  Viewport.scrollDown(Viewport.getWindowHeight());
 };
 
 Command.scrollUpPage = function() {
-  Resource.Viewport.scrollUp(Resource.Viewport.getWindowHeight());
+  Viewport.scrollUp(Viewport.getWindowHeight());
 };
 
 Command.scrollToTop = function() {
-  Resource.Viewport.scrollTo(0, 0);
+  Viewport.scrollTo(0, 0);
 };
 
 Command.scrollToBottom = function() {
-  Resource.Viewport.scrollTo(0, Resource.Viewport.getDocumentHeight());
+  Viewport.scrollTo(0, Viewport.getDocumentHeight());
 };
 
 Command.closeTab = function() {
@@ -37,20 +37,17 @@ Command.closeTab = function() {
 };
 
 Command.goToHintMode = function() {
-  Resource.Mode.changeMode(ModeList.HINT_MODE);
-  $('div.chromekey-hit-a-hint').remove();
+  Mode.changeMode(ModeList.HINT_MODE);
 
-  Resource.Viewport.clickableElement().each(function() {
-    if (Resource.Viewport.isInnerScreen($(this))) {
-      $(this).addClass('chromekey-hit-a-hint-area');
+  var currentHint = Viewport.getCurrentHintElement();
+  if (currentHint) {
+    currentHint.removeAllHint();
+  }
 
-      $('<div>').css({
-        'top': ($(this).offset().top - 10) + 'px',
-        'left': ($(this).offset().left - 10) + 'px'
-      }).addClass('chromekey-hit-a-hint').text('a').appendTo($('body'));
-    }
-    else {
-      $(this).removeClass('chromekey-hit-a-hint-area');
-    }
-  });
+  var hint = Viewport.createNewHintElement();
+  for (var index in hint.getElements()) {
+    hint.setHintTip(index, hint.nextHintKey());
+  }
+
+  hint.show();
 };

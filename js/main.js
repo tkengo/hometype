@@ -27,8 +27,8 @@ $(document).ready(function() {
   // $(document).on('keydown', KeyManager.onKeyDown);
 
   // イベントハンドラ登録
+  var km = Resource.KeyManager;
   document.addEventListener('keydown', function(event) {
-    var km = Resource.KeyManager;
     km.onKeyDown.call(km, event);
   });
 });

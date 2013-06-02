@@ -1,9 +1,15 @@
 .chromekey-hit-a-hint {
   position:absolute;
   background-color:#FFFF4D;
+  border:solid 1px #C4C4C4;
   opacity:0.8;
-  padding:0 3px;
+  padding:3px;
   border-radius:3px;
+  font-size:12px;
+  color:#222222;
+  z-index:1000000;
+  font-family:'Osaka-Mono';
+  display:none;
 }
 .chromekey-hit-a-hint-area {
   background-color:#FDFFC3;

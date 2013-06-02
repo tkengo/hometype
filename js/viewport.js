@@ -1,64 +1,84 @@
-var Viewport = function() {
+var _Viewport = function() {
 };
 
-Viewport.prototype.scrollPosition = function() {
+_Viewport.prototype.scrollPosition = function() {
   return {
     top: document.body.scrollTop,
     left: document.body.scrollLeft
   }
 };
 
-Viewport.prototype.getWindowWidth = function() {
+_Viewport.prototype.getWindowWidth = function() {
   return window.innerWidth;
 };
 
-Viewport.prototype.getWindowHeight = function() {
+_Viewport.prototype.getWindowHeight = function() {
   return window.innerHeight;
 };
 
-Viewport.prototype.getDocumentWidth = function() {
+_Viewport.prototype.getDocumentWidth = function() {
   return $(document).width();
 };
 
-Viewport.prototype.getDocumentHeight = function() {
+_Viewport.prototype.getDocumentHeight = function() {
   return $(document).height();
 };
 
-Viewport.prototype.scrollTo = function(x, y) {
+_Viewport.prototype.scrollTo = function(x, y) {
   // $(document.body).animate({ scrollTop: y + 'px', scrollLeft: x + 'px' }, 100);
   document.body.scrollTop = y;
   document.body.scrollLeft = x;
 };
 
-Viewport.prototype.scrollDown = function(value) {
+_Viewport.prototype.scrollDown = function(value) {
   var pos = this.scrollPosition();
   this.scrollTo(pos.left, pos.top + value);
 };
 
-Viewport.prototype.scrollUp = function(value) {
+_Viewport.prototype.scrollUp = function(value) {
   var pos = this.scrollPosition();
   this.scrollTo(pos.left, pos.top - value);
 };
 
-Viewport.prototype.scrollLeft = function(value) {
+_Viewport.prototype.scrollLeft = function(value) {
   var pos = this.scrollPosition();
   this.scrollTo(pos.left - value, pos.top);
 };
 
-Viewport.prototype.scrollRight = function(value) {
+_Viewport.prototype.scrollRight = function(value) {
   var pos = this.scrollPosition();
   this.scrollTo(pos.left + value, pos.top);
 };
 
-Viewport.prototype.clickableElement = function() {
-  return $('a[href], *[onclick]');
+_Viewport.prototype.clickableElementInnerScreen = function() {
+  var _this = this;
+  var elements = [];
+  $('a[href], *[onclick]').each(function() {
+    var element = $(this);
+    if (_this.isInnerScreen(element)) {
+      elements.push(element);
+    }
+  });
+
+  return elements;
 };
 
-Viewport.prototype.isInnerScreen = function(element) {
-  var screenOffsetTop     = Resource.Viewport.scrollPosition().top;
-  var screenOffsetBottom  = screenOffsetTop + Resource.Viewport.getWindowHeight();
+_Viewport.prototype.createNewHintElement = function() {
+  this.hintElement = new HintElement();
+  return this.hintElement;
+};
+
+_Viewport.prototype.getCurrentHintElement = function() {
+  return this.hintElement;
+};
+
+_Viewport.prototype.isInnerScreen = function(element) {
+  var screenOffsetTop     = this.scrollPosition().top;
+  var screenOffsetBottom  = screenOffsetTop + this.getWindowHeight();
   var elementOffsetTop    = element.offset().top;
   var elementOffsetBottom = elementOffsetTop + element.height();
 
   return elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop;
 };
+
+var Viewport = new _Viewport();

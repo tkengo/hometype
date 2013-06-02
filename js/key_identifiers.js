@@ -73,5 +73,5 @@ var KeyIdentifiers = {
   "U+007B" : "{",
   "U+007C" : "|",
   "U+007D" : "}",
-  "U+007F" : "Delete",
+  "U+007F" : "Delete"
 };
