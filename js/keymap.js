@@ -1,9 +1,9 @@
 var KeyMap = {};
 
 _map = {
-  nmap: {},
-  fmap: {},
-  vmap: {}
+  normal: {},
+  hint: {},
+  visual: {}
 };
 
 KeyMap.assign = function(mode, key, command) {
@@ -11,7 +11,15 @@ KeyMap.assign = function(mode, key, command) {
 };
 
 KeyMap.nmap = function(key, command) {
-  KeyMap.assign('nmap', key, command);
+  KeyMap.assign(ModeList.NORMAL_MODE, key, command);
+};
+
+KeyMap.fmap = function(key, command) {
+  KeyMap.assign(ModeList.HINT_MODE, key, command);
+};
+
+KeyMap.vmap = function(key, command) {
+  KeyMap.assign(ModeList.VISUAL_MODE, key, command);
 };
 
 KeyMap.candidate = function(mode, key) {

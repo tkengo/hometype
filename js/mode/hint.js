@@ -5,11 +5,6 @@ var HintMode = function() {
 HintMode.prototype.onKeyDown = function(event) {
   var key = KeyIdentifiers.toChar(event.keyIdentifier);
 
-  if (key == 'Esc' || (key == 'c' && event.ctrlKey)) {
-    this.finish();
-    return false;
-  }
-
   if (key == undefined || key.length != 1 || !key.match(/[a-z]/)) {
     return false;
   }
@@ -20,11 +15,11 @@ HintMode.prototype.onKeyDown = function(event) {
   var elements = hint.getMatchedElements(this.keySequece);
 
   if (elements.length == 0) {
-    this.finish();
+    Command.cancelHintMode();
   }
-  else if (elements.length == 1) {
+  else if (elements.length == 1 && elements[0].getKey() == this.keySequece) {
     elements[0].click();
-    this.finish();
+    Command.cancelHintMode();
   }
   else {
     hint.hideUnmatchedElements(this.keySequece);
@@ -32,10 +27,4 @@ HintMode.prototype.onKeyDown = function(event) {
       elements[i].setRedFirstKey();
     }
   }
-};
-
-HintMode.prototype.finish = function() {
-  Viewport.getCurrentHintElement().removeAllHint();
-  this.keySequece = '';
-  Mode.changeMode(ModeList.NORMAL_MODE);
 };

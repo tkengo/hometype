@@ -5,11 +5,7 @@ var NormalMode = function() {
 };
 
 NormalMode.prototype.onKeyDown = function(event) {
-  var id = event.keyIdentifier;
-  if (id == 'Control' || id == 'Shift' || id == 'Alt' || id == 'Meta') {
-    return false;
-  }
-
+  return true;
   this.keySequece += this.getKeyChar(event);
 
   this.resetTimerForResetKeySequence();

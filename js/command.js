@@ -32,6 +32,62 @@ Command.scrollToBottom = function() {
   Viewport.scrollTo(0, Viewport.getDocumentHeight());
 };
 
+Command.caretDown = function() {
+  var sel = document.getSelection();
+  var range = sel.getRangeAt(0);
+  var nestedCount = 0;
+  var el = $(sel.baseNode);
+  while (el.length != 0 && nestedCount++ < 100) {
+    var next = el.next();
+    if (next.length > 0) {
+      while (next.length > 0 && next.text() == '') {
+        next = next.next();
+      }
+
+      if (next.length > 0) {
+        el = next.get(0);
+        break;
+      }
+    }
+
+    if (next.length == 0) {
+      el = el.parent();
+    }
+  }
+  range.setStart(el, 0);
+  range.setEnd(el, 0);
+  sel.removeAllRanges();
+  sel.addRange(range);
+};
+
+Command.caretUp = function() {
+  var sel = document.getSelection();
+  var range = sel.getRangeAt(0);
+  var nestedCount = 0;
+  var el = $(sel.baseNode);
+  while (el.length != 0 && nestedCount++ < 100) {
+    var prev = el.prev();
+    if (prev.length > 0) {
+      while (prev.length > 0 && prev.text() == '') {
+        prev = prev.prev();
+      }
+
+      if (prev.length > 0) {
+        el = prev.get(0);
+        break;
+      }
+    }
+
+    if (prev.length == 0) {
+      el = el.parent();
+    }
+  }
+  range.setStart(el, 0);
+  range.setEnd(el, 0);
+  sel.removeAllRanges();
+  sel.addRange(range);
+};
+
 Command.closeTab = function() {
   chrome.runtime.sendMessage('closeTab');
 };
@@ -72,4 +128,9 @@ Command.goToNHintMode = function() {
 
   var hint = Viewport.createNewHintElement();
   hint.show();
+};
+
+Command.cancelHintMode = function() {
+  Viewport.getCurrentHintElement().removeAllHint();
+  Mode.changeMode(ModeList.NORMAL_MODE);
 };

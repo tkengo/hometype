@@ -16,6 +16,12 @@
   KeyMap.nmap('<C-b>', 'scrollUpPage');
   KeyMap.nmap('<C-h>', 'moveLeftTab');
   KeyMap.nmap('<C-l>', 'moveRightTab');
+
+  KeyMap.vmap('j', 'caretDown');
+  KeyMap.vmap('k', 'caretUp');
+
+  KeyMap.fmap('Esc',   'cancelHintMode');
+  KeyMap.fmap('<C-c>', 'cancelHintMode');
 })();
 
 // 初期化処理

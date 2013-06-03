@@ -15,6 +15,7 @@ var HintElement = function(srcElement, index, key) {
   for (var i in key) {
     this.tipElement.append($('<span>').text(key[i]));
   }
+  this.key = key;
 
   this.tipElement.appendTo($('body'));
 };
@@ -25,6 +26,10 @@ HintElement.prototype.getElement = function() {
 
 HintElement.prototype.getTipElement = function() {
   return this.tipElement;
+};
+
+HintElement.prototype.getKey = function() {
+  return this.key;
 };
 
 HintElement.prototype.setRedFirstKey = function() {
