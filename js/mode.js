@@ -34,7 +34,7 @@ _Mode.prototype.factory = function(mode) {
     case ModeList.NORMAL_MODE: return new NormalMode();
     case ModeList.HINT_MODE: return new HintMode();
     case ModeList.NHINT_MODE: return new HintMode();
-    case ModeList.VISUAL_MODE: return new NormalMode();
+    case ModeList.VISUAL_MODE: return new VisualMode();
   }
 };
 

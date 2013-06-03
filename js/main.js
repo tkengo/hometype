@@ -7,6 +7,7 @@
   KeyMap.nmap('f',     'goToHintMode');
   KeyMap.nmap('F',     'goToNHintMode');
   KeyMap.nmap('x',     'closeTab');
+  KeyMap.nmap('v',     'goToVisualMode');
   KeyMap.nmap('<C-e>', 'scrollDown');
   KeyMap.nmap('<C-y>', 'scrollUp');
   KeyMap.nmap('<C-d>', 'scrollDownHalf');

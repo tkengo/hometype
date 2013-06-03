@@ -81,4 +81,8 @@ _Viewport.prototype.isInnerScreen = function(element) {
   return elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop;
 };
 
+_Viewport.prototype.setContentEditable = function(editable) {
+  return $('html').attr('contenteditable', editable);
+};
+
 var Viewport = new _Viewport();

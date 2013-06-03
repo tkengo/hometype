@@ -44,6 +44,12 @@ Command.moveRightTab = function() {
   chrome.runtime.sendMessage('moveRightTab');
 };
 
+Command.goToVisualMode = function() {
+  var element = Viewport.setContentEditable(true);
+  setTimeout(function() { element.focus(); }, 100);
+  Mode.changeMode(ModeList.VISUAL_MODE);
+};
+
 Command.goToHintMode = function() {
   Mode.changeMode(ModeList.HINT_MODE);
 
