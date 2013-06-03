@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 Kengo Tateishi (@tkengo)
+ * Licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Chromekeyで利用するコマンドを定義します。
+ */
 var Command = {};
 
 Command.scrollDown = function() {

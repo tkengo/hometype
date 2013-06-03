@@ -20,6 +20,7 @@
     "js": [
       "lib/jquery-2.0.1.min.js",
       "js/key_identifiers.js",
+      "js/key_event.js",
       "js/viewport.js",
       "js/mode/hint_element.js",
       "js/mode/hint_element_collection.js",

@@ -27,9 +27,10 @@
 
 // 初期化処理
 $(document).ready(function() {
-  // イベントハンドラ登録
-  var km = new KeyManager();
-  document.addEventListener('keydown', function(event) {
-    km.onKeyDown.call(km, event);
+  // キーダウンのイベントハンドラ登録
+  // 全部のキーを拾えるようにdocumentに対してイベントハンドラを登録
+  var m = new KeyManager();
+  document.addEventListener('keydown', function(e) {
+    m.onKeyDown.call(m, new KeyEvent(e));
   });
 });

@@ -1,3 +1,11 @@
+/**
+ * Copyright (c) 2013 Kengo Tateishi (@tkengo)
+ * Licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * keydownイベントのkeyIdentifierに対応するキーIDとキー名の
+ * テーブルを定義します。
+ */
 var KeyIdentifiers = {
   toChar: function(keyIdentifier) {
     return this[keyIdentifier];
