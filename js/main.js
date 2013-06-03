@@ -17,8 +17,9 @@
   KeyMap.nmap('<C-h>', 'moveLeftTab');
   KeyMap.nmap('<C-l>', 'moveRightTab');
 
-  KeyMap.vmap('j', 'caretDown');
-  KeyMap.vmap('k', 'caretUp');
+  KeyMap.vmap('Esc', 'cancelVisualMode');
+  KeyMap.vmap('j',   'caretDown');
+  KeyMap.vmap('k',   'caretUp');
 
   KeyMap.fmap('Esc',   'cancelHintMode');
   KeyMap.fmap('<C-c>', 'cancelHintMode');
@@ -27,7 +28,7 @@
 // 初期化処理
 $(document).ready(function() {
   // イベントハンドラ登録
-  var km = Resource.KeyManager;
+  var km = new KeyManager();
   document.addEventListener('keydown', function(event) {
     km.onKeyDown.call(km, event);
   });

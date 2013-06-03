@@ -131,6 +131,15 @@ Command.goToNHintMode = function() {
 };
 
 Command.cancelHintMode = function() {
-  Viewport.getCurrentHintElement().removeAllHint();
-  Mode.changeMode(ModeList.NORMAL_MODE);
+  if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
+    Viewport.getCurrentHintElement().removeAllHint();
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
+};
+
+Command.cancelVisualMode = function() {
+  if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
+    Viewport.setContentEditable(false);
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
 };

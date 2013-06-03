@@ -30,7 +30,6 @@
       "js/keymap.js",
       "js/mode.js",
       "js/key_manager.js",
-      "js/resource.js",
       "js/main.js"
     ]
   }]
