@@ -21,6 +21,7 @@
       "lib/jquery-2.0.1.min.js",
       "js/key_identifiers.js",
       "js/key_event.js",
+      "js/key_sequence.js",
       "js/viewport.js",
       "js/command_box.js",
       "js/mode/hint_element.js",
@@ -32,7 +33,6 @@
       "js/command.js",
       "js/keymap.js",
       "js/mode.js",
-      "js/key_manager.js",
       "js/main.js"
     ]
   }]

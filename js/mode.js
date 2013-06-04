@@ -26,6 +26,11 @@ var _Mode = function() {
   this.mode = ModeList.NORMAL_MODE;
 
   this.callbacks = [];
+
+  this.normalMode  = new NormalMode();
+  this.hintMode    = new HintMode();
+  this.VisualMode  = new VisualMode();
+  this.commandMode = new CommandMode();
 };
 
 /**
@@ -61,15 +66,15 @@ _Mode.prototype.changeMode = function(modeName) {
   }
 };
 
-_Mode.prototype.factory = function(mode) {
+_Mode.prototype.getProcessor = function(mode) {
   mode = mode || this.mode;
 
   switch (mode) {
-    case ModeList.NORMAL_MODE: return new NormalMode();
-    case ModeList.HINT_MODE: return new HintMode();
-    case ModeList.NHINT_MODE: return new HintMode();
-    case ModeList.VISUAL_MODE: return new VisualMode();
-    case ModeList.COMMAND_MODE: return new CommandMode();
+    case ModeList.NORMAL_MODE:  return this.normalMode;
+    case ModeList.HINT_MODE:    return this.hintMode;
+    case ModeList.NHINT_MODE:   return this.hintMode;
+    case ModeList.VISUAL_MODE:  return this.visualMode;
+    case ModeList.COMMAND_MODE: return this.commandMode;
   }
 };
 

@@ -28,10 +28,20 @@
 
 // 初期化処理
 $(document).ready(function() {
-  // キーダウンのイベントハンドラ登録
-  // 全部のキーを拾えるようにdocumentに対してイベントハンドラを登録
-  var m = new KeyManager();
-  document.addEventListener('keydown', function(e) {
-    m.onKeyDown.call(m, new KeyEvent(e));
+  KeySequence.onKeyCertain(function(sequence, stack) {
+    var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
+    if (candidate.length == 1 && candidate[0].key == sequence) {
+      // コマンドが確定できればそれを実行
+      // 次のコマンド入力を待つためにキーシーケンスも同時にリセット
+      candidate[0].command.call();
+      this.reset();
+    }
+    else if (candidate.length == 0) {
+      // 候補となるコマンドが1つもなければ
+      // 現在のモードのデフォルトキーイベントに処理を委譲
+      if (Mode.getProcessor().onKeyDown(stack)) {
+        this.reset();
+      }
+    }
   });
 });
