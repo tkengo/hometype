@@ -59,6 +59,15 @@ KeyEvent.prototype.getKeyChar = function() {
 };
 
 /**
+ * 押下されたキー文字を取得します。
+ *
+ * @return string キー文字
+ */
+KeyEvent.prototype.getChar = function() {
+  return KeyIdentifiers.toChar(this.event.keyIdentifier);
+};
+
+/**
  * キー押下のデフォルトの処理をキャンセルします。
  */
 KeyEvent.prototype.stop = function() {

@@ -3,7 +3,7 @@ var HintMode = function() {
 };
 
 HintMode.prototype.onKeyDown = function(e) {
-  var key = KeyIdentifiers.toChar(e.getOriginal().keyIdentifier);
+  var key = e.getChar();
 
   if (key == undefined || key.length != 1 || !key.match(/[a-z]/)) {
     return false;
