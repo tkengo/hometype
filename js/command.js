@@ -42,27 +42,9 @@ Command.scrollToBottom = function() {
 Command.caretDown = function() {
   var sel = document.getSelection();
   var range = sel.getRangeAt(0);
-  var nestedCount = 0;
   var el = $(sel.baseNode);
-  while (el.length != 0 && nestedCount++ < 100) {
-    var next = el.next();
-    if (next.length > 0) {
-      while (next.length > 0 && next.text() == '') {
-        next = next.next();
-      }
-
-      if (next.length > 0) {
-        el = next.get(0);
-        break;
-      }
-    }
-
-    if (next.length == 0) {
-      el = el.parent();
-    }
-  }
-  range.setStart(el, 0);
-  range.setEnd(el, 0);
+  range.setStart(document, 30);
+  range.setEnd(document, 30);
   sel.removeAllRanges();
   sel.addRange(range);
 };
@@ -135,6 +117,11 @@ Command.goToNHintMode = function() {
 
   var hint = Viewport.createNewHintElement();
   hint.show();
+};
+
+Command.goToCommandMode = function() {
+  CommandBox.show();
+  Mode.changeMode(ModeList.COMMAND_MODE);
 };
 
 Command.cancelHintMode = function() {

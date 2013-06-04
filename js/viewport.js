@@ -1,7 +1,7 @@
 var _Viewport = function() {
 };
 
-_Viewport.prototype.scrollPosition = function() {
+_Viewport.prototype.getScrollPosition = function() {
   return {
     top: document.body.scrollTop,
     left: document.body.scrollLeft
@@ -31,22 +31,22 @@ _Viewport.prototype.scrollTo = function(x, y) {
 };
 
 _Viewport.prototype.scrollDown = function(value) {
-  var pos = this.scrollPosition();
+  var pos = this.getScrollPosition();
   this.scrollTo(pos.left, pos.top + value);
 };
 
 _Viewport.prototype.scrollUp = function(value) {
-  var pos = this.scrollPosition();
+  var pos = this.getScrollPosition();
   this.scrollTo(pos.left, pos.top - value);
 };
 
 _Viewport.prototype.scrollLeft = function(value) {
-  var pos = this.scrollPosition();
+  var pos = this.getScrollPosition();
   this.scrollTo(pos.left - value, pos.top);
 };
 
 _Viewport.prototype.scrollRight = function(value) {
-  var pos = this.scrollPosition();
+  var pos = this.getScrollPosition();
   this.scrollTo(pos.left + value, pos.top);
 };
 
@@ -73,7 +73,7 @@ _Viewport.prototype.getCurrentHintElement = function() {
 };
 
 _Viewport.prototype.isInnerScreen = function(element) {
-  var screenOffsetTop     = this.scrollPosition().top;
+  var screenOffsetTop     = this.getScrollPosition().top;
   var screenOffsetBottom  = screenOffsetTop + this.getWindowHeight();
   var elementOffsetTop    = element.offset().top;
   var elementOffsetBottom = elementOffsetTop + element.height();
@@ -83,6 +83,27 @@ _Viewport.prototype.isInnerScreen = function(element) {
 
 _Viewport.prototype.setContentEditable = function(editable) {
   return $('html').attr('contenteditable', editable);
+};
+
+_Viewport.prototype.getNextTextableFrom = function(el) {
+  var nestedCount = 0;
+  while (el.length != 0 && nestedCount++ < 100) {
+    var next = el.next();
+
+    while (next.length > 0 && next.text() == '') {
+      next = next.next();
+    }
+
+    if (next.length > 0) {
+      el = next.get(0);
+      break;
+    }
+    else {
+      el = el.parent();
+    }
+  }
+
+  return el;
 };
 
 var Viewport = new _Viewport();

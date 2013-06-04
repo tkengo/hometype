@@ -52,7 +52,7 @@ KeyManager.prototype.onKeyDown = function(e) {
     // 候補となるコマンドが1つもなければキーシーケンスをリセットして
     // 現在のモードのデフォルトキーイベントに処理を委譲
     this.keySequece = '';
-    this.currentModeKeyManager.onKeyDown(e.getOriginal());
+    this.currentModeKeyManager.onKeyDown(e);
   }
   else {
     // 候補が複数あれば次のキー入力を待つためにタイマーを仕込む

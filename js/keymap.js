@@ -10,17 +10,19 @@
  * キーマッピング管理オブジェクト。
  * 各モード毎にマッピング情報を保持します。
  *
- * normal : ノーマルモード
- * hint   : ヒントモード
- * visual : ビジュアルモード
+ * normal  : ノーマルモード
+ * hint    : ヒントモード
+ * visual  : ビジュアルモード
+ * command : コマンドモード
  */
 var KeyMap = {
-  _map: {
-    normal: {},
-    hint: {},
-    visual: {}
-  }
 };
+var _map = {
+  normal: {},
+  hint: {},
+  visual: {},
+  comand: {}
+}
 
 /**
  * 指定したモードのキーに対してコマンドを割り当てます。

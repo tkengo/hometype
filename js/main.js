@@ -16,6 +16,7 @@
   KeyMap.nmap('<C-b>', 'scrollUpPage');
   KeyMap.nmap('<C-h>', 'moveLeftTab');
   KeyMap.nmap('<C-l>', 'moveRightTab');
+  KeyMap.nmap(':',     'goToCommandMode');
 
   KeyMap.vmap('Esc', 'cancelVisualMode');
   KeyMap.vmap('j',   'caretDown');

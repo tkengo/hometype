@@ -13,7 +13,8 @@ var ModeList = {
   NORMAL_MODE: 'normal',
   HINT_MODE: 'hint',
   NHINT_MODE: 'nhint',
-  VISUAL_MODE: 'visual'
+  VISUAL_MODE: 'visual',
+  COMMAND_MODE: 'command'
 };
 
 /**
@@ -68,6 +69,7 @@ _Mode.prototype.factory = function(mode) {
     case ModeList.HINT_MODE: return new HintMode();
     case ModeList.NHINT_MODE: return new HintMode();
     case ModeList.VISUAL_MODE: return new VisualMode();
+    case ModeList.COMMAND_MODE: return new CommandMode();
   }
 };
 
