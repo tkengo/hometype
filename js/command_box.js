@@ -22,7 +22,7 @@ _CommandBox.prototype.hide = function() {
 };
 
 _CommandBox.prototype.getText = function() {
-  return this.text.val();
+  return this.text.val().replace(':', '');
 };
 
 var CommandBox = new _CommandBox();

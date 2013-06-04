@@ -20,11 +20,17 @@ _KeySequence.prototype.processor = function(e) {
   this.resetTimerForResetKeySequence();
 
   // 押下されたキーをキーシーケンスに追加
-  this.keySequece += e.getKeyChar();
-  this.keyStack   += e.getKeyChar();
+  var key = e.getKeyChar();
+  this.keySequece += key;
+  this.keyStack   += key;
 
   // キー入力コールバックを呼び出す
-  this.executeCallbacks();
+  for (var i in this.callbacks) {
+    var callback = this.callbacks[i];
+    if (typeof callback == 'function') {
+      callback.call(this, this.keySequece, this.keyStack, key);
+    }
+  }
 
   // 次のキー入力を待つためにタイマーを仕込む
   this.setTimerForResetKeySequence(this.interval);
@@ -49,15 +55,6 @@ _KeySequence.prototype.setInterval = function(interval) {
   this.resetTimerForResetKeySequence();
   this.interval = interval;
   this.setTimerForResetKeySequence(this.interval);
-};
-
-_KeySequence.prototype.executeCallbacks = function() {
-  for (var i in this.callbacks) {
-    var callback = this.callbacks[i];
-    if (typeof callback == 'function') {
-      callback.call(this, this.keySequece, this.keyStack);
-    }
-  }
 };
 
 /**

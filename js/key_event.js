@@ -44,6 +44,10 @@ KeyEvent.prototype.getOriginal = function() {
 KeyEvent.prototype.getKeyChar = function() {
   var key = KeyIdentifiers.toChar(this.event.keyIdentifier);
 
+  if (!key) {
+    return this.event.keyIdentifier;
+  }
+
   if (event.shiftKey) {
     key = key.toUpperCase();
   }
