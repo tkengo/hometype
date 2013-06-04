@@ -3,7 +3,6 @@ var _KeySequence = function() {
   this.keyStack = '';
   this.callbacks = [];
   this.resetkeySequeceTimerId = -1;
-  this.interval = 300;
 };
 
 _KeySequence.prototype.onKeyCertain = function(callback) {
@@ -33,7 +32,7 @@ _KeySequence.prototype.processor = function(e) {
   }
 
   // 次のキー入力を待つためにタイマーを仕込む
-  this.setTimerForResetKeySequence(this.interval);
+  this.setTimerForResetKeySequence(300);
 };
 
 /**
@@ -46,18 +45,6 @@ _KeySequence.prototype.reset = function() {
 };
 
 /**
- * キー確定までのインターバルを変更します。
- *
- * @param integer interval キー確定までのインターバル。
- *                         0を指定すると明示的にリセットするまでキー確定しない。
- */
-_KeySequence.prototype.setInterval = function(interval) {
-  this.resetTimerForResetKeySequence();
-  this.interval = interval;
-  this.setTimerForResetKeySequence(this.interval);
-};
-
-/**
  * 次のキー入力を待つためのタイマーを仕込みます。
  *
  * 引数のintervalに指定された秒数だけ待つ間に次のキー入力がなければ
@@ -66,10 +53,6 @@ _KeySequence.prototype.setInterval = function(interval) {
  * @param integer interval 次のキー入力を待つまでの時間。ミリセカンド
  */
 _KeySequence.prototype.setTimerForResetKeySequence = function(interval) {
-  if (interval == 0) {
-    return;
-  }
-
   this.resetkeySequeceTimerId = setTimeout($.proxy(function() {
     this.keySequece = '';
     this.resetTimerForResetKeySequence();

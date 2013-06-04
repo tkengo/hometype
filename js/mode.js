@@ -29,7 +29,7 @@ var _Mode = function() {
 
   this.normalMode  = new NormalMode();
   this.hintMode    = new HintMode();
-  this.VisualMode  = new VisualMode();
+  this.visualMode  = new VisualMode();
   this.commandMode = new CommandMode();
 };
 

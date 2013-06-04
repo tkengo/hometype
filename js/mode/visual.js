@@ -1,5 +1,5 @@
 var VisualMode = function() {
 };
 
-VisualMode.prototype.onKeyDown = function(e) {
+VisualMode.prototype.onKeyDown = function(key) {
 };
