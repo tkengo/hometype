@@ -14,7 +14,8 @@ var ModeList = {
   HINT_MODE: 'hint',
   NHINT_MODE: 'nhint',
   VISUAL_MODE: 'visual',
-  COMMAND_MODE: 'command'
+  COMMAND_MODE: 'command',
+  BOOKMARK_MODE: 'bookmark'
 };
 
 /**
@@ -27,10 +28,11 @@ var _Mode = function() {
 
   this.callbacks = [];
 
-  this.normalMode  = new NormalMode();
-  this.hintMode    = new HintMode();
-  this.visualMode  = new VisualMode();
-  this.commandMode = new CommandMode();
+  this.normalMode   = new NormalMode();
+  this.hintMode     = new HintMode();
+  this.visualMode   = new VisualMode();
+  this.commandMode  = new CommandMode();
+  this.bookmarkMode = new BookmarkMode();
 };
 
 /**
@@ -70,11 +72,12 @@ _Mode.prototype.getProcessor = function(mode) {
   mode = mode || this.mode;
 
   switch (mode) {
-    case ModeList.NORMAL_MODE:  return this.normalMode;
-    case ModeList.HINT_MODE:    return this.hintMode;
-    case ModeList.NHINT_MODE:   return this.hintMode;
-    case ModeList.VISUAL_MODE:  return this.visualMode;
-    case ModeList.COMMAND_MODE: return this.commandMode;
+    case ModeList.NORMAL_MODE:   return this.normalMode;
+    case ModeList.HINT_MODE:     return this.hintMode;
+    case ModeList.NHINT_MODE:    return this.hintMode;
+    case ModeList.VISUAL_MODE:   return this.visualMode;
+    case ModeList.COMMAND_MODE:  return this.commandMode;
+    case ModeList.BOOKMARK_MODE: return this.bookmarkMode;
   }
 };
 

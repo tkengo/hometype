@@ -24,20 +24,35 @@
 }
 
 .chromekey-command-box {
-  width:400px;
-  height:30px;
   background-color:#aaaaaa;
   position:absolute;
   z-index:1000000;
   display:none;
   opacity:0.8;
+  padding:5px;
 }
 .chromekey-command-box input {
-  width:390px;
-  height:30px;
+  width:100%;
+  height:100%;
   border-width:0;
-  padding:5px;
   outline:none;
   font-size:16px;
   background-color:#aaaaaa;
+}
+.chromekey-command-box-candidate-area {
+  background-color:#666666;
+  position:absolute;
+  z-index:1000000;
+  display:none;
+  color:#ffffff;
+  opacity:0.8;
+}
+.chromekey-command-box-candidate-area div {
+  text-align:left;
+  font-size:16px;
+  margin:5px;
+}
+.chromekey-command-box-candidate-area div.selected {
+  background-color:#ffffff;
+  color:#444444;
 }

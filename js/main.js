@@ -17,6 +17,7 @@
   KeyMap.nmap('<C-h>', 'moveLeftTab');
   KeyMap.nmap('<C-l>', 'moveRightTab');
   KeyMap.nmap(':',     'goToCommandMode');
+  KeyMap.nmap('b',     'goToBookmarkMode');
 
   KeyMap.vmap('Esc', 'cancelVisualMode');
   KeyMap.vmap('j',   'caretDown');
@@ -24,16 +25,21 @@
 
   KeyMap.fmap('Esc',   'cancelHintMode');
   KeyMap.fmap('<C-c>', 'cancelHintMode');
+
+  KeyMap.bmap('<C-n>', 'selectNextCandidate');
+  KeyMap.bmap('<C-p>', 'selectPrevCandidate');
+  KeyMap.bmap('Esc',   'cancelBookmarkMode');
 })();
 
 // 初期化処理
 $(document).ready(function() {
-  KeySequence.onKeyCertain(function(sequence, stack, currentKey) {
+  KeySequence.onKeyCertain(function(e, sequence, stack, currentKey) {
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
     if (candidate.length == 1 && candidate[0].key == sequence) {
       // コマンドが確定できればそれを実行
       // 次のコマンド入力を待つためにキーシーケンスも同時にリセット
       candidate[0].command.call();
+      e.stop();
       this.reset();
     }
     else if (candidate.length == 0) {

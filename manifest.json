@@ -5,7 +5,10 @@
   "description": "vi key mapping for GoogleChrome",
   "version": "0.1",
 
-  "permissions": [ "tabs" ],
+  "permissions": [
+    "tabs",
+    "bookmarks"
+  ],
   
   "background": {
     "persistent": true,
@@ -29,6 +32,7 @@
       "js/mode/normal.js",
       "js/mode/visual.js",
       "js/mode/command.js",
+      "js/mode/bookmark.js",
       "js/mode/hint.js",
       "js/command.js",
       "js/keymap.js",

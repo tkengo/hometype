@@ -124,6 +124,11 @@ Command.goToCommandMode = function() {
   Mode.changeMode(ModeList.COMMAND_MODE);
 };
 
+Command.goToBookmarkMode = function() {
+  CommandBox.show();
+  Mode.changeMode(ModeList.BOOKMARK_MODE);
+};
+
 Command.cancelHintMode = function() {
   if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
     Viewport.getCurrentHintElement().removeAllHint();
@@ -136,4 +141,19 @@ Command.cancelVisualMode = function() {
     Viewport.setContentEditable(false);
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
+};
+
+Command.cancelBookmarkMode = function() {
+  if (Mode.getCurrentMode() == ModeList.BOOKMARK_MODE) {
+    CommandBox.hide();
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
+};
+
+Command.selectNextCandidate = function() {
+  CommandBox.selectNext();
+};
+
+Command.selectPrevCandidate = function() {
+  CommandBox.selectPrev();
 };

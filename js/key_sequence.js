@@ -27,7 +27,7 @@ _KeySequence.prototype.processor = function(e) {
   for (var i in this.callbacks) {
     var callback = this.callbacks[i];
     if (typeof callback == 'function') {
-      callback.call(this, this.keySequece, this.keyStack, key);
+      callback.call(this, e, this.keySequece, this.keyStack, key);
     }
   }
 
