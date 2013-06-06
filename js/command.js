@@ -127,6 +127,13 @@ Command.goToCommandMode = function() {
 Command.goToBookmarkMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.BOOKMARK_MODE);
+  Mode.getProcessor().setOpenNewTab(false);
+};
+
+Command.goToNewWindowBookmarkMode = function() {
+  CommandBox.show();
+  Mode.changeMode(ModeList.BOOKMARK_MODE);
+  Mode.getProcessor().setOpenNewTab(true);
 };
 
 Command.cancelHintMode = function() {

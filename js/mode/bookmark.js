@@ -1,20 +1,29 @@
 var BookmarkMode = function() {
   this.port = chrome.runtime.connect({ name: 'searchBookmarks' });
   this.port.onMessage.addListener(this.onMessage);
+  this.newTab = false;
 };
 
 BookmarkMode.prototype.onKeyDown = function(key, currentKey) {
+  if (currentKey == 'Enter') {
+    var selected = CommandBox.getSelected();
+    var e = document.createEvent('MouseEvents');
+    e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
+    Viewport.createLink(selected.url).get(0).dispatchEvent(e);
+    Mode.changeMode(ModeList.NORMAL_MODE);
+    CommandBox.hide();
+    return true;
+  }
+
   setTimeout($.proxy(function() {
     this.port.postMessage(CommandBox.getText());
   }, this), 100);
 
-  if (currentKey == 'Enter') {
-    var selected = CommandBox.getSelected();
-    window.location.href = selected.url;
-    return false;
-  }
-
   return false;
+};
+
+BookmarkMode.prototype.setOpenNewTab = function(newTab) {
+  this.newTab = newTab;
 };
 
 BookmarkMode.prototype.onMessage = function(results) {

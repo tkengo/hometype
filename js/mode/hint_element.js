@@ -44,10 +44,13 @@ HintElement.prototype.hideHintTip = function() {
 HintElement.prototype.click = function() {
   var element = this.getElement();
 
-  if (Mode.getCurrentMode() == ModeList.NHINT_MODE && element.get(0).tagName.toLowerCase() == 'a') {
-    window.open(element.attr('href'), null);
-  }
-  else {
-    element.get(0).click();
-  }
+  // if (Mode.getCurrentMode() == ModeList.NHINT_MODE && element.get(0).tagName.toLowerCase() == 'a') {
+  //   window.open(element.attr('href'), null);
+  // }
+  // else {
+  //   element.get(0).click();
+  // }
+  var e = document.createEvent('MouseEvents');
+  e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, true, 0, null);
+  element.get(0).dispatchEvent(e);
 };

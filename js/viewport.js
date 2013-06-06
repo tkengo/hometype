@@ -85,6 +85,11 @@ _Viewport.prototype.setContentEditable = function(editable) {
   return $('html').attr('contenteditable', editable);
 };
 
+_Viewport.prototype.createLink = function(url, parent) {
+  var parent = $(parent || 'body');
+  return $('<a>').attr('href', url).appendTo(parent);
+};
+
 _Viewport.prototype.getNextTextableFrom = function(el) {
   var nestedCount = 0;
   while (el.length != 0 && nestedCount++ < 100) {

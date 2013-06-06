@@ -18,6 +18,7 @@
   KeyMap.nmap('<C-l>', 'moveRightTab');
   KeyMap.nmap(':',     'goToCommandMode');
   KeyMap.nmap('b',     'goToBookmarkMode');
+  KeyMap.nmap('B',     'goToNewWindowBookmarkMode');
 
   KeyMap.vmap('Esc', 'cancelVisualMode');
   KeyMap.vmap('j',   'caretDown');
