@@ -22,6 +22,9 @@
 .chromekey-hit-a-hint-blue-area {
   background-color:#CDFFF3;
 }
+.chromekey-hit-a-hint-pushed {
+  color:red;
+}
 
 .chromekey-command-box {
   background-color:#aaaaaa;

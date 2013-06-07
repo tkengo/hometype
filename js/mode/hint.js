@@ -20,7 +20,7 @@ HintMode.prototype.onKeyDown = function(stack) {
   else {
     hint.hideUnmatchedElements(stack);
     for (var i in elements) {
-      elements[i].setRedFirstKey();
+      elements[i].setPushed();
     }
     return false;
   }

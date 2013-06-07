@@ -30,8 +30,8 @@ HintElement.prototype.getKey = function() {
   return this.key;
 };
 
-HintElement.prototype.setRedFirstKey = function() {
-  $(this.tipElement.children()[0]).css('color', 'red');
+HintElement.prototype.setPushed = function() {
+  $(this.tipElement.children()[0]).addClass('chromekey-hit-a-hint-pushed');
 };
 
 HintElement.prototype.hideHintTip = function() {
