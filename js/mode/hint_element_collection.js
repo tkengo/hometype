@@ -1,8 +1,8 @@
 // ヒントモードの時のキー
-var HintKeys = 'jfhklasdgyuiopqwertnmzxcvb';
+var HintKeys = 'jfhkgyuiopqwertnmzxcvblasd';
 
 var HintElementCollection = function(hintTheme) {
-  hintTheme = hintTheme || 'yellow';
+  this.hintTheme = hintTheme || 'yellow';
   this.elements = [];
 
   this.htmlElements = Viewport.clickableElementInnerScreen();
@@ -14,7 +14,7 @@ var HintElementCollection = function(hintTheme) {
 
   for (var i in this.htmlElements) {
     var key = this.nextHintKey();
-    this.elements.push(new HintElement(this.htmlElements[i], i, key, hintTheme));
+    this.elements.push(new HintElement(this.htmlElements[i], i, key, this.hintTheme));
     this.hintKeys.push({ index: i, key: key });
   }
 };
@@ -47,8 +47,8 @@ HintElementCollection.prototype.hideUnmatchedElements = function(key) {
 
 HintElementCollection.prototype.removeAllHint = function() {
   $('div.chromekey-hit-a-hint-base').remove();
-  $('.chromekey-hit-a-hint-area').removeClass('chromekey-hit-a-hint-area');;
-  $('.chromekey-hit-a-hint-n-area').removeClass('chromekey-hit-a-hint-n-area');;
+  var c = 'chromekey-hit-a-hint-' + this.hintTheme + '-area';
+  $('.' + c).removeClass(c);
   $('body').css('overflow', this.originalBodyOverflow);
 };
 
@@ -60,7 +60,8 @@ HintElementCollection.prototype.show = function() {
 };
 
 HintElementCollection.prototype.nextHintKey = function() {
-  var multiKey = this.htmlElements.length > HintKeys.length;
+  var singleKeyCount = HintKeys.length - Math.floor(this.htmlElements.length / HintKeys.length);
+  multiKey = this.htmlElements.length > HintKeys.length;
 
   var key1 = HintKeys[this.keyIndex1];
   var key2 = '';
