@@ -1,7 +1,5 @@
-var HintElement = function(srcElement, index, key) {
-  this.className = Mode.getCurrentMode() == ModeList.NHINT_MODE ?
-    'chromekey-hit-a-hint-n' :
-    'chromekey-hit-a-hint';
+var HintElement = function(srcElement, index, key, hintTheme) {
+  this.className = 'chromekey-hit-a-hint-' + hintTheme;
   this.index = index;
 
   this.srcElement = srcElement;
@@ -50,7 +48,7 @@ HintElement.prototype.click = function() {
   // else {
   //   element.get(0).click();
   // }
-  var e = document.createEvent('MouseEvents');
-  e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, true, 0, null);
-  element.get(0).dispatchEvent(e);
+  // var e = document.createEvent('MouseEvents');
+  // e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, true, 0, null);
+  // element.get(0).dispatchEvent(e);
 };

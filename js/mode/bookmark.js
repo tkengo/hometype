@@ -9,7 +9,9 @@ BookmarkMode.prototype.onKeyDown = function(key, currentKey) {
     var selected = CommandBox.getSelected();
     var e = document.createEvent('MouseEvents');
     e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
-    Viewport.createLink(selected.url).get(0).dispatchEvent(e);
+    var link = Viewport.createLink(selected.url);
+    link.get(0).dispatchEvent(e);
+    link.remove();
     Mode.changeMode(ModeList.NORMAL_MODE);
     CommandBox.hide();
     return true;

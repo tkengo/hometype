@@ -1,7 +1,8 @@
 // ヒントモードの時のキー
 var HintKeys = 'jfhklasdgyuiopqwertnmzxcvb';
 
-var HintElementCollection = function() {
+var HintElementCollection = function(hintTheme) {
+  hintTheme = hintTheme || 'yellow';
   this.elements = [];
 
   this.htmlElements = Viewport.clickableElementInnerScreen();
@@ -13,7 +14,7 @@ var HintElementCollection = function() {
 
   for (var i in this.htmlElements) {
     var key = this.nextHintKey();
-    this.elements.push(new HintElement(this.htmlElements[i], i, key));
+    this.elements.push(new HintElement(this.htmlElements[i], i, key, hintTheme));
     this.hintKeys.push({ index: i, key: key });
   }
 };

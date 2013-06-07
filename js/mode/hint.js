@@ -1,4 +1,5 @@
 var HintMode = function() {
+  this.newTab = false;
 };
 
 HintMode.prototype.onKeyDown = function(stack) {
@@ -7,7 +8,9 @@ HintMode.prototype.onKeyDown = function(stack) {
 
   if (elements.length <= 1) {
     if (elements.length == 1 && elements[0].getKey() == stack) {
-      elements[0].click();
+      var e = document.createEvent('MouseEvents');
+      e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
+      elements[0].getElement().get(0).dispatchEvent(e);
     }
     Command.cancelHintMode();
     return true;
@@ -19,4 +22,8 @@ HintMode.prototype.onKeyDown = function(stack) {
     }
     return false;
   }
+};
+
+HintMode.prototype.setOpenNewTab = function(newTab) {
+  this.newTab = newTab;
 };

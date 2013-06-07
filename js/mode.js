@@ -12,7 +12,6 @@
 var ModeList = {
   NORMAL_MODE: 'normal',
   HINT_MODE: 'hint',
-  NHINT_MODE: 'nhint',
   VISUAL_MODE: 'visual',
   COMMAND_MODE: 'command',
   BOOKMARK_MODE: 'bookmark'

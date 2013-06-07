@@ -63,8 +63,8 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
   return elements;
 };
 
-_Viewport.prototype.createNewHintElement = function() {
-  this.hintElement = new HintElementCollection();
+_Viewport.prototype.createNewHintElement = function(hintTheme) {
+  this.hintElement = new HintElementCollection(hintTheme);
   return this.hintElement;
 };
 

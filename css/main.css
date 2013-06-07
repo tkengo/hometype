@@ -10,16 +10,16 @@
   font-family:'Osaka-Mono';
   display:none;
 }
-.chromekey-hit-a-hint {
+.chromekey-hit-a-hint-yellow {
   background-color:#FFFF4D;
 }
-.chromekey-hit-a-hint-n {
-  background-color:#4DFFFF;
-}
-.chromekey-hit-a-hint-area {
+.chromekey-hit-a-hint-yellow-area {
   background-color:#FDFFC3;
 }
-.chromekey-hit-a-hint-n-area {
+.chromekey-hit-a-hint-blue {
+  background-color:#4DFFFF;
+}
+.chromekey-hit-a-hint-n-blue-area {
   background-color:#CDFFF3;
 }
 
