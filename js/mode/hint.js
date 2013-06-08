@@ -2,7 +2,8 @@ var HintMode = function() {
   this.newTab = false;
 };
 
-HintMode.prototype.onKeyDown = function(stack) {
+HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
+  e.stop();
   var hint = Viewport.getCurrentHintElement();
   var elements = hint.getMatchedElements(stack);
 

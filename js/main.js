@@ -58,7 +58,7 @@ $(document).ready(function() {
     else if (candidate.length == 0) {
       // 候補となるコマンドが1つもなければ
       // 現在のモードのデフォルトキーイベントに処理を委譲
-      if (Mode.getProcessor().onKeyDown(stack, currentKey)) {
+      if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
         this.reset();
       }
     }
