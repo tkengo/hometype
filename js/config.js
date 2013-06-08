@@ -20,6 +20,8 @@
   KeyMap.nmap('B',     'goToNewWindowBookmarkMode');
   KeyMap.nmap('i',     'goToFocusHintMode');
   KeyMap.nmap('a',     'goToFocusHintMode');
+  KeyMap.nmap('H',     'backHistory');
+  KeyMap.nmap('L',     'forwardHistory');
 
   KeyMap.imap('Esc',   'blurForm');
   KeyMap.imap('<C-c>', 'blurForm');

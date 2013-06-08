@@ -166,3 +166,11 @@ Command.selectPrevCandidate = function() {
 Command.blurForm = function() {
   $(document.activeElement).blur();
 };
+
+Command.backHistory = function() {
+  window.history.back();
+};
+
+Command.forwardHistory = function() {
+  window.history.forward();
+};
