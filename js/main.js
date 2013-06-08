@@ -38,9 +38,15 @@ $(document).ready(function() {
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
     if (candidate.length == 1 && candidate[0].key == sequence) {
       // コマンドが確定できればそれを実行
+      // ただしテキストエリアにフォーカスがあれば何もしない
+      var focusElememnt = $(document.activeElement);
+      var isText = focusElememnt.get(0).tagName.toLowerCase() == 'textarea' || focusElememnt.is(':text');
+      if (!isText) {
+        candidate[0].command.call();
+        e.stop();
+      }
+
       // 次のコマンド入力を待つためにキーシーケンスも同時にリセット
-      candidate[0].command.call();
-      e.stop();
       this.reset();
     }
     else if (candidate.length == 0) {
