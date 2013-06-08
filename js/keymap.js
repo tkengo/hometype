@@ -20,6 +20,7 @@ var KeyMap = {
 };
 var _map = {
   normal: {},
+  insert: {},
   hint: {},
   visual: {},
   comand: {},
@@ -45,6 +46,16 @@ KeyMap.assign = function(mode, key, command) {
  */
 KeyMap.nmap = function(key, command) {
   KeyMap.assign(ModeList.NORMAL_MODE, key, command);
+};
+
+/**
+ * インサートモードのキーに対してコマンドを割り当てます。
+ *
+ * @param string key     マッピングするキー
+ * @param string command キーに対して割り当てるコマンド
+ */
+KeyMap.imap = function(key, command) {
+  KeyMap.assign(ModeList.INSERT_MODE, key, command);
 };
 
 /**

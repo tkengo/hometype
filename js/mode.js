@@ -11,6 +11,7 @@
  */
 var ModeList = {
   NORMAL_MODE: 'normal',
+  INSERT_MODE: 'insert',
   HINT_MODE: 'hint',
   VISUAL_MODE: 'visual',
   COMMAND_MODE: 'command',
@@ -29,6 +30,7 @@ var _Mode = function() {
 
   this.modeProcessors = {};
   this.modeProcessors[ModeList.NORMAL_MODE]   = new NormalMode();
+  this.modeProcessors[ModeList.INSERT_MODE]   = new NormalMode();
   this.modeProcessors[ModeList.HINT_MODE]     = new HintMode();
   this.modeProcessors[ModeList.VISUAL_MODE]   = new VisualMode();
   this.modeProcessors[ModeList.COMMAND_MODE]  = new CommandMode();

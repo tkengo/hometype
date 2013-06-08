@@ -20,6 +20,9 @@
   KeyMap.nmap('b',     'goToBookmarkMode');
   KeyMap.nmap('B',     'goToNewWindowBookmarkMode');
 
+  KeyMap.imap('Esc',   'blurForm');
+  KeyMap.imap('<C-c>', 'blurForm');
+
   KeyMap.vmap('Esc', 'cancelVisualMode');
   KeyMap.vmap('j',   'caretDown');
   KeyMap.vmap('k',   'caretUp');
@@ -34,17 +37,19 @@
 
 // 初期化処理
 $(document).ready(function() {
+  $(document).on('focus', ':text, :password, textarea', function() {
+    Mode.changeMode(ModeList.INSERT_MODE);
+  }).on('blur', ':text, :password, textarea', function() {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  });
+
   KeySequence.onKeyCertain(function(e, sequence, stack, currentKey) {
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
     if (candidate.length == 1 && candidate[0].key == sequence) {
       // コマンドが確定できればそれを実行
       // ただしテキストエリアにフォーカスがあれば何もしない
-      var focusElememnt = $(document.activeElement);
-      var isText = focusElememnt.get(0).tagName.toLowerCase() == 'textarea' || focusElememnt.is(':text');
-      if (!isText) {
-        candidate[0].command.call();
-        e.stop();
-      }
+      candidate[0].command.call();
+      e.stop();
 
       // 次のコマンド入力を待つためにキーシーケンスも同時にリセット
       this.reset();

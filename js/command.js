@@ -166,3 +166,7 @@ Command.selectNextCandidate = function() {
 Command.selectPrevCandidate = function() {
   CommandBox.selectPrev();
 };
+
+Command.blurForm = function() {
+  $(document.activeElement).blur();
+};
