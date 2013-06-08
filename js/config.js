@@ -13,8 +13,8 @@
   KeyMap.nmap('<C-u>', 'scrollUpHalf');
   KeyMap.nmap('<C-f>', 'scrollDownPage');
   KeyMap.nmap('<C-b>', 'scrollUpPage');
-  KeyMap.nmap('<C-h>', 'moveLeftTab');
-  KeyMap.nmap('<C-l>', 'moveRightTab');
+  KeyMap.nmap('<C-p>', 'moveLeftTab');
+  KeyMap.nmap('<C-n>', 'moveRightTab');
   KeyMap.nmap(':',     'goToCommandMode');
   KeyMap.nmap('b',     'goToBookmarkMode');
   KeyMap.nmap('B',     'goToNewWindowBookmarkMode');
@@ -25,6 +25,8 @@
 
   KeyMap.imap('Esc',   'blurForm');
   KeyMap.imap('<C-c>', 'blurForm');
+  KeyMap.imap('<C-p>', 'moveLeftTab');
+  KeyMap.imap('<C-n>', 'moveRightTab');
 
   KeyMap.vmap('Esc', 'cancelVisualMode');
   KeyMap.vmap('j',   'caretDown');
