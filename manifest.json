@@ -37,6 +37,7 @@
       "js/mode/hint.js",
       "js/command.js",
       "js/mode.js",
+      "js/config.js"
       "js/main.js"
     ]
   }]
