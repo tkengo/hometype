@@ -22,6 +22,12 @@
 .chromekey-hit-a-hint-blue-area {
   background-color:#CDFFF3;
 }
+.chromekey-hit-a-hint-green {
+  background-color:#B2FFC7;
+}
+.chromekey-hit-a-hint-green-area {
+  background-color:#E2FFE3;
+}
 .chromekey-hit-a-hint-pushed {
   color:red;
 }

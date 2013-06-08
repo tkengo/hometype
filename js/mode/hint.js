@@ -11,10 +11,11 @@ HintMode.prototype.onKeyDown = function(stack) {
     return true;
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
+    Command.cancelHintMode();
     var e = document.createEvent('MouseEvents');
     e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
     elements[0].getElement().get(0).dispatchEvent(e);
-    Command.cancelHintMode();
+    elements[0].getElement().focus();
     return true;
   }
   else {

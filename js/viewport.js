@@ -63,13 +63,28 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
   return elements;
 };
 
-_Viewport.prototype.createNewHintElement = function(hintTheme) {
+_Viewport.prototype.formElementInnerScreen = function() {
+  var _this = this;
+  var elements = [];
+  $('textarea, :input').each(function() {
+    var element = $(this);
+    if (_this.isInnerScreen(element)) {
+      elements.push(element);
+    }
+  });
+
+  return elements;
+};
+
+_Viewport.prototype.createNewHintElement = function(hintTheme, target) {
+  target = target || Viewport.clickableElementInnerScreen();
+
   var currentHint = this.getCurrentHintElement();
   if (currentHint) {
     currentHint.removeAllHint();
   }
 
-  this.hintElement = new HintElementCollection(hintTheme);
+  this.hintElement = new HintElementCollection(hintTheme, target);
   return this.hintElement;
 };
 

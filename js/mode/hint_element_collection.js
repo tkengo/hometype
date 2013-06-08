@@ -1,11 +1,11 @@
 // ヒントモードの時のキー
 var HintKeys = 'jfhkgyuiopqwertnmzxcvblasd';
 
-var HintElementCollection = function(hintTheme) {
+var HintElementCollection = function(hintTheme, target) {
   this.hintTheme = hintTheme || 'yellow';
   this.elements = [];
 
-  this.htmlElements = Viewport.clickableElementInnerScreen();
+  this.htmlElements = target;
 
   this.keyIndex1 = 0;
   this.keyIndex2 = 0;

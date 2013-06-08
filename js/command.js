@@ -99,16 +99,22 @@ Command.goToHintMode = function() {
   Mode.changeMode(ModeList.HINT_MODE);
   Mode.getProcessor().setOpenNewTab(false);
 
-  var hint = Viewport.createNewHintElement('yellow');
-  hint.show();
+  Viewport.createNewHintElement('yellow').show();
+};
+
+Command.goToFocusHintMode = function() {
+  Mode.changeMode(ModeList.HINT_MODE);
+  Mode.getProcessor().setOpenNewTab(false);
+
+  var target = Viewport.formElementInnerScreen();
+  Viewport.createNewHintElement('green', target).show();
 };
 
 Command.goToNewWindowHintMode = function() {
   Mode.changeMode(ModeList.HINT_MODE);
   Mode.getProcessor().setOpenNewTab(true);
 
-  var hint = Viewport.createNewHintElement('blue');
-  hint.show();
+  Viewport.createNewHintElement('blue').show();
 };
 
 Command.goToCommandMode = function() {
