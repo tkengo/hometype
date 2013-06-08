@@ -64,6 +64,11 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
 };
 
 _Viewport.prototype.createNewHintElement = function(hintTheme) {
+  var currentHint = this.getCurrentHintElement();
+  if (currentHint) {
+    currentHint.removeAllHint();
+  }
+
   this.hintElement = new HintElementCollection(hintTheme);
   return this.hintElement;
 };

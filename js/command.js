@@ -99,11 +99,6 @@ Command.goToHintMode = function() {
   Mode.changeMode(ModeList.HINT_MODE);
   Mode.getProcessor().setOpenNewTab(false);
 
-  var currentHint = Viewport.getCurrentHintElement();
-  if (currentHint) {
-    currentHint.removeAllHint();
-  }
-
   var hint = Viewport.createNewHintElement('yellow');
   hint.show();
 };
@@ -111,11 +106,6 @@ Command.goToHintMode = function() {
 Command.goToNewWindowHintMode = function() {
   Mode.changeMode(ModeList.HINT_MODE);
   Mode.getProcessor().setOpenNewTab(true);
-
-  var currentHint = Viewport.getCurrentHintElement();
-  if (currentHint) {
-    currentHint.removeAllHint();
-  }
 
   var hint = Viewport.createNewHintElement('blue');
   hint.show();
