@@ -22,9 +22,10 @@
     ],
     "js": [
       "lib/jquery-2.0.1.min.js",
-      "js/key_identifiers.js",
-      "js/key_event.js",
-      "js/key_sequence.js",
+      "js/key/identifiers.js",
+      "js/key/event.js",
+      "js/key/sequence.js",
+      "js/key/map.js",
       "js/viewport.js",
       "js/command_box.js",
       "js/mode/hint_element.js",
@@ -35,7 +36,6 @@
       "js/mode/bookmark.js",
       "js/mode/hint.js",
       "js/command.js",
-      "js/keymap.js",
       "js/mode.js",
       "js/main.js"
     ]
