@@ -96,25 +96,30 @@ Command.goToVisualMode = function() {
 };
 
 Command.goToHintMode = function() {
-  Mode.changeMode(ModeList.HINT_MODE);
-  Mode.getProcessor().setOpenNewTab(false);
-
-  Viewport.createNewHintElement('yellow').show();
+  var target = Viewport.clickableElementInnerScreen();
+  if (target.length > 0) {
+    Mode.changeMode(ModeList.HINT_MODE);
+    Mode.getProcessor().setOpenNewTab(false);
+    Viewport.createNewHintElement('yellow', target).show();
+  }
 };
 
 Command.goToFocusHintMode = function() {
-  Mode.changeMode(ModeList.HINT_MODE);
-  Mode.getProcessor().setOpenNewTab(false);
-
   var target = Viewport.formElementInnerScreen();
-  Viewport.createNewHintElement('green', target).show();
+  if (target.length > 0) {
+    Mode.changeMode(ModeList.HINT_MODE);
+    Mode.getProcessor().setOpenNewTab(false);
+    Viewport.createNewHintElement('green', target).show();
+  }
 };
 
 Command.goToNewWindowHintMode = function() {
-  Mode.changeMode(ModeList.HINT_MODE);
-  Mode.getProcessor().setOpenNewTab(true);
-
-  Viewport.createNewHintElement('blue').show();
+  var target = Viewport.clickableElementInnerScreen();
+  if (target.length > 0) {
+    Mode.changeMode(ModeList.HINT_MODE);
+    Mode.getProcessor().setOpenNewTab(true);
+    Viewport.createNewHintElement('blue', target).show();
+  }
 };
 
 Command.goToCommandMode = function() {

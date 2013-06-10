@@ -53,9 +53,11 @@ _Viewport.prototype.scrollRight = function(value) {
 _Viewport.prototype.clickableElementInnerScreen = function() {
   var _this = this;
   var elements = [];
-  $('a[href], *[onclick]').each(function() {
+  $('*').each(function() {
     var element = $(this);
-    if (_this.isInnerScreen(element)) {
+
+    var clickable = element.get(0).tagName.toLowerCase() == 'a' || element.css('cursor') == 'pointer';
+    if (clickable && _this.isInnerScreen(element)) {
       elements.push(element);
     }
   });
@@ -98,7 +100,7 @@ _Viewport.prototype.isInnerScreen = function(element) {
   var elementOffsetTop    = element.offset().top;
   var elementOffsetBottom = elementOffsetTop + element.height();
 
-  return elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop;
+  return element.is(':visible') && elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop;
 };
 
 _Viewport.prototype.setContentEditable = function(editable) {
