@@ -49,14 +49,10 @@ HintElementCollection.prototype.removeAllHint = function() {
   $('div.chromekey-hit-a-hint-base').remove();
   var c = 'chromekey-hit-a-hint-' + this.hintTheme + '-area';
   $('.' + c).removeClass(c);
-  $('body').css('overflow', this.originalBodyOverflow);
 };
 
 HintElementCollection.prototype.show = function() {
   $('.chromekey-hit-a-hint-base').fadeIn(100);
-
-  this.originalBodyOverflow = $('body').css('overflow');
-  $('body').css('overflow', 'hidden');
 };
 
 HintElementCollection.prototype.nextHintKey = function() {
