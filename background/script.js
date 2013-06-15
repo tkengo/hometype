@@ -33,6 +33,7 @@ RuntimeCommand.moveRightTab = function(sender) {
 RuntimeCommand.searchBookmarks = function(port) {
   port.onMessage.addListener(function(key) {
     chrome.bookmarks.getSubTree('1', function(tree) {
+      key = key.toLowerCase();
       var results = [];
       var search = function(node) {
         if (node.children) {
@@ -40,7 +41,7 @@ RuntimeCommand.searchBookmarks = function(port) {
             search(node.children[i]);
           }
         }
-        else if (node.title.indexOf(key) > -1 || node.url.indexOf(key) > -1) {
+        else if (node.title.toLowerCase().indexOf(key) > -1 || node.url.toLowerCase().indexOf(key) > -1) {
           results.push(node);
         }
       };
