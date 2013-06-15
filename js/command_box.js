@@ -1,6 +1,6 @@
 var COMMAND_BOX_HEIGHT = 20;
-var CANDIDATE_AREA_HEIGHT = 200;
-var COMMAND_BOX_MARGIN = 5;
+var CANDIDATE_AREA_HEIGHT = 180;
+var COMMAND_BOX_MARGIN = 8;
 
 var _CommandBox = function() {
   this.commandBox = $('<div>').addClass('chromekey-command-box').css({
@@ -38,13 +38,20 @@ _CommandBox.prototype.showCandidate = function() {
     this.candidateArea.appendTo($('body'));
   }
   if (!this.candidateArea.is(':visible')) {
-    this.candidateArea.css({
-      top: Viewport.getWindowHeight() + Viewport.getScrollPosition().top - CANDIDATE_AREA_HEIGHT - COMMAND_BOX_HEIGHT - COMMAND_BOX_MARGIN * 4,
-      left: COMMAND_BOX_MARGIN
-    });
-    
-    this.candidateArea.fadeIn(300);
+    this.recalculateAndSetPosition();
+    this.candidateArea.hide().fadeIn(300);
   }
+};
+
+_CommandBox.prototype.recalculateAndSetPosition = function() {
+  this.candidateArea.css({ top: -9999, left: -9999 }).show();
+
+  var children = this.candidateArea.children();
+  this.candidateArea.height($(children[0]).outerHeight() * children.length);
+  this.candidateArea.css({
+    top: Viewport.getWindowHeight() + Viewport.getScrollPosition().top - this.candidateArea.height() - COMMAND_BOX_HEIGHT - COMMAND_BOX_MARGIN * 4,
+    left: COMMAND_BOX_MARGIN
+  });
 };
 
 _CommandBox.prototype.setCandidate = function(list) {
@@ -57,9 +64,13 @@ _CommandBox.prototype.setCandidate = function(list) {
       div.addClass('selected');
     }
     this.candidateArea.append(div);
-    if (i == 5) {
+    if (i == 6) {
       break;
     }
+  }
+
+  if (this.candidateArea.is(':visible')) {
+    this.recalculateAndSetPosition();
   }
 };
 
