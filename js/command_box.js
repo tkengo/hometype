@@ -78,7 +78,7 @@ _CommandBox.prototype.selectNext = function() {
   var div = $('div.selected', this.candidateArea);
   div.removeClass('selected');
   var next = div.next();
-  if (next.length >= 0) {
+  if (next.length > 0) {
     next.addClass('selected');
   }
   else {
@@ -90,7 +90,7 @@ _CommandBox.prototype.selectPrev = function() {
   var div = $('div.selected', this.candidateArea);
   div.removeClass('selected');
   var prev = div.prev();
-  if (prev.length >= 0) {
+  if (prev.length > 0) {
     prev.addClass('selected');
   }
   else {
