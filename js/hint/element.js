@@ -18,8 +18,8 @@ HintElement.prototype.createTipElement = function() {
     left = coords[0];
   }
   else {
-    top  = srcElement.offset().top - 10;
-    left = srcElement.offset().left - 10;
+    top  = this.srcElement.offset().top - 10;
+    left = this.srcElement.offset().left - 10;
   }
 
   var div = $('<div>').css({
