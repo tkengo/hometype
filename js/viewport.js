@@ -56,7 +56,8 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
   $('*').each(function() {
     var element = $(this);
 
-    var clickable = element.get(0).tagName.toLowerCase() == 'a' || element.css('cursor') == 'pointer';
+    var tagName = element.get(0).tagName.toLowerCase();
+    var clickable = tagName == 'a' || tagName == 'area' || element.css('cursor') == 'pointer';
     if (clickable && _this.isInnerScreen(element)) {
       elements.push(element);
     }
@@ -95,12 +96,16 @@ _Viewport.prototype.getCurrentHintElement = function() {
 };
 
 _Viewport.prototype.isInnerScreen = function(element) {
+  if (element.get(0).tagName.toLowerCase() == 'area') {
+    element = element.parent().parent();
+  }
+
   var screenOffsetTop     = this.getScrollPosition().top;
   var screenOffsetBottom  = screenOffsetTop + this.getWindowHeight();
   var elementOffsetTop    = element.offset().top;
   var elementOffsetBottom = elementOffsetTop + element.height();
 
-  return element.is(':visible') && elementOffsetBottom > screenOffsetTop && screenOffsetBottom > elementOffsetTop;
+  return element.is(':visible') && elementOffsetBottom >= screenOffsetTop && screenOffsetBottom >= elementOffsetTop;
 };
 
 _Viewport.prototype.setContentEditable = function(editable) {

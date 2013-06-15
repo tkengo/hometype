@@ -5,9 +5,20 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.srcElement = srcElement;
   this.srcElement.addClass(this.className + '-area');
 
+  var top = 0, left = 0;
+  if (this.srcElement.get(0).tagName.toLowerCase() == 'area') {
+    var coords = this.srcElement.attr('coords').split(',');
+    top = coords[1];
+    left = coords[0];
+  }
+  else {
+    top  = srcElement.offset().top - 10;
+    left = srcElement.offset().left - 10;
+  }
+
   this.tipElement = $('<div>').css({
-    'top': (srcElement.offset().top - 10) + 'px',
-    'left': (srcElement.offset().left - 10) + 'px'
+    'top': top + 'px',
+    'left': left + 'px'
   }).addClass(this.className).addClass('chromekey-hit-a-hint-base');
 
   for (var i in key) {
