@@ -25,7 +25,6 @@ _Viewport.prototype.getDocumentHeight = function() {
 };
 
 _Viewport.prototype.scrollTo = function(x, y) {
-  // $(document.body).animate({ scrollTop: y + 'px', scrollLeft: x + 'px' }, 100);
   document.body.scrollTop = y;
   document.body.scrollLeft = x;
 };
