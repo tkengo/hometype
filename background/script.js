@@ -32,8 +32,20 @@ RuntimeCommand.moveRightTab = function(sender) {
 
 RuntimeCommand.searchBookmarks = function(port) {
   port.onMessage.addListener(function(key) {
-    chrome.bookmarks.search(key, function(result) {
-      port.postMessage(result);
+    chrome.bookmarks.getSubTree('1', function(tree) {
+      var results = [];
+      var search = function(node) {
+        if (node.children) {
+          for (var i in node.children) {
+            search(node.children[i]);
+          }
+        }
+        else if (node.title.indexOf(key) > -1 || node.url.indexOf(key) > -1) {
+          results.push(node);
+        }
+      };
+      search(tree[0]);
+      port.postMessage(results);
     });
   });
 };
