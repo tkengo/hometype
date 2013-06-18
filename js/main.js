@@ -1,7 +1,7 @@
 (function() {
   document.addEventListener('keydown', function(e) {
     KeySequence.processor(e);
-  });
+  }, true);
 
   KeySequence.onKeyCertain(function(e, sequence, stack, currentKey) {
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
