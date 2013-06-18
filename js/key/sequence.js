@@ -10,8 +10,9 @@ _KeySequence.prototype.onKeyCertain = function(callback) {
 };
 
 _KeySequence.prototype.processor = function(e) {
-  // メタキー(Shift / Ctrl / Alt / Command)単体でのキー押下は処理しない
-  if (e.isMetaKey()) {
+  // メタキー単体でのキー押下は処理しない
+  var id = e.keyIdentifier;
+  if (id == 'Control' || id == 'Shift' || id == 'Alt' || id == 'Meta') {
     return false;
   }
 
@@ -19,7 +20,7 @@ _KeySequence.prototype.processor = function(e) {
   this.resetTimerForResetKeySequence();
 
   // 押下されたキーをキーシーケンスに追加
-  var key = e.getKeyChar();
+  var key = this.getKeyChar(e);
   this.keySequece += key;
   this.keyStack   += key;
 
@@ -33,6 +34,36 @@ _KeySequence.prototype.processor = function(e) {
 
   // 次のキー入力を待つためにタイマーを仕込む
   this.setTimerForResetKeySequence(300);
+};
+
+/**
+ * 押下されたキーをキーマッピング用の文字列に変換して返します。
+ *   * Ctrlキーと同時にaキーを押した場合は<C-a>
+ *   * Shiftキーと同時にaキーを押した場合はA
+ *   * Commandキーと同時にaキーを押した場合は<M-a>
+ * などです。
+ *
+ * @return string キーマッピング用の文字列
+ */
+_KeySequence.prototype.getKeyChar = function(e) {
+  var key = KeyIdentifiers.toChar(e.keyIdentifier);
+
+  if (!key) {
+    return e.keyIdentifier;
+  }
+
+  if (e.shiftKey) {
+    key = key.toUpperCase();
+  }
+
+  if (e.metaKey) {
+    key = '<M-' + key + '>';
+  }
+  else if (e.ctrlKey) {
+    key = '<C-' + key + '>';
+  }
+
+  return key;
 };
 
 /**
@@ -69,9 +100,3 @@ _KeySequence.prototype.resetTimerForResetKeySequence = function() {
 };
 
 var KeySequence = new _KeySequence();
-
-$(document).ready(function() {
-  document.addEventListener('keydown', function(e) {
-    KeySequence.processor(new KeyEvent(e));
-  });
-});

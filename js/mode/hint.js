@@ -3,7 +3,9 @@ var HintMode = function() {
 };
 
 HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
-  e.stop();
+  e.stopPropagation();
+  e.preventDefault();
+
   var hint = Viewport.getCurrentHintElement();
   var elements = hint.getMatchedElements(stack);
 
@@ -13,9 +15,9 @@ HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
     Command.cancelHintMode();
-    var e = document.createEvent('MouseEvents');
-    e.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
-    elements[0].getElement().get(0).dispatchEvent(e);
+    var event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
+    elements[0].getElement().get(0).dispatchEvent(event);
     elements[0].getElement().focus();
     return true;
   }

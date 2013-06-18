@@ -7,7 +7,8 @@
 
   "permissions": [
     "tabs",
-    "bookmarks"
+    "bookmarks",
+    "<all_urls>"
   ],
   
   "background": {
@@ -23,7 +24,6 @@
     "js": [
       "lib/jquery-2.0.1.min.js",
       "js/key/identifiers.js",
-      "js/key/event.js",
       "js/key/sequence.js",
       "js/key/map.js",
       "js/viewport.js",
@@ -39,6 +39,7 @@
       "js/mode.js",
       "js/config.js",
       "js/main.js"
-    ]
+    ],
+    "run_at": "document_start"
   }]
 }
