@@ -56,8 +56,8 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
     var element = $(this);
 
     var tagName = element.get(0).tagName.toLowerCase();
-    var submittable = tagName == 'input' && (element.is(':submit') || element.is(':reset') || element.is(':image'));
-    var clickable = tagName == 'a' || tagName == 'area' || element.css('cursor') == 'pointer';
+    var submittable = tagName == 'input' && (element.is(':submit') || element.is(':reset') || element.is(':image') || element.is(':radio'));
+    var clickable = tagName == 'select' || tagName == 'a' || tagName == 'area' || element.css('cursor') == 'pointer';
     if ((clickable || submittable) && _this.isInnerScreen(element)) {
       elements.push(element);
     }
@@ -69,7 +69,7 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
 _Viewport.prototype.formElementInnerScreen = function() {
   var _this = this;
   var elements = [];
-  $('textarea, :file, :text, :password, :radio, select').each(function() {
+  $('textarea, :file, :text, :password').each(function() {
     var element = $(this);
     if (_this.isInnerScreen(element)) {
       elements.push(element);
