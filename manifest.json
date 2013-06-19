@@ -23,6 +23,7 @@
     ],
     "js": [
       "lib/jquery-2.0.1.min.js",
+      "lib/jquery.extend.js",
       "js/key/identifiers.js",
       "js/key/sequence.js",
       "js/key/map.js",
