@@ -56,8 +56,7 @@ HintElementCollection.prototype.show = function() {
 };
 
 HintElementCollection.prototype.nextHintKey = function() {
-  var singleKeyCount = HintKeys.length - Math.floor(this.htmlElements.length / HintKeys.length);
-  multiKey = this.htmlElements.length > HintKeys.length;
+  var multiKey = this.htmlElements.length > HintKeys.length;
 
   var key1 = HintKeys[this.keyIndex1];
   var key2 = '';
