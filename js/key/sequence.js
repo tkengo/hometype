@@ -5,7 +5,7 @@ var _KeySequence = function() {
   this.resetkeySequeceTimerId = -1;
 };
 
-_KeySequence.prototype.onKeyCertain = function(callback) {
+_KeySequence.prototype.onProcess = function(callback) {
   this.callbacks.push(callback);
 };
 
