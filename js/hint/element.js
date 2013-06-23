@@ -3,7 +3,7 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.index     = index;
   this.key       = key;
 
-  this.srcElement = srcElement;
+  this.srcElement = $(srcElement);
   this.srcElement.addClass(this.className + '-area');
 
   this.tipElement = this.createTipElement();
@@ -12,7 +12,7 @@ var HintElement = function(srcElement, index, key, hintTheme) {
 
 HintElement.prototype.createTipElement = function() {
   var top = 0, left = 0;
-  if (this.srcElement.get(0).tagName.toLowerCase() == 'area') {
+  if (this.srcElement.tag() == 'area') {
     var coords = this.srcElement.attr('coords').split(',');
     top = coords[1];
     left = coords[0];

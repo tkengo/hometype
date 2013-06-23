@@ -85,22 +85,13 @@
   list-style:none;
 }
 .chromekey-select-box li {
+  float:left;
   line-height:200%;
   font-size:14px;
-  margin:5px 0;
+  margin:5px;
   padding:0 10px;
-}
-.chromekey-select-box div:nth-child(1) {
   border:solid 1px #999;
   border-radius:4px;
-  width:30px;
-  text-align:center;
-  float:left;
-  font-family:'Osaka-Mono';
-  margin-right:6px;
-}
-.chromekey-select-box div:nth-child(2) {
-  border:solid 1px #999;
-  border-radius:4px;
+  cursor:pointer;
   background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
 }
