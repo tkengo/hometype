@@ -1,10 +1,38 @@
+/**
+ * キーボードから押下されたキーを取り扱います。
+ *
+ * KeySequenceクラスのonProcessにコールバック関数を登録すると
+ * キーボードのキーが押下される度に登録されたコールバック関数が呼び出され
+ * 以下の形式でパラメータが渡されます。
+ *
+ * function callback(e, sequence, stack, key);
+ *   e        : キーダウンイベント
+ *   sequence : 特定の時間内に連続して押下されたキーを連結したもの。
+ *              1文字目に a を押下した場合は 'a' が渡される。
+ *              2文字目に特定時間内に b を押下した場合は 'ab' が渡される。
+ *              3文字目に特定時間を過ぎた後に c を押下した場合はリセットされて 'c' が渡される。
+ *   stack    : 押下されたキーを連結したもの。
+ *              sequenceと違って特定時間内でリセットされない。
+ *              リセットする場合は明示的にresetメソッドを呼び出す。
+ *   key      : 今回押下されたキー
+ */
 var _KeySequence = function() {
   this.keySequece = '';
   this.keyStack = '';
   this.callbacks = [];
   this.resetkeySequeceTimerId = -1;
+
+  var _this = this;
+  document.addEventListener('keydown', function(e) {
+    _this.processor(e);
+  }, true);
 };
 
+/**
+ * キーボード押下時のコールバック関数を登録します。
+ *
+ * @param function callback コールバック関数
+ */
 _KeySequence.prototype.onProcess = function(callback) {
   this.callbacks.push(callback);
 };

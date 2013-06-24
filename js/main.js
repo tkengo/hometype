@@ -1,8 +1,4 @@
 (function() {
-  document.addEventListener('keydown', function(e) {
-    KeySequence.processor(e);
-  }, true);
-
   KeySequence.onProcess(function(e, sequence, stack, currentKey) {
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
     if (candidate.length == 1 && candidate[0].key == sequence) {
