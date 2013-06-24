@@ -53,7 +53,7 @@ RuntimeCommand.searchBookmarks = function(port) {
 
 (function() {
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    var command = RuntimeCommand[message];
+    var command = RuntimeCommand[message.command];
     if (command) {
       command.call(command, sender, sendResponse);
     }

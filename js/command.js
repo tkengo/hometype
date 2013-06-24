@@ -78,15 +78,15 @@ Command.caretUp = function() {
 };
 
 Command.closeTab = function() {
-  chrome.runtime.sendMessage('closeTab');
+  chrome.runtime.sendMessage({ command: 'closeTab' });
 };
 
 Command.moveLeftTab = function() {
-  chrome.runtime.sendMessage('moveLeftTab');
+  chrome.runtime.sendMessage({ command: 'moveLeftTab' });
 };
 
 Command.moveRightTab = function() {
-  chrome.runtime.sendMessage('moveRightTab');
+  chrome.runtime.sendMessage({ command: 'moveRightTab' });
 };
 
 Command.goToVisualMode = function() {
