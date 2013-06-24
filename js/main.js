@@ -1,9 +1,10 @@
 (function() {
   KeySequence.onProcess(function(e, sequence, stack, currentKey) {
+    // 入力されたキーでコマンド候補を取得する
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
+
     if (candidate.length == 1 && candidate[0].key == sequence) {
       // コマンドが確定できればそれを実行
-      // ただしテキストエリアにフォーカスがあれば何もしない
       candidate[0].command.call();
       e.stopPropagation();
       e.preventDefault();
@@ -23,6 +24,8 @@
 
 // 初期化処理
 $(document).ready(function() {
+  // テキストエリアにフォーカスがあたればインサートモードへ
+  // フォーカスが外れればノーマルモードへ移行する
   $(document).on('focus', ':text, :password, textarea', function() {
     Mode.changeMode(ModeList.INSERT_MODE);
   }).on('blur', ':text, :password, textarea', function() {
