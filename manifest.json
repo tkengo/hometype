@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Chromekey",
-  "description": "vi key mapping for GoogleChrome",
+  "description": "provide key board manipulation for GoogleChrome",
   "version": "0.1",
 
   "permissions": [
