@@ -61,7 +61,7 @@ KeySequence.prototype.processor = function(e) {
   }
 
   // 次のキー入力を待つためにタイマーを仕込む
-  this.setTimerForResetKeySequence(300);
+  this.setTimerForResetKeySequence(Options.command_interval);
 };
 
 /**

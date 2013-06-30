@@ -1,6 +1,13 @@
+var Options = new ChromekeyOptions();
+
 (function() {
-  var key = new KeySequence();
-  key.onProcess(function(e, sequence, stack, currentKey) {
+  Options.init(function() {
+    var key = new KeySequence();
+    key.onProcess(processor);
+  });
+
+  function processor(e, sequence, stack, currentKey)
+  {
     // 入力されたキーでコマンド候補を取得する
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
 
@@ -20,7 +27,7 @@
         this.reset();
       }
     }
-  });
+  };
 })();
 
 // 初期化処理

@@ -30,6 +30,25 @@ RuntimeCommand.moveRightTab = function(sender) {
   });
 };
 
+RuntimeCommand.setOptions = function(sender, params) {
+  for (var i in params) {
+    localStorage.setItem(i, params[i]);
+  }
+};
+
+RuntimeCommand.getOptions = function(sender, params, sendResponse) {
+  if (params && params.key) {
+    var result = localStorage.getItem(params.key);
+  }
+  else {
+    var result = {};
+    for (var k in localStorage){
+      result[k] = localStorage.getItem(k);
+    }
+  }
+  sendResponse(result);
+};
+
 RuntimeCommand.searchBookmarks = function(port) {
   port.onMessage.addListener(function(key) {
     chrome.bookmarks.getSubTree('1', function(tree) {
@@ -55,7 +74,7 @@ RuntimeCommand.searchBookmarks = function(port) {
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     var command = RuntimeCommand[message.command];
     if (command) {
-      command.call(command, sender, sendResponse);
+      command.call(command, sender, message.params, sendResponse);
     }
   });
 
