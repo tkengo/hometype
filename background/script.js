@@ -34,6 +34,12 @@ RuntimeCommand.setOptions = function(sender, params) {
   for (var i in params) {
     localStorage.setItem(i, params[i]);
   }
+  notifyPort.postMessage(params);
+};
+
+var notifyPort;
+RuntimeCommand.notifyOptions = function(port) {
+  notifyPort = port;
 };
 
 RuntimeCommand.getOptions = function(sender, params, sendResponse) {

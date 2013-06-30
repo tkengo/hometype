@@ -1,5 +1,14 @@
 var ChromekeyOptions = function() {
   this.options = {};
+  var port = chrome.runtime.connect({ name: 'notifyOptions' });
+  port.onMessage.addListener($.proxy(this.onMessage, this));
+};
+
+ChromekeyOptions.prototype.onMessage = function(results) {
+  this.options = $.extend(this.options, results);
+  for (var key in results) {
+    ChromekeyOptions.prototype[key] = results[key];
+  }
 };
 
 ChromekeyOptions.prototype.init = function(callback) {
