@@ -16,7 +16,7 @@
  *              リセットする場合は明示的にresetメソッドを呼び出す。
  *   key      : 今回押下されたキー
  */
-var _KeySequence = function() {
+var KeySequence = function() {
   this.keySequece = '';
   this.keyStack = '';
   this.callbacks = [];
@@ -33,11 +33,11 @@ var _KeySequence = function() {
  *
  * @param function callback コールバック関数
  */
-_KeySequence.prototype.onProcess = function(callback) {
+KeySequence.prototype.onProcess = function(callback) {
   this.callbacks.push(callback);
 };
 
-_KeySequence.prototype.processor = function(e) {
+KeySequence.prototype.processor = function(e) {
   // メタキー単体でのキー押下は処理しない
   var id = e.keyIdentifier;
   if (id == 'Control' || id == 'Shift' || id == 'Alt' || id == 'Meta') {
@@ -73,7 +73,7 @@ _KeySequence.prototype.processor = function(e) {
  *
  * @return string キーマッピング用の文字列
  */
-_KeySequence.prototype.getKeyChar = function(e) {
+KeySequence.prototype.getKeyChar = function(e) {
   var key = KeyIdentifiers.toChar(e.keyIdentifier);
 
   if (!key) {
@@ -97,7 +97,7 @@ _KeySequence.prototype.getKeyChar = function(e) {
 /**
  * キーシーケンスをリセットします。
  */
-_KeySequence.prototype.reset = function() {
+KeySequence.prototype.reset = function() {
   this.keySequece = '';
   this.keyStack   = '';
   this.resetTimerForResetKeySequence();
@@ -111,7 +111,7 @@ _KeySequence.prototype.reset = function() {
  *
  * @param integer interval 次のキー入力を待つまでの時間。ミリセカンド
  */
-_KeySequence.prototype.setTimerForResetKeySequence = function(interval) {
+KeySequence.prototype.setTimerForResetKeySequence = function(interval) {
   this.resetkeySequeceTimerId = setTimeout($.proxy(function() {
     this.keySequece = '';
     this.resetTimerForResetKeySequence();
@@ -121,10 +121,8 @@ _KeySequence.prototype.setTimerForResetKeySequence = function(interval) {
 /**
  * キー入力を待つタイマーを解除します。
  */
-_KeySequence.prototype.resetTimerForResetKeySequence = function() {
+KeySequence.prototype.resetTimerForResetKeySequence = function() {
   // これによってsetTimerForResetKeySequenceでセットしたタイマーが
   // 実行されなくなる
   clearTimeout(this.resetkeySequeceTimerId);
 };
-
-var KeySequence = new _KeySequence();

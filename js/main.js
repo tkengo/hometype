@@ -1,5 +1,6 @@
 (function() {
-  KeySequence.onProcess(function(e, sequence, stack, currentKey) {
+  var key = new KeySequence();
+  key.onProcess(function(e, sequence, stack, currentKey) {
     // 入力されたキーでコマンド候補を取得する
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
 
