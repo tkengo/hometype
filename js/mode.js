@@ -23,11 +23,12 @@ var ModeList = {
  *
  * デフォルトでノーマルモードとなります。
  */
-var _Mode = function() {
+var ChromekeyMode = function() {
   this.mode = ModeList.NORMAL_MODE;
 
   this.callbacks = [];
 
+  // 各モードのプロセッサを生成
   this.modeProcessors = {};
   this.modeProcessors[ModeList.NORMAL_MODE]   = new NormalMode();
   this.modeProcessors[ModeList.INSERT_MODE]   = new NormalMode();
@@ -42,7 +43,7 @@ var _Mode = function() {
  *
  * @return string 現在のモード
  */
-_Mode.prototype.getCurrentMode = function() {
+ChromekeyMode.prototype.getCurrentMode = function() {
   return this.mode;
 };
 
@@ -53,7 +54,7 @@ _Mode.prototype.getCurrentMode = function() {
  *
  * @param string modeName 変更後のモード名
  */
-_Mode.prototype.changeMode = function(modeName) {
+ChromekeyMode.prototype.changeMode = function(modeName) {
   // モードが変わってなければ何もしない
   if (this.mode == modeName) {
     return;
@@ -70,7 +71,14 @@ _Mode.prototype.changeMode = function(modeName) {
   }
 };
 
-_Mode.prototype.getProcessor = function(mode) {
+/**
+ * 指定されたモードのプロセッサを取得します。
+ * 引数が省略された場合は現在のモードのプロセッサを取得します。
+ *
+ * @param ModeList mode モード。省略時は現在のモード
+ * @return モードプロセッサ
+ */
+ChromekeyMode.prototype.getProcessor = function(mode) {
   mode = mode || this.mode;
 
   return this.modeProcessors[mode];
@@ -84,8 +92,8 @@ _Mode.prototype.getProcessor = function(mode) {
  *                          newMode : 変更後のモード
  *                          oldMode : 変更前のモード。
  */
-_Mode.prototype.onModeChange = function(callback) {
+ChromekeyMode.prototype.onModeChange = function(callback) {
   this.callbacks.push(callback);
 };
 
-var Mode = new _Mode();
+var Mode = new ChromekeyMode();

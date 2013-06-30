@@ -7,34 +7,58 @@
  */
 var Command = {};
 
+/**
+ * 下方向にスクロールします。
+ */
 Command.scrollDown = function() {
   Viewport.scrollDown(50);
 };
 
+/**
+ * 上方向にスクロールします。
+ */
 Command.scrollUp = function() {
   Viewport.scrollUp(50);
 };
 
+/**
+ * 下方向に画面半分スクロールします。
+ */
 Command.scrollDownHalf = function() {
   Viewport.scrollDown(Viewport.getWindowHeight() / 2);
 };
 
+/**
+ * 上方向に画面半分スクロールします。
+ */
 Command.scrollUpHalf = function() {
   Viewport.scrollUp(Viewport.getWindowHeight() / 2);
 };
 
+/**
+ * 下方向に1画面分スクロールします。
+ */
 Command.scrollDownPage = function() {
   Viewport.scrollDown(Viewport.getWindowHeight());
 };
 
+/**
+ * 上方向に1画面分スクロールします。
+ */
 Command.scrollUpPage = function() {
   Viewport.scrollUp(Viewport.getWindowHeight());
 };
 
+/**
+ * ドキュメント先頭部分へスクロールします。
+ */
 Command.scrollToTop = function() {
   Viewport.scrollTo(0, 0);
 };
 
+/**
+ * ドキュメント最後尾部分へスクロールします。
+ */
 Command.scrollToBottom = function() {
   Viewport.scrollTo(0, Viewport.getDocumentHeight());
 };

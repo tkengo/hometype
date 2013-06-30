@@ -1,13 +1,18 @@
+/**
+ * Copyright (c) 2013 Kengo Tateishi (@tkengo)
+ * Licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Chromekeyの起動処理
+ */
+
 var Options = new ChromekeyOptions();
 
-(function() {
-  Options.init(function() {
-    var key = new KeySequence();
-    key.onProcess(processor);
-  });
-
-  function processor(e, sequence, stack, currentKey)
-  {
+// Chromekeyのオプションをロードする
+Options.init(function() {
+  // ロードが完了したらキー入力待ちのイベントを設定する
+  var key = new KeySequence();
+  key.onProcess(function (e, sequence, stack, currentKey) {
     // 入力されたキーでコマンド候補を取得する
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
 
@@ -27,10 +32,9 @@ var Options = new ChromekeyOptions();
         this.reset();
       }
     }
-  };
-})();
+  });
+});
 
-// 初期化処理
 $(document).ready(function() {
   // テキストエリアにフォーカスがあたればインサートモードへ
   // フォーカスが外れればノーマルモードへ移行する
