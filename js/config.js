@@ -3,10 +3,10 @@
   KeyMap.nmap('k',     'scrollUp');
   KeyMap.nmap('G',     'scrollToBottom');
   KeyMap.nmap('gg',    'scrollToTop');
-  KeyMap.nmap('f',     'goToHintMode');
-  KeyMap.nmap('F',     'goToNewWindowHintMode');
+  KeyMap.nmap('f',     'enterHintMode');
+  KeyMap.nmap('F',     'enterNewWindowHintMode');
   KeyMap.nmap('x',     'closeTab');
-  KeyMap.nmap('v',     'goToVisualMode');
+  KeyMap.nmap('v',     'enterVisualMode');
   KeyMap.nmap('<C-e>', 'scrollDown');
   KeyMap.nmap('<C-y>', 'scrollUp');
   KeyMap.nmap('<C-d>', 'scrollDownHalf');
@@ -15,11 +15,11 @@
   KeyMap.nmap('<C-b>', 'scrollUpPage');
   KeyMap.nmap('<C-p>', 'moveLeftTab');
   KeyMap.nmap('<C-n>', 'moveRightTab');
-  KeyMap.nmap(':',     'goToCommandMode');
-  KeyMap.nmap('b',     'goToBookmarkMode');
-  KeyMap.nmap('B',     'goToNewWindowBookmarkMode');
-  KeyMap.nmap('i',     'goToFocusHintMode');
-  KeyMap.nmap('a',     'goToFocusHintMode');
+  KeyMap.nmap(':',     'enterCommandMode');
+  KeyMap.nmap('b',     'enterBookmarkMode');
+  KeyMap.nmap('B',     'enterNewWindowBookmarkMode');
+  KeyMap.nmap('i',     'enterFocusHintMode');
+  KeyMap.nmap('a',     'enterFocusHintMode');
   KeyMap.nmap('H',     'backHistory');
   KeyMap.nmap('L',     'forwardHistory');
 

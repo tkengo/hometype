@@ -89,13 +89,13 @@ Command.moveRightTab = function() {
   chrome.runtime.sendMessage({ command: 'moveRightTab' });
 };
 
-Command.goToVisualMode = function() {
+Command.enterVisualMode = function() {
   var element = Viewport.setContentEditable(true);
   setTimeout(function() { element.focus(); }, 100);
   Mode.changeMode(ModeList.VISUAL_MODE);
 };
 
-Command.goToHintMode = function() {
+Command.enterHintMode = function() {
   var target = Viewport.clickableElementInnerScreen();
   if (target.length > 0) {
     Mode.changeMode(ModeList.HINT_MODE);
@@ -104,7 +104,7 @@ Command.goToHintMode = function() {
   }
 };
 
-Command.goToFocusHintMode = function() {
+Command.enterFocusHintMode = function() {
   var target = Viewport.formElementInnerScreen();
   if (target.length > 0) {
     Mode.changeMode(ModeList.HINT_MODE);
@@ -113,7 +113,7 @@ Command.goToFocusHintMode = function() {
   }
 };
 
-Command.goToNewWindowHintMode = function() {
+Command.enterNewWindowHintMode = function() {
   var target = Viewport.clickableElementInnerScreen();
   if (target.length > 0) {
     Mode.changeMode(ModeList.HINT_MODE);
@@ -122,18 +122,18 @@ Command.goToNewWindowHintMode = function() {
   }
 };
 
-Command.goToCommandMode = function() {
+Command.enterCommandMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.COMMAND_MODE);
 };
 
-Command.goToBookmarkMode = function() {
+Command.enterBookmarkMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.BOOKMARK_MODE);
   Mode.getProcessor().setOpenNewTab(false);
 };
 
-Command.goToNewWindowBookmarkMode = function() {
+Command.enterNewWindowBookmarkMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.BOOKMARK_MODE);
   Mode.getProcessor().setOpenNewTab(true);
