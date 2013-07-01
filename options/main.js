@@ -1,12 +1,15 @@
 $(document).ready(function() {
-  chrome.runtime.sendMessage({ command: 'getOptions', params: { key: 'command_interval' } }, function(response) {
-    $('#command_interval').val(response);
+  chrome.runtime.sendMessage({ command: 'getOptions' }, function(response) {
+    for (var key in response) {
+      $('#' + key).val(response[key]);
+    }
   });
 
   $('#save').click(function() {
     var params = {};
-    // localStorage.command_interval = $('#command_interval').val();
-    params.command_interval = $('#command_interval').val();
+    $(':input').each(function() {
+      params[$(this).attr('id')] = $(this).val();
+    });
     chrome.runtime.sendMessage({ command: 'setOptions', params: params });
   });
 });
