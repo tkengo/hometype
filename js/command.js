@@ -11,14 +11,14 @@ var Command = {};
  * 下方向にスクロールします。
  */
 Command.scrollDown = function() {
-  Viewport.scrollDown(50);
+  Viewport.scrollDown(parseInt(Options.scroll_amount));
 };
 
 /**
  * 上方向にスクロールします。
  */
 Command.scrollUp = function() {
-  Viewport.scrollUp(50);
+  Viewport.scrollUp(parseInt(Options.scroll_amount));
 };
 
 /**
