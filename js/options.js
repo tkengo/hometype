@@ -15,7 +15,7 @@ ChromekeyOptions.prototype.init = function(callback) {
   chrome.runtime.sendMessage({
     command: 'getOptions'
   }, $.proxy(function(response) {
-    this.options = $.extend(this.options, ChromekeyOptions.defaultOptions);
+    this.options = $.extend(this.options, ChromekeyDefaultOptions);
     for (var key in this.options) {
       var option = response[key];
       if (option) {
@@ -29,10 +29,6 @@ ChromekeyOptions.prototype.init = function(callback) {
       callback.call();
     }
   }, this));
-};
-
-ChromekeyOptions.defaultOptions = {
-  command_interval: 300
 };
 
 ChromekeyOptions.prototype.get = function(key) {
