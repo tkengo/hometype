@@ -63,24 +63,74 @@ Command.scrollToBottom = function() {
   Viewport.scrollTo(0, Viewport.getDocumentHeight());
 };
 
+/**
+ * 現在のタブを閉じます
+ */
 Command.closeTab = function() {
   chrome.runtime.sendMessage({ command: 'closeTab' });
 };
 
+/**
+ * ひとつ左側のタブへ移動します。
+ */
 Command.moveLeftTab = function() {
   chrome.runtime.sendMessage({ command: 'moveLeftTab' });
 };
 
+/**
+ * ひとつ右側のタブへ移動します。
+ */
 Command.moveRightTab = function() {
   chrome.runtime.sendMessage({ command: 'moveRightTab' });
 };
 
+/**
+ * コマンドボックスの次の候補を選択します。
+ */
+Command.selectNextCandidate = function() {
+  CommandBox.selectNext();
+};
+
+/**
+ * コマンドボックスの前の候補を選択します。
+ */
+Command.selectPrevCandidate = function() {
+  CommandBox.selectPrev();
+};
+
+/**
+ * アクティブ要素からフォーカスを外します。
+ */
+Command.blurForm = function() {
+  $(document.activeElement).blur();
+};
+
+/**
+ * 履歴の1つ前に戻ります。
+ */
+Command.backHistory = function() {
+  window.history.back();
+};
+
+/**
+ * 履歴の1つ先に進みます。
+ */
+Command.forwardHistory = function() {
+  window.history.forward();
+};
+
+/**
+ * ビジュアルモードへ移行します。
+ */
 Command.enterVisualMode = function() {
   var element = Viewport.setContentEditable(true);
   setTimeout(function() { element.focus(); }, 100);
   Mode.changeMode(ModeList.VISUAL_MODE);
 };
 
+/**
+ * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
+ */
 Command.enterHintMode = function() {
   var target = Viewport.clickableElementInnerScreen();
   if (target.length > 0) {
@@ -90,6 +140,9 @@ Command.enterHintMode = function() {
   }
 };
 
+/**
+ * ヒントモードへ移行します。ヒント対象は入力可能フォームです。
+ */
 Command.enterFocusHintMode = function() {
   var target = Viewport.formElementInnerScreen();
   if (target.length > 0) {
@@ -99,6 +152,10 @@ Command.enterFocusHintMode = function() {
   }
 };
 
+/**
+ * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
+ * リンクをクリックする時に新しいウィンドウで開きます。
+ */
 Command.enterNewWindowHintMode = function() {
   var target = Viewport.clickableElementInnerScreen();
   if (target.length > 0) {
@@ -108,23 +165,36 @@ Command.enterNewWindowHintMode = function() {
   }
 };
 
+/**
+ * コマンドモードへ移行します。
+ */
 Command.enterCommandMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.COMMAND_MODE);
 };
 
+/**
+ * ブックマークモードへ移行します。
+ */
 Command.enterBookmarkMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.BOOKMARK_MODE);
   Mode.getProcessor().setOpenNewTab(false);
 };
 
+/**
+ * ブックマークモードへ移行します。
+ * ブックマークを開く時に新しいウィンドウで開きます。
+ */
 Command.enterNewWindowBookmarkMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.BOOKMARK_MODE);
   Mode.getProcessor().setOpenNewTab(true);
 };
 
+/**
+ * ヒントモードを抜けてノーマルモードへ戻ります。
+ */
 Command.cancelHintMode = function() {
   if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
     Viewport.getCurrentHintElement().removeAllHint();
@@ -132,6 +202,9 @@ Command.cancelHintMode = function() {
   }
 };
 
+/**
+ * ビジュアルモードを抜けてノーマルモードへ戻ります。
+ */
 Command.cancelVisualMode = function() {
   if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
     Viewport.setContentEditable(false);
@@ -139,29 +212,12 @@ Command.cancelVisualMode = function() {
   }
 };
 
+/**
+ * ブックマークモードを抜けてノーマルモードへ戻ります。
+ */
 Command.cancelBookmarkMode = function() {
   if (Mode.getCurrentMode() == ModeList.BOOKMARK_MODE) {
     CommandBox.hide();
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
-};
-
-Command.selectNextCandidate = function() {
-  CommandBox.selectNext();
-};
-
-Command.selectPrevCandidate = function() {
-  CommandBox.selectPrev();
-};
-
-Command.blurForm = function() {
-  $(document.activeElement).blur();
-};
-
-Command.backHistory = function() {
-  window.history.back();
-};
-
-Command.forwardHistory = function() {
-  window.history.forward();
 };
