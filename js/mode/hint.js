@@ -34,7 +34,7 @@ HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
       children.each(function() {;
         var li = $('<li>').text($(this).text()).attr('value', $(this).val()).click(function() {
           Command.cancelHintMode();
-          target.val($(this).attr('value'));
+          target.val($(this).attr('value')).change();
           div.remove();
         }).appendTo(ul);
       });
