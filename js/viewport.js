@@ -79,6 +79,19 @@ _Viewport.prototype.formElementInnerScreen = function() {
   return elements;
 };
 
+_Viewport.prototype.divElementInnerScreen = function() {
+  var _this = this;
+  var elements = [];
+  $('div, section, table, h1, h2, h3, h4, h5, h6').each(function() {
+    var element = $(this);
+    if (_this.isInnerScreen(element)) {
+      elements.push(element);
+    }
+  });
+
+  return elements;
+};
+
 _Viewport.prototype.createNewHintElement = function(hintTheme, target) {
   target = target || Viewport.clickableElementInnerScreen();
 
@@ -106,10 +119,6 @@ _Viewport.prototype.isInnerScreen = function(element) {
   var elementOffsetBottom = elementOffsetTop + element.height();
 
   return element.is(':visible') && elementOffsetBottom >= screenOffsetTop && screenOffsetBottom >= elementOffsetTop;
-};
-
-_Viewport.prototype.setContentEditable = function(editable) {
-  return $('html').attr('contenteditable', editable);
 };
 
 _Viewport.prototype.createLink = function(url, parent) {

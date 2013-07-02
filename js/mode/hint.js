@@ -1,5 +1,6 @@
 var HintMode = function() {
   this.newTab = false;
+  this.callbacks = [];
 };
 
 HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
@@ -15,6 +16,16 @@ HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
     var target = elements[0].getElement();
+
+    if (this.callbacks.length > 0) {
+      Command.cancelHintMode();
+      for (var i in this.callbacks) {
+        this.callbacks[i].call(this.callbacks[i], target);
+      }
+      this.resetCallback();
+      return true;
+    }
+
     if (target.tag() == 'select') {
       var children = target.children('option');
       var div = $('<div>').addClass('chromekey-select-box').appendTo($('body')).screenCenter();
@@ -49,6 +60,14 @@ HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
     }
     return false;
   }
+};
+
+HintMode.prototype.setCallback = function(callback) {
+  this.callbacks.push(callback);
+};
+
+HintMode.prototype.resetCallback = function() {
+  this.callbacks = [];
 };
 
 HintMode.prototype.setOpenNewTab = function(newTab) {

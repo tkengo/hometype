@@ -123,9 +123,16 @@ Command.forwardHistory = function() {
  * ビジュアルモードへ移行します。
  */
 Command.enterVisualMode = function() {
-  var element = Viewport.setContentEditable(true);
-  setTimeout(function() { element.focus(); }, 100);
-  Mode.changeMode(ModeList.VISUAL_MODE);
+  var target = Viewport.divElementInnerScreen();
+  if (target.length > 0) {
+    Mode.changeMode(ModeList.HINT_MODE);
+    Mode.getProcessor().setCallback(function(element) {
+      element.attr('contenteditable', true).attr('data-chromekey-contenteditable', 'true');
+      setTimeout(function() { element.focus(); }, 100);
+      Mode.changeMode(ModeList.VISUAL_MODE);
+    });
+    Viewport.createNewHintElement('yellow', target).show();
+  }
 };
 
 /**
@@ -207,7 +214,7 @@ Command.cancelHintMode = function() {
  */
 Command.cancelVisualMode = function() {
   if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
-    Viewport.setContentEditable(false);
+    $('[data-chromekey-contenteditable=true]').removeAttr('contenteditable').removeAttr('data-chromekey-contenteditable');
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
