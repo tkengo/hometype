@@ -120,6 +120,36 @@ Command.forwardHistory = function() {
 };
 
 /**
+ * 現在ビジュアルモードになっている要素の次の要素をビジュアルモードにします。
+ */
+Command.forwardContentEditable = function() {
+  var current = $('[data-chromekey-contenteditable=true]')
+  if (current.length > 0) {
+    current.removeAttr('contenteditable').removeAttr('data-chromekey-contenteditable');
+    var next = null;
+    while (current.length > 0) {
+      next = current.next();
+      if (next.length > 0) {
+        if (next.is('div, section, table, h1, h2, h3, h4, h5, h6') && next.is(':visible')) {
+          break;
+        }
+        else {
+          current = next;
+        }
+      }
+      else {
+        current = current.parent();
+      }
+    }
+    if (next && next.length > 0) {
+      next.attr('contenteditable', true).attr('data-chromekey-contenteditable', 'true');
+      Viewport.scrollTo(0, parseInt(next.offset().top));
+      setTimeout(function() { next.focus(); }, 100);
+    }
+  }
+};
+
+/**
  * ビジュアルモードへ移行します。
  */
 Command.enterVisualMode = function() {

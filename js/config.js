@@ -29,6 +29,7 @@
   KeyMap.imap('<C-n>', 'moveRightTab');
 
   KeyMap.vmap('Esc', 'cancelVisualMode');
+  KeyMap.vmap('n',   'forwardContentEditable');
 
   KeyMap.fmap('Esc',   'cancelHintMode');
   KeyMap.fmap('<C-c>', 'cancelHintMode');
