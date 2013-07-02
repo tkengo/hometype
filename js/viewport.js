@@ -121,6 +121,39 @@ _Viewport.prototype.isInnerScreen = function(element) {
   return element.is(':visible') && elementOffsetBottom >= screenOffsetTop && screenOffsetBottom >= elementOffsetTop;
 };
 
+_Viewport.prototype.setContentEditable = function(element) {
+  element.attr('contenteditable', true);
+  element.attr('data-chromekey-contenteditable', 'true');
+  element.addClass('chromekey-contenteditable');
+};
+
+_Viewport.prototype.resetContentEditable = function(element) {
+  element.removeAttr('contenteditable');
+  element.removeAttr('data-chromekey-contenteditable');
+  element.removeClass('chromekey-contenteditable');
+};
+
+_Viewport.prototype.getNextContentEditableElement = function(current) {
+  var next = null;
+
+  while (current.length > 0) {
+    next = current.next();
+    if (next.length > 0) {
+      if (next.is('div, section, table, h1, h2, h3, h4, h5, h6') && next.is(':visible')) {
+        break;
+      }
+      else {
+        current = next;
+      }
+    }
+    else {
+      current = current.parent();
+    }
+  }
+  
+  return next;
+};
+
 _Viewport.prototype.createLink = function(url, parent) {
   var parent = $(parent || 'body');
   return $('<a>').attr('href', url).appendTo(parent);

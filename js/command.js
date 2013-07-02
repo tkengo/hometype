@@ -125,26 +125,14 @@ Command.forwardHistory = function() {
 Command.forwardContentEditable = function() {
   var current = $('[data-chromekey-contenteditable=true]')
   if (current.length > 0) {
-    current.removeAttr('contenteditable').removeAttr('data-chromekey-contenteditable');
-    var next = null;
-    while (current.length > 0) {
-      next = current.next();
-      if (next.length > 0) {
-        if (next.is('div, section, table, h1, h2, h3, h4, h5, h6') && next.is(':visible')) {
-          break;
-        }
-        else {
-          current = next;
-        }
-      }
-      else {
-        current = current.parent();
-      }
-    }
+    Viewport.resetContentEditable(current);
+    var next = Viewport.getNextContentEditableElement(current);
     if (next && next.length > 0) {
-      next.attr('contenteditable', true).attr('data-chromekey-contenteditable', 'true');
-      Viewport.scrollTo(0, parseInt(next.offset().top));
+      Viewport.setContentEditable(next);
       setTimeout(function() { next.focus(); }, 100);
+    }
+    else {
+      Command.cancelVisualMode();
     }
   }
 };
@@ -157,7 +145,7 @@ Command.enterVisualMode = function() {
   if (target.length > 0) {
     Mode.changeMode(ModeList.HINT_MODE);
     Mode.getProcessor().setCallback(function(element) {
-      element.attr('contenteditable', true).attr('data-chromekey-contenteditable', 'true');
+      Viewport.setContentEditable(element);
       setTimeout(function() { element.focus(); }, 100);
       Mode.changeMode(ModeList.VISUAL_MODE);
     });
@@ -244,7 +232,7 @@ Command.cancelHintMode = function() {
  */
 Command.cancelVisualMode = function() {
   if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
-    $('[data-chromekey-contenteditable=true]').removeAttr('contenteditable').removeAttr('data-chromekey-contenteditable');
+    Viewport.resetContentEditable($('[data-chromekey-contenteditable=true]'));
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };

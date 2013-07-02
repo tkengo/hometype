@@ -95,3 +95,7 @@
   cursor:pointer;
   background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
 }
+
+.chromekey-contenteditable {
+  border:solid 1px red !important;
+}
