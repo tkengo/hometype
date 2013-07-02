@@ -154,6 +154,27 @@ _Viewport.prototype.getNextContentEditableElement = function(current) {
   return next;
 };
 
+_Viewport.prototype.getPrevContentEditableElement = function(current) {
+  var prev = null;
+
+  while (current.length > 0) {
+    prev = current.prev();
+    if (prev.length > 0) {
+      if (prev.is('div, section, table, h1, h2, h3, h4, h5, h6') && prev.is(':visible')) {
+        break;
+      }
+      else {
+        current = prev;
+      }
+    }
+    else {
+      current = current.parent();
+    }
+  }
+  
+  return prev;
+};
+
 _Viewport.prototype.createLink = function(url, parent) {
   var parent = $(parent || 'body');
   return $('<a>').attr('href', url).appendTo(parent);

@@ -30,6 +30,7 @@
 
   KeyMap.vmap('Esc', 'cancelVisualMode');
   KeyMap.vmap('n',   'forwardContentEditable');
+  KeyMap.vmap('p',   'backwardContentEditable');
 
   KeyMap.fmap('Esc',   'cancelHintMode');
   KeyMap.fmap('<C-c>', 'cancelHintMode');

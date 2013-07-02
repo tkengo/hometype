@@ -138,6 +138,24 @@ Command.forwardContentEditable = function() {
 };
 
 /**
+ * 現在ビジュアルモードになっている要素の前の要素をビジュアルモードにします。
+ */
+Command.backwardContentEditable = function() {
+  var current = $('[data-chromekey-contenteditable=true]')
+  if (current.length > 0) {
+    Viewport.resetContentEditable(current);
+    var prev = Viewport.getPrevContentEditableElement(current);
+    if (prev && prev.length > 0) {
+      Viewport.setContentEditable(prev);
+      setTimeout(function() { prev.focus(); }, 100);
+    }
+    else {
+      Command.cancelVisualMode();
+    }
+  }
+};
+
+/**
  * ビジュアルモードへ移行します。
  */
 Command.enterVisualMode = function() {
