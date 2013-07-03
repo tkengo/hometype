@@ -102,5 +102,9 @@
 }
 
 .chromekey-contenteditable {
-  border:solid 1px red !important;
+  border:solid 1px #f00;
+  position:absolute;
+  z-index:1000000;
+  background-color:transparent;
+  cursor:text;
 }

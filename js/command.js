@@ -164,7 +164,7 @@ Command.enterVisualMode = function() {
     Mode.changeMode(ModeList.HINT_MODE);
     Mode.getProcessor().setCallback(function(element) {
       Viewport.setContentEditable(element);
-      setTimeout(function() { element.focus(); }, 100);
+      element.focus().click();
       Mode.changeMode(ModeList.VISUAL_MODE);
     });
     Viewport.createNewHintElement('yellow', target).show();

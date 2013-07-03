@@ -82,7 +82,7 @@ _Viewport.prototype.formElementInnerScreen = function() {
 _Viewport.prototype.divElementInnerScreen = function() {
   var _this = this;
   var elements = [];
-  $('div, section, table, h1, h2, h3, h4, h5, h6').each(function() {
+  $('div, section, th, td, h1, h2, h3, h4, h5, h6').each(function() {
     var element = $(this);
     if (_this.isInnerScreen(element)) {
       elements.push(element);
@@ -124,13 +124,21 @@ _Viewport.prototype.isInnerScreen = function(element) {
 _Viewport.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
   element.attr('data-chromekey-contenteditable', 'true');
-  element.addClass('chromekey-contenteditable');
+  $('<div>').addClass('chromekey-contenteditable').css({
+    width: element.innerWidth(),
+    height: element.innerHeight(),
+    top: element.offset().top,
+    left: element.offset().left
+  }).appendTo($('body')).click(function() {
+    element.focus();
+  });
 };
 
 _Viewport.prototype.resetContentEditable = function(element) {
   element.removeAttr('contenteditable');
   element.removeAttr('data-chromekey-contenteditable');
-  element.removeClass('chromekey-contenteditable');
+  $('.chromekey-contenteditable').remove();
+  $(document.activeElement).blur();
 };
 
 _Viewport.prototype.getNextContentEditableElement = function(current) {
@@ -139,7 +147,7 @@ _Viewport.prototype.getNextContentEditableElement = function(current) {
   while (current.length > 0) {
     next = current.next();
     if (next.length > 0) {
-      if (next.is('div, section, table, h1, h2, h3, h4, h5, h6') && next.is(':visible')) {
+      if (next.is('div, section, th, td, h1, h2, h3, h4, h5, h6') && next.is(':visible')) {
         break;
       }
       else {
@@ -160,7 +168,7 @@ _Viewport.prototype.getPrevContentEditableElement = function(current) {
   while (current.length > 0) {
     prev = current.prev();
     if (prev.length > 0) {
-      if (prev.is('div, section, table, h1, h2, h3, h4, h5, h6') && prev.is(':visible')) {
+      if (prev.is('div, section, th, td, h1, h2, h3, h4, h5, h6') && prev.is(':visible')) {
         break;
       }
       else {
