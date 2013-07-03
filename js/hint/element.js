@@ -10,10 +10,10 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.tipElement.appendTo($('body'));
 
   this.borderElement = $('<div>').addClass('chromekey-hit-a-hint-border').css({
-    width: this.srcElement.innerWidth() + 2,
-    height: this.srcElement.innerHeight() + 2,
-    top: this.srcElement.offset().top - 1,
-    left: this.srcElement.offset().left - 1
+    width: this.srcElement.innerWidth(),
+    height: this.srcElement.innerHeight(),
+    top: this.srcElement.offset().top,
+    left: this.srcElement.offset().left
   }).appendTo($('body'));
 };
 

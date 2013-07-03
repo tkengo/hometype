@@ -11,7 +11,7 @@
   display:none;
 }
 .chromekey-hit-a-hint-border {
-  border:solid 1px red !important;
+  border:dashed 1px #900;
   position:absolute;
   z-index:1000000;
 }
