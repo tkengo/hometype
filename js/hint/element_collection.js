@@ -40,15 +40,15 @@ HintElementCollection.prototype.hideUnmatchedElements = function(key) {
   for (var i in this.hintKeys) {
     var hintKey = this.hintKeys[i];
     if (hintKey.key.indexOf(key) != 0) {
-      this.elements[hintKey.index].hideHintTip();
+      this.elements[hintKey.index].removeHintTip();
     }
   }
 };
 
 HintElementCollection.prototype.removeAllHint = function() {
-  $('div.chromekey-hit-a-hint-base').remove();
-  var c = 'chromekey-hit-a-hint-' + this.hintTheme + '-area';
-  $('.' + c).removeClass(c);
+  for (var index in this.elements) {
+    this.elements[index].removeHintTip(false);
+  }
 };
 
 HintElementCollection.prototype.show = function() {

@@ -57,8 +57,15 @@ HintElement.prototype.setPushed = function() {
   $(this.tipElement.children()[0]).addClass('chromekey-hit-a-hint-pushed');
 };
 
-HintElement.prototype.hideHintTip = function() {
+HintElement.prototype.removeHintTip = function(animate) {
   this.getElement().removeClass(this.className + '-area');
-  this.tipElement.fadeOut(100);
-  this.borderElement.hide();
+  if (animate === false) {
+    this.tipElement.remove();
+  }
+  else {
+    this.tipElement.fadeOut(100, function() {
+      $(this).remove();
+    });
+  }
+  this.borderElement.remove();
 };
