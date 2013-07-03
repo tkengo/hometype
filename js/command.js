@@ -188,7 +188,10 @@ Command.enterHintMode = function() {
  */
 Command.enterFocusHintMode = function() {
   var target = Viewport.formElementInnerScreen();
-  if (target.length > 0) {
+  if (target.length == 1) {
+    target[0].focus();
+  }
+  else if (target.length > 0) {
     Mode.changeMode(ModeList.HINT_MODE);
     Mode.getProcessor().setOpenNewTab(false);
     Viewport.createNewHintElement('green', target).show();
