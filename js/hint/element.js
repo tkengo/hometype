@@ -8,6 +8,13 @@ var HintElement = function(srcElement, index, key, hintTheme) {
 
   this.tipElement = this.createTipElement();
   this.tipElement.appendTo($('body'));
+
+  this.borderElement = $('<div>').addClass('chromekey-hit-a-hint-border').css({
+    width: this.srcElement.innerWidth() + 2,
+    height: this.srcElement.innerHeight() + 2,
+    top: this.srcElement.offset().top - 1,
+    left: this.srcElement.offset().left - 1
+  }).appendTo($('body'));
 };
 
 HintElement.prototype.createTipElement = function() {
@@ -53,4 +60,5 @@ HintElement.prototype.setPushed = function() {
 HintElement.prototype.hideHintTip = function() {
   this.getElement().removeClass(this.className + '-area');
   this.tipElement.fadeOut(100);
+  this.borderElement.hide();
 };
