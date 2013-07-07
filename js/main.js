@@ -38,10 +38,8 @@ Options.init(function() {
 $(document).ready(function() {
   // テキストエリアにフォーカスがあたればインサートモードへ
   // フォーカスが外れればノーマルモードへ移行する
-  $(document).on('focus', ':text, :password, textarea', function() {
-    Mode.changeMode(ModeList.INSERT_MODE);
-  }).on('blur', ':text, :password, textarea', function() {
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  });
+  var focusTargets = ':text, :password, textarea, [contenteditable]';
+  $(document).on('focus', focusTargets, function() { Mode.changeMode(ModeList.INSERT_MODE); })
+             .on('blur',  focusTargets, function() { Mode.changeMode(ModeList.NORMAL_MODE); });
   $(document.activeElement).blur();
 });
