@@ -125,10 +125,10 @@ _Viewport.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
   element.attr('data-chromekey-contenteditable', 'true');
   $('<div>').addClass('chromekey-contenteditable').css({
-    width: element.innerWidth(),
-    height: element.innerHeight(),
-    top: element.offset().top,
-    left: element.offset().left
+    width: element.innerWidth() + 10,
+    height: element.innerHeight() + 10,
+    top: element.offset().top - 5,
+    left: element.offset().left - 5
   }).appendTo($('body')).click(function() {
     element.focus();
   });
