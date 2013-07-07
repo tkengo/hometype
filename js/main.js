@@ -39,8 +39,13 @@ $(document).ready(function() {
   // テキストエリアにフォーカスがあたればインサートモードへ
   // フォーカスが外れればノーマルモードへ移行する
   var focusTargets = ':text, :password, textarea, [contenteditable]';
-  $(document).on('focus', focusTargets, function() { Mode.changeMode(ModeList.INSERT_MODE); })
-             .on('blur',  focusTargets, function() { Mode.changeMode(ModeList.NORMAL_MODE); });
+  $(document).on('focus', focusTargets, function() {
+    if (!$(this).is('[data-chromekey-contenteditable]')) {
+      Mode.changeMode(ModeList.INSERT_MODE);
+    }
+  }).on('blur', focusTargets, function() {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  });
   $(document.activeElement).blur();
 
   Mode.onModeChange(function(mode) {
