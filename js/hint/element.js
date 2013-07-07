@@ -29,6 +29,13 @@ HintElement.prototype.createTipElement = function() {
     left = this.srcElement.offset().left - 10;
   }
 
+  if (top < Viewport.getScrollPosition().top) {
+    top = Viewport.getScrollPosition().top;
+  }
+  if (left < 0) {
+    left = 0;
+  }
+
   var div = $('<div>').css({
     'top': top + 'px',
     'left': left + 'px'
