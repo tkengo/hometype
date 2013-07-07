@@ -108,3 +108,18 @@
   background-color:transparent;
   cursor:text;
 }
+
+.chromekey-current-mode {
+  position:fixed;
+  z-index:1000002;
+  top:6px;
+  right:6px;
+  font-family:'Osaka-Mono';
+  background: linear-gradient(to bottom, #fefcea 0%,#f1da36 100%);
+  box-shadow:0 0 2px 2px rgba(200,200,200,0.2) inset;
+  padding:2px 6px;
+  border-radius:4px;
+  border:solid 1px #cecece;
+  font-size:14px;
+  color:#222;
+}
