@@ -120,6 +120,13 @@ Command.forwardHistory = function() {
 };
 
 /**
+ * 最後に閉じたタブを復活させます。
+ */
+Command.restoreTab = function() {
+  chrome.runtime.sendMessage({ command: 'restoreTab' });
+};
+
+/**
  * 現在ビジュアルモードになっている要素の次の要素をビジュアルモードにします。
  */
 Command.forwardContentEditable = function() {

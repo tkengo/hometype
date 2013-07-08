@@ -30,6 +30,10 @@ RuntimeCommand.moveRightTab = function(sender) {
   });
 };
 
+RuntimeCommand.restoreTab = function() {
+  Tab.openLastClosedTab();
+};
+
 RuntimeCommand.setOptions = function(sender, params) {
   for (var i in params) {
     localStorage.setItem(i, params[i]);
@@ -75,6 +79,8 @@ RuntimeCommand.searchBookmarks = function(port) {
     });
   });
 };
+
+var Tab = new ChromekeyTab();
 
 (function() {
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {

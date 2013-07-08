@@ -22,6 +22,7 @@
   KeyMap.nmap('a',     'enterFocusHintMode');
   KeyMap.nmap('H',     'backHistory');
   KeyMap.nmap('L',     'forwardHistory');
+  KeyMap.nmap('u',     'restoreTab');
 
   KeyMap.imap('Esc',   'blurForm');
   KeyMap.imap('<C-c>', 'blurForm');
