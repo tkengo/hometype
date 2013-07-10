@@ -1,4 +1,5 @@
 var _Viewport = function() {
+  this.visualableTags = 'div, section, th, td, h1, h2, h3, h4, h5, h6';
 };
 
 _Viewport.prototype.getScrollPosition = function() {
@@ -82,7 +83,7 @@ _Viewport.prototype.formElementInnerScreen = function() {
 _Viewport.prototype.divElementInnerScreen = function() {
   var _this = this;
   var elements = [];
-  $('div, section, th, td, h1, h2, h3, h4, h5, h6').each(function() {
+  $(this.visualableTags).each(function() {
     var element = $(this);
     if (_this.isInnerScreen(element)) {
       elements.push(element);
@@ -123,7 +124,7 @@ _Viewport.prototype.isInnerScreen = function(element) {
 
 _Viewport.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
-  element.attr('data-chromekey-contenteditable', 'true');
+  element.attr('data-chromekey-not-insert-mode', 'true');
   $('<div>').addClass('chromekey-contenteditable').css({
     width: element.innerWidth() + 10,
     height: element.innerHeight() + 10,
@@ -136,7 +137,7 @@ _Viewport.prototype.setContentEditable = function(element) {
 
 _Viewport.prototype.resetContentEditable = function(element) {
   element.removeAttr('contenteditable');
-  element.removeAttr('data-chromekey-contenteditable');
+  element.removeAttr('data-chromekey-not-insert-mode');
   $('.chromekey-contenteditable').remove();
   $(document.activeElement).blur();
 };
@@ -147,7 +148,7 @@ _Viewport.prototype.getNextContentEditableElement = function(current) {
   while (current.length > 0) {
     next = current.next();
     if (next.length > 0) {
-      if (next.is('div, section, th, td, h1, h2, h3, h4, h5, h6') && next.is(':visible')) {
+      if (next.is(this.visualableTags) && next.is(':visible')) {
         break;
       }
       else {
@@ -168,7 +169,7 @@ _Viewport.prototype.getPrevContentEditableElement = function(current) {
   while (current.length > 0) {
     prev = current.prev();
     if (prev.length > 0) {
-      if (prev.is('div, section, th, td, h1, h2, h3, h4, h5, h6') && prev.is(':visible')) {
+      if (prev.is(this.visualableTags) && prev.is(':visible')) {
         break;
       }
       else {

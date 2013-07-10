@@ -4,10 +4,10 @@ var ChromekeyTab = function() {
 
   var context = this;
 
-  chrome.windows.getCurrent(function(window) {
+  chrome.windows.getCurrent({ populate: true }, function(window) {
     for (var i in window.tabs) {
       var tab = window.tabs[i];
-      context.tabs[tab.tabId] = tab;
+      context.tabs[tab.id] = tab;
     }
   });
 
@@ -29,12 +29,25 @@ var ChromekeyTab = function() {
   });
 };
 
-ChromekeyTab.prototype.openLastClosedTab = function() {
+ChromekeyTab.prototype.openClosedTab = function(tabId) {
   if (this.closedTabStacks.length == 0) {
     return;
   }
 
-  var tab = this.closedTabStacks.pop();
+  var tab = null;
+  if (tabId) {
+    for (var i in this.closedTabStacks) {
+      tab = this.closedTabStacks[i];
+      if (tab.id == tabId) {
+        this.closedTabStacks.splice(i, 1);
+        break;
+      }
+    }
+  }
+  else {
+    tab = this.closedTabStacks.pop();
+  }
+
   var params = {
     windowId: tab.windowId,
     index: tab.index,
@@ -43,4 +56,8 @@ ChromekeyTab.prototype.openLastClosedTab = function() {
     openerTabId: tab.openerTabId
   };
   chrome.tabs.create(params);
+};
+
+ChromekeyTab.prototype.getClosedTabList = function() {
+  return this.closedTabStacks;
 };

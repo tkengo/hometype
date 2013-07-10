@@ -127,6 +127,34 @@ Command.restoreTab = function() {
 };
 
 /**
+ * 閉じたタブの一覧を表示します。
+ */
+Command.closedTabList = function() {
+  CommandBox.show();
+  Mode.changeMode(ModeList.COMMAND_MODE);
+  var func = function() {
+    chrome.runtime.sendMessage({ command: 'closedTabList' }, function(results) {
+      var list = [];
+      for (var i in results) {
+        var result = results[i];
+        list.push({
+          text: result.title + '(' + result.url + ')',
+          url: result.url,
+          tabId: result.id
+        });
+      }
+      CommandBox.setCandidate(list);
+      CommandBox.showCandidate();
+    });
+  };
+  func();
+  Mode.getProcessor().setProcessor(func);
+  Mode.getProcessor().setEnter(function(text, selected) {
+    chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
+  });
+};
+
+/**
  * 現在ビジュアルモードになっている要素の次の要素をビジュアルモードにします。
  */
 Command.forwardContentEditable = function() {
@@ -243,6 +271,16 @@ Command.enterNewWindowBookmarkMode = function() {
   CommandBox.show();
   Mode.changeMode(ModeList.BOOKMARK_MODE);
   Mode.getProcessor().setOpenNewTab(true);
+};
+
+/**
+ * コマンドモードを抜けてノーマルモードへ戻ります。
+ */
+Command.cancelCommandMode = function() {
+  if (Mode.getCurrentMode() == ModeList.COMMAND_MODE) {
+    CommandBox.hide();
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
 };
 
 /**

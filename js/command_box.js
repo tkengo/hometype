@@ -2,20 +2,29 @@ var COMMAND_BOX_HEIGHT = 20;
 var CANDIDATE_AREA_HEIGHT = 180;
 var COMMAND_BOX_MARGIN = 8;
 
-var _CommandBox = function() {
+var ChromekeyCommandBox = function() {
   this.commandBox = $('<div>').addClass('chromekey-command-box').css({
     width: Viewport.getWindowWidth() - COMMAND_BOX_MARGIN * 4,
     height: COMMAND_BOX_HEIGHT
   }).attr('id', '_chromekey-command-box');
-  this.text = $('<input type="text">').appendTo(this.commandBox);
+  this.text = $('<input type="text">').attr('data-chromekey-not-insert-mode', true).appendTo(this.commandBox);
   this.candidateArea = $('<div>').addClass('chromekey-command-box-candidate-area').css({
     width: Viewport.getWindowWidth() - COMMAND_BOX_MARGIN * 4,
     height: CANDIDATE_AREA_HEIGHT
   }).attr('id', '_chromekey-command-box-candidate-area');;
   this.candidate = [];
+
+  this.notifyCallback = null;
+  this.text.get(0).addEventListener('keyup', $.proxy(this.notifyChange, this), true);
 };
 
-_CommandBox.prototype.show = function() {
+ChromekeyCommandBox.prototype.notifyChange = function() {
+  if (this.notifyCallback) {
+    this.notifyCallback.call(this.text, this.text.val());
+  }
+};
+
+ChromekeyCommandBox.prototype.show = function(notifyCallback) {
   if ($('#_chromekey-command-box').length == 0) {
     this.commandBox.appendTo($('body'));
   }
@@ -24,16 +33,21 @@ _CommandBox.prototype.show = function() {
     left: COMMAND_BOX_MARGIN
   }).fadeIn(300);
   this.text.focus();
+
+  if (typeof notifyCallback == 'function') {
+    this.notifyCallback = notifyCallback;
+  }
 };
 
-_CommandBox.prototype.hide = function() {
+ChromekeyCommandBox.prototype.hide = function() {
+  this.notifyCallback = null;
   this.commandBox.hide();
   this.candidateArea.hide();
   $('div', this.candidateArea).remove();
   this.text.val('');
 };
 
-_CommandBox.prototype.showCandidate = function() {
+ChromekeyCommandBox.prototype.showCandidate = function() {
   if ($('#_chromekey-command-box-candidate-area').length == 0) {
     this.candidateArea.appendTo($('body'));
   }
@@ -43,7 +57,7 @@ _CommandBox.prototype.showCandidate = function() {
   }
 };
 
-_CommandBox.prototype.recalculateAndSetPosition = function() {
+ChromekeyCommandBox.prototype.recalculateAndSetPosition = function() {
   this.candidateArea.css({ top: -9999, left: -9999 }).show();
 
   var children = this.candidateArea.children();
@@ -54,7 +68,7 @@ _CommandBox.prototype.recalculateAndSetPosition = function() {
   });
 };
 
-_CommandBox.prototype.setCandidate = function(list) {
+ChromekeyCommandBox.prototype.setCandidate = function(list) {
   $('div', this.candidateArea).remove();
   this.candidate = list;
   for (var i in list) {
@@ -74,7 +88,7 @@ _CommandBox.prototype.setCandidate = function(list) {
   }
 };
 
-_CommandBox.prototype.selectNext = function() {
+ChromekeyCommandBox.prototype.selectNext = function() {
   var div = $('div.selected', this.candidateArea);
   div.removeClass('selected');
   var next = div.next();
@@ -86,7 +100,7 @@ _CommandBox.prototype.selectNext = function() {
   }
 };
 
-_CommandBox.prototype.selectPrev = function() {
+ChromekeyCommandBox.prototype.selectPrev = function() {
   var div = $('div.selected', this.candidateArea);
   div.removeClass('selected');
   var prev = div.prev();
@@ -98,13 +112,13 @@ _CommandBox.prototype.selectPrev = function() {
   }
 };
 
-_CommandBox.prototype.getSelected = function() {
+ChromekeyCommandBox.prototype.getSelected = function() {
   var div = $('div.selected', this.candidateArea);
   return this.candidate[div.attr('data-index')];
 };
 
-_CommandBox.prototype.getText = function() {
+ChromekeyCommandBox.prototype.getText = function() {
   return this.text.val().replace(':', '');
 };
 
-var CommandBox = new _CommandBox();
+var CommandBox = new ChromekeyCommandBox();

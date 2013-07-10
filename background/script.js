@@ -30,9 +30,13 @@ RuntimeCommand.moveRightTab = function(sender) {
   });
 };
 
-RuntimeCommand.restoreTab = function() {
-  Tab.openLastClosedTab();
+RuntimeCommand.restoreTab = function(sender, tabId) {
+  Tab.openClosedTab(tabId);
 };
+
+RuntimeCommand.closedTabList = function(sender, params, sendResponse) {
+  sendResponse(Tab.getClosedTabList());
+}
 
 RuntimeCommand.setOptions = function(sender, params) {
   for (var i in params) {

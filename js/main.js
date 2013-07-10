@@ -40,11 +40,13 @@ $(document).ready(function() {
   // フォーカスが外れればノーマルモードへ移行する
   var focusTargets = ':text, :password, textarea, [contenteditable]';
   $(document).on('focus', focusTargets, function() {
-    if (!$(this).is('[data-chromekey-contenteditable]')) {
+    if (!$(this).is('[data-chromekey-not-insert-mode]')) {
       Mode.changeMode(ModeList.INSERT_MODE);
     }
   }).on('blur', focusTargets, function() {
-    Mode.changeMode(ModeList.NORMAL_MODE);
+    if (!$(this).is('[data-chromekey-not-insert-mode]')) {
+      Mode.changeMode(ModeList.NORMAL_MODE);
+    }
   });
   $(document.activeElement).blur();
 

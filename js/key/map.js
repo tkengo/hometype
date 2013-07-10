@@ -23,7 +23,7 @@ var _map = {
   insert: {},
   hint: {},
   visual: {},
-  comand: {},
+  command: {},
   bookmark: {}
 }
 
