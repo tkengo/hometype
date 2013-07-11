@@ -60,14 +60,26 @@ ChromekeyMode.prototype.changeMode = function(modeName) {
     return;
   }
 
+  // モード変更
   var oldMode = this.mode;
   this.mode = modeName;
 
+  // コールバックが登録されていれば呼び出す
   for (var key in this.callbacks) {
     var callback = this.callbacks[key];
     if (typeof callback === 'function') {
       callback.call(callback, this.mode, oldMode);
     }
+  }
+
+  // プロセッサにモードが変更されたことを通知する
+  var oldProcessor     = this.getProcessor(oldMode);
+  var currentProcessor = this.getProcessor(this.mode);
+  if (typeof oldProcessor.notifyLeaveMode == 'function') {
+    oldProcessor.notifyLeaveMode();
+  }
+  if (typeof currentProcessor.notifyEnterMode == 'function') {
+    currentProcessor.notifyEnterMode();
   }
 };
 
