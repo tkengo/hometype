@@ -125,6 +125,7 @@ _Viewport.prototype.isInnerScreen = function(element) {
 _Viewport.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
   element.attr('data-chromekey-not-insert-mode', 'true');
+  element.attr('data-chromekey-contenteditable', 'true');
   $('<div>').addClass('chromekey-contenteditable').css({
     width: element.innerWidth() + 10,
     height: element.innerHeight() + 10,
@@ -135,11 +136,17 @@ _Viewport.prototype.setContentEditable = function(element) {
   });
 };
 
-_Viewport.prototype.resetContentEditable = function(element) {
+_Viewport.prototype.resetContentEditable = function() {
+  var element = this.getCurrentContentEditable();
   element.removeAttr('contenteditable');
   element.removeAttr('data-chromekey-not-insert-mode');
+  element.removeAttr('data-chromekey-contenteditable');
   $('.chromekey-contenteditable').remove();
   $(document.activeElement).blur();
+};
+
+_Viewport.prototype.getCurrentContentEditable = function() {
+  return $('[data-chromekey-contenteditable=true]');
 };
 
 _Viewport.prototype.getNextContentEditableElement = function(current) {

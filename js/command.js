@@ -158,7 +158,7 @@ Command.closedTabList = function() {
  * 現在ビジュアルモードになっている要素の次の要素をビジュアルモードにします。
  */
 Command.forwardContentEditable = function() {
-  var current = $('[data-chromekey-contenteditable=true]')
+  var current = Viewport.getCurrentContentEditable();
   if (current.length > 0) {
     Viewport.resetContentEditable(current);
     var next = Viewport.getNextContentEditableElement(current);
@@ -176,7 +176,7 @@ Command.forwardContentEditable = function() {
  * 現在ビジュアルモードになっている要素の前の要素をビジュアルモードにします。
  */
 Command.backwardContentEditable = function() {
-  var current = $('[data-chromekey-contenteditable=true]')
+  var current = Viewport.getCurrentContentEditable();
   if (current.length > 0) {
     Viewport.resetContentEditable(current);
     var prev = Viewport.getPrevContentEditableElement(current);
@@ -298,7 +298,7 @@ Command.cancelHintMode = function() {
  */
 Command.cancelVisualMode = function() {
   if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
-    Viewport.resetContentEditable($('[data-chromekey-contenteditable=true]'));
+    Viewport.resetContentEditable();
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
