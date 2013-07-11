@@ -1,6 +1,7 @@
 var CommandMode = function() {
   this.processor = null;
   this.enterProcessor = null;
+  this.commandBox = new ChromekeyCommandBox();
 };
 
 CommandMode.prototype.onKeyDown = function(key, currentKey) {
