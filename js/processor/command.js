@@ -1,10 +1,10 @@
-var CommandMode = function() {
+var CommandModeProcessor = function() {
   this.processor = null;
   this.enterProcessor = null;
   this.commandBox = new ChromekeyCommandBox();
 };
 
-CommandMode.prototype.onKeyDown = function(key, currentKey) {
+CommandModeProcessor.prototype.onKeyDown = function(key, currentKey) {
   if (currentKey == 'Enter') {
     var result = false;
     if (this.enterProcessor) {
@@ -31,15 +31,15 @@ CommandMode.prototype.onKeyDown = function(key, currentKey) {
   return false;
 };
 
-CommandMode.prototype.setProcessor = function(processor) {
+CommandModeProcessor.prototype.setProcessor = function(processor) {
   this.processor = processor;
 };
 
-CommandMode.prototype.setEnter = function(enter) {
+CommandModeProcessor.prototype.setEnter = function(enter) {
   this.enterProcessor = enter;
 };
 
-CommandMode.prototype.enter = function() {
+CommandModeProcessor.prototype.enter = function() {
   var command = Command[CommandBox.getText()]
   if (command) {
     command.call();

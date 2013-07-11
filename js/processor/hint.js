@@ -1,9 +1,9 @@
-var HintMode = function() {
+var HintModeProcessor = function() {
   this.newTab = false;
   this.callbacks = [];
 };
 
-HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
+HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   e.stopPropagation();
   e.preventDefault();
 
@@ -62,14 +62,14 @@ HintMode.prototype.onKeyDown = function(stack, currentKey, e) {
   }
 };
 
-HintMode.prototype.setCallback = function(callback) {
+HintModeProcessor.prototype.setCallback = function(callback) {
   this.callbacks.push(callback);
 };
 
-HintMode.prototype.resetCallback = function() {
+HintModeProcessor.prototype.resetCallback = function() {
   this.callbacks = [];
 };
 
-HintMode.prototype.setOpenNewTab = function(newTab) {
+HintModeProcessor.prototype.setOpenNewTab = function(newTab) {
   this.newTab = newTab;
 };

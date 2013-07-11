@@ -1,10 +1,10 @@
-var BookmarkMode = function() {
+var BookmarkModeProcessor = function() {
   this.port = chrome.runtime.connect({ name: 'searchBookmarks' });
   this.port.onMessage.addListener(this.onMessage);
   this.newTab = false;
 };
 
-BookmarkMode.prototype.onKeyDown = function(key, currentKey) {
+BookmarkModeProcessor.prototype.onKeyDown = function(key, currentKey) {
   if (currentKey == 'Enter') {
     var selected = CommandBox.getSelected();
     var e = document.createEvent('MouseEvents');
@@ -24,11 +24,11 @@ BookmarkMode.prototype.onKeyDown = function(key, currentKey) {
   return false;
 };
 
-BookmarkMode.prototype.setOpenNewTab = function(newTab) {
+BookmarkModeProcessor.prototype.setOpenNewTab = function(newTab) {
   this.newTab = newTab;
 };
 
-BookmarkMode.prototype.onMessage = function(results) {
+BookmarkModeProcessor.prototype.onMessage = function(results) {
   var list = [];
   for (var i in results) {
     list.push({
