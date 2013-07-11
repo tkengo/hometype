@@ -30,8 +30,8 @@ var ChromekeyMode = function() {
 
   // 各モードのプロセッサを生成
   this.modeProcessors = {};
-  this.modeProcessors[ModeList.NORMAL_MODE]   = new NormalMode();
-  this.modeProcessors[ModeList.INSERT_MODE]   = new NormalMode();
+  this.modeProcessors[ModeList.NORMAL_MODE]   = new NoopProcessor();
+  this.modeProcessors[ModeList.INSERT_MODE]   = new NoopProcessor();
   this.modeProcessors[ModeList.HINT_MODE]     = new HintMode();
   this.modeProcessors[ModeList.VISUAL_MODE]   = new VisualMode();
   this.modeProcessors[ModeList.COMMAND_MODE]  = new CommandMode();

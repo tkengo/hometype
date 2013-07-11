@@ -35,7 +35,7 @@
       "js/command_box.js",
       "js/hint/element.js",
       "js/hint/element_collection.js",
-      "js/processor/normal.js",
+      "js/processor/noop.js",
       "js/processor/visual.js",
       "js/processor/command.js",
       "js/processor/bookmark.js",
