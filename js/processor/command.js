@@ -31,6 +31,14 @@ CommandModeProcessor.prototype.onKeyDown = function(key, currentKey) {
   return false;
 };
 
+CommandModeProcessor.prototype.notifyEnterMode = function() {
+  this.commandBox.show();
+};
+
+CommandModeProcessor.prototype.notifyLeaveMode = function() {
+  this.commandBox.hide();
+};
+
 CommandModeProcessor.prototype.setProcessor = function(processor) {
   this.processor = processor;
 };
