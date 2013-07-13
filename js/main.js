@@ -18,7 +18,7 @@ Options.init(function() {
 
     if (candidate.length == 1 && candidate[0].key == sequence) {
       // コマンドが確定できればそれを実行
-      candidate[0].command.call();
+      candidate[0].command.apply(window, candidate[0].args);
       e.stopPropagation();
       e.preventDefault();
 

@@ -109,11 +109,24 @@ KeyMap.bmap = function(key, command) {
 KeyMap.candidate = function(mode, key) {
   var result = [];
 
-  for (map in _map[mode]) {
-    if (map.indexOf(key) == 0) {
+  var maps = _map[mode];
+  for (keyMap in maps) {
+    if (keyMap.indexOf(key) == 0) {
+      var map = maps[keyMap];
+
+      var command = '', args = [];
+      if (map instanceof Array) {
+        command = map.shift()
+        args = map;
+      }
+      else {
+        command = map;
+      }
+
       result.push({
-        key: map,
-        command: Command[_map[mode][map]]
+        key: keyMap,
+        command: Command[command],
+        args: args
       });
     }
   }
