@@ -4,11 +4,38 @@
  *   http://www.opensource.org/licenses/mit-license.php
  *
  * コマンドモードでの処理を担当します。
+ * コマンドモードに入ったらコマンドボックスが表示されます。
+ * プロセッサに対して以下のイベントを設定できます。
+ *
+ * イベント
+ *   - onUpdateBoxText コマンドボックスの内容が更新された場合に呼び出されます。
+ *                     配列を返した場合、それが候補一覧としてコマンドボックス上に表示されます。
+ *   - onEnter         コマンドボックス内でエンターキーが押下された場合に呼び出されます
+ * これらのイベントはコマンドモードを抜けたらクリアされます。
  */
 var CommandModeProcessor = function() {
-  this.processor = null;
-  this.enterProcessor = null;
+  this.updateBoxTextCallback = null;
+  this.enterCallback         = null;
+
+  // コマンドボックス
   this.commandBox = new ChromekeyCommandBox();
+};
+
+/**
+ * コマンドモードに入った時に呼ばれるコールバック関数です。
+ */
+CommandModeProcessor.prototype.notifyEnterMode = function() {
+  this.commandBox.show();
+};
+
+/**
+ * コマンドモードを抜ける時に呼ばれるコールバック関数です。
+ */
+CommandModeProcessor.prototype.notifyLeaveMode = function() {
+  this.updateBoxTextCallback = null;
+  this.enterCallback         = null;
+
+  this.commandBox.hide();
 };
 
 /**
@@ -20,14 +47,12 @@ var CommandModeProcessor = function() {
  */
 CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   if (currentKey == 'Enter') {
-    var result = false;
-    if (this.enterProcessor) {
-      result = this.enterProcessor(this.commandBox.getText(), this.commandBox.getSelected());
-    }
-    else {
-      result = this.enter();
-    }
+    // エンターキー押下の処理を実行。定義されていなければデフォルト動作
+    var result = this.enterCallback ?
+                 this.enterCallback(this.commandBox.getText(), this.commandBox.getSelected()) :
+                 this.enter();
 
+    // falseが返ってきたらコマンドモードは抜けないでおく
     if (result !== false) {
       this.commandBox.hide();
       Mode.changeMode(ModeList.NORMAL_MODE);
@@ -35,46 +60,58 @@ CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 
     return result;
   }
-  else if (this.processor) {
+
+  // コマンドボックスの更新イベントが設定されていれば呼び出す
+  if (this.updateBoxTextCallback) {
+    // コマンドボックス内にキーイベントが浸透しないとこのキー押下のキーが
+    // 適用されていないので、少し待ってからイベントを呼び出す
     setTimeout($.proxy(function() {
-      var result = this.processor(this.commandBox.getText());
-      if (result) {
+      var result = this.updateBoxTextCallback(this.commandBox.getText());
+
+      // 結果が配列であればそれをセットして候補として表示する
+      if (result instanceof Array) {
         this.commandBox.setCandidate(result);
         this.commandBox.showCandidate();
       }
     }, this), 10);
   }
 
-  return false;
+  return true;
 };
 
+/**
+ * コマンドボックスが更新された時に呼ばれるコールバック関数を指定します。
+ *
+ * @param function callback コールバック関数
+ */
 CommandModeProcessor.prototype.onUpdateBoxText = function(callback) {
-  this.processor = callback;
+  this.updateBoxTextCallback = callback;
 };
 
+/**
+ * コマンドボックス内でエンターキーが押下された時に呼ばれるコールバック関数を指定します。
+ *
+ * @param function callback コールバック関数
+ */
 CommandModeProcessor.prototype.onEnter = function(callback) {
-  this.enterProcessor = callback;
+  this.enterCallback = callback;
 };
 
-CommandModeProcessor.prototype.notifyEnterMode = function() {
-  this.commandBox.show();
-};
-
-CommandModeProcessor.prototype.notifyLeaveMode = function() {
-  this.processor = null;
-  this.commandBox.hide();
-};
-
+/**
+ * コマンドボックスを取得します。
+ *
+ * @return ChromekeyCommandBox コマンドボックス
+ */
 CommandModeProcessor.prototype.getCommandBox = function() {
   return this.commandBox;
 };
 
 CommandModeProcessor.prototype.setProcessor = function(processor) {
-  this.processor = processor;
+  this.updateBoxTextCallback = processor;
 };
 
 CommandModeProcessor.prototype.setEnter = function(enter) {
-  this.enterProcessor = enter;
+  this.enterCallback = enter;
 };
 
 CommandModeProcessor.prototype.enter = function() {
