@@ -88,14 +88,14 @@ Command.moveRightTab = function() {
  * コマンドボックスの次の候補を選択します。
  */
 Command.selectNextCandidate = function() {
-  CommandBox.selectNext();
+  Mode.getProcessor(ModeList.COMMAND_MODE).getCommandBox().selectNext();
 };
 
 /**
  * コマンドボックスの前の候補を選択します。
  */
 Command.selectPrevCandidate = function() {
-  CommandBox.selectPrev();
+  Mode.getProcessor(ModeList.COMMAND_MODE).getCommandBox().selectPrev();
 };
 
 /**
@@ -130,7 +130,6 @@ Command.restoreTab = function() {
  * 閉じたタブの一覧を表示します。
  */
 Command.closedTabList = function() {
-  CommandBox.show();
   Mode.changeMode(ModeList.COMMAND_MODE);
   var func = function() {
     chrome.runtime.sendMessage({ command: 'closedTabList' }, function(results) {
@@ -250,7 +249,6 @@ Command.enterNewWindowHintMode = function() {
  * コマンドモードへ移行します。
  */
 Command.enterCommandMode = function() {
-  CommandBox.show();
   Mode.changeMode(ModeList.COMMAND_MODE);
 };
 
@@ -264,13 +262,25 @@ Command.enterBookmarkMode = function() {
 };
 
 /**
- * ブックマークモードへ移行します。
- * ブックマークを開く時に新しいウィンドウで開きます。
+ * ブックマークを検索します。
  */
-Command.enterNewWindowBookmarkMode = function() {
-  CommandBox.show();
-  Mode.changeMode(ModeList.BOOKMARK_MODE);
-  Mode.getProcessor().setOpenNewTab(true);
+Command.searchBookmarks = function() {
+  Mode.changeMode(ModeList.COMMAND_MODE);
+  var processor = Mode.getProcessor();
+  processor.onUpdateBoxText(function(text) {
+    var searchResult = Bookmarks.search(text);
+    var bookmarks = [];
+    for (var i in searchResult) {
+      bookmarks.push({
+        text: searchResult[i].title + '(' + searchResult[i].url + ')',
+        url: searchResult[i].url
+      });
+    }
+    return bookmarks;
+  });
+  processor.onEnter(function(text, selected) {
+    Utility.openUrl(selected.url, true);
+  });
 };
 
 /**

@@ -45,6 +45,26 @@ RuntimeCommand.setOptions = function(sender, params) {
   notifyPort.postMessage(params);
 };
 
+RuntimeCommand.loadBookmarks = function(port) {
+  port.onMessage.addListener(function() {
+    chrome.bookmarks.getSubTree('1', function(tree) {
+      var results = [];
+      var find = function(node) {
+        if (node.children) {
+          for (var i in node.children) {
+            find(node.children[i]);
+          }
+        }
+        if (node.url) {
+          results.push(node);
+        }
+      };
+      find(tree[0]);
+      port.postMessage(results);
+    });
+  });
+};
+
 var notifyPort;
 RuntimeCommand.notifyOptions = function(port) {
   notifyPort = port;

@@ -17,7 +17,7 @@
   KeyMap.nmap('<C-n>', 'moveRightTab');
   KeyMap.nmap(':',     'enterCommandMode');
   KeyMap.nmap('b',     'enterBookmarkMode');
-  KeyMap.nmap('B',     'enterNewWindowBookmarkMode');
+  KeyMap.nmap('B',     'searchBookmarks');
   KeyMap.nmap('i',     'enterFocusHintMode');
   KeyMap.nmap('a',     'enterFocusHintMode');
   KeyMap.nmap('H',     'backHistory');
