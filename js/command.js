@@ -253,18 +253,9 @@ Command.enterCommandMode = function() {
 };
 
 /**
- * ブックマークモードへ移行します。
- */
-Command.enterBookmarkMode = function() {
-  CommandBox.show();
-  Mode.changeMode(ModeList.BOOKMARK_MODE);
-  Mode.getProcessor().setOpenNewTab(false);
-};
-
-/**
  * ブックマークを検索します。
  */
-Command.searchBookmarks = function() {
+Command.searchBookmarks = function(newTab) {
   Mode.changeMode(ModeList.COMMAND_MODE);
   var processor = Mode.getProcessor();
   processor.onUpdateBoxText(function(text) {
@@ -279,7 +270,7 @@ Command.searchBookmarks = function() {
     return bookmarks;
   });
   processor.onEnter(function(text, selected) {
-    Utility.openUrl(selected.url, true);
+    Utility.openUrl(selected.url, newTab);
   });
 };
 
@@ -309,16 +300,6 @@ Command.cancelHintMode = function() {
 Command.cancelVisualMode = function() {
   if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
     Viewport.resetContentEditable();
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
-
-/**
- * ブックマークモードを抜けてノーマルモードへ戻ります。
- */
-Command.cancelBookmarkMode = function() {
-  if (Mode.getCurrentMode() == ModeList.BOOKMARK_MODE) {
-    CommandBox.hide();
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };

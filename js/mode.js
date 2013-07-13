@@ -14,8 +14,7 @@ var ModeList = {
   INSERT_MODE: 'insert',
   HINT_MODE: 'hint',
   VISUAL_MODE: 'visual',
-  COMMAND_MODE: 'command',
-  BOOKMARK_MODE: 'bookmark'
+  COMMAND_MODE: 'command'
 };
 
 /**
@@ -30,12 +29,11 @@ var ChromekeyMode = function() {
 
   // 各モードのプロセッサを生成
   this.modeProcessors = {};
-  this.modeProcessors[ModeList.NORMAL_MODE]   = new NoopProcessor();
-  this.modeProcessors[ModeList.INSERT_MODE]   = new NoopProcessor();
-  this.modeProcessors[ModeList.HINT_MODE]     = new HintModeProcessor();
-  this.modeProcessors[ModeList.VISUAL_MODE]   = new VisualModeProcessor();
-  this.modeProcessors[ModeList.COMMAND_MODE]  = new CommandModeProcessor();
-  this.modeProcessors[ModeList.BOOKMARK_MODE] = new BookmarkModeProcessor();
+  this.modeProcessors[ModeList.NORMAL_MODE]  = new NoopProcessor();
+  this.modeProcessors[ModeList.INSERT_MODE]  = new NoopProcessor();
+  this.modeProcessors[ModeList.HINT_MODE]    = new HintModeProcessor();
+  this.modeProcessors[ModeList.VISUAL_MODE]  = new VisualModeProcessor();
+  this.modeProcessors[ModeList.COMMAND_MODE] = new CommandModeProcessor();
 };
 
 /**

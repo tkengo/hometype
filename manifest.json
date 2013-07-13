@@ -40,7 +40,6 @@
       "js/processor/noop.js",
       "js/processor/visual.js",
       "js/processor/command.js",
-      "js/processor/bookmark.js",
       "js/processor/hint.js",
       "js/command.js",
       "js/mode.js",

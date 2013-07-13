@@ -83,27 +83,6 @@ RuntimeCommand.getOptions = function(sender, params, sendResponse) {
   sendResponse(result);
 };
 
-RuntimeCommand.searchBookmarks = function(port) {
-  port.onMessage.addListener(function(key) {
-    chrome.bookmarks.getSubTree('1', function(tree) {
-      key = key.toLowerCase();
-      var results = [];
-      var search = function(node) {
-        if (node.children) {
-          for (var i in node.children) {
-            search(node.children[i]);
-          }
-        }
-        else if (node.title.toLowerCase().indexOf(key) > -1 || node.url.toLowerCase().indexOf(key) > -1) {
-          results.push(node);
-        }
-      };
-      search(tree[0]);
-      port.postMessage(results);
-    });
-  });
-};
-
 var Tab = new ChromekeyTab();
 
 (function() {

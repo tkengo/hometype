@@ -16,8 +16,8 @@
   KeyMap.nmap('<C-p>', 'moveLeftTab');
   KeyMap.nmap('<C-n>', 'moveRightTab');
   KeyMap.nmap(':',     'enterCommandMode');
-  KeyMap.nmap('b',     'enterBookmarkMode');
-  KeyMap.nmap('B',     'searchBookmarks');
+  KeyMap.nmap('b',     [ 'searchBookmarks', false ]);
+  KeyMap.nmap('B',     [ 'searchBookmarks', true ]);
   KeyMap.nmap('i',     'enterFocusHintMode');
   KeyMap.nmap('a',     'enterFocusHintMode');
   KeyMap.nmap('H',     'backHistory');
@@ -40,8 +40,4 @@
 
   KeyMap.fmap('Esc',   'cancelHintMode');
   KeyMap.fmap('<C-c>', 'cancelHintMode');
-
-  KeyMap.bmap('<C-n>', 'selectNextCandidate');
-  KeyMap.bmap('<C-p>', 'selectPrevCandidate');
-  KeyMap.bmap('Esc',   'cancelBookmarkMode');
 })();

@@ -10,11 +10,10 @@
  * キーマッピング管理オブジェクト。
  * 各モード毎にマッピング情報を保持します。
  *
- * normal   : ノーマルモード
- * hint     : ヒントモード
- * visual   : ビジュアルモード
- * command  : コマンドモード
- * bookmark : ブックマークモード
+ * normal  : ノーマルモード
+ * hint    : ヒントモード
+ * visual  : ビジュアルモード
+ * command : コマンドモード
  */
 var KeyMap = {
 };
@@ -23,8 +22,7 @@ var _map = {
   insert: {},
   hint: {},
   visual: {},
-  command: {},
-  bookmark: {}
+  command: {}
 }
 
 /**
@@ -86,16 +84,6 @@ KeyMap.vmap = function(key, command) {
  */
 KeyMap.cmap = function(key, command) {
   KeyMap.assign(ModeList.COMMAND_MODE, key, command);
-};
-
-/**
- * ブックマークモードのキーに対してコマンドを割り当てます。
- *
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
- */
-KeyMap.bmap = function(key, command) {
-  KeyMap.assign(ModeList.BOOKMARK_MODE, key, command);
 };
 
 /**
