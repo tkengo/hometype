@@ -51,6 +51,7 @@ ChromekeyMode.prototype.getCurrentMode = function() {
  * イベントハンドラが実行されます。
  *
  * @param string modeName 変更後のモード名
+ * @return Object 現在のモードのプロセッサ
  */
 ChromekeyMode.prototype.changeMode = function(modeName) {
   // モードが変わってなければ何もしない
@@ -79,6 +80,8 @@ ChromekeyMode.prototype.changeMode = function(modeName) {
   if (typeof currentProcessor.notifyEnterMode == 'function') {
     currentProcessor.notifyEnterMode();
   }
+
+  return currentProcessor;
 };
 
 /**
