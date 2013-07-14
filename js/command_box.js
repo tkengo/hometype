@@ -25,7 +25,7 @@ var ChromekeyCommandBox = function() {
                               .width(Viewport.getWindowWidth() - COMMAND_BOX_MARGIN * 4)
                               .height(CANDIDATE_AREA_HEIGHT)
 
-  this.candidate = [];
+  this.list = [];
 
   // 要素をオブジェクトに保存
   this.box       = box;
@@ -33,8 +33,10 @@ var ChromekeyCommandBox = function() {
   this.candidate = candidate;
 
   // bodyに追加
-  this.box.appendTo($('body'));
-  this.candidate.appendTo($('body'));
+  $(document).ready($.proxy(function() {
+    this.box.appendTo($('body'));
+    this.candidate.appendTo($('body'));
+  }, this));
 };
 
 /**
@@ -104,7 +106,7 @@ ChromekeyCommandBox.prototype.setCandidate = function(list) {
   $('div', this.candidate).remove();
 
   // 候補一覧をオブジェクトに保存
-  this.candidate = list;
+  this.list = list;
 
   // 候補一覧をセットしていく
   for (var i in list) {

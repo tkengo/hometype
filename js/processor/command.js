@@ -66,13 +66,7 @@ CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     // コマンドボックス内にキーイベントが浸透しないとこのキー押下のキーが
     // 適用されていないので、少し待ってからイベントを呼び出す
     setTimeout($.proxy(function() {
-      var result = this.updateBoxTextCallback(this.commandBox.getText());
-
-      // 結果が配列であればそれをセットして候補として表示する
-      if (result instanceof Array) {
-        this.commandBox.setCandidate(result);
-        this.commandBox.showCandidate();
-      }
+      this.updateCandidate();
     }, this), 10);
   }
 
@@ -80,12 +74,30 @@ CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 };
 
 /**
+ * コールバック関数を実行して候補一覧を更新します。
+ */
+CommandModeProcessor.prototype.updateCandidate = function() {
+  var result = this.updateBoxTextCallback(this.commandBox.getText());
+
+  // 結果が配列であればそれをセットして候補として表示する
+  if (result instanceof Array) {
+    this.commandBox.setCandidate(result);
+    this.commandBox.showCandidate();
+  }
+};
+
+/**
  * コマンドボックスが更新された時に呼ばれるコールバック関数を指定します。
  *
- * @param function callback コールバック関数
+ * @param function callback    コールバック関数
+ * @param boolean  immediately trueを指定すればコールバック関数を登録と同時に1度実行します
  */
-CommandModeProcessor.prototype.onUpdateBoxText = function(callback) {
+CommandModeProcessor.prototype.onUpdateBoxText = function(callback, immediately) {
   this.updateBoxTextCallback = callback;
+  
+  if (immediately) {
+    this.updateCandidate();
+  }
 };
 
 /**

@@ -23,7 +23,7 @@
   KeyMap.nmap('H',     'backHistory');
   KeyMap.nmap('L',     'forwardHistory');
   KeyMap.nmap('u',     'restoreTab');
-  KeyMap.nmap('U',     'closedTabList');
+  KeyMap.nmap('U',     'searchClosedTabs');
 
   KeyMap.cmap('Esc',   'cancelCommandMode');
   KeyMap.cmap('<C-n>', 'selectNextCandidate');

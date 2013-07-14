@@ -127,29 +127,56 @@ Command.restoreTab = function() {
 };
 
 /**
- * 閉じたタブの一覧を表示します。
+ * 閉じたタブを検索します。
  */
-Command.closedTabList = function() {
-  Mode.changeMode(ModeList.COMMAND_MODE);
-  var func = function() {
-    chrome.runtime.sendMessage({ command: 'closedTabList' }, function(results) {
+Command.searchClosedTabs = function() {
+  chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
+    var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+
+    processor.onUpdateBoxText(function(text) {
       var list = [];
-      for (var i in results) {
-        var result = results[i];
-        list.push({
-          text: result.title + '(' + result.url + ')',
-          url: result.url,
-          tabId: result.id
-        });
+      for (var i in closedTabs) {
+        var tab = closedTabs[i];
+
+        var includeInTitle = tab.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
+        var includeInUrl   = tab.url  .toLowerCase().indexOf(text.toLowerCase()) > -1;
+
+        if (includeInTitle || includeInUrl) {
+          list.push({
+            text: tab.title + '(' + tab.url + ')',
+            url: tab.url,
+            tabId: tab.id
+          });
+        }
       }
-      CommandBox.setCandidate(list);
-      CommandBox.showCandidate();
+
+      return list;
+    }, true);
+    processor.onEnter(function(text, selected) {
+      chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
     });
-  };
-  func();
-  Mode.getProcessor().setProcessor(func);
-  Mode.getProcessor().setEnter(function(text, selected) {
-    chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
+  });
+};
+
+/**
+ * ブックマークを検索します。
+ */
+Command.searchBookmarks = function(newTab) {
+  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+
+  processor.onUpdateBoxText(function(text) {
+    var searchResult = Bookmarks.search(text);
+    var bookmarks = [];
+    for (var i in searchResult) {
+      bookmarks.push({
+        text: searchResult[i].title + '(' + searchResult[i].url + ')',
+        url: searchResult[i].url
+      });
+    }
+    return bookmarks;
+  });
+  processor.onEnter(function(text, selected) {
+    Utility.openUrl(selected.url, newTab);
   });
 };
 
@@ -250,28 +277,6 @@ Command.enterNewWindowHintMode = function() {
  */
 Command.enterCommandMode = function() {
   Mode.changeMode(ModeList.COMMAND_MODE);
-};
-
-/**
- * ブックマークを検索します。
- */
-Command.searchBookmarks = function(newTab) {
-  Mode.changeMode(ModeList.COMMAND_MODE);
-  var processor = Mode.getProcessor();
-  processor.onUpdateBoxText(function(text) {
-    var searchResult = Bookmarks.search(text);
-    var bookmarks = [];
-    for (var i in searchResult) {
-      bookmarks.push({
-        text: searchResult[i].title + '(' + searchResult[i].url + ')',
-        url: searchResult[i].url
-      });
-    }
-    return bookmarks;
-  });
-  processor.onEnter(function(text, selected) {
-    Utility.openUrl(selected.url, newTab);
-  });
 };
 
 /**
