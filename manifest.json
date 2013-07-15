@@ -33,7 +33,6 @@
       "js/key/sequence.js",
       "js/key/map.js",
       "js/viewport.js",
-      "js/bookmarks.js",
       "js/command_box.js",
       "js/hint/element.js",
       "js/hint/element_collection.js",
