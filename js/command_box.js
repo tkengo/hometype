@@ -165,7 +165,7 @@ ChromekeyCommandBox.prototype.selectPrev = function() {
  */
 ChromekeyCommandBox.prototype.getSelected = function() {
   var div = $('div.selected', this.candidate);
-  return this.candidate[div.attr('data-index')];
+  return this.list[div.attr('data-index')];
 };
 
 /**

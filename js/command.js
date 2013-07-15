@@ -130,9 +130,13 @@ Command.restoreTab = function() {
  * 閉じたタブを検索します。
  */
 Command.searchClosedTabs = function() {
-  chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
-    var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
+  processor.onEnter(function(text, selected) {
+    chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
+  });
+
+  chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
       for (var i in closedTabs) {
@@ -140,7 +144,6 @@ Command.searchClosedTabs = function() {
 
         var includeInTitle = tab.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
         var includeInUrl   = tab.url  .toLowerCase().indexOf(text.toLowerCase()) > -1;
-
         if (includeInTitle || includeInUrl) {
           list.push({
             text: tab.title + '(' + tab.url + ')',
@@ -152,9 +155,6 @@ Command.searchClosedTabs = function() {
 
       return list;
     }, true);
-    processor.onEnter(function(text, selected) {
-      chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
-    });
   });
 };
 
@@ -164,20 +164,31 @@ Command.searchClosedTabs = function() {
 Command.searchBookmarks = function(newTab) {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
-  processor.onUpdateBoxText(function(text) {
-    var searchResult = Bookmarks.search(text);
-    var bookmarks = [];
-    for (var i in searchResult) {
-      bookmarks.push({
-        text: searchResult[i].title + '(' + searchResult[i].url + ')',
-        url: searchResult[i].url
-      });
-    }
-    return bookmarks;
-  });
   processor.onEnter(function(text, selected) {
     Utility.openUrl(selected.url, newTab);
   });
+
+  var port = chrome.runtime.connect({ name: 'loadBookmarks' });
+  port.onMessage.addListener(function(bookmarks) {
+    processor.onUpdateBoxText(function(text) {
+      var list = [];
+      for (var i in bookmarks) {
+        var bookmark = bookmarks[i];
+
+        var includeInTitle = bookmark.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
+        var includeInUrl   = bookmark.url  .toLowerCase().indexOf(text.toLowerCase()) > -1;
+        if (includeInTitle || includeInUrl) {
+          list.push({
+            text: bookmark.title + '(' + bookmark.url + ')',
+            url: bookmark.url
+          });
+        }
+      }
+      port.disconnect();
+      return list;
+    });
+  });
+  port.postMessage();
 };
 
 /**
