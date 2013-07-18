@@ -33,6 +33,12 @@
 .chromekey-hit-a-hint-green-area {
   background-color:#E2FFE3;
 }
+.chromekey-hit-a-hint-red {
+  background-color:#FFB2C7;
+}
+.chromekey-hit-a-hint-red-area {
+  background-color:#FFE2E3;
+}
 .chromekey-hit-a-hint-pushed {
   color:red;
 }

@@ -1,60 +1,56 @@
+/**
+ * Copyright (c) 2013 Kengo Tateishi (@tkengo)
+ * Licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * ヒントモードのプロセッサ
+ */
 var HintModeProcessor = function() {
   this.newTab = false;
-  this.callbacks = [];
+  this.callback     = null;
+  this.hintElements = null;
 };
 
+/**
+ * ヒントモードを抜ける時に呼ばれるコールバック関数です。
+ */
+HintModeProcessor.prototype.notifyLeaveMode = function() {
+  this.callback = null;
+  this.hintElements.removeAllHint();
+};
+
+/**
+ * キー処理
+ *
+ * @param string        stack      キースタック。押下されたキー文字列
+ * @param string        currentKey 今回押下されたキー文字
+ * @param KeyboradEvent e          イベントオブジェクト
+ */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
+  // デフォルト動作をキャンセル。キーを押していないことにする
   e.stopPropagation();
   e.preventDefault();
 
-  var hint = Viewport.getCurrentHintElement();
-  var elements = hint.getMatchedElements(stack);
+  // ヒントキーにマッチする要素一覧を取得する
+  var elements = this.hintElements.getMatchedElements(stack);
 
   if (elements.length == 0) {
-    Command.cancelHintMode();
+    // マッチする要素がなければヒントモードを抜ける
+    Mode.changeMode(ModeList.NORMAL_MODE);
     return true;
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
-    var target = elements[0].getElement();
-
-    if (this.callbacks.length > 0) {
-      Command.cancelHintMode();
-      for (var i in this.callbacks) {
-        this.callbacks[i].call(this.callbacks[i], target);
-      }
-      this.resetCallback();
-      return true;
+    // マッチする要素が確定できればコールバックを呼び出す
+    if (this.callback) {
+      this.callback(elements[0].getElement());
     }
 
-    if (target.tag() == 'select') {
-      var children = target.children('option');
-      var div = $('<div>').addClass('chromekey-select-box').appendTo($('body')).screenCenter();
-      var ul = $('<ul>').appendTo(div);
-
-      children.each(function() {;
-        var li = $('<li>').text($(this).text()).attr('value', $(this).val()).click(function() {
-          Command.cancelHintMode();
-          target.val($(this).attr('value')).change();
-          div.remove();
-        }).appendTo(ul);
-      });
-
-      var a = [];
-      $('li', ul).each(function() { a.push($(this)); });
-      Viewport.createNewHintElement('yellow', a).show();
-    }
-    else {
-      Command.cancelHintMode();
-      var event = document.createEvent('MouseEvents');
-      event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, this.newTab, 0, null);
-      target.get(0).dispatchEvent(event);
-      target.focus();
-    }
-
+    Mode.changeMode(ModeList.NORMAL_MODE);
     return true;
   }
   else {
-    hint.hideUnmatchedElements(stack);
+    // マッチしたけどまだ要素が確定していなければ要素を絞り込む
+    this.hintElements.hideUnmatchedElements(stack);
     for (var i in elements) {
       elements[i].setPushed();
     }
@@ -62,12 +58,27 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   }
 };
 
-HintModeProcessor.prototype.setCallback = function(callback) {
-  this.callbacks.push(callback);
+/**
+ * 要素に対するヒントを生成して表示します。
+ *
+ * @param array elements ヒントを表示する対象の要素の配列
+ */
+HintModeProcessor.prototype.createHints = function(theme, elements) {
+  this.hintElements = Viewport.createNewHintElement(theme, elements);
+  this.hintElements.show();
 };
 
-HintModeProcessor.prototype.resetCallback = function() {
-  this.callbacks = [];
+/**
+ * ヒントが確定して要素が選ばれた時に呼ばれるコールバック関数を定義します。
+ *
+ * @param function callback コールバック関す
+ */
+HintModeProcessor.prototype.onChooseElement = function(callback) {
+  this.callback = callback;
+};
+
+HintModeProcessor.prototype.setCallback = function(callback) {
+  this.callback = callback;
 };
 
 HintModeProcessor.prototype.setOpenNewTab = function(newTab) {

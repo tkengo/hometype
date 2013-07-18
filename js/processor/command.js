@@ -118,14 +118,6 @@ CommandModeProcessor.prototype.getCommandBox = function() {
   return this.commandBox;
 };
 
-CommandModeProcessor.prototype.setProcessor = function(processor) {
-  this.updateBoxTextCallback = processor;
-};
-
-CommandModeProcessor.prototype.setEnter = function(enter) {
-  this.enterCallback = enter;
-};
-
 CommandModeProcessor.prototype.enter = function() {
   var command = Command[this.commandBox.getText()]
   if (command) {

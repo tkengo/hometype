@@ -85,6 +85,33 @@ ChromekeyMode.prototype.changeMode = function(modeName) {
 };
 
 /**
+ * ヒントモードに入ります。
+ * ヒントモードのテーマと、どの要素に対してヒントを出すかを指定します。
+ *
+ * @param string theme   ヒントモードのテーマ
+ * @param array  targets ヒントを出す要素
+ * @return Object ヒントモードのプロセッサ
+ */
+ChromekeyMode.prototype.enterHintMode = function(theme, targets) {
+  var processor = this.changeMode(ModeList.HINT_MODE);
+  processor.createHints(theme, targets);
+  return processor;
+};
+
+/**
+ * ビジュアルモードに入ります。
+ * どの要素に対してビジュアルモードに入るのかを指定します。
+ *
+ * @param jQueryElement element ヒントを出す要素
+ * @return Object ビジュアルモードのプロセッサ
+ */
+ChromekeyMode.prototype.enterVisualMode = function(element) {
+  Viewport.setContentEditable(element);
+  element.focus().click();
+  return Mode.changeMode(ModeList.VISUAL_MODE);
+};
+
+/**
  * 指定されたモードのプロセッサを取得します。
  * 引数が省略された場合は現在のモードのプロセッサを取得します。
  *

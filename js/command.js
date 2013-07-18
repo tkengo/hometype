@@ -139,20 +139,11 @@ Command.searchClosedTabs = function() {
   chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      for (var i in closedTabs) {
-        var tab = closedTabs[i];
-
-        var includeInTitle = tab.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
-        var includeInUrl   = tab.url  .toLowerCase().indexOf(text.toLowerCase()) > -1;
-        if (includeInTitle || includeInUrl) {
-          list.push({
-            text: tab.title + '(' + tab.url + ')',
-            url: tab.url,
-            tabId: tab.id
-          });
+      $.each(closedTabs, function(tab) {
+        if (Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
+          list.push({ text: tab.title + '(' + tab.url + ')', url: tab.url, tabId: tab.id });
         }
-      }
-
+      });
       return list;
     }, true);
   });
@@ -172,23 +163,30 @@ Command.searchBookmarks = function(newTab) {
   port.onMessage.addListener(function(bookmarks) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      for (var i in bookmarks) {
-        var bookmark = bookmarks[i];
-
-        var includeInTitle = bookmark.title.toLowerCase().indexOf(text.toLowerCase()) > -1;
-        var includeInUrl   = bookmark.url  .toLowerCase().indexOf(text.toLowerCase()) > -1;
-        if (includeInTitle || includeInUrl) {
-          list.push({
-            text: bookmark.title + '(' + bookmark.url + ')',
-            url: bookmark.url
-          });
+      $.each(bookmarks, function(bookmark) {
+        if (Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
+          list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url });
         }
-      }
+      });
       port.disconnect();
       return list;
     });
   });
   port.postMessage();
+};
+
+/**
+ * ビジュアルモードへ移行します。
+ */
+Command.enterVisualMode = function() {
+  var targets = Viewport.divElementInnerScreen();
+
+  if (targets.length > 0) {
+    var processor = Mode.enterHintMode('red', targets);
+    processor.onChooseElement(function(element) {
+      Mode.enterVisualMode(element);
+    });
+  }
 };
 
 /**
@@ -228,30 +226,34 @@ Command.backwardContentEditable = function() {
 };
 
 /**
- * ビジュアルモードへ移行します。
- */
-Command.enterVisualMode = function() {
-  var target = Viewport.divElementInnerScreen();
-  if (target.length > 0) {
-    Mode.changeMode(ModeList.HINT_MODE);
-    Mode.getProcessor().setCallback(function(element) {
-      Viewport.setContentEditable(element);
-      element.focus().click();
-      Mode.changeMode(ModeList.VISUAL_MODE);
-    });
-    Viewport.createNewHintElement('yellow', target).show();
-  }
-};
-
-/**
  * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
  */
 Command.enterHintMode = function() {
-  var target = Viewport.clickableElementInnerScreen();
-  if (target.length > 0) {
-    Mode.changeMode(ModeList.HINT_MODE);
-    Mode.getProcessor().setOpenNewTab(false);
-    Viewport.createNewHintElement('yellow', target).show();
+  var targets = Viewport.clickableElementInnerScreen();
+  if (targets.length > 0) {
+    var processor = Mode.enterHintMode('yellow', targets);
+    processor.onChooseElement(function(element) {
+      if (element.tag() == 'select') {
+        var children = element.children('option');
+        var div = $('<div>').addClass('chromekey-select-box').appendTo($('body')).screenCenter();
+        var ul = $('<ul>').appendTo(div);
+
+        children.each(function() {;
+          var li = $('<li>').text($(this).text()).attr('value', $(this).val()).click(function() {
+            Command.cancelHintMode();
+            element.val($(this).attr('value')).change();
+            div.remove();
+          }).appendTo(ul);
+        });
+
+        var a = [];
+        $('li', ul).each(function() { a.push($(this)); });
+        Viewport.createNewHintElement('yellow', a).show();
+      }
+      else {
+        Utility.clickElement(element);
+      }
+    });
   }
 };
 
