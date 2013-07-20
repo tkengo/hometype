@@ -32,6 +32,7 @@
       "js/key/identifiers.js",
       "js/key/sequence.js",
       "js/key/map.js",
+      "js/box/select.js",
       "js/viewport.js",
       "js/command_box.js",
       "js/hint/element.js",

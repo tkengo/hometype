@@ -234,21 +234,9 @@ Command.enterHintMode = function() {
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
       if (element.tag() == 'select') {
-        var children = element.children('option');
-        var div = $('<div>').addClass('chromekey-select-box').appendTo($('body')).screenCenter();
-        var ul = $('<ul>').appendTo(div);
-
-        children.each(function() {;
-          var li = $('<li>').text($(this).text()).attr('value', $(this).val()).click(function() {
-            Command.cancelHintMode();
-            element.val($(this).attr('value')).change();
-            div.remove();
-          }).appendTo(ul);
-        });
-
-        var a = [];
-        $('li', ul).each(function() { a.push($(this)); });
-        Viewport.createNewHintElement('yellow', a).show();
+        var select = new ChromekeySelectBox(element);
+        processor.createHints('yellow', select.getListElements());
+        return false;
       }
       else {
         Utility.clickElement(element);
@@ -261,14 +249,15 @@ Command.enterHintMode = function() {
  * ヒントモードへ移行します。ヒント対象は入力可能フォームです。
  */
 Command.enterFocusHintMode = function() {
-  var target = Viewport.formElementInnerScreen();
-  if (target.length == 1) {
-    target[0].focus();
+  var targets = Viewport.formElementInnerScreen();
+  if (targets.length == 1) {
+    targets[0].focus();
   }
-  else if (target.length > 0) {
-    Mode.changeMode(ModeList.HINT_MODE);
-    Mode.getProcessor().setOpenNewTab(false);
-    Viewport.createNewHintElement('green', target).show();
+  else if (targets.length > 0) {
+    var processor = Mode.enterHintMode('green', targets);
+    processor.onChooseElement(function(element) {
+      element.focus();
+    });
   }
 };
 
@@ -277,11 +266,18 @@ Command.enterFocusHintMode = function() {
  * リンクをクリックする時に新しいウィンドウで開きます。
  */
 Command.enterNewWindowHintMode = function() {
-  var target = Viewport.clickableElementInnerScreen();
-  if (target.length > 0) {
-    Mode.changeMode(ModeList.HINT_MODE);
-    Mode.getProcessor().setOpenNewTab(true);
-    Viewport.createNewHintElement('blue', target).show();
+  var targets = [];
+  $.each(Viewport.clickableElementInnerScreenWithoutSelect(), function() {
+    if ($(this).tag() != 'select') {
+      targets.push($(this));
+    }
+  });
+
+  if (targets.length > 0) {
+    var processor = Mode.enterHintMode('blue', targets);
+    processor.onChooseElement(function(element) {
+      Utility.clickElement(element, true);
+    });
   }
 };
 

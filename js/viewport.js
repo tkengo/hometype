@@ -67,6 +67,16 @@ _Viewport.prototype.clickableElementInnerScreen = function() {
   return elements;
 };
 
+_Viewport.prototype.clickableElementInnerScreenWithoutSelect = function() {
+  var targets = [];
+  $.each(this.clickableElementInnerScreen(), function() {
+    if ($(this).tag() != 'select') {
+      targets.push($(this));
+    }
+  });
+  return targets;
+}
+
 _Viewport.prototype.formElementInnerScreen = function() {
   var _this = this;
   var elements = [];
