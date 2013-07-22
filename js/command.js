@@ -184,6 +184,7 @@ Command.enterVisualMode = function() {
     var processor = Mode.enterHintMode('red', targets);
     processor.onChooseElement(function(element) {
       Mode.enterVisualMode(element);
+      return false;
     });
   }
 };
