@@ -67,7 +67,11 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
  * @param array elements ヒントを表示する対象の要素の配列
  */
 HintModeProcessor.prototype.createHints = function(theme, elements) {
-  this.hintElements = Viewport.createNewHintElement(theme, elements);
+  if (this.hintElements) {
+    this.hintElements.removeAllHint();
+  }
+
+  this.hintElements = new HintElementCollection(theme, elements);
   this.hintElements.show();
 };
 

@@ -12,11 +12,11 @@ var HintElementCollection = function(hintTheme, target) {
 
   this.hintKeys = [];
 
-  for (var i in this.htmlElements) {
+  $.each(this.htmlElements, $.proxy(function(index, element) {
     var key = this.nextHintKey();
-    this.elements.push(new HintElement(this.htmlElements[i], i, key, this.hintTheme));
-    this.hintKeys.push({ index: i, key: key });
-  }
+    this.elements.push(new HintElement($(element), index, key, this.hintTheme));
+    this.hintKeys.push({ index: index, key: key });
+  }, this));
 };
 
 HintElementCollection.prototype.getElements = function() {

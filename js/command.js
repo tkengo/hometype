@@ -229,7 +229,7 @@ Command.backwardContentEditable = function() {
  * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
  */
 Command.enterHintMode = function() {
-  var targets = Viewport.clickableElementInnerScreen();
+  var targets = $(':clickable:screen, :submittable:screen');
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
@@ -249,7 +249,7 @@ Command.enterHintMode = function() {
  * ヒントモードへ移行します。ヒント対象は入力可能フォームです。
  */
 Command.enterFocusHintMode = function() {
-  var targets = Viewport.formElementInnerScreen();
+  var targets = $('textarea:screen, :file:screen, :text:screen, :password:screen');
   if (targets.length == 1) {
     targets[0].focus();
   }
@@ -266,13 +266,7 @@ Command.enterFocusHintMode = function() {
  * リンクをクリックする時に新しいウィンドウで開きます。
  */
 Command.enterNewWindowHintMode = function() {
-  var targets = [];
-  $.each(Viewport.clickableElementInnerScreenWithoutSelect(), function() {
-    if ($(this).tag() != 'select') {
-      targets.push($(this));
-    }
-  });
-
+  var targets = $(':clickable:screen:not(select), :submittable:screen:not(select)');
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('blue', targets);
     processor.onChooseElement(function(element) {
@@ -303,7 +297,6 @@ Command.cancelCommandMode = function() {
  */
 Command.cancelHintMode = function() {
   if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
-    Viewport.getCurrentHintElement().removeAllHint();
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
