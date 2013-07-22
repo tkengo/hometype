@@ -139,7 +139,7 @@ Command.searchClosedTabs = function() {
   chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      $.each(closedTabs, function(tab) {
+      $.each(closedTabs, function(index, tab) {
         if (Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
           list.push({ text: tab.title + '(' + tab.url + ')', url: tab.url, tabId: tab.id });
         }
@@ -163,7 +163,7 @@ Command.searchBookmarks = function(newTab) {
   port.onMessage.addListener(function(bookmarks) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      $.each(bookmarks, function(bookmark) {
+      $.each(bookmarks, function(index, bookmark) {
         if (Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
           list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url });
         }
