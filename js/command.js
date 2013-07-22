@@ -179,8 +179,7 @@ Command.searchBookmarks = function(newTab) {
  * ビジュアルモードへ移行します。
  */
 Command.enterVisualMode = function() {
-  var targets = Viewport.divElementInnerScreen();
-
+  var targets = $(':visualable:screen');
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('red', targets);
     processor.onChooseElement(function(element) {

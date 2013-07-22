@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 Kengo Tateishi (@tkengo)
+ * Licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * コマンドボックス
+ */
 var _Viewport = function() {
   this.visualableTags = 'div:screen, section:screen, th:screen, td:screen, header:screen';
 };
@@ -50,17 +57,6 @@ _Viewport.prototype.scrollRight = function(value) {
   this.scrollTo(pos.left + value, pos.top);
 };
 
-_Viewport.prototype.divElementInnerScreen = function() {
-  var _this = this;
-  var elements = [];
-  $(this.visualableTags).each(function() {
-    var element = $(this);
-    elements.push(element);
-  });
-
-  return elements;
-};
-
 _Viewport.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
   element.attr('data-chromekey-not-insert-mode', 'true');
@@ -94,7 +90,7 @@ _Viewport.prototype.getNextContentEditableElement = function(current) {
   while (current.length > 0) {
     next = current.next();
     if (next.length > 0) {
-      if (next.is(this.visualableTags) && next.is(':visible')) {
+      if (next.is(':visualable:visible')) {
         break;
       }
       else {
@@ -115,7 +111,7 @@ _Viewport.prototype.getPrevContentEditableElement = function(current) {
   while (current.length > 0) {
     prev = current.prev();
     if (prev.length > 0) {
-      if (prev.is(this.visualableTags) && prev.is(':visible')) {
+      if (prev.is(':visualable:visible')) {
         break;
       }
       else {
