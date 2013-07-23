@@ -127,6 +127,20 @@ Command.restoreTab = function() {
 };
 
 /**
+ * 画面上の最初の要素にフォーカスします。
+ */
+Command.focusFirstInput = function() {
+  $(':text:screen:first').focus();
+};
+
+/**
+ * 画面上の最後の要素にフォーカスします。
+ */
+Command.focusLastInput = function() {
+  $(':text:screen:last').focus();
+};
+
+/**
  * 閉じたタブを検索します。
  */
 Command.searchClosedTabs = function() {

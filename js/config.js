@@ -20,6 +20,8 @@
   KeyMap.nmap('B',     [ 'searchBookmarks', true ]);
   KeyMap.nmap('i',     'enterFocusHintMode');
   KeyMap.nmap('a',     'enterFocusHintMode');
+  KeyMap.nmap('I',     'focusFirstInput');
+  KeyMap.nmap('A',     'focusLastInput');
   KeyMap.nmap('H',     'backHistory');
   KeyMap.nmap('L',     'forwardHistory');
   KeyMap.nmap('u',     'restoreTab');
