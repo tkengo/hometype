@@ -11,42 +11,42 @@ var Command = {};
  * 下方向にスクロールします。
  */
 Command.scrollDown = function() {
-  Viewport.scrollDown(parseInt(Options.scroll_amount));
+  Viewport.scrollVertical(parseInt(Options.scroll_amount));
 };
 
 /**
  * 上方向にスクロールします。
  */
 Command.scrollUp = function() {
-  Viewport.scrollUp(parseInt(Options.scroll_amount));
+  Viewport.scrollVertical(-parseInt(Options.scroll_amount));
 };
 
 /**
  * 下方向に画面半分スクロールします。
  */
 Command.scrollDownHalf = function() {
-  Viewport.scrollDown(Viewport.getWindowHeight() / 2);
+  Viewport.scrollVertical(Viewport.getWindowSize().height / 2);
 };
 
 /**
  * 上方向に画面半分スクロールします。
  */
 Command.scrollUpHalf = function() {
-  Viewport.scrollUp(Viewport.getWindowHeight() / 2);
+  Viewport.scrollVertical(-Viewport.getWindowSize().height / 2);
 };
 
 /**
  * 下方向に1画面分スクロールします。
  */
 Command.scrollDownPage = function() {
-  Viewport.scrollDown(Viewport.getWindowHeight());
+  Viewport.scrollVertical(Viewport.getWindowSize().height);
 };
 
 /**
  * 上方向に1画面分スクロールします。
  */
 Command.scrollUpPage = function() {
-  Viewport.scrollUp(Viewport.getWindowHeight());
+  Viewport.scrollVertical(-Viewport.getWindowSize().height);
 };
 
 /**
@@ -60,7 +60,7 @@ Command.scrollToTop = function() {
  * ドキュメント最後尾部分へスクロールします。
  */
 Command.scrollToBottom = function() {
-  Viewport.scrollTo(0, Viewport.getDocumentHeight());
+  Viewport.scrollTo(0, Viewport.getDocumentSize().height);
 };
 
 /**

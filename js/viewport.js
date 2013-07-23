@@ -3,61 +3,85 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * コマンドボックス
+ * 画面オブジェクト
  */
-var _Viewport = function() {
-  this.visualableTags = 'div:screen, section:screen, th:screen, td:screen, header:screen';
+var ChromekeyScreen = function() {
 };
 
-_Viewport.prototype.getScrollPosition = function() {
+/**
+ * 現在のスクロール位置を取得します。
+ *
+ * @return Object topとleftのキーを持つハッシュ
+ */
+ChromekeyScreen.prototype.getScrollPosition = function() {
   return {
     top: document.body.scrollTop,
     left: document.body.scrollLeft
-  }
+  };
 };
 
-_Viewport.prototype.getWindowWidth = function() {
-  return window.innerWidth;
+/**
+ * ウィンドウのサイズを取得します。
+ *
+ * @return Object widthとheightのキーを持つハッシュ
+ */
+ChromekeyScreen.prototype.getWindowSize = function() {
+  return {
+    width: window.innerWidth,
+    height: window.innerHeight
+  };
 };
 
-_Viewport.prototype.getWindowHeight = function() {
-  return window.innerHeight;
+/**
+ * ドキュメントのサイズを取得します。
+ *
+ * @return Object widthとheightのキーを持つハッシュ
+ */
+ChromekeyScreen.prototype.getDocumentSize = function() {
+  return {
+    width: $(document).width(),
+    height: $(document).height()
+  };
 };
 
-_Viewport.prototype.getDocumentWidth = function() {
-  return $(document).width();
-};
-
-_Viewport.prototype.getDocumentHeight = function() {
-  return $(document).height();
-};
-
-_Viewport.prototype.scrollTo = function(x, y) {
+/**
+ * 指定位置にスクロールします。
+ *
+ * @param integer x 縦位置
+ * @param integer y 横位置
+ */
+ChromekeyScreen.prototype.scrollTo = function(x, y) {
   document.body.scrollTop = y;
   document.body.scrollLeft = x;
 };
 
-_Viewport.prototype.scrollDown = function(value) {
+/**
+ * 指定した量だけ縦方向にスクロールします。
+ * プラスの値を指定すると下方向へ
+ * マイナスの量を指定すると上方向へ
+ * スクロールします。
+ *
+ * @param integer value スクロール量
+ */
+ChromekeyScreen.prototype.scrollVertical = function(value) {
   var pos = this.getScrollPosition();
   this.scrollTo(pos.left, pos.top + value);
 };
 
-_Viewport.prototype.scrollUp = function(value) {
-  var pos = this.getScrollPosition();
-  this.scrollTo(pos.left, pos.top - value);
-};
-
-_Viewport.prototype.scrollLeft = function(value) {
+/**
+ * 指定した量だけ横方向にスクロールします。
+ * プラスの値を指定すると右方向へ
+ * マイナスの量を指定すると左方向へ
+ * スクロールします。
+ *
+ * @param integer value スクロール量
+ */
+ChromekeyScreen.prototype.scrollHorizontal = function(value) {
   var pos = this.getScrollPosition();
   this.scrollTo(pos.left - value, pos.top);
 };
 
-_Viewport.prototype.scrollRight = function(value) {
-  var pos = this.getScrollPosition();
-  this.scrollTo(pos.left + value, pos.top);
-};
-
-_Viewport.prototype.setContentEditable = function(element) {
+ChromekeyScreen.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
   element.attr('data-chromekey-not-insert-mode', 'true');
   element.attr('data-chromekey-contenteditable', 'true');
@@ -71,7 +95,7 @@ _Viewport.prototype.setContentEditable = function(element) {
   });
 };
 
-_Viewport.prototype.resetContentEditable = function() {
+ChromekeyScreen.prototype.resetContentEditable = function() {
   var element = this.getCurrentContentEditable();
   element.removeAttr('contenteditable');
   element.removeAttr('data-chromekey-not-insert-mode');
@@ -80,11 +104,11 @@ _Viewport.prototype.resetContentEditable = function() {
   $(document.activeElement).blur();
 };
 
-_Viewport.prototype.getCurrentContentEditable = function() {
+ChromekeyScreen.prototype.getCurrentContentEditable = function() {
   return $('[data-chromekey-contenteditable=true]');
 };
 
-_Viewport.prototype.getNextContentEditableElement = function(current) {
+ChromekeyScreen.prototype.getNextContentEditableElement = function(current) {
   var next = null;
 
   while (current.length > 0) {
@@ -105,7 +129,7 @@ _Viewport.prototype.getNextContentEditableElement = function(current) {
   return next;
 };
 
-_Viewport.prototype.getPrevContentEditableElement = function(current) {
+ChromekeyScreen.prototype.getPrevContentEditableElement = function(current) {
   var prev = null;
 
   while (current.length > 0) {
@@ -126,9 +150,16 @@ _Viewport.prototype.getPrevContentEditableElement = function(current) {
   return prev;
 };
 
-_Viewport.prototype.createLink = function(url, parent) {
+/**
+ * DOMにリンク要素を追加します。
+ *
+ * @param string  url    リンク先URL
+ * @param element parant リンクの親となる要素。
+ *                       省略された場合はbody以下にリンクを追加します。
+ */
+ChromekeyScreen.prototype.createLink = function(url, parent) {
   var parent = $(parent || 'body');
   return $('<a>').attr('href', url).appendTo(parent);
 };
 
-var Viewport = new _Viewport();
+var Viewport = new ChromekeyScreen();

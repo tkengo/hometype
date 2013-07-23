@@ -12,17 +12,19 @@ var COMMAND_BOX_MARGIN = 8;
 var CANDIDATE_MAX_COUNT = 10;
 
 var ChromekeyCommandBox = function() {
+  var windowWidth = Viewport.getWindowSize().width;
+
   // コマンドボックスに必要な要素を作る
   var box       = $('<div>')  .addClass('chromekey-command-box')
                               .attr('id', '_chromekey-command-box')
-                              .width(Viewport.getWindowWidth() - COMMAND_BOX_MARGIN * 4)
+                              .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(COMMAND_BOX_HEIGHT);
   var text      = $('<input>').attr('type', 'text')
                               .attr('data-chromekey-not-insert-mode', true)
                               .appendTo(box);
   var candidate = $('<div>')  .addClass('chromekey-command-box-candidate-area')
                               .attr('id', '_chromekey-command-box-candidate-area')
-                              .width(Viewport.getWindowWidth() - COMMAND_BOX_MARGIN * 4)
+                              .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(CANDIDATE_AREA_HEIGHT)
 
   this.list = [];
@@ -44,7 +46,7 @@ var ChromekeyCommandBox = function() {
  */
 ChromekeyCommandBox.prototype.show = function() {
   // コマンドボックスを表示する位置を計算
-  var scrollTop = Viewport.getWindowHeight() + Viewport.getScrollPosition().top;
+  var scrollTop = Viewport.getWindowSize().height + Viewport.getScrollPosition().top;
 
   // 画面下側にコマンドボックスを配置して表示する
   this.box.css({
@@ -85,7 +87,7 @@ ChromekeyCommandBox.prototype.recalculateAndSetPosition = function() {
   this.candidate.css({ top: -9999, left: -9999 }).show();
 
   // スクロール位置の取得
-  var scrollTop = Viewport.getWindowHeight() + Viewport.getScrollPosition().top;
+  var scrollTop = Viewport.getWindowSize().height + Viewport.getScrollPosition().top;
 
   // 候補一覧のサイズと表示位置をセット
   var children = this.candidate.children();
