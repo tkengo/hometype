@@ -45,6 +45,10 @@ RuntimeCommand.setOptions = function(sender, params) {
   notifyPort.postMessage(params);
 };
 
+RuntimeCommand.getHistories = function(sender, params, sendResponse) {
+  sendResponse(Tab.getHistories(sender.tab.id));
+};
+
 RuntimeCommand.loadBookmarks = function(port) {
   port.onMessage.addListener(function() {
     chrome.bookmarks.getSubTree('1', function(tree) {

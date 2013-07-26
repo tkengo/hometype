@@ -9,7 +9,7 @@
 var COMMAND_BOX_HEIGHT = 20;
 var CANDIDATE_AREA_HEIGHT = 180;
 var COMMAND_BOX_MARGIN = 8;
-var CANDIDATE_MAX_COUNT = 10;
+var CANDIDATE_MAX_COUNT = 20;
 
 var ChromekeyCommandBox = function() {
   var windowWidth = Viewport.getWindowSize().width;

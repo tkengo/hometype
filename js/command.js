@@ -190,6 +190,29 @@ Command.searchBookmarks = function(newTab) {
 };
 
 /**
+ * 履歴を検索します。
+ */
+Command.searchHistories = function() {
+  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+
+  processor.onEnter(function(text, selected) {
+    Utility.openUrl(selected.url);
+  });
+
+  chrome.runtime.sendMessage({ command: 'getHistories' }, function(histories) {
+    processor.onUpdateBoxText(function(text) {
+      var list = [];
+      $.each(histories, function(index, history) {
+        if (Utility.includedInProperties(history, text, [ 'title', 'url' ])) {
+          list.push({ text: history.title + '(' + history.url + ')', url: history.url });
+        }
+      });
+      return list;
+    }, true);
+  });
+};
+
+/**
  * ビジュアルモードへ移行します。
  */
 Command.enterVisualMode = function() {

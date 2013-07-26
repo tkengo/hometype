@@ -8,6 +8,7 @@
   "permissions": [
     "tabs",
     "bookmarks",
+    "webNavigation",
     "<all_urls>"
   ],
   
