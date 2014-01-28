@@ -1,6 +1,6 @@
 var ChromekeyTab = function() {
   this.tabs = {};
-  this.histories = {};
+  this.history = new ChromekeyHistory();
   this.closedTabStacks = [];
 
   var context = this;
@@ -12,55 +12,39 @@ var ChromekeyTab = function() {
     }
   });
 
-  chrome.tabs.onCreated.addListener(function(tab) {
-    context.tabs[tab.id] = tab;
-    var history = { url: tab.url, title: tab.title };
-    localStorage.setItem('history' + tab.id, JSON.stringify({ history: [ history ] }));
-  });
-  chrome.tabs.onAttached.addListener(function(tab) {
-    context.tabs[tab.id] = tab;
-    var history = { url: tab.url, title: tab.title };
-    localStorage.setItem('history' + tab.id, JSON.stringify({ history: [ history ] }));
-  });
+  chrome.tabs.onCreated .addListener($.proxy(this.createAction, this));
+  chrome.tabs.onAttached.addListener($.proxy(this.createAction, this));
+  chrome.tabs.onRemoved .addListener($.proxy(this.removeAction, this));
+  chrome.tabs.onDetached.addListener($.proxy(this.removeAction, this));
+
   chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
     context.closedTabStacks.push(context.tabs[tabId]);
-    delete context.tabs[tabId];
-    localStorage.removeItem('history' + tabId);
-  });
-  chrome.tabs.onDetached.addListener(function(tab) {
-    delete context.tabs[tab.id];
-    localStorage.removeItem('history' + tabId);
   });
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     context.tabs[tabId] = tab;
 
-    var history = JSON.parse(localStorage.getItem('history' + tabId));
-    if (!history) {
-      history = { history: [] };
-    }
-
+    var history = context.history.get(tabId);
     if (changeInfo.url) {
-      history.history.push({ url: changeInfo.url, title: tab.title });
-      if (history.history.length > 20) {
-        history.history.shift();
-      }
-      localStorage.setItem('history' + tabId, JSON.stringify(history));
+      context.history.push(tabId, changeInfo.url);
     }
-    else if (changeInfo.status == 'complete') {
-      history.history[history.history.length - 1].title = tab.title;
-      localStorage.setItem('history' + tabId, JSON.stringify(history));
+    else {
+      context.history.update(tabId, tab.title);
     }
   });
 };
 
+ChromekeyTab.prototype.createAction = function(tab) {
+  context.tabs[tab.id] = tab;
+  this.history.set(tab.id, [ { url: tab.url, title: tab.title } ]);
+};
+
+ChromekeyTab.prototype.removeAction = function(tab) {
+  delete context.tabs[tab.id];
+  this.history.remove(tab.id);
+};
+
 ChromekeyTab.prototype.getHistories = function(tabId) {
-  var history = localStorage.getItem('history' + tabId);
-  if (history) {
-    return JSON.parse(history).history;
-  }
-  else {
-    return [];
-  }
+  return this.history.get(tabId);
 };
 
 ChromekeyTab.prototype.openClosedTab = function(tabId) {
