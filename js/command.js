@@ -266,7 +266,14 @@ Command.backwardContentEditable = function() {
  * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
  */
 Command.enterHintMode = function() {
-  var targets = $(':clickable:screen, :submittable:screen');
+  var targets = [];
+  $(':clickable:screen, :submittable:screen').each(function() {
+    var currentTarget = $(this);
+    if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
+      targets.push(currentTarget);
+    }
+  });
+
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
@@ -303,7 +310,14 @@ Command.enterFocusHintMode = function() {
  * リンクをクリックする時に新しいウィンドウで開きます。
  */
 Command.enterNewWindowHintMode = function() {
-  var targets = $(':clickable:screen:not(select), :submittable:screen:not(select)');
+  var targets = [];
+  $(':clickable:screen:not(select), :submittable:screen:not(select)').each(function() {
+    var currentTarget = $(this);
+    if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
+      targets.push(currentTarget);
+    }
+  });
+
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('blue', targets);
     processor.onChooseElement(function(element) {
