@@ -3,145 +3,145 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Chromekeyで利用するコマンドを定義します。
+ * Define command used in Chromekey.
  */
 var Command = {};
 
 /**
- * 下方向にスクロールします。
+ * Scroll down.
  */
 Command.scrollDown = function() {
   Viewport.scrollVertical(parseInt(Options.scroll_amount));
 };
 
 /**
- * 上方向にスクロールします。
+ * Scroll up.
  */
 Command.scrollUp = function() {
   Viewport.scrollVertical(-parseInt(Options.scroll_amount));
 };
 
 /**
- * 下方向に画面半分スクロールします。
+ * Scroll down half display.
  */
 Command.scrollDownHalf = function() {
   Viewport.scrollVertical(Viewport.getWindowSize().height / 2);
 };
 
 /**
- * 上方向に画面半分スクロールします。
+ * Scroll up half display.
  */
 Command.scrollUpHalf = function() {
   Viewport.scrollVertical(-Viewport.getWindowSize().height / 2);
 };
 
 /**
- * 下方向に1画面分スクロールします。
+ * Scroll down display.
  */
 Command.scrollDownPage = function() {
   Viewport.scrollVertical(Viewport.getWindowSize().height);
 };
 
 /**
- * 上方向に1画面分スクロールします。
+ * Scroll up display.
  */
 Command.scrollUpPage = function() {
   Viewport.scrollVertical(-Viewport.getWindowSize().height);
 };
 
 /**
- * ドキュメント先頭部分へスクロールします。
+ * Scroll to document top.
  */
 Command.scrollToTop = function() {
   Viewport.scrollTo(0, 0);
 };
 
 /**
- * ドキュメント最後尾部分へスクロールします。
+ * Scroll to document bottom.
  */
 Command.scrollToBottom = function() {
   Viewport.scrollTo(0, Viewport.getDocumentSize().height);
 };
 
 /**
- * 現在のタブを閉じます
+ * Close the current tab.
  */
 Command.closeTab = function() {
   chrome.runtime.sendMessage({ command: 'closeTab' });
 };
 
 /**
- * ひとつ左側のタブへ移動します。
+ * Move to left tab.
  */
 Command.moveLeftTab = function() {
   chrome.runtime.sendMessage({ command: 'moveLeftTab' });
 };
 
 /**
- * ひとつ右側のタブへ移動します。
+ * Move to right tab.
  */
 Command.moveRightTab = function() {
   chrome.runtime.sendMessage({ command: 'moveRightTab' });
 };
 
 /**
- * コマンドボックスの次の候補を選択します。
+ * Select next candidate in a command box.
  */
 Command.selectNextCandidate = function() {
   Mode.getProcessor(ModeList.COMMAND_MODE).getCommandBox().selectNext();
 };
 
 /**
- * コマンドボックスの前の候補を選択します。
+ * Select previous candidate in a command box.
  */
 Command.selectPrevCandidate = function() {
   Mode.getProcessor(ModeList.COMMAND_MODE).getCommandBox().selectPrev();
 };
 
 /**
- * アクティブ要素からフォーカスを外します。
+ * Focus out from an active element.
  */
 Command.blurForm = function() {
   $(document.activeElement).blur();
 };
 
 /**
- * 履歴の1つ前に戻ります。
+ * Back history.
  */
 Command.backHistory = function() {
   window.history.back();
 };
 
 /**
- * 履歴の1つ先に進みます。
+ * Foward history.
  */
 Command.forwardHistory = function() {
   window.history.forward();
 };
 
 /**
- * 最後に閉じたタブを復活させます。
+ * Restore closed tabs.
  */
 Command.restoreTab = function() {
   chrome.runtime.sendMessage({ command: 'restoreTab' });
 };
 
 /**
- * 画面上の最初の要素にフォーカスします。
+ * Focus first element in window.
  */
 Command.focusFirstInput = function() {
   $(':text:screen:first').focus();
 };
 
 /**
- * 画面上の最後の要素にフォーカスします。
+ * Focus last element in window.
  */
 Command.focusLastInput = function() {
   $(':text:screen:last').focus();
 };
 
 /**
- * 閉じたタブを検索します。
+ * Search a tab from closed tab list.
  */
 Command.searchClosedTabs = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
@@ -164,7 +164,7 @@ Command.searchClosedTabs = function() {
 };
 
 /**
- * ブックマークを検索します。
+ * Search a bookmark from chrome bookmark list.
  */
 Command.searchBookmarks = function(newTab) {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
@@ -190,7 +190,7 @@ Command.searchBookmarks = function(newTab) {
 };
 
 /**
- * 履歴を検索します。
+ * Search a history.
  */
 Command.searchHistories = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
@@ -213,7 +213,7 @@ Command.searchHistories = function() {
 };
 
 /**
- * ビジュアルモードへ移行します。
+ * Enter the visual mode.
  */
 Command.enterVisualMode = function() {
   var targets = $(':visualable:screen');
@@ -227,7 +227,7 @@ Command.enterVisualMode = function() {
 };
 
 /**
- * 現在ビジュアルモードになっている要素の次の要素をビジュアルモードにします。
+ * Make next element content editable.
  */
 Command.forwardContentEditable = function() {
   var current = Viewport.getCurrentContentEditable();
@@ -245,7 +245,7 @@ Command.forwardContentEditable = function() {
 };
 
 /**
- * 現在ビジュアルモードになっている要素の前の要素をビジュアルモードにします。
+ * Make previous element content editable.
  */
 Command.backwardContentEditable = function() {
   var current = Viewport.getCurrentContentEditable();
@@ -263,7 +263,7 @@ Command.backwardContentEditable = function() {
 };
 
 /**
- * ヒントモードへ移行します。ヒント対象はクリック可能要素及びフォーム要素です。
+ * Enter the hint mode. Hint targets are clicable and form elements.
  */
 Command.enterHintMode = function() {
   var targets = [];
@@ -290,8 +290,8 @@ Command.enterHintMode = function() {
 };
 
 /**
- * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
- * リンクをクリックする時に新しいウィンドウで開きます。
+ * Enter the hint mode. Hint targets are clicable and form elements.
+ * Open a new window if click a hint.
  */
 Command.enterNewWindowHintMode = function() {
   var targets = [];
@@ -311,7 +311,7 @@ Command.enterNewWindowHintMode = function() {
 };
 
 /**
- * インサートモードへ移行します。
+ * Enter the insert mode.
  */
 Command.enterInsertMode = function() {
   Mode.changeMode(ModeList.INSERT_MODE);
@@ -322,14 +322,14 @@ Command.enterInsertMode = function() {
 };
 
 /**
- * コマンドモードへ移行します。
+ * Enter the command mode.
  */
 Command.enterCommandMode = function() {
   Mode.changeMode(ModeList.COMMAND_MODE);
 };
 
 /**
- * コマンドモードを抜けてノーマルモードへ戻ります。
+ * Return the normal mode from the command mode.
  */
 Command.cancelCommandMode = function() {
   if (Mode.getCurrentMode() == ModeList.COMMAND_MODE) {
@@ -339,7 +339,7 @@ Command.cancelCommandMode = function() {
 };
 
 /**
- * ヒントモードを抜けてノーマルモードへ戻ります。
+ * Return the normal mode from the hint mode.
  */
 Command.cancelHintMode = function() {
   if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
@@ -348,7 +348,7 @@ Command.cancelHintMode = function() {
 };
 
 /**
- * ビジュアルモードを抜けてノーマルモードへ戻ります。
+ * Return the normal mode from the visual mode.
  */
 Command.cancelVisualMode = function() {
   if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {

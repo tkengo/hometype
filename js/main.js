@@ -3,31 +3,30 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Chromekeyの起動処理
+ * Entry point in Chromekey.
  */
 
 var Options = new ChromekeyOptions();
 
-// Chromekeyのオプションをロードする
+// Load the Chromekey's options.
 Options.init(function() {
-  // ロードが完了したらキー入力待ちのイベントを設定する
+  // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
-    // 入力されたキーでコマンド候補を取得する
+    // Get command candidates from input keys.
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
 
     if (candidate.length == 1 && candidate[0].key == sequence) {
-      // コマンドが確定できればそれを実行
+      // Execute the command if decided.
       candidate[0].command.apply(window, candidate[0].args);
       e.stopPropagation();
       e.preventDefault();
 
-      // 次のコマンド入力を待つためにキーシーケンスも同時にリセット
+      // Reset key sequence to wait next command.
       this.reset();
     }
     else if (candidate.length == 0) {
-      // 候補となるコマンドが1つもなければ
-      // 現在のモードのデフォルトキーイベントに処理を委譲
+      // Delegate key event to current mode processor if command candidates was not found.
       if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
         this.reset();
       }
@@ -36,8 +35,8 @@ Options.init(function() {
 });
 
 $(document).ready(function() {
-  // テキストエリアにフォーカスがあたればインサートモードへ
-  // フォーカスが外れればノーマルモードへ移行する
+  // Enter the insert mode if focus to a textarea.
+  // Otherwise, Return the normal mode.
   var focusTargets = ':text, :password, textarea, [contenteditable]';
   $(document).on('focus', focusTargets, function() {
     if (!$(this).is('[data-chromekey-not-insert-mode]')) {

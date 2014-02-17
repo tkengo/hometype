@@ -3,17 +3,17 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * タブ毎の履歴を管理します。
+ * Manage every tab history
  */
 var ChromekeyHistory = function() {
   this.prefix = 'chromekey-history-';
 };
 
 /**
- * タブの履歴を取得します。
+ * Get tab's histories.
  *
- * @param integer tabId タブID
- * @return array 履歴
+ * @param integer tabId tab ID
+ * @return array histories
  */
 ChromekeyHistory.prototype.get = function(tabId) {
   var history = JSON.parse(localStorage.getItem(this.prefix + tabId));
@@ -26,29 +26,29 @@ ChromekeyHistory.prototype.get = function(tabId) {
 };
 
 /**
- * タブの履歴を取得します。
+ * Set tab's histories.
  *
- * @param integer tabId   タブID
- * @param array   history 履歴
+ * @param integer tabId   tab ID
+ * @param array   history history set in tab have tab id
  */
 ChromekeyHistory.prototype.set = function(tabId, history) {
   localStorage.setItem(this.prefix + tabId, JSON.stringify({ history: history }));
 };
 
 /**
- * タブの履歴を削除します。
+ * Delete the tab's history.
  *
- * @param integer タブID
+ * @param integer tabId tab ID you want to delete.
  */
 ChromekeyHistory.prototype.remove = function(tabId) {
   localStorage.removeItem(this.prefix + tabId);
 };
 
 /**
- * 履歴を追加します。最大20件まで保持。
+ * Add a history. Max count is 20.
  *
- * @param integer tabId タブID
- * @param string  url   履歴URL
+ * @param integer tabId tab ID you want to add.
+ * @param string  url   history url.
  */
 ChromekeyHistory.prototype.push = function(tabId, url) {
   var history = this.get(tabId);
@@ -62,10 +62,10 @@ ChromekeyHistory.prototype.push = function(tabId, url) {
 };
 
 /**
- * 履歴のタイトルを更新します。
+ * Update history title.
  *
- * @param integer tabId タブID
- * @param string  title タイトル
+ * @param integer tabId tab ID you want to update.
+ * @param string  title update title.
  */
 ChromekeyHistory.prototype.update = function(tabId, title) {
   var history = this.get(tabId);
