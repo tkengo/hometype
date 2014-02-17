@@ -12,11 +12,16 @@ var HintElementCollection = function(hintTheme, target) {
 
   this.hintKeys = [];
 
+  tipText = '';
   $.each(this.htmlElements, $.proxy(function(index, element) {
     var key = this.nextHintKey();
-    this.elements.push(new HintElement($(element), index, key, this.hintTheme));
+    var element = new HintElement($(element), index, key, this.hintTheme);
+    this.elements.push(element);
     this.hintKeys.push({ index: index, key: key });
+    tipText += element.rawText;
   }, this));
+
+  $('body').append(tipText);
 };
 
 HintElementCollection.prototype.getElements = function() {

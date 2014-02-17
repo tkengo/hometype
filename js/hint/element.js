@@ -7,14 +7,14 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.srcElement.addClass(this.className + '-area');
 
   this.tipElement = this.createTipElement();
-  this.tipElement.appendTo($('body'));
+  // this.tipElement.appendTo($('body'));
 
-  this.borderElement = $('<div>').addClass('chromekey-hit-a-hint-border').css({
-    width: this.srcElement.innerWidth(),
-    height: this.srcElement.innerHeight(),
-    top: this.srcElement.offset().top,
-    left: this.srcElement.offset().left
-  }).appendTo($('body'));
+  // this.borderElement = $('<div>').addClass('chromekey-hit-a-hint-border').css({
+  //   width: this.srcElement.innerWidth(),
+  //   height: this.srcElement.innerHeight(),
+  //   top: this.srcElement.offset().top,
+  //   left: this.srcElement.offset().left
+  // }).appendTo($('body'));
 };
 
 HintElement.prototype.createTipElement = function() {
@@ -41,10 +41,13 @@ HintElement.prototype.createTipElement = function() {
     'left': left + 'px'
   }).addClass(this.className).addClass('chromekey-hit-a-hint-base');
 
+  var localKey = '';
   for (var i in this.key) {
+    localKey += this.key[i];
     div.append($('<span>').text(this.key[i]));
   }
 
+  this.rawText = '<div style="top:' + top + 'px;left:' + left + 'px;" class="' + this.className + ' chromekey-hit-a-hint-base"><span>' + localKey + '</span></div>';
   return div;
 };
 
@@ -74,5 +77,5 @@ HintElement.prototype.removeHintTip = function(animate) {
       $(this).remove();
     });
   }
-  this.borderElement.remove();
+  // this.borderElement.remove();
 };
