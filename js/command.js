@@ -290,22 +290,6 @@ Command.enterHintMode = function() {
 };
 
 /**
- * ヒントモードへ移行します。ヒント対象は入力可能フォームです。
- */
-Command.enterFocusHintMode = function() {
-  var targets = $('textarea:screen, :file:screen, :text:screen, :password:screen');
-  if (targets.length == 1) {
-    targets[0].focus();
-  }
-  else if (targets.length > 0) {
-    var processor = Mode.enterHintMode('green', targets);
-    processor.onChooseElement(function(element) {
-      element.focus();
-    });
-  }
-};
-
-/**
  * ヒントモードへ移行します。ヒント対象はクリック可能要素です。
  * リンクをクリックする時に新しいウィンドウで開きます。
  */
