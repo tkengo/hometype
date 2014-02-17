@@ -327,6 +327,13 @@ Command.enterNewWindowHintMode = function() {
 };
 
 /**
+ * インサートモードへ移行します。
+ */
+Command.enterInsertMode = function() {
+  Mode.changeMode(ModeList.INSERT_MODE);
+};
+
+/**
  * コマンドモードへ移行します。
  */
 Command.enterCommandMode = function() {
