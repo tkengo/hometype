@@ -18,8 +18,8 @@
   KeyMap.nmap(':',     'enterCommandMode');
   KeyMap.nmap('b',     [ 'searchBookmarks', false ]);
   KeyMap.nmap('B',     [ 'searchBookmarks', true ]);
-  KeyMap.nmap('i',     'enterFocusHintMode');
-  KeyMap.nmap('a',     'enterFocusHintMode');
+  KeyMap.nmap('i',     'enterInsertMode');
+  KeyMap.nmap('a',     'enterInsertMode');
   KeyMap.nmap('I',     'focusFirstInput');
   KeyMap.nmap('A',     'focusLastInput');
   KeyMap.nmap('H',     'backHistory');
