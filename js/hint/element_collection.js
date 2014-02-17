@@ -18,7 +18,7 @@ var HintElementCollection = function(hintTheme, target) {
     var element = new HintElement($(element), index, key, this.hintTheme);
     this.elements.push(element);
     this.hintKeys.push({ index: index, key: key });
-    tipText += element.rawText;
+    tipText += element.getRawTipElement().get(0).outerHTML;
   }, this));
 
   $('body').append(tipText);
