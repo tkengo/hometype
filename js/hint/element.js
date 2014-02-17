@@ -55,10 +55,6 @@ HintElement.prototype.getElement = function() {
   return this.srcElement;
 };
 
-HintElement.prototype.getTipElement = function() {
-  return this.tipElement;
-};
-
 HintElement.prototype.getKey = function() {
   return this.key;
 };
