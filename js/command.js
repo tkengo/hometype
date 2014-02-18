@@ -283,6 +283,10 @@ Command.enterHintMode = function() {
         processor.createHints('yellow', select.getListElements());
         return false;
       }
+      else if (element.is('textarea, :text, :password, [contenteditable]')) {
+        element.focus();
+        return false;
+      }
       else {
         Utility.clickElement(element);
       }
