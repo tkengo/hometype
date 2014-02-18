@@ -3,11 +3,11 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * モードを管理するオブジェクト。
+ * Manage mode.
  */
 
 /**
- * モードの一覧
+ * Mode list.
  */
 var ModeList = {
   NORMAL_MODE: 'normal',
@@ -18,16 +18,13 @@ var ModeList = {
 };
 
 /**
- * コンストラクタ
- *
- * デフォルトでノーマルモードとなります。
+ * Constructor.
  */
 var ChromekeyMode = function() {
   this.mode = ModeList.NORMAL_MODE;
 
   this.callbacks = [];
 
-  // 各モードのプロセッサを生成
   this.modeProcessors = {};
   this.modeProcessors[ModeList.NORMAL_MODE]  = new NoopProcessor();
   this.modeProcessors[ModeList.INSERT_MODE]  = new NoopProcessor();
@@ -37,33 +34,31 @@ var ChromekeyMode = function() {
 };
 
 /**
- * 現在のモードを取得します。
+ * Get the current mode.
  *
- * @return string 現在のモード
+ * @return string The current mode.
  */
 ChromekeyMode.prototype.getCurrentMode = function() {
   return this.mode;
 };
 
 /**
- * 現在のモードを指定されたモードに変更します。
- * モードが変更された場合はonModeChangeで登録された
- * イベントハンドラが実行されます。
+ * Change the current mode to specified mode,
+ * and call event handler registered by onModeChange.
  *
- * @param string modeName 変更後のモード名
- * @return Object 現在のモードのプロセッサ
+ * @param string modeName A mode name
+ * @return Object The current mode processor
  */
 ChromekeyMode.prototype.changeMode = function(modeName) {
-  // モードが変わってなければ何もしない
+  // Nothing happens if mode didn't change.
   if (this.mode == modeName) {
     return;
   }
 
-  // モード変更
   var oldMode = this.mode;
   this.mode = modeName;
 
-  // コールバックが登録されていれば呼び出す
+  // call callbacks
   for (var key in this.callbacks) {
     var callback = this.callbacks[key];
     if (typeof callback === 'function') {
@@ -71,7 +66,7 @@ ChromekeyMode.prototype.changeMode = function(modeName) {
     }
   }
 
-  // プロセッサにモードが変更されたことを通知する
+  // Notify the current mode processor that mode has changed.
   var oldProcessor     = this.getProcessor(oldMode);
   var currentProcessor = this.getProcessor(this.mode);
   if (typeof oldProcessor.notifyLeaveMode == 'function') {
@@ -85,12 +80,12 @@ ChromekeyMode.prototype.changeMode = function(modeName) {
 };
 
 /**
- * ヒントモードに入ります。
- * ヒントモードのテーマと、どの要素に対してヒントを出すかを指定します。
+ * Enter the hint mode.
+ * Specify hint targets and hint theme.
  *
- * @param string theme   ヒントモードのテーマ
- * @param array  targets ヒントを出す要素
- * @return Object ヒントモードのプロセッサ
+ * @param string theme   hint theme.
+ * @param array  targets hint targets.
+ * @return Object hint mode processor.
  */
 ChromekeyMode.prototype.enterHintMode = function(theme, targets) {
   var processor = this.changeMode(ModeList.HINT_MODE);
@@ -99,11 +94,11 @@ ChromekeyMode.prototype.enterHintMode = function(theme, targets) {
 };
 
 /**
- * ビジュアルモードに入ります。
- * どの要素に対してビジュアルモードに入るのかを指定します。
+ * Enter the visual mode.
+ * Specify visual mode target.
  *
- * @param jQueryElement element ヒントを出す要素
- * @return Object ビジュアルモードのプロセッサ
+ * @param jQueryElement element visual mode target.
+ * @return Object visual mode processor.
  */
 ChromekeyMode.prototype.enterVisualMode = function(element) {
   Viewport.setContentEditable(element);
@@ -112,11 +107,11 @@ ChromekeyMode.prototype.enterVisualMode = function(element) {
 };
 
 /**
- * 指定されたモードのプロセッサを取得します。
- * 引数が省略された場合は現在のモードのプロセッサを取得します。
+ * Get the processor specified mode by argument.
+ * Return current mode processor if omit an argument.
  *
- * @param ModeList mode モード。省略時は現在のモード
- * @return モードプロセッサ
+ * @param ModeList mode mode
+ * @return Object processor
  */
 ChromekeyMode.prototype.getProcessor = function(mode) {
   mode = mode || this.mode;
@@ -125,12 +120,12 @@ ChromekeyMode.prototype.getProcessor = function(mode) {
 };
 
 /**
- * モードが変更された時のイベントを登録します。
+ * Register an event which is called when mode was changed.
+ * Callback method has two arguments.
+ * newMode is the mode after changed.
+ * oldMode is the mode before changed.
  *
- * @param function callback イベントハンドラ。
- *                          <引数>
- *                          newMode : 変更後のモード
- *                          oldMode : 変更前のモード。
+ * @param function callback Callback method.
  */
 ChromekeyMode.prototype.onModeChange = function(callback) {
   this.callbacks.push(callback);

@@ -3,18 +3,20 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * コマンドボックス
- * コマンドモードに入った時に画面下側に表示されるボックスを管理します。
+ * Manage command box that is shown bottom of the display when enter the command mode.
  */
 var COMMAND_BOX_HEIGHT = 20;
 var CANDIDATE_AREA_HEIGHT = 180;
 var COMMAND_BOX_MARGIN = 8;
 var CANDIDATE_MAX_COUNT = 20;
 
+/**
+ * Constructor
+ */
 var ChromekeyCommandBox = function() {
   var windowWidth = Viewport.getWindowSize().width;
 
-  // コマンドボックスに必要な要素を作る
+  // Create command box elements.
   var box       = $('<div>')  .addClass('chromekey-command-box')
                               .attr('id', '_chromekey-command-box')
                               .width(windowWidth - COMMAND_BOX_MARGIN * 4)
@@ -27,14 +29,12 @@ var ChromekeyCommandBox = function() {
                               .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(CANDIDATE_AREA_HEIGHT)
 
-  this.list = [];
-
-  // 要素をオブジェクトに保存
+  this.list      = [];
   this.box       = box;
   this.text      = text;
   this.candidate = candidate;
 
-  // bodyに追加
+  // Append created elements to body
   $(document).ready($.proxy(function() {
     this.box.appendTo($('body'));
     this.candidate.appendTo($('body'));
@@ -42,24 +42,23 @@ var ChromekeyCommandBox = function() {
 };
 
 /**
- * コマンドボックスを表示します。
+ * Show command box.
  */
 ChromekeyCommandBox.prototype.show = function() {
-  // コマンドボックスを表示する位置を計算
+  // Calculate position.
   var scrollTop = Viewport.getWindowSize().height + Viewport.getScrollPosition().top;
 
-  // 画面下側にコマンドボックスを配置して表示する
+  // Place command box to calculated position and show it.
   this.box.css({
     top: scrollTop - (COMMAND_BOX_HEIGHT + COMMAND_BOX_MARGIN * 3),
     left: COMMAND_BOX_MARGIN
   }).fadeIn(300);
 
-  // フォーカスをあてる
   this.text.focus();
 };
 
 /**
- * コマンドボックスを非表示にします。
+ * Hide command box.
  */
 ChromekeyCommandBox.prototype.hide = function() {
   this.box.hide();
@@ -69,7 +68,7 @@ ChromekeyCommandBox.prototype.hide = function() {
 };
 
 /**
- * 候補一覧を表示します。
+ * Show candidate list.
  */
 ChromekeyCommandBox.prototype.showCandidate = function() {
   if (!this.candidate.is(':visible')) {
@@ -79,17 +78,16 @@ ChromekeyCommandBox.prototype.showCandidate = function() {
 };
 
 /**
- * 候補一覧の表示位置とサイズを再計算してその位置に移動します。
+ * Recalculate position of candidate list element and move its.
  */
 ChromekeyCommandBox.prototype.recalculateAndSetPosition = function() {
-  // 一旦見えない所に候補一覧を表示する。
-  // 表示状態じゃないと要素の幅と高さが取得できないので。
+  // Show at out of window because size of an element can't be retrieved.
   this.candidate.css({ top: -9999, left: -9999 }).show();
 
-  // スクロール位置の取得
+  // Get the scroll position.
   var scrollTop = Viewport.getWindowSize().height + Viewport.getScrollPosition().top;
 
-  // 候補一覧のサイズと表示位置をセット
+  // Set candidate list size and position.
   var children = this.candidate.children();
   this.candidate.height($(children[0]).outerHeight() * children.length);
   this.candidate.css({
@@ -99,29 +97,26 @@ ChromekeyCommandBox.prototype.recalculateAndSetPosition = function() {
 };
 
 /**
- * 候補一覧をセットします。
+ * Set candidate list.
  *
- * @param array list 候補一覧
+ * @param array list Candidate list.
  */
 ChromekeyCommandBox.prototype.setCandidate = function(list) {
-  // 一度現在の候補を全部削除
   $('div', this.candidate).remove();
 
-  // 候補一覧をオブジェクトに保存
   this.list = list;
 
-  // 候補一覧をセットしていく
   for (var i in list) {
     var text = typeof list[i] == 'string' ? list[i] : list[i].text;
     var div = $('<div>').text(text).attr('data-index', i);
 
-    // 1つ目を選択状態にしておく
+    // Selected first item.
     if (i == 0) {
       div.addClass('selected');
     }
     this.candidate.append(div);
 
-    // 最大候補数を超えたら終了
+    // Break if item count was over max count.
     if (i == CANDIDATE_MAX_COUNT) {
       break;
     }
@@ -133,7 +128,7 @@ ChromekeyCommandBox.prototype.setCandidate = function(list) {
 };
 
 /**
- * 次の候補を選択します。
+ * Select next candidate.
  */
 ChromekeyCommandBox.prototype.selectNext = function() {
   var div = $('div.selected', this.candidate);
@@ -148,7 +143,7 @@ ChromekeyCommandBox.prototype.selectNext = function() {
 };
 
 /**
- * 前の候補を選択します。
+ * Select previous candidate.
  */
 ChromekeyCommandBox.prototype.selectPrev = function() {
   var div = $('div.selected', this.candidate);
@@ -163,7 +158,7 @@ ChromekeyCommandBox.prototype.selectPrev = function() {
 };
 
 /**
- * 選択されている候補を取得します。
+ * Get a selected candidate.
  */
 ChromekeyCommandBox.prototype.getSelected = function() {
   var div = $('div.selected', this.candidate);
@@ -171,7 +166,7 @@ ChromekeyCommandBox.prototype.getSelected = function() {
 };
 
 /**
- * コマンドボックスのテキスト内容を取得します。
+ * Get a text in the command box.
  */
 ChromekeyCommandBox.prototype.getText = function() {
   return this.text.val().replace(':', '');

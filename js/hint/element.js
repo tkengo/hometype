@@ -3,16 +3,16 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * ヒントエレメント
+ * Hint element.
  */
 
 /**
- * コンストラクタ
+ * Constructor
  *
- * @param element srcElement ヒントエレメントを付けるソースとなる要素
- * @param integer index      ヒントエレメントのインデックス
- * @param array   key        ヒントに設定するキー
- * @param string  hintTheme  ヒントエレメントのテーマ
+ * @param element srcElement A source element of this hint element.
+ * @param integer index      Hint element index.
+ * @param array   key        Hint key.
+ * @param string  hintTheme  Hint theme.
  */
 var HintElement = function(srcElement, index, key, hintTheme) {
   this.className = 'chromekey-hit-a-hint-' + hintTheme;
@@ -26,25 +26,25 @@ var HintElement = function(srcElement, index, key, hintTheme) {
 };
 
 /**
- * ヒントチップエレメントを作る。
- * ソース要素の左側にチップエレメントが表示されるように位置を計算。
+ * Create a hint tip element.
+ * Calculate a hint tip position to show in left side of a source element.
  */
 HintElement.prototype.createTipElement = function() {
   var top = 0, left = 0;
 
   if (this.srcElement.tag() == 'area') {
-    // クリッカブルマップの場合はcoords属性から位置を取得
+    // Get a position from coords attribute if an element is a clickable map.
     var coords = this.srcElement.attr('coords').split(',');
     top = coords[1];
     left = coords[0];
   }
   else {
-    // 通常の要素であればオフセット位置を取得
+    // Usually get a position from an element offset.
     top  = this.srcElement.offset().top - 10;
     left = this.srcElement.offset().left - 10;
   }
 
-  // 画面からはみ出していれば補正
+  // Correct an element position if it is out of display.
   if (top < Viewport.getScrollPosition().top) {
     top = Viewport.getScrollPosition().top;
   }
@@ -52,62 +52,61 @@ HintElement.prototype.createTipElement = function() {
     left = 0;
   }
 
-  // 計算した位置にヒントチップエレメントを作る
+  // Create a hint tip element in a calclated position.
   var div = $('<div>').css({
     'top': top + 'px',
     'left': left + 'px'
   }).addClass(this.className + ' chromekey-hit-a-hint-base');
 
-  // ヒントチップのキーを埋め込む
+  // Set hint keys to a hint tip element.
   for (var i in this.key) {
     div.append($('<span>').text(this.key[i]));
   }
 
-  // 一意になるIDを設定して要素を返す
+  // Set unique ID attribute to a hint tip element and return it.
   this.elementId = 'chromekey-hit-a-hint-element-' + div.text();
   div.attr({ 'id': this.elementId })
   return div;
 };
 
 /**
- * ソース要素を取得する。
+ * Get the source element.
  */
 HintElement.prototype.getElement = function() {
   return this.srcElement;
 };
 
 /**
- * ヒントチップエレメントを取得する。
+ * Get the hint tip element.
  */
 HintElement.prototype.getTipElement = function() {
   return $('#' + this.elementId);
 };
 
 /**
- * ヒントチップエレメントを取得する。
- * エレメントがまだ描画されていない場合はこっちを。
+ * Get the hint tip element.
+ * Use this if it is not still rendered to DOM.
  */
 HintElement.prototype.getRawTipElement = function() {
   return this.rawTipElement;
 };
 
 /**
- * このヒントチップに設定されたキーを取得する。
+ * Get the hint keys.
  */
 HintElement.prototype.getKey = function() {
   return this.key;
 };
 
 /**
- * このヒントチップに設定された1つ目のキーを押したことにして
- * 文字色を赤くして強調する。
+ * Pushed first hint key.
  */
 HintElement.prototype.setPushed = function() {
   $(this.getTipElement().children()[0]).addClass('chromekey-hit-a-hint-pushed');
 };
 
 /**
- * ヒントチップを削除する。
+ * Remove hint tip element.
  */
 HintElement.prototype.removeHintTip = function(animate) {
   this.getElement().removeClass(this.className + '-area');

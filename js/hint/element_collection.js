@@ -1,4 +1,3 @@
-// ヒントモードの時のキー
 var HintKeys = 'jfhkgyuiopqwertnmzxcvblasd';
 
 var HintElementCollection = function(hintTheme, target) {
@@ -37,7 +36,7 @@ HintElementCollection.prototype.getMatchedElements = function(key) {
       results.push(this.elements[hintKey.index]);
     }
   }
-  
+
   return results;
 };
 

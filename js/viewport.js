@@ -3,15 +3,15 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * 画面オブジェクト
+ * Screen object.
  */
 var ChromekeyScreen = function() {
 };
 
 /**
- * 現在のスクロール位置を取得します。
+ * Get the current scroll position.
  *
- * @return Object topとleftのキーを持つハッシュ
+ * @return Object A hash that has top and left key.
  */
 ChromekeyScreen.prototype.getScrollPosition = function() {
   return {
@@ -21,9 +21,9 @@ ChromekeyScreen.prototype.getScrollPosition = function() {
 };
 
 /**
- * ウィンドウのサイズを取得します。
+ * Get the current window size.
  *
- * @return Object widthとheightのキーを持つハッシュ
+ * @return Object A hash that has width and height key.
  */
 ChromekeyScreen.prototype.getWindowSize = function() {
   return {
@@ -33,9 +33,9 @@ ChromekeyScreen.prototype.getWindowSize = function() {
 };
 
 /**
- * ドキュメントのサイズを取得します。
+ * Get the current document size.
  *
- * @return Object widthとheightのキーを持つハッシュ
+ * @return Object A hash that has width and height key.
  */
 ChromekeyScreen.prototype.getDocumentSize = function() {
   return {
@@ -45,10 +45,10 @@ ChromekeyScreen.prototype.getDocumentSize = function() {
 };
 
 /**
- * 指定位置にスクロールします。
+ * Scroll to specified position.
  *
- * @param integer x 縦位置
- * @param integer y 横位置
+ * @param integer x horizontal position.
+ * @param integer y vertical position.
  */
 ChromekeyScreen.prototype.scrollTo = function(x, y) {
   document.body.scrollTop = y;
@@ -56,12 +56,9 @@ ChromekeyScreen.prototype.scrollTo = function(x, y) {
 };
 
 /**
- * 指定した量だけ縦方向にスクロールします。
- * プラスの値を指定すると下方向へ
- * マイナスの量を指定すると上方向へ
- * スクロールします。
+ * Scroll to specified position for vertical direction.
  *
- * @param integer value スクロール量
+ * @param integer value Scroll amount.
  */
 ChromekeyScreen.prototype.scrollVertical = function(value) {
   var pos = this.getScrollPosition();
@@ -69,12 +66,9 @@ ChromekeyScreen.prototype.scrollVertical = function(value) {
 };
 
 /**
- * 指定した量だけ横方向にスクロールします。
- * プラスの値を指定すると右方向へ
- * マイナスの量を指定すると左方向へ
- * スクロールします。
+ * Scroll to specified position for horizontal direction.
  *
- * @param integer value スクロール量
+ * @param integer value Scroll amount.
  */
 ChromekeyScreen.prototype.scrollHorizontal = function(value) {
   var pos = this.getScrollPosition();
@@ -125,7 +119,7 @@ ChromekeyScreen.prototype.getNextContentEditableElement = function(current) {
       current = current.parent();
     }
   }
-  
+
   return next;
 };
 
@@ -146,16 +140,16 @@ ChromekeyScreen.prototype.getPrevContentEditableElement = function(current) {
       current = current.parent();
     }
   }
-  
+
   return prev;
 };
 
 /**
- * DOMにリンク要素を追加します。
+ * Add link element to DOM.
  *
- * @param string  url    リンク先URL
- * @param element parant リンクの親となる要素。
- *                       省略された場合はbody以下にリンクを追加します。
+ * @param string  url    link url.
+ * @param element parant An element that is parent for a link element.
+ *                       Add link element into body element if omit an argument.
  */
 ChromekeyScreen.prototype.createLink = function(url, parent) {
   var parent = $(parent || 'body');
