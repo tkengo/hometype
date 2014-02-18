@@ -278,7 +278,7 @@ Command.enterHintMode = function() {
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
-      if (element.tag() == 'select') {
+      if (element.is('select')) {
         var select = new ChromekeySelectBox(element);
         processor.createHints('yellow', select.getListElements());
         return false;
