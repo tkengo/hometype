@@ -267,6 +267,8 @@ Command.backwardContentEditable = function() {
  * Enter the hint mode. Hint targets are clicable and form elements.
  */
 Command.enterHintMode = function() {
+  // Collect hint source targets.
+  // Element already pushed to target is not pushed.
   var targets = [];
   $(':clickable:screen, :submittable:screen, textarea:screen, :file:screen, :text:screen, :password:screen').each(function() {
     var currentTarget = $(this);
@@ -276,18 +278,23 @@ Command.enterHintMode = function() {
   });
 
   if (targets.length > 0) {
+    // If there are at least one target elements, enter the hint mode with yellow theme,
+    // and register choose element event listener.
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
       if (element.is('select')) {
+        // If choosen element is select tag, open the select box.
         var select = new ChromekeySelectBox(element);
         processor.createHints('yellow', select.getListElements());
         return false;
       }
       else if (element.is('textarea, :text, :password, [contenteditable]')) {
+        // If choosen element is form tag, focus to it.
         element.focus();
         return false;
       }
       else {
+        // Otherwise, emulate click event for element.
         Utility.clickElement(element);
       }
     });
