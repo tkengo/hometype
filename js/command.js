@@ -327,10 +327,6 @@ Command.enterNewWindowHintMode = function() {
  */
 Command.enterInsertMode = function() {
   Mode.changeMode(ModeList.INSERT_MODE);
-  var targets = $('textarea:screen, :file:screen, :text:screen, :password:screen');
-  if (targets.length == 1) {
-    targets[0].focus();
-  }
 };
 
 /**
