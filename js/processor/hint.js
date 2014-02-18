@@ -41,11 +41,9 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
     // マッチする要素が確定できればコールバックを呼び出す
-    if (this.callback) {
+    if (this.callback && this.callback(elements[0].getElement()) === false) {
       // コールバック関数でfalseが返されたらノーマルモードには戻らない
-      if (this.callback(elements[0].getElement()) === false) {
-        return true;
-      }
+      return true;
     }
 
     Mode.changeMode(ModeList.NORMAL_MODE);
