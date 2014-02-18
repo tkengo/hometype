@@ -101,8 +101,9 @@ Command.selectPrevCandidate = function() {
 /**
  * Focus out from an active element.
  */
-Command.blurForm = function() {
+Command.cancelInsertMode = function() {
   $(document.activeElement).blur();
+  Mode.changeMode(ModeList.NORMAL_MODE);
 };
 
 /**

@@ -32,8 +32,8 @@
   KeyMap.cmap('<C-n>', 'selectNextCandidate');
   KeyMap.cmap('<C-p>', 'selectPrevCandidate');
 
-  KeyMap.imap('Esc',   'blurForm');
-  KeyMap.imap('<C-c>', 'blurForm');
+  KeyMap.imap('Esc',   'cancelInsertMode');
+  KeyMap.imap('<C-c>', 'cancelInsertMode');
   KeyMap.imap('<C-p>', 'moveLeftTab');
   KeyMap.imap('<C-n>', 'moveRightTab');
 
