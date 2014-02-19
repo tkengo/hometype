@@ -3,8 +3,7 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * keydownイベントのkeyIdentifierに対応するキーIDとキー名の
- * テーブルを定義します。
+ * Define key ID and key name mapping for keyIdentifier
  */
 var KeyIdentifiers = {
   toChar: function(keyIdentifier) {

@@ -3,20 +3,20 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * keydownイベントのeventオブジェクトのラッパー。
+ * Keydown event object wrapper.
  */
 
 /**
- * コンストラクタ
+ * Constructor
  */
 var KeyEvent = function(event) {
   this.event = event;
 };
 
 /**
- * 押下されたキーがメタキー(Shift / Ctrl / Alt / Command)単体かどうかを調べます。
+ * Check if pushed key is meta key (Shift / Ctrl / Alt / Command).
  *
- * @return boolena メタキー単体であればtrue
+ * @return boolean true if meta key is pushed.
  */
 KeyEvent.prototype.isMetaKey = function() {
   var id = this.event.keyIdentifier;
@@ -24,22 +24,21 @@ KeyEvent.prototype.isMetaKey = function() {
 };
 
 /**
- * ラップしているオリジナルのイベントを取得します。
+ * Get the original event.
  *
- * @return KeyboardEvent オリジナルイベント
+ * @return KeyboardEvent Original event.
  */
 KeyEvent.prototype.getOriginal = function() {
   return this.event;
 };
 
 /**
- * 押下されたキーをキーマッピング用の文字列に変換して返します。
- *   * Ctrlキーと同時にaキーを押した場合は<C-a>
- *   * Shiftキーと同時にaキーを押した場合はA
- *   * Commandキーと同時にaキーを押した場合は<M-a>
- * などです。
+ * Get a string that is translated for key mapping. For example:
+ *   If 'a' was pushed with Ctrl, return '<C-a>'
+ *   If 'a' was pushed with Shift, return 'A'
+ *   If 'a' was pushed with Command, return '<M-a>'
  *
- * @return string キーマッピング用の文字列
+ * @return string A key mapping string.
  */
 KeyEvent.prototype.getKeyChar = function() {
   var key = KeyIdentifiers.toChar(this.event.keyIdentifier);
@@ -63,7 +62,7 @@ KeyEvent.prototype.getKeyChar = function() {
 };
 
 /**
- * 押下されたキー文字を取得します。
+ * Get a pushed key.
  *
  * @return string キー文字
  */
@@ -72,7 +71,7 @@ KeyEvent.prototype.getChar = function() {
 };
 
 /**
- * キー押下のデフォルトの処理をキャンセルします。
+ * Cancel default process when key was pushed.
  */
 KeyEvent.prototype.stop = function() {
   this.event.preventDefault();

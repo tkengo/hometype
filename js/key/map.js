@@ -3,17 +3,18 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * キーとコマンドのマッピングを管理します。
+ * Manage key and command mapping.
  */
 
 /**
- * キーマッピング管理オブジェクト。
- * 各モード毎にマッピング情報を保持します。
+ * Key mapping managing object.
+ * Mapping information is saved to this object.
  *
- * normal  : ノーマルモード
- * hint    : ヒントモード
- * visual  : ビジュアルモード
- * command : コマンドモード
+ * Chromekey has below modes.
+ *   normal mode
+ *   hint mode
+ *   visual mode
+ *   command mode
  */
 var KeyMap = {
 };
@@ -26,61 +27,61 @@ var _map = {
 }
 
 /**
- * 指定したモードのキーに対してコマンドを割り当てます。
+ * Assign key to command in specified mode.
  *
- * @param string mode    キーをマッピングするモード
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
+ * @param string mode    mode that assign key
+ * @param string key     assigned key
+ * @param string command command that assigned in key
  */
 KeyMap.assign = function(mode, key, command) {
   _map[mode][key] = command;
 };
 
 /**
- * ノーマルモードのキーに対してコマンドを割り当てます。
+ * Assign key to command in normal mode.
  *
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
+ * @param string key     assigned key
+ * @param string command command that assigned in key
  */
 KeyMap.nmap = function(key, command) {
   KeyMap.assign(ModeList.NORMAL_MODE, key, command);
 };
 
 /**
- * インサートモードのキーに対してコマンドを割り当てます。
+ * Assign key to command in insert mode.
  *
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
+ * @param string key     assigned key
+ * @param string command command that assigned in key
  */
 KeyMap.imap = function(key, command) {
   KeyMap.assign(ModeList.INSERT_MODE, key, command);
 };
 
 /**
- * ヒントモードのキーに対してコマンドを割り当てます。
+ * Assign key to command in hint mode.
  *
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
+ * @param string key     assigned key
+ * @param string command command that assigned in key
  */
 KeyMap.fmap = function(key, command) {
   KeyMap.assign(ModeList.HINT_MODE, key, command);
 };
 
 /**
- * ビジュアルモードのキーに対してコマンドを割り当てます。
+ * Assign key to command in visual mode.
  *
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
+ * @param string key     assigned key
+ * @param string command command that assigned in key
  */
 KeyMap.vmap = function(key, command) {
   KeyMap.assign(ModeList.VISUAL_MODE, key, command);
 };
 
 /**
- * コマンドモードのキーに対してコマンドを割り当てます。
+ * Assign key to command in command mode.
  *
- * @param string key     マッピングするキー
- * @param string command キーに対して割り当てるコマンド
+ * @param string key     assigned key
+ * @param string command command that assigned in key
  */
 KeyMap.cmap = function(key, command) {
   KeyMap.assign(ModeList.COMMAND_MODE, key, command);
