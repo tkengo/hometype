@@ -270,7 +270,7 @@ Command.enterHintMode = function() {
   // Collect hint source targets.
   // Element already pushed to target is not pushed.
   var targets = [];
-  $(':clickable:screen, :submittable:screen, textarea:screen, :file:screen, :text:screen, :password:screen').each(function() {
+  $(':clickable:screen, :submittable:screen, textarea:screen, :file:screen, :text:screen, :password:screen, :button:screen').each(function() {
     var currentTarget = $(this);
     if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
       targets.push(currentTarget);
