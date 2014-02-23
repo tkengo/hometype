@@ -29,9 +29,9 @@ var _map = {
 /**
  * Assign key to command in specified mode.
  *
- * @param string mode    mode that assign key
- * @param string key     assigned key
- * @param string command command that assigned in key
+ * @param string mode    The mode that assign key
+ * @param string key     Assigned key
+ * @param string command Command that assigned in key
  */
 KeyMap.assign = function(mode, key, command) {
   _map[mode][key] = command;
@@ -40,8 +40,8 @@ KeyMap.assign = function(mode, key, command) {
 /**
  * Assign key to command in normal mode.
  *
- * @param string key     assigned key
- * @param string command command that assigned in key
+ * @param string key     Assigned key
+ * @param string command Command that assigned in key
  */
 KeyMap.nmap = function(key, command) {
   KeyMap.assign(ModeList.NORMAL_MODE, key, command);
@@ -50,8 +50,8 @@ KeyMap.nmap = function(key, command) {
 /**
  * Assign key to command in insert mode.
  *
- * @param string key     assigned key
- * @param string command command that assigned in key
+ * @param string key     Assigned key
+ * @param string command Command that assigned in key
  */
 KeyMap.imap = function(key, command) {
   KeyMap.assign(ModeList.INSERT_MODE, key, command);
@@ -60,8 +60,8 @@ KeyMap.imap = function(key, command) {
 /**
  * Assign key to command in hint mode.
  *
- * @param string key     assigned key
- * @param string command command that assigned in key
+ * @param string key     Assigned key
+ * @param string command Command that assigned in key
  */
 KeyMap.fmap = function(key, command) {
   KeyMap.assign(ModeList.HINT_MODE, key, command);
@@ -70,8 +70,8 @@ KeyMap.fmap = function(key, command) {
 /**
  * Assign key to command in visual mode.
  *
- * @param string key     assigned key
- * @param string command command that assigned in key
+ * @param string key     Assigned key
+ * @param string command Command that assigned in key
  */
 KeyMap.vmap = function(key, command) {
   KeyMap.assign(ModeList.VISUAL_MODE, key, command);
@@ -80,20 +80,19 @@ KeyMap.vmap = function(key, command) {
 /**
  * Assign key to command in command mode.
  *
- * @param string key     assigned key
- * @param string command command that assigned in key
+ * @param string key     Assigned key
+ * @param string command Command that assigned in key
  */
 KeyMap.cmap = function(key, command) {
   KeyMap.assign(ModeList.COMMAND_MODE, key, command);
 };
 
 /**
- * 指定したモードの指定したキーに割り当てられたコマンドの
- * 候補を配列で返します。
+ * Get an array of command candidate that is assigned specified key.
  *
- * @param string mode コマンドを取得するモード
- * @param string key  マッピングされたキー
- * @return array コマンド名とマッピングキーを持つ配列
+ * @param string mode The mode.
+ * @param string key  Assigned key.
+ * @return array An array that has command name and assigned key.
  */
 KeyMap.candidate = function(mode, key) {
   var result = [];
@@ -124,12 +123,11 @@ KeyMap.candidate = function(mode, key) {
 };
 
 /**
- * 指定したモードの指定したキーに割り当てられたコマンドを取得します。
+ * Get the command that is assigned specified key in specified mode.
  *
- * @param string mode コマンドを取得するモード
- * @param string key  マッピングされたキー
- * @return function キーにマッピングされたコマンド。
- *                  マッピングされたコマンドがない場合はundefined。
+ * @param string mode The mode.
+ * @param string key  Assigned key.
+ * @return function Command name.
  */
 KeyMap.command = function(mode, key) {
   return Command[_map[mode][key]];

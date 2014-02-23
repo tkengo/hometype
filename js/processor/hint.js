@@ -3,7 +3,7 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * ヒントモードのプロセッサ
+ * Hint mode processor.
  */
 var HintModeProcessor = function() {
   this.newTab = false;
@@ -12,7 +12,7 @@ var HintModeProcessor = function() {
 };
 
 /**
- * ヒントモードを抜ける時に呼ばれるコールバック関数です。
+ * Callback method that invoke when leave the hint mode.
  */
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.callback = null;
@@ -20,33 +20,32 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
 };
 
 /**
- * キー処理
+ * Key processing.
  *
- * @param string        stack      キースタック。押下されたキー文字列
- * @param string        currentKey 今回押下されたキー文字
- * @param KeyboradEvent e          イベントオブジェクト
+ * @param string        stack      key stack.
+ * @param string        currentKey pushed key.
+ * @param KeyboradEvent e          event.
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
-  // デフォルト動作をキャンセル。キーを押していないことにする
+  // Cancel default.
   e.stopPropagation();
   e.preventDefault();
 
-  // ヒントキーにマッチする要素一覧を取得する
+  // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
 
   if (elements.length == 0) {
-    // マッチする要素がなければヒントモードを抜ける
+    // Return normal mode if there is no element matched hint key.
     Mode.changeMode(ModeList.NORMAL_MODE);
     return true;
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
-    // マッチする要素が確定できればコールバックを呼び出す
-    if (this.callback && this.callback(elements[0].getElement()) === false) {
-      // コールバック関数でfalseが返されたらノーマルモードには戻らない
-      return true;
+    // Invoke a callback method if an element is confirmed.
+    if (this.callback && this.callback(elements[0].getElement()) !== false) {
+      // Return normal mode if only callback didn't return false.
+      Mode.changeMode(ModeList.NORMAL_MODE);
     }
 
-    Mode.changeMode(ModeList.NORMAL_MODE);
     return true;
   }
   else {

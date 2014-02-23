@@ -3,33 +3,32 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * コマンドモードでの処理を担当します。
- * コマンドモードに入ったらコマンドボックスが表示されます。
- * プロセッサに対して以下のイベントを設定できます。
+ * Command mode processor.
+ * Show command box under the window if enter the command mode.
  *
- * イベント
- *   - onUpdateBoxText コマンドボックスの内容が更新された場合に呼び出されます。
- *                     配列を返した場合、それが候補一覧としてコマンドボックス上に表示されます。
- *   - onEnter         コマンドボックス内でエンターキーが押下された場合に呼び出されます
- * これらのイベントはコマンドモードを抜けたらクリアされます。
+ * This processor has below events, and set event listener.
+ *   - onUpdateBoxText Fire up when command box contents is updated.
+ *                     If this event listener returns an array, it is shown on a command box
+ *                     as candidate list.
+ *   - onEnter         Fire up when the enter key was pushed in a command box.
+ * These event listeners is reset when leave the command mode.
  */
 var CommandModeProcessor = function() {
   this.updateBoxTextCallback = null;
   this.enterCallback         = null;
 
-  // コマンドボックス
   this.commandBox = new ChromekeyCommandBox();
 };
 
 /**
- * コマンドモードに入った時に呼ばれるコールバック関数です。
+ * Callback method that invoke when enter the command mode.
  */
 CommandModeProcessor.prototype.notifyEnterMode = function() {
   this.commandBox.show();
 };
 
 /**
- * コマンドモードを抜ける時に呼ばれるコールバック関数です。
+ * Callback method that invoke when leave the command mode.
  */
 CommandModeProcessor.prototype.notifyLeaveMode = function() {
   this.updateBoxTextCallback = null;
@@ -39,20 +38,18 @@ CommandModeProcessor.prototype.notifyLeaveMode = function() {
 };
 
 /**
- * キー処理
+ * Key processing.
  *
- * @param string        stack      キースタック。押下されたキー文字列
- * @param string        currentKey 今回押下されたキー文字
- * @param KeyboradEvent e          イベントオブジェクト
+ * @param string        stack      key stack.
+ * @param string        currentKey pushed key.
+ * @param KeyboradEvent e          event.
  */
 CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   if (currentKey == 'Enter') {
-    // エンターキー押下の処理を実行。定義されていなければデフォルト動作
     var result = this.enterCallback ?
                  this.enterCallback(this.commandBox.getText(), this.commandBox.getSelected()) :
                  this.enter();
 
-    // falseが返ってきたらコマンドモードは抜けないでおく
     if (result !== false) {
       this.commandBox.hide();
       Mode.changeMode(ModeList.NORMAL_MODE);
@@ -61,10 +58,9 @@ CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     return result;
   }
 
-  // コマンドボックスの更新イベントが設定されていれば呼び出す
   if (this.updateBoxTextCallback) {
-    // コマンドボックス内にキーイベントが浸透しないとこのキー押下のキーが
-    // 適用されていないので、少し待ってからイベントを呼び出す
+    // Wait a moment, then invoke a callback, because this key event is invalid
+    // if processor don't spread it over command box.
     setTimeout($.proxy(function() {
       this.updateCandidate();
     }, this), 10);
@@ -74,12 +70,13 @@ CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 };
 
 /**
- * コールバック関数を実行して候補一覧を更新します。
+ * Update candidate.
  */
 CommandModeProcessor.prototype.updateCandidate = function() {
   var result = this.updateBoxTextCallback(this.commandBox.getText());
 
-  // 結果が配列であればそれをセットして候補として表示する
+  // If a result of callback method is array, set it as candidate,
+  // and then show candidates list.
   if (result instanceof Array) {
     this.commandBox.setCandidate(result);
     this.commandBox.showCandidate();
@@ -87,32 +84,32 @@ CommandModeProcessor.prototype.updateCandidate = function() {
 };
 
 /**
- * コマンドボックスが更新された時に呼ばれるコールバック関数を指定します。
+ * Set a callback method that invoke when command box contents is updated.
  *
- * @param function callback    コールバック関数
- * @param boolean  immediately trueを指定すればコールバック関数を登録と同時に1度実行します
+ * @param function callback    Callback method.
+ * @param boolean  immediately Execute once registered callback method if true.
  */
 CommandModeProcessor.prototype.onUpdateBoxText = function(callback, immediately) {
   this.updateBoxTextCallback = callback;
-  
+
   if (immediately) {
     this.updateCandidate();
   }
 };
 
 /**
- * コマンドボックス内でエンターキーが押下された時に呼ばれるコールバック関数を指定します。
+ * Set a callback method that invoke when enter key was pushed in command box.
  *
- * @param function callback コールバック関数
+ * @param function callback Callback method.
  */
 CommandModeProcessor.prototype.onEnter = function(callback) {
   this.enterCallback = callback;
 };
 
 /**
- * コマンドボックスを取得します。
+ * Get the command box.
  *
- * @return ChromekeyCommandBox コマンドボックス
+ * @return ChromekeyCommandBox The command box object.
  */
 CommandModeProcessor.prototype.getCommandBox = function() {
   return this.commandBox;

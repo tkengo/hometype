@@ -1,20 +1,20 @@
 /**
- * キーボードから押下されたキーを取り扱います。
+ * Manage key.
  *
- * KeySequenceクラスのonProcessにコールバック関数を登録すると
- * キーボードのキーが押下される度に登録されたコールバック関数が呼び出され
- * 以下の形式でパラメータが渡されます。
+ * Register callback method to onProcess in KeySequence class, and
+ * it is called every keyboard push with below parameters.
  *
  * function callback(e, sequence, stack, key);
- *   e        : キーダウンイベント
- *   sequence : 特定の時間内に連続して押下されたキーを連結したもの。
- *              1文字目に a を押下した場合は 'a' が渡される。
- *              2文字目に特定時間内に b を押下した場合は 'ab' が渡される。
- *              3文字目に特定時間を過ぎた後に c を押下した場合はリセットされて 'c' が渡される。
- *   stack    : 押下されたキーを連結したもの。
- *              sequenceと違って特定時間内でリセットされない。
- *              リセットする場合は明示的にresetメソッドを呼び出す。
- *   key      : 今回押下されたキー
+ *   e        : Keydown event.
+ *   sequence : A string that concat pushed key from keyboard in specified time.
+ *              At first, if 'a' was pushed, this argument is 'a'.
+ *              Second, if 'b' was pushed in specified time, this argument is 'ab'.
+ *              Third, if 'c' was pushed out of specified time, this argument is 'c'.
+ *   stack    : A string that concat pushed key from keyboard.
+ *              Difference of stack between sequence is that this argument is not reset
+ *              in specified time. If you want to reset this argument, you can call
+ *              'reset' method.
+ *   key      : A pushed key character.
  */
 var KeySequence = function() {
   this.keySequece = '';
@@ -29,30 +29,33 @@ var KeySequence = function() {
 };
 
 /**
- * キーボード押下時のコールバック関数を登録します。
+ * Register callback method called when key was pushed.
  *
- * @param function callback コールバック関数
+ * @param function callback Callback method.
  */
 KeySequence.prototype.onProcess = function(callback) {
   this.callbacks.push(callback);
 };
 
+/**
+ * Process key pushing.
+ */
 KeySequence.prototype.processor = function(e) {
-  // メタキー単体でのキー押下は処理しない
+  // Return if pushed key is only meta key.
   var id = e.keyIdentifier;
   if (id == 'Control' || id == 'Shift' || id == 'Alt' || id == 'Meta') {
     return false;
   }
 
-  // キー入力待ちのタイマーをリセット
+  // Reset a key input waiting timer.
   this.resetTimerForResetKeySequence();
 
-  // 押下されたキーをキーシーケンスに追加
+  // Add pushed key to key sequence.
   var key = this.getKeyChar(e);
   this.keySequece += key;
   this.keyStack   += key;
 
-  // キー入力コールバックを呼び出す
+  // Invoke callback method.
   for (var i in this.callbacks) {
     var callback = this.callbacks[i];
     if (typeof callback == 'function') {
@@ -60,18 +63,16 @@ KeySequence.prototype.processor = function(e) {
     }
   }
 
-  // 次のキー入力を待つためにタイマーを仕込む
   this.setTimerForResetKeySequence(Options.command_interval);
 };
 
 /**
- * 押下されたキーをキーマッピング用の文字列に変換して返します。
- *   * Ctrlキーと同時にaキーを押した場合は<C-a>
- *   * Shiftキーと同時にaキーを押した場合はA
- *   * Commandキーと同時にaキーを押した場合は<M-a>
- * などです。
+ * Get a string that is translated for key mapping. For example:
+ *   If 'a' was pushed with Ctrl, return '<C-a>'
+ *   If 'a' was pushed with Shift, return 'A'
+ *   If 'a' was pushed with Command, return '<M-a>'
  *
- * @return string キーマッピング用の文字列
+ * @return string A key mapping string.
  */
 KeySequence.prototype.getKeyChar = function(e) {
   var key = KeyIdentifiers.toChar(e.keyIdentifier);
@@ -95,7 +96,7 @@ KeySequence.prototype.getKeyChar = function(e) {
 };
 
 /**
- * キーシーケンスをリセットします。
+ * Reset key sequence.
  */
 KeySequence.prototype.reset = function() {
   this.keySequece = '';
@@ -104,12 +105,12 @@ KeySequence.prototype.reset = function() {
 };
 
 /**
- * 次のキー入力を待つためのタイマーを仕込みます。
+ * Set a timer to wait a next key.
  *
- * 引数のintervalに指定された秒数だけ待つ間に次のキー入力がなければ
- * 登録されたキー入力が確定されたことを伝えるためにコールバック関数を呼び出します。
+ * Invoke callback method to confirm key push if there is no key push between
+ * argument 'interval' time.
  *
- * @param integer interval 次のキー入力を待つまでの時間。ミリセカンド
+ * @param integer interval Interval time.
  */
 KeySequence.prototype.setTimerForResetKeySequence = function(interval) {
   this.resetkeySequeceTimerId = setTimeout($.proxy(function() {
@@ -119,10 +120,8 @@ KeySequence.prototype.setTimerForResetKeySequence = function(interval) {
 };
 
 /**
- * キー入力を待つタイマーを解除します。
+ * Reset a timer.
  */
 KeySequence.prototype.resetTimerForResetKeySequence = function() {
-  // これによってsetTimerForResetKeySequenceでセットしたタイマーが
-  // 実行されなくなる
   clearTimeout(this.resetkeySequeceTimerId);
 };
