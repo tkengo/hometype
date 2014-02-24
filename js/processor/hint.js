@@ -49,8 +49,8 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 
     // If confirmed element is select tag, open the select box.
     if (element.is('select')) {
-      this.select = new ChromekeySelectBox(element);
-      this.createHints('yellow', this.select.getListElements());
+      this.selectBox = new ChromekeySelectBox(element);
+      this.createHints('yellow', this.selectBox.getListElements());
       return true;
     }
 
