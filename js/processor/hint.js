@@ -6,7 +6,6 @@
  * Hint mode processor.
  */
 var HintModeProcessor = function() {
-  this.newTab = false;
   this.callback     = null;
   this.hintElements = null;
   this.selectBox    = null;
