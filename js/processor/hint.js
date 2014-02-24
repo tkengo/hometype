@@ -9,6 +9,7 @@ var HintModeProcessor = function() {
   this.newTab = false;
   this.callback     = null;
   this.hintElements = null;
+  this.selectBox    = null;
 };
 
 /**
@@ -17,6 +18,10 @@ var HintModeProcessor = function() {
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.callback = null;
   this.hintElements.removeAllHint();
+
+  if (this.selectBox) {
+    this.selectBox.remove();
+  }
 };
 
 /**
@@ -40,8 +45,17 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     return true;
   }
   else if (elements.length == 1 && elements[0].getKey() == stack) {
+    var element = elements[0].getElement();
+
+    // If confirmed element is select tag, open the select box.
+    if (element.is('select')) {
+      this.select = new ChromekeySelectBox(element);
+      this.createHints('yellow', this.select.getListElements());
+      return true;
+    }
+
     // Invoke a callback method if an element is confirmed.
-    if (this.callback && this.callback(elements[0].getElement()) !== false) {
+    if (this.callback && this.callback(element) !== false) {
       // Return normal mode if only callback didn't return false.
       Mode.changeMode(ModeList.NORMAL_MODE);
     }

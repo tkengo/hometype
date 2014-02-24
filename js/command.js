@@ -282,13 +282,7 @@ Command.enterHintMode = function() {
     // and register choose element event listener.
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
-      if (element.is('select')) {
-        // If choosen element is select tag, open the select box.
-        var select = new ChromekeySelectBox(element);
-        processor.createHints('yellow', select.getListElements());
-        return false;
-      }
-      else if (element.is('textarea, :text, :password, [contenteditable]')) {
+      if (element.is('textarea, :text, :password, [contenteditable]')) {
         // If choosen element is form tag, focus to it.
         element.focus();
         return false;
