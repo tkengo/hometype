@@ -104,7 +104,8 @@ KeyMap.candidate = function(mode, key) {
 
       var command = '', args = [];
       if (map instanceof Array) {
-        command = map.shift()
+        map = map.slice();
+        command = map.shift();
         args = map;
       }
       else {
