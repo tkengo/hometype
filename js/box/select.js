@@ -26,8 +26,12 @@ var ChromekeySelectBox = function(select) {
 
     // Select the option if an element in the box is clicked.
     li.click(function() {
-      select.val($(this).attr('value')).change();
+      select.val($(this).attr('value'));
       context.remove();
+
+      var event = document.createEvent('HTMLEvents');
+      event.initEvent('change', true, true);
+      select.get(0).dispatchEvent(event);
     });
 
     context.items.push(li);
