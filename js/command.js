@@ -171,7 +171,7 @@ Command.searchBookmarks = function(newTab) {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
   processor.onEnter(function(text, selected) {
-    Utility.openUrl(selected.url, newTab);
+    chrome.runtime.sendMessage({ command: 'createTab', params: { url: selected.url } });
   });
 
   var port = chrome.runtime.connect({ name: 'loadBookmarks' });
