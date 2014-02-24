@@ -4,6 +4,10 @@ RuntimeCommand.closeTab = function(sender) {
   chrome.tabs.remove(sender.tab.id, null);
 };
 
+RuntimeCommand.createTab = function(sender, params) {
+  chrome.tabs.create({ url: params.url, active: true });
+};
+
 RuntimeCommand.moveLeftTab = function(sender) {
   chrome.tabs.query({ currentWindow: true }, function(tabs) {
     var index;
