@@ -76,6 +76,11 @@
   font-size:16px;
   font-family:'Osaka-Mono';
   padding:5px;
+  height: 32px;
+  width: 100%;
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
 }
 .chromekey-command-box-candidate-area div.selected {
   background-color:#ffffff;
