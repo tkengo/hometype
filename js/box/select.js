@@ -27,7 +27,7 @@ var ChromekeySelectBox = function(select) {
     // Select the option if an element in the box is clicked.
     li.click(function() {
       select.val($(this).attr('value')).change();
-      context.box.remove();
+      context.remove();
     });
 
     context.items.push(li);
@@ -41,4 +41,11 @@ var ChromekeySelectBox = function(select) {
  */
 ChromekeySelectBox.prototype.getListElements = function() {
   return this.items;
+};
+
+/**
+ * Remove select box from document body.
+ */
+ChromekeySelectBox.prototype.remove = function() {
+  this.box.remove();
 };
