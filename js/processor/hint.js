@@ -80,11 +80,3 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
 HintModeProcessor.prototype.onChooseElement = function(callback) {
   this.callback = callback;
 };
-
-HintModeProcessor.prototype.setCallback = function(callback) {
-  this.callback = callback;
-};
-
-HintModeProcessor.prototype.setOpenNewTab = function(newTab) {
-  this.newTab = newTab;
-};
