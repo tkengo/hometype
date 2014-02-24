@@ -49,7 +49,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     return true;
   }
   else {
-    // マッチしたけどまだ要素が確定していなければ要素を絞り込む
+    // Hide unmatched elements if an element didn't confirm.
     this.hintElements.hideUnmatchedElements(stack);
     for (var i in elements) {
       elements[i].setPushed();
@@ -59,9 +59,9 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 };
 
 /**
- * 要素に対するヒントを生成して表示します。
+ * Create hints for source elements and show it.
  *
- * @param array elements ヒントを表示する対象の要素の配列
+ * @param array elements Source elements.
  */
 HintModeProcessor.prototype.createHints = function(theme, elements) {
   if (this.hintElements) {
@@ -73,9 +73,9 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
 };
 
 /**
- * ヒントが確定して要素が選ばれた時に呼ばれるコールバック関数を定義します。
+ * Set a callback method that is invoked when a hint is confirmed.
  *
- * @param function callback コールバック関す
+ * @param function callback Callback method.
  */
 HintModeProcessor.prototype.onChooseElement = function(callback) {
   this.callback = callback;
