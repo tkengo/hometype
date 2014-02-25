@@ -61,6 +61,9 @@
   font-size:16px !important;
   background-color:#aaaaaa !important;
   font-family:'Osaka-Mono' !important;
+  outline: none !important;
+  box-sizing: border-box !important;
+  min-height: 34px;
 }
 .chromekey-command-box-candidate-area {
   background-color:#666666;
@@ -70,6 +73,8 @@
   color:#ffffff;
   opacity:0.8;
   padding:3px;
+  box-sizing: border-box;
+  font-size: 12px !important;
 }
 .chromekey-command-box-candidate-area div {
   text-align:left;
@@ -81,6 +86,8 @@
   word-break: break-all;
   word-wrap: break-word;
   overflow: hidden;
+  box-sizing: border-box;
+  line-height: 22px;
 }
 .chromekey-command-box-candidate-area div.selected {
   background-color:#ffffff;
