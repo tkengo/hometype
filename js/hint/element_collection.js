@@ -20,7 +20,7 @@ var HintElementCollection = function(hintTheme, target) {
     tipText += element.getRawTipElement().get(0).outerHTML;
   }, this));
 
-  $('body').append(tipText);
+  $('html').append(tipText);
 };
 
 HintElementCollection.prototype.getElements = function() {
