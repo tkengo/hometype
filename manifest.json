@@ -3,7 +3,7 @@
 
   "name": "Chromekey",
   "description": "provide key board manipulation for GoogleChrome",
-  "version": "0.1",
+  "version": "0.0.1",
 
   "permissions": [
     "tabs",
