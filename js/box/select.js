@@ -5,7 +5,7 @@
  *
  * Select box.
  */
-var ChromekeySelectBox = function(select) {
+var HometypeSelectBox = function(select) {
   // Create select box elements.
   this.ul  = $('<ul>');
   this.box = $('<div>').addClass('chromekey-select-box')
@@ -43,13 +43,13 @@ var ChromekeySelectBox = function(select) {
  *
  * @return array options
  */
-ChromekeySelectBox.prototype.getListElements = function() {
+HometypeSelectBox.prototype.getListElements = function() {
   return this.items;
 };
 
 /**
  * Remove select box from document body.
  */
-ChromekeySelectBox.prototype.remove = function() {
+HometypeSelectBox.prototype.remove = function() {
   this.box.remove();
 };

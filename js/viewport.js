@@ -5,7 +5,7 @@
  *
  * Screen object.
  */
-var ChromekeyScreen = function() {
+var HometypeScreen = function() {
 };
 
 /**
@@ -13,7 +13,7 @@ var ChromekeyScreen = function() {
  *
  * @return Object A hash that has top and left key.
  */
-ChromekeyScreen.prototype.getScrollPosition = function() {
+HometypeScreen.prototype.getScrollPosition = function() {
   return {
     top: document.body.scrollTop,
     left: document.body.scrollLeft
@@ -25,7 +25,7 @@ ChromekeyScreen.prototype.getScrollPosition = function() {
  *
  * @return Object A hash that has width and height key.
  */
-ChromekeyScreen.prototype.getWindowSize = function() {
+HometypeScreen.prototype.getWindowSize = function() {
   return {
     width: window.innerWidth,
     height: window.innerHeight
@@ -37,7 +37,7 @@ ChromekeyScreen.prototype.getWindowSize = function() {
  *
  * @return Object A hash that has width and height key.
  */
-ChromekeyScreen.prototype.getDocumentSize = function() {
+HometypeScreen.prototype.getDocumentSize = function() {
   return {
     width: $(document).width(),
     height: $(document).height()
@@ -50,7 +50,7 @@ ChromekeyScreen.prototype.getDocumentSize = function() {
  * @param integer x horizontal position.
  * @param integer y vertical position.
  */
-ChromekeyScreen.prototype.scrollTo = function(x, y) {
+HometypeScreen.prototype.scrollTo = function(x, y) {
   document.body.scrollTop = y;
   document.body.scrollLeft = x;
 };
@@ -60,7 +60,7 @@ ChromekeyScreen.prototype.scrollTo = function(x, y) {
  *
  * @param integer value Scroll amount.
  */
-ChromekeyScreen.prototype.scrollVertical = function(value) {
+HometypeScreen.prototype.scrollVertical = function(value) {
   var pos = this.getScrollPosition();
   this.scrollTo(pos.left, pos.top + value);
 };
@@ -70,12 +70,12 @@ ChromekeyScreen.prototype.scrollVertical = function(value) {
  *
  * @param integer value Scroll amount.
  */
-ChromekeyScreen.prototype.scrollHorizontal = function(value) {
+HometypeScreen.prototype.scrollHorizontal = function(value) {
   var pos = this.getScrollPosition();
   this.scrollTo(pos.left - value, pos.top);
 };
 
-ChromekeyScreen.prototype.setContentEditable = function(element) {
+HometypeScreen.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
   element.attr('data-chromekey-not-insert-mode', 'true');
   element.attr('data-chromekey-contenteditable', 'true');
@@ -89,7 +89,7 @@ ChromekeyScreen.prototype.setContentEditable = function(element) {
   });
 };
 
-ChromekeyScreen.prototype.resetContentEditable = function() {
+HometypeScreen.prototype.resetContentEditable = function() {
   var element = this.getCurrentContentEditable();
   element.removeAttr('contenteditable');
   element.removeAttr('data-chromekey-not-insert-mode');
@@ -98,11 +98,11 @@ ChromekeyScreen.prototype.resetContentEditable = function() {
   $(document.activeElement).blur();
 };
 
-ChromekeyScreen.prototype.getCurrentContentEditable = function() {
+HometypeScreen.prototype.getCurrentContentEditable = function() {
   return $('[data-chromekey-contenteditable=true]');
 };
 
-ChromekeyScreen.prototype.getNextContentEditableElement = function(current) {
+HometypeScreen.prototype.getNextContentEditableElement = function(current) {
   var next = null;
 
   while (current.length > 0) {
@@ -123,7 +123,7 @@ ChromekeyScreen.prototype.getNextContentEditableElement = function(current) {
   return next;
 };
 
-ChromekeyScreen.prototype.getPrevContentEditableElement = function(current) {
+HometypeScreen.prototype.getPrevContentEditableElement = function(current) {
   var prev = null;
 
   while (current.length > 0) {
@@ -151,9 +151,9 @@ ChromekeyScreen.prototype.getPrevContentEditableElement = function(current) {
  * @param element parant An element that is parent for a link element.
  *                       Add link element into body element if omit an argument.
  */
-ChromekeyScreen.prototype.createLink = function(url, parent) {
+HometypeScreen.prototype.createLink = function(url, parent) {
   var parent = $(parent || 'body');
   return $('<a>').attr('href', url).appendTo(parent);
 };
 
-var Viewport = new ChromekeyScreen();
+var Viewport = new HometypeScreen();

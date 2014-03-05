@@ -91,7 +91,7 @@ RuntimeCommand.getOptions = function(sender, params, sendResponse) {
   sendResponse(result);
 };
 
-var Tab = new ChromekeyTab();
+var Tab = new HometypeTab();
 
 (function() {
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {

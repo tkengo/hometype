@@ -17,7 +17,7 @@ var CommandModeProcessor = function() {
   this.updateBoxTextCallback = null;
   this.enterCallback         = null;
 
-  this.commandBox = new ChromekeyCommandBox();
+  this.commandBox = new HometypeCommandBox();
 };
 
 /**
@@ -109,7 +109,7 @@ CommandModeProcessor.prototype.onEnter = function(callback) {
 /**
  * Get the command box.
  *
- * @return ChromekeyCommandBox The command box object.
+ * @return HometypeCommandBox The command box object.
  */
 CommandModeProcessor.prototype.getCommandBox = function() {
   return this.commandBox;

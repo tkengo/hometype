@@ -1,6 +1,6 @@
-var ChromekeyTab = function() {
+var HometypeTab = function() {
   this.tabs = {};
-  this.history = new ChromekeyHistory();
+  this.history = new HometypeHistory();
   this.closedTabStacks = [];
 
   var context = this;
@@ -33,21 +33,21 @@ var ChromekeyTab = function() {
   });
 };
 
-ChromekeyTab.prototype.createAction = function(tab) {
+HometypeTab.prototype.createAction = function(tab) {
   context.tabs[tab.id] = tab;
   this.history.set(tab.id, [ { url: tab.url, title: tab.title } ]);
 };
 
-ChromekeyTab.prototype.removeAction = function(tab) {
+HometypeTab.prototype.removeAction = function(tab) {
   delete context.tabs[tab.id];
   this.history.remove(tab.id);
 };
 
-ChromekeyTab.prototype.getHistories = function(tabId) {
+HometypeTab.prototype.getHistories = function(tabId) {
   return this.history.get(tabId);
 };
 
-ChromekeyTab.prototype.openClosedTab = function(tabId) {
+HometypeTab.prototype.openClosedTab = function(tabId) {
   if (this.closedTabStacks.length == 0) {
     return;
   }
@@ -76,6 +76,6 @@ ChromekeyTab.prototype.openClosedTab = function(tabId) {
   chrome.tabs.create(params);
 };
 
-ChromekeyTab.prototype.getClosedTabList = function() {
+HometypeTab.prototype.getClosedTabList = function() {
   return this.closedTabStacks;
 };

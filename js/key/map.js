@@ -10,7 +10,7 @@
  * Key mapping managing object.
  * Mapping information is saved to this object.
  *
- * Chromekey has below modes.
+ * Hometype has below modes.
  *   normal mode
  *   hint mode
  *   visual mode

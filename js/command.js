@@ -3,7 +3,7 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Define command used in Chromekey.
+ * Define command used in Hometype.
  */
 var Command = {};
 

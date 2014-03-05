@@ -13,7 +13,7 @@ var CANDIDATE_MAX_COUNT = 20;
 /**
  * Constructor
  */
-var ChromekeyCommandBox = function() {
+var HometypeCommandBox = function() {
   var windowWidth = Viewport.getWindowSize().width;
 
   // Create command box elements.
@@ -44,7 +44,7 @@ var ChromekeyCommandBox = function() {
 /**
  * Show command box.
  */
-ChromekeyCommandBox.prototype.show = function() {
+HometypeCommandBox.prototype.show = function() {
   // Calculate position.
   var scrollTop = Viewport.getWindowSize().height + Viewport.getScrollPosition().top;
 
@@ -60,7 +60,7 @@ ChromekeyCommandBox.prototype.show = function() {
 /**
  * Hide command box.
  */
-ChromekeyCommandBox.prototype.hide = function() {
+HometypeCommandBox.prototype.hide = function() {
   this.box.hide();
   this.candidate.hide();
   $('div', this.candidate).remove();
@@ -70,7 +70,7 @@ ChromekeyCommandBox.prototype.hide = function() {
 /**
  * Show candidate list.
  */
-ChromekeyCommandBox.prototype.showCandidate = function() {
+HometypeCommandBox.prototype.showCandidate = function() {
   if (!this.candidate.is(':visible')) {
     this.recalculateAndSetPosition();
     this.candidate.hide().fadeIn(300);
@@ -80,7 +80,7 @@ ChromekeyCommandBox.prototype.showCandidate = function() {
 /**
  * Recalculate position of candidate list element and move its.
  */
-ChromekeyCommandBox.prototype.recalculateAndSetPosition = function() {
+HometypeCommandBox.prototype.recalculateAndSetPosition = function() {
   // Show at out of window because size of an element can't be retrieved.
   this.candidate.css({ top: -9999, left: -9999 }).show();
 
@@ -101,7 +101,7 @@ ChromekeyCommandBox.prototype.recalculateAndSetPosition = function() {
  *
  * @param array list Candidate list.
  */
-ChromekeyCommandBox.prototype.setCandidate = function(list) {
+HometypeCommandBox.prototype.setCandidate = function(list) {
   $('div', this.candidate).remove();
 
   this.list = list;
@@ -130,7 +130,7 @@ ChromekeyCommandBox.prototype.setCandidate = function(list) {
 /**
  * Select next candidate.
  */
-ChromekeyCommandBox.prototype.selectNext = function() {
+HometypeCommandBox.prototype.selectNext = function() {
   var div = $('div.selected', this.candidate);
   div.removeClass('selected');
   var next = div.next();
@@ -145,7 +145,7 @@ ChromekeyCommandBox.prototype.selectNext = function() {
 /**
  * Select previous candidate.
  */
-ChromekeyCommandBox.prototype.selectPrev = function() {
+HometypeCommandBox.prototype.selectPrev = function() {
   var div = $('div.selected', this.candidate);
   div.removeClass('selected');
   var prev = div.prev();
@@ -160,7 +160,7 @@ ChromekeyCommandBox.prototype.selectPrev = function() {
 /**
  * Get a selected candidate.
  */
-ChromekeyCommandBox.prototype.getSelected = function() {
+HometypeCommandBox.prototype.getSelected = function() {
   var div = $('div.selected', this.candidate);
   return this.list[div.attr('data-index')];
 };
@@ -168,8 +168,8 @@ ChromekeyCommandBox.prototype.getSelected = function() {
 /**
  * Get a text in the command box.
  */
-ChromekeyCommandBox.prototype.getText = function() {
+HometypeCommandBox.prototype.getText = function() {
   return this.text.val().replace(':', '');
 };
 
-var CommandBox = new ChromekeyCommandBox();
+var CommandBox = new HometypeCommandBox();

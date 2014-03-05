@@ -6,7 +6,7 @@
  * Manage options.
  *
  * Create instance and initialize it.
- * var options = new ChromekeyOptions();
+ * var options = new HometypeOptions();
  * options.init();
  *
  * Option object has option value in object prototype.
@@ -14,8 +14,8 @@
  * options.option_name1
  * options.option_name2
  */
-var ChromekeyOptions = function() {
-  this.options = ChromekeyDefaultOptions;
+var HometypeOptions = function() {
+  this.options = HometypeDefaultOptions;
 
   // Set an event listener to notify for this object when option value was changed.
   var port = chrome.runtime.connect({ name: 'notifyOptions' });
@@ -28,10 +28,10 @@ var ChromekeyOptions = function() {
  *
  * @param Object results Changed option value hash.
  */
-ChromekeyOptions.prototype.notifyOptions = function(results) {
+HometypeOptions.prototype.notifyOptions = function(results) {
   this.options = $.extend(this.options, results);
   for (var key in results) {
-    ChromekeyOptions.prototype[key] = results[key];
+    HometypeOptions.prototype[key] = results[key];
   }
 };
 
@@ -40,13 +40,13 @@ ChromekeyOptions.prototype.notifyOptions = function(results) {
  *
  * @param function callback Callback method that is called when option has loaded.
  */
-ChromekeyOptions.prototype.init = function(callback) {
+HometypeOptions.prototype.init = function(callback) {
   var getOptionsCallback = function(response) {
     for (var key in this.options) {
       if (response[key]) {
         this.options[key] = response[key];
       }
-      ChromekeyOptions.prototype[key] = this.options[key];
+      HometypeOptions.prototype[key] = this.options[key];
     }
 
     if (typeof callback == 'function') {

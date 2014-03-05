@@ -20,7 +20,7 @@ var ModeList = {
 /**
  * Constructor.
  */
-var ChromekeyMode = function() {
+var HometypeMode = function() {
   this.mode = ModeList.NORMAL_MODE;
 
   this.callbacks = [];
@@ -38,7 +38,7 @@ var ChromekeyMode = function() {
  *
  * @return string The current mode.
  */
-ChromekeyMode.prototype.getCurrentMode = function() {
+HometypeMode.prototype.getCurrentMode = function() {
   return this.mode;
 };
 
@@ -49,7 +49,7 @@ ChromekeyMode.prototype.getCurrentMode = function() {
  * @param string modeName A mode name
  * @return Object The current mode processor
  */
-ChromekeyMode.prototype.changeMode = function(modeName) {
+HometypeMode.prototype.changeMode = function(modeName) {
   // Nothing happens if mode didn't change.
   if (this.mode == modeName) {
     return;
@@ -87,7 +87,7 @@ ChromekeyMode.prototype.changeMode = function(modeName) {
  * @param array  targets hint targets.
  * @return Object hint mode processor.
  */
-ChromekeyMode.prototype.enterHintMode = function(theme, targets) {
+HometypeMode.prototype.enterHintMode = function(theme, targets) {
   var processor = this.changeMode(ModeList.HINT_MODE);
   processor.createHints(theme, targets);
   return processor;
@@ -100,7 +100,7 @@ ChromekeyMode.prototype.enterHintMode = function(theme, targets) {
  * @param jQueryElement element visual mode target.
  * @return Object visual mode processor.
  */
-ChromekeyMode.prototype.enterVisualMode = function(element) {
+HometypeMode.prototype.enterVisualMode = function(element) {
   Viewport.setContentEditable(element);
   element.focus().click();
   return Mode.changeMode(ModeList.VISUAL_MODE);
@@ -113,7 +113,7 @@ ChromekeyMode.prototype.enterVisualMode = function(element) {
  * @param ModeList mode mode
  * @return Object processor
  */
-ChromekeyMode.prototype.getProcessor = function(mode) {
+HometypeMode.prototype.getProcessor = function(mode) {
   mode = mode || this.mode;
 
   return this.modeProcessors[mode];
@@ -127,8 +127,8 @@ ChromekeyMode.prototype.getProcessor = function(mode) {
  *
  * @param function callback Callback method.
  */
-ChromekeyMode.prototype.onModeChange = function(callback) {
+HometypeMode.prototype.onModeChange = function(callback) {
   this.callbacks.push(callback);
 };
 
-var Mode = new ChromekeyMode();
+var Mode = new HometypeMode();

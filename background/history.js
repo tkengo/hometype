@@ -5,7 +5,7 @@
  *
  * Manage every tab history
  */
-var ChromekeyHistory = function() {
+var HometypeHistory = function() {
   this.prefix = 'chromekey-history-';
 };
 
@@ -15,7 +15,7 @@ var ChromekeyHistory = function() {
  * @param integer tabId tab ID
  * @return array histories
  */
-ChromekeyHistory.prototype.get = function(tabId) {
+HometypeHistory.prototype.get = function(tabId) {
   var history = JSON.parse(localStorage.getItem(this.prefix + tabId));
 
   if (!history) {
@@ -31,7 +31,7 @@ ChromekeyHistory.prototype.get = function(tabId) {
  * @param integer tabId   tab ID
  * @param array   history history set in tab have tab id
  */
-ChromekeyHistory.prototype.set = function(tabId, history) {
+HometypeHistory.prototype.set = function(tabId, history) {
   localStorage.setItem(this.prefix + tabId, JSON.stringify({ history: history }));
 };
 
@@ -40,7 +40,7 @@ ChromekeyHistory.prototype.set = function(tabId, history) {
  *
  * @param integer tabId tab ID you want to delete.
  */
-ChromekeyHistory.prototype.remove = function(tabId) {
+HometypeHistory.prototype.remove = function(tabId) {
   localStorage.removeItem(this.prefix + tabId);
 };
 
@@ -50,7 +50,7 @@ ChromekeyHistory.prototype.remove = function(tabId) {
  * @param integer tabId tab ID you want to add.
  * @param string  url   history url.
  */
-ChromekeyHistory.prototype.push = function(tabId, url) {
+HometypeHistory.prototype.push = function(tabId, url) {
   var history = this.get(tabId);
   history.push({ url: url, title: '' });
 
@@ -67,7 +67,7 @@ ChromekeyHistory.prototype.push = function(tabId, url) {
  * @param integer tabId tab ID you want to update.
  * @param string  title update title.
  */
-ChromekeyHistory.prototype.update = function(tabId, title) {
+HometypeHistory.prototype.update = function(tabId, title) {
   var history = this.get(tabId);
   history[history.length - 1].title = title;
   this.set(tabId, history);

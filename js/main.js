@@ -3,12 +3,12 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Entry point in Chromekey.
+ * Entry point in Hometype.
  */
 
-var Options = new ChromekeyOptions();
+var Options = new HometypeOptions();
 
-// Load the Chromekey's options.
+// Load the Hometype's options.
 Options.init(function() {
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
