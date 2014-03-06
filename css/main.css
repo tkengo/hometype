@@ -1,4 +1,4 @@
-.chromekey-hit-a-hint-base {
+.hometype-hit-a-hint-base {
   position:absolute;
   border:solid 1px #C4C4C4;
   opacity:0.8;
@@ -10,40 +10,40 @@
   font-family:'Osaka-Mono';
   display:none;
 }
-.chromekey-hit-a-hint-border {
+.hometype-hit-a-hint-border {
   border:dashed 1px #900;
   position:absolute;
   z-index:1000000;
 }
-.chromekey-hit-a-hint-yellow {
+.hometype-hit-a-hint-yellow {
   background-color:#FFFF4D;
 }
-.chromekey-hit-a-hint-yellow-area {
+.hometype-hit-a-hint-yellow-area {
   background-color:#FDFFC3;
 }
-.chromekey-hit-a-hint-blue {
+.hometype-hit-a-hint-blue {
   background-color:#4DFFFF;
 }
-.chromekey-hit-a-hint-blue-area {
+.hometype-hit-a-hint-blue-area {
   background-color:#CDFFF3;
 }
-.chromekey-hit-a-hint-green {
+.hometype-hit-a-hint-green {
   background-color:#B2FFC7;
 }
-.chromekey-hit-a-hint-green-area {
+.hometype-hit-a-hint-green-area {
   background-color:#E2FFE3;
 }
-.chromekey-hit-a-hint-red {
+.hometype-hit-a-hint-red {
   background-color:#FFB2C7;
 }
-.chromekey-hit-a-hint-red-area {
+.hometype-hit-a-hint-red-area {
   background-color:#FFE2E3;
 }
-.chromekey-hit-a-hint-pushed {
+.hometype-hit-a-hint-pushed {
   color:red;
 }
 
-.chromekey-command-box {
+.hometype-command-box {
   background-color:#aaaaaa;
   position:absolute;
   z-index:1000000;
@@ -51,7 +51,7 @@
   opacity:0.8;
   height:30px;
 }
-.chromekey-command-box input {
+.hometype-command-box input {
   width:100% !important;
   height:100% !important;
   border-width:0 !important;
@@ -65,7 +65,7 @@
   box-sizing: border-box !important;
   min-height: 34px;
 }
-.chromekey-command-box-candidate-area {
+.hometype-command-box-candidate-area {
   background-color:#666666;
   position:absolute;
   z-index:1000000;
@@ -76,7 +76,7 @@
   box-sizing: border-box;
   font-size: 12px !important;
 }
-.chromekey-command-box-candidate-area div {
+.hometype-command-box-candidate-area div {
   text-align:left;
   font-size:16px;
   font-family:'Osaka-Mono';
@@ -89,12 +89,12 @@
   box-sizing: border-box;
   line-height: 22px;
 }
-.chromekey-command-box-candidate-area div.selected {
+.hometype-command-box-candidate-area div.selected {
   background-color:#ffffff;
   color:#444444;
 }
 
-.chromekey-select-box {
+.hometype-select-box {
   width:400px;
   height:600px;
   z-index:10000;
@@ -104,10 +104,10 @@
   border:solid 1px #ccc;
   padding:10px;
 }
-.chromekey-select-box ul, .chromekey-select-box li {
+.hometype-select-box ul, .hometype-select-box li {
   list-style:none;
 }
-.chromekey-select-box li {
+.hometype-select-box li {
   float:left;
   line-height:200%;
   font-size:14px;
@@ -119,7 +119,7 @@
   background: linear-gradient(to bottom, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);
 }
 
-.chromekey-contenteditable {
+.hometype-contenteditable {
   border:solid 1px #f00;
   position:absolute;
   z-index:1000000;
@@ -127,7 +127,7 @@
   cursor:text;
 }
 
-.chromekey-current-mode {
+.hometype-current-mode {
   position:fixed;
   z-index:1000002;
   top:6px;

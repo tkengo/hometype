@@ -17,15 +17,15 @@ var HometypeCommandBox = function() {
   var windowWidth = Viewport.getWindowSize().width;
 
   // Create command box elements.
-  var box       = $('<div>')  .addClass('chromekey-command-box')
-                              .attr('id', '_chromekey-command-box')
+  var box       = $('<div>')  .addClass('hometype-command-box')
+                              .attr('id', '_hometype-command-box')
                               .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(COMMAND_BOX_HEIGHT);
   var text      = $('<input>').attr('type', 'text')
-                              .attr('data-chromekey-not-insert-mode', true)
+                              .attr('data-hometype-not-insert-mode', true)
                               .appendTo(box);
-  var candidate = $('<div>')  .addClass('chromekey-command-box-candidate-area')
-                              .attr('id', '_chromekey-command-box-candidate-area')
+  var candidate = $('<div>')  .addClass('hometype-command-box-candidate-area')
+                              .attr('id', '_hometype-command-box-candidate-area')
                               .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(CANDIDATE_AREA_HEIGHT)
 

@@ -77,9 +77,9 @@ HometypeScreen.prototype.scrollHorizontal = function(value) {
 
 HometypeScreen.prototype.setContentEditable = function(element) {
   element.attr('contenteditable', true);
-  element.attr('data-chromekey-not-insert-mode', 'true');
-  element.attr('data-chromekey-contenteditable', 'true');
-  $('<div>').addClass('chromekey-contenteditable').css({
+  element.attr('data-hometype-not-insert-mode', 'true');
+  element.attr('data-hometype-contenteditable', 'true');
+  $('<div>').addClass('hometype-contenteditable').css({
     width: element.innerWidth() + 10,
     height: element.innerHeight() + 10,
     top: element.offset().top - 5,
@@ -92,14 +92,14 @@ HometypeScreen.prototype.setContentEditable = function(element) {
 HometypeScreen.prototype.resetContentEditable = function() {
   var element = this.getCurrentContentEditable();
   element.removeAttr('contenteditable');
-  element.removeAttr('data-chromekey-not-insert-mode');
-  element.removeAttr('data-chromekey-contenteditable');
-  $('.chromekey-contenteditable').remove();
+  element.removeAttr('data-hometype-not-insert-mode');
+  element.removeAttr('data-hometype-contenteditable');
+  $('.hometype-contenteditable').remove();
   $(document.activeElement).blur();
 };
 
 HometypeScreen.prototype.getCurrentContentEditable = function() {
-  return $('[data-chromekey-contenteditable=true]');
+  return $('[data-hometype-contenteditable=true]');
 };
 
 HometypeScreen.prototype.getNextContentEditableElement = function(current) {

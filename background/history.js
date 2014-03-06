@@ -6,7 +6,7 @@
  * Manage every tab history
  */
 var HometypeHistory = function() {
-  this.prefix = 'chromekey-history-';
+  this.prefix = 'hometype-history-';
 };
 
 /**

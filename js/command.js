@@ -131,14 +131,14 @@ Command.restoreTab = function() {
  * Focus first element in window.
  */
 Command.focusFirstInput = function() {
-  $(':text:screen:first').focus();
+  $(':text:screen:first, textarea:screen:first').focus();
 };
 
 /**
  * Focus last element in window.
  */
 Command.focusLastInput = function() {
-  $(':text:screen:last').focus();
+  $(':text:screen:last, textarea:screen:last').focus();
 };
 
 /**

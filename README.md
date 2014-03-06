@@ -1,4 +1,4 @@
-# chromekey
+# hometype
 
 Google Chrome をキーボードで操作するための拡張機能です。
 

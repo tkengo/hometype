@@ -15,7 +15,7 @@
  * @param string  hintTheme  Hint theme.
  */
 var HintElement = function(srcElement, index, key, hintTheme) {
-  this.className = 'chromekey-hit-a-hint-' + hintTheme;
+  this.className = 'hometype-hit-a-hint-' + hintTheme;
   this.index     = index;
   this.key       = key;
 
@@ -56,7 +56,7 @@ HintElement.prototype.createTipElement = function() {
   var div = $('<div>').css({
     'top': top + 'px',
     'left': left + 'px'
-  }).addClass(this.className + ' chromekey-hit-a-hint-base');
+  }).addClass(this.className + ' hometype-hit-a-hint-base');
 
   // Set hint keys to a hint tip element.
   for (var i in this.key) {
@@ -64,7 +64,7 @@ HintElement.prototype.createTipElement = function() {
   }
 
   // Set unique ID attribute to a hint tip element and return it.
-  this.elementId = 'chromekey-hit-a-hint-element-' + div.text();
+  this.elementId = 'hometype-hit-a-hint-element-' + div.text();
   div.attr({ 'id': this.elementId })
   return div;
 };
@@ -102,7 +102,7 @@ HintElement.prototype.getKey = function() {
  * Pushed first hint key.
  */
 HintElement.prototype.setPushed = function() {
-  $(this.getTipElement().children()[0]).addClass('chromekey-hit-a-hint-pushed');
+  $(this.getTipElement().children()[0]).addClass('hometype-hit-a-hint-pushed');
 };
 
 /**

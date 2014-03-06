@@ -56,7 +56,7 @@ HintElementCollection.prototype.removeAllHint = function() {
 };
 
 HintElementCollection.prototype.show = function() {
-  $('.chromekey-hit-a-hint-base').fadeIn(100);
+  $('.hometype-hit-a-hint-base').fadeIn(100);
 };
 
 HintElementCollection.prototype.nextHintKey = function() {

@@ -8,7 +8,7 @@
 var HometypeSelectBox = function(select) {
   // Create select box elements.
   this.ul  = $('<ul>');
-  this.box = $('<div>').addClass('chromekey-select-box')
+  this.box = $('<div>').addClass('hometype-select-box')
                        .appendTo($('body'))
                        .screenCenter()
                        .append(this.ul);

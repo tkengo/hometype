@@ -39,20 +39,20 @@ $(document).ready(function() {
   // Otherwise, Return the normal mode.
   var focusTargets = ':text, :password, textarea, [contenteditable]';
   $(document).on('focus', focusTargets, function() {
-    if (!$(this).is('[data-chromekey-not-insert-mode]')) {
+    if (!$(this).is('[data-hometype-not-insert-mode]')) {
       Mode.changeMode(ModeList.INSERT_MODE);
     }
   }).on('blur', focusTargets, function() {
-    if (!$(this).is('[data-chromekey-not-insert-mode]')) {
+    if (!$(this).is('[data-hometype-not-insert-mode]')) {
       Mode.changeMode(ModeList.NORMAL_MODE);
     }
   });
   $(document.activeElement).blur();
 
   Mode.onModeChange(function(mode) {
-    $('.chromekey-current-mode').remove();
+    $('.hometype-current-mode').remove();
     if (mode != ModeList.NORMAL_MODE) {
-      var modeElement = $('<div>').addClass('chromekey-current-mode').text(mode + ' mode');
+      var modeElement = $('<div>').addClass('hometype-current-mode').text(mode + ' mode');
       modeElement.appendTo($('body')).css('opacity', 0.4).fadeTo('slow', 1.0);
     }
   });
