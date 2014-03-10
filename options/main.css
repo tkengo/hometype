@@ -4,6 +4,41 @@
 }
 
 h1 {
-  color:#666;
-  border-bottom:solid 1px #444;
+  font-size: 18px;
+}
+
+.header {
+  background-color: #363636;
+  color: #fff;
+  font-family: Antonio;
+  padding: 6px;
+}
+
+ul.tab {
+  list-style: none;
+  border-bottom: solid 1px #3eba2b;
+  height: 45px;
+}
+ul.tab li {
+  list-style: none;
+  float: left;
+  width: 150px;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  background-color: #3eba2b;
+  margin: 5px;
+}
+
+.clearfix {
+  *zoom: 1;
+
+  &:before, &:after {
+    content: " ";
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
 }
