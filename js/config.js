@@ -1,4 +1,19 @@
+var ModeList = {};
+
 (function() {
+
+/**
+ * Mode list.
+ */
+  ModeList = {
+    NORMAL_MODE: 'normal',
+    INSERT_MODE: 'insert',
+    HINT_MODE: 'hint',
+    VISUAL_MODE: 'visual',
+    COMMAND_MODE: 'command',
+    HELP_MODE: 'help'
+  };
+
   KeyMap.nmap('j',     'scrollDown');
   KeyMap.nmap('k',     'scrollUp');
   KeyMap.nmap('G',     'scrollToBottom');
@@ -27,6 +42,7 @@
   KeyMap.nmap('u',     'restoreTab');
   KeyMap.nmap('U',     'searchClosedTabs');
   KeyMap.nmap('<C-h>', 'searchHistories');
+  KeyMap.nmap('?',     'showAssignedCommands');
 
   KeyMap.cmap('Esc',   'cancelCommandMode');
   KeyMap.cmap('<C-n>', 'selectNextCandidate');
@@ -43,4 +59,6 @@
 
   KeyMap.fmap('Esc',   'cancelHintMode');
   KeyMap.fmap('<C-c>', 'cancelHintMode');
+
+  KeyMap.hmap('Esc', 'cancelHelpMode');
 })();

@@ -358,3 +358,13 @@ Command.cancelVisualMode = function() {
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
+
+Command.showAssignedCommands = function() {
+  Mode.changeMode(ModeList.HELP_MODE);
+};
+
+Command.cancelHelpMode = function() {
+  if (Mode.getCurrentMode() == ModeList.HELP_MODE) {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
+};
