@@ -19,8 +19,13 @@
   },
 
   "background": {
-    "persistent": true,
-    "page": "background/background.html"
+    "persistent": false,
+    "scripts": [
+      "lib/jquery-2.0.1.min.js",
+      "js/background/history.js",
+      "js/background/tab.js",
+      "js/background/script.js"
+    ]
   },
 
   "options_page": "options/options.html",
