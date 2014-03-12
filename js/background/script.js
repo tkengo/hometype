@@ -129,8 +129,6 @@ RuntimeCommand.notifyOptions = function(port) {
   notifyPort = port;
 };
 
-var Tab = new HometypeTab();
-
 (function() {
   chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     var command = RuntimeCommand[message.command];

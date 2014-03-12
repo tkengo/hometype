@@ -79,3 +79,5 @@ HometypeTab.prototype.openClosedTab = function(tabId) {
 HometypeTab.prototype.getClosedTabList = function() {
   return this.closedTabStacks;
 };
+
+var Tab = new HometypeTab();
