@@ -1,36 +1,25 @@
 <html>
 <head>
-  <title>My Test Extension Options</title>
+  <title>Hometype設定</title>
   <link rel="stylesheet" href="main.css" type="text/css" />
   <script type="text/javascript" src="../lib/jquery-2.0.1.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.extend.js"></script>
   <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-
-<div class="header">
-  <h1>Hometype 設定</h1>
-</div>
-
-<div class="description">
-  Hometypeの設定を行います。
-</div>
-
-<ul class="tab clearfix">
-  <li><img src="./basic.png" alt="一般">一般</li>
-  <li><img src="./keyboard.png" alt="キーバインド">キーバインド</li>
-  <li>高度な設定</li>
-</ul>
-
-<div class="item">コマンド確定までのインターバル</div>
-<input type="text" id="command_interval" size="7" />
-
-<div class="item">スクロール量</div>
-<input type="text" id="scroll_amount" size="7" />
-
-<br>
-<div id="status"></div>
-<button id="save">Save</button>
-
+  <div class="header">
+    <h1>Hometype 設定</h1>
+  </div>
+  <div class="section">一般設定</div>
+  <dl>
+    <dt>コマンド確定までのインターバル</dt>
+    <dd><input type="text" id="command_interval" size="7" /> ms</dd>
+    <dt>スクロール量</dt>
+    <dt><input type="text" id="scroll_amount" size="7" /></dt>
+  </dl>
+  <br>
+  <br>
+  <div id="status"></div>
+  <button id="save">Save</button>
 </body>
 </html>

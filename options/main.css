@@ -3,7 +3,16 @@
   padding:0;
 }
 
+body {
+  font-size: 14px;
+  color: #666;
+}
+
 h1 {
+  font-size: 20px;
+}
+
+.section {
   font-size: 18px;
 }
 
@@ -14,20 +23,19 @@ h1 {
   padding: 6px;
 }
 
-ul.tab {
-  list-style: none;
-  border-bottom: solid 1px #3eba2b;
-  height: 45px;
+input {
+  border: solid 1px #aaa;
+  padding: 4px;
+  border-radius: 3px;
 }
-ul.tab li {
-  list-style: none;
+
+dl dt {
   float: left;
-  width: 150px;
-  text-align: center;
-  height: 40px;
-  line-height: 40px;
-  background-color: #3eba2b;
-  margin: 5px;
+  width: 300px;
+}
+dl dt, dl dd {
+  height: 30px;
+  line-height: 30px;
 }
 
 .clearfix {
