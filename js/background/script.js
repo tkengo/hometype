@@ -9,6 +9,12 @@
 var RuntimeCommand = {};
 
 /**
+ * ------------------------------------
+ * OnMessage callback runtime methods.
+ * ------------------------------------
+ */
+
+/**
  * Close a tab.
  */
 RuntimeCommand.closeTab = function(sender) {
@@ -102,6 +108,12 @@ RuntimeCommand.getHistories = function(sender, params, sendResponse) {
 };
 
 /**
+ * ------------------------------------
+ * OnConnect callback runtime methods.
+ * ------------------------------------
+ */
+
+/**
  * Get the bookmark list.
  */
 RuntimeCommand.loadBookmarks = function(port) {
@@ -130,17 +142,28 @@ RuntimeCommand.notifyOptions = function(port) {
 };
 
 (function() {
-  chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  /**
+   * This is invoked when called chrome.runtime.sendMessage from content script.
+   *
+   * @param object   message      Message from content script. This should include 'command' key
+   *                              to determine invoked runtime method. If this has 'params'
+   *                              key, it is passed to the runtime method as a second argument.
+   * @param object   sender       The message sender.
+   * @param function sendResponse The callback method.
+   */
+  var messageCallback = function(message, sender, sendResponse) {
     var command = RuntimeCommand[message.command];
     if (command) {
       command.call(command, sender, message.params, sendResponse);
     }
-  });
-
-  chrome.runtime.onConnect.addListener(function(port) {
+  };
+  var connectCallback = function(port) {
     var command = RuntimeCommand[port.name];
     if (command) {
       command.call(command, port);
     }
-  });
+  }
+
+  chrome.runtime.onMessage.addListener(messageCallback);
+  chrome.runtime.onConnect.addListener(connectCallback);
 })();
