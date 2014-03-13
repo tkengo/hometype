@@ -78,9 +78,10 @@ RuntimeCommand.closedTabList = function(sender, params, sendResponse) {
  * Save options to local storage.
  */
 RuntimeCommand.setOptions = function(sender, params) {
-  for (var i in params) {
-    localStorage.setItem(i, params[i]);
-  }
+  // for (var i in params) {
+  //   localStorage.setItem(i, params[i]);
+  // }
+  localStorage.setItem('options', JSON.stringify(params));
   notifyPort.postMessage(params);
 };
 
@@ -88,14 +89,13 @@ RuntimeCommand.setOptions = function(sender, params) {
  * Get options from local storage.
  */
 RuntimeCommand.getOptions = function(sender, params, sendResponse) {
+  var options = JSON.parse(localStorage.getItem('options'));
+
   if (params && params.key) {
-    var result = localStorage.getItem(params.key);
+    var result = options[params.key];
   }
   else {
-    var result = {};
-    for (var k in localStorage){
-      result[k] = localStorage.getItem(k);
-    }
+    var result = options;
   }
   sendResponse(result);
 };
@@ -143,7 +143,7 @@ RuntimeCommand.notifyOptions = function(port) {
 
 (function() {
   /**
-   * This is invoked when called chrome.runtime.sendMessage from content script.
+   * This is invoked when called chrome.runtime.sendMessage in content script.
    *
    * @param object   message      Message from content script. This should include 'command' key
    *                              to determine invoked runtime method. If this has 'params'

@@ -42,10 +42,8 @@ HometypeOptions.prototype.notifyOptions = function(results) {
  */
 HometypeOptions.prototype.init = function(callback) {
   var getOptionsCallback = function(response) {
-    for (var key in this.options) {
-      if (response[key]) {
-        this.options[key] = response[key];
-      }
+    for (var key in response) {
+      this.options[key] = response[key];
       HometypeOptions.prototype[key] = this.options[key];
     }
 
