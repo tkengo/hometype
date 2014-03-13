@@ -10,6 +10,14 @@ var Options = new HometypeOptions();
 
 // Load the Hometype's options.
 Options.init(function() {
+  $.each([ 'nmap', 'cmap', 'imap', 'vmap', 'fmap' ], function(index, map) {
+    if (Options[map]) {
+      for (var key in Options[map]) {
+        KeyMap[map].call(this, key, Options[map][key]);
+      }
+    }
+  });
+
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
