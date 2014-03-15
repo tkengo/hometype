@@ -56,7 +56,16 @@
   position:absolute;
   z-index:1000000;
   display:none;
-  opacity:0.8;
+  opacity:0.6;
+  background-color: black;
+  color: white;
+}
+.hometype-help-box-wrap {
+  display: -webkit-box;
+}
+.hometype-help-box-commands-key {
+  text-align: right;
+  color: #dd0;
 }
 .hometype-command-box input {
   width:100% !important;

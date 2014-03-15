@@ -1,32 +1,70 @@
 
-var HELP_BOX_HEIGHT = 400;
 var HELP_BOX_MARGIN = 20;
+
+var box_html = (function () {/*
+<div class="hometype-help-box">
+  <div class="hometype-help-box-wrap">
+    <table id="_hometype-help-box-commands-normal">
+      <tbody><tr><th>normal mode</th></tr><tr></tr></tbody>
+    </table>
+  </div>
+  <div class="hometype-help-box-wrap">
+    <table id="_hometype-help-box-commands-insert">
+      <tbody><tr><th>insert mode</th><th></th></tr></tbody>
+    </table>
+    <table id="_hometype-help-box-commands-visual">
+      <tbody><tr><th>visual mode</th><th></th></tr></tbody>
+    </table>
+  </div>
+  <div class="hometype-help-box-wrap">
+    <table id="_hometype-help-box-commands-hint">
+      <tbody><tr><th>hint mode</th><th></th></tr></tbody>
+    </table>
+    <table id="_hometype-help-box-commands-command">
+      <tbody><tr><th>command mode</th><th></th></tr></tbody>
+    </table>
+  </div>
+  <div class="hometype-help-box-wrap">
+    <table id="_hometype-help-box-commands-help">
+      <tbody><tr><th>help mode</th><th></th></tr></tbody>
+    </table>
+  </div>
+</div>
+*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
 
 var HometypeHelpBox = function() {
   var windowWidth = Viewport.getWindowSize().width;
+  var box = $(box_html).width(windowWidth - HELP_BOX_MARGIN * 4);
 
-  var box = $('<div>').addClass('hometype-help-box')
-                      .attr('id', '_hometype-help-box')
-                      .width(windowWidth - HELP_BOX_MARGIN * 4)
-                      .height(HELP_BOX_HEIGHT);
+  var normal_table = $('#_hometype-help-box-commands-normal', box);
 
-  var command_list = $('<ul>').addClass('hometype-commands-list');
+  $.each(KeyMap.assignedCommands().normal, function(key, command) {
+      var raw = $('tr:last', normal_table);
+      raw.append($('<td>').addClass('hometype-help-box-commands-key').text(key + ' :'))
+      raw.append($('<td>').addClass('hometype-help-box-commands-command').text(command))
 
-  this.box = box;
+      if ($('td', raw).length == 4) {
+        normal_table.append($('<tr>'));
+      }
+  });
 
   $.each(KeyMap.assignedCommands(), function(mode, commands) {
+    if (mode == 'normal') { return true; }
+
     $.each(commands, function(key, command) {
-      var list = $('<li>');
-      list.text(mode + ': ' + key + ' ' + command);
-      list.appendTo(command_list);
+      $('#_hometype-help-box-commands-' + mode, box).append(
+        $('<tr>')
+        .append($('<td>').addClass('hometype-help-box-commands-key').text(key + ' :'))
+        .append($('<td>').addClass('hometype-help-box-commands-command').text(command))
+      );
     });
   });
 
-  command_list.appendTo(this.box);
+  this.box = box;
 
-  $(document).ready($.proxy(function() {
-    this.box.appendTo($('body'));
-  }, this));
+  $(document).ready(function() {
+    box.appendTo($('body'));
+  });
 };
 
 HometypeHelpBox.prototype.show = function() {
