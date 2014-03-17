@@ -23,7 +23,7 @@ h1 {
   padding: 6px;
 }
 
-input {
+input, textarea {
   border: solid 1px #aaa;
   padding: 4px;
   border-radius: 3px;
@@ -36,6 +36,11 @@ dl dt {
 dl dt, dl dd {
   height: 30px;
   line-height: 30px;
+}
+
+#key_bind_list {
+  width: 365px;
+  height: 500px;
 }
 
 .clearfix {
