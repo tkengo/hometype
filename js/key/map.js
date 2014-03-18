@@ -142,3 +142,12 @@ KeyMap.command = function(mode, key) {
 KeyMap.assignedCommands = function() {
   return _map;
 };
+
+/**
+ * Clear all key binding.
+ */
+KeyMap.clear = function() {
+  $.each(_map, function(key, map) {
+    _map[key] = {};
+  });
+};

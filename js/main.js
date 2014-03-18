@@ -8,6 +8,8 @@
 
 // Set key binding if it was changed.
 HometypeOptions.getInstance().onLoaded(function(options) {
+  KeyMap.clear();
+
   $.each([ 'nmap', 'cmap', 'imap', 'vmap', 'fmap' ], function(index, map) {
     $.each(options[map] || {}, function(key, command) {
       KeyMap[map](key, command);
