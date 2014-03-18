@@ -46,13 +46,6 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   else if (elements.length == 1 && elements[0].getKey() == stack) {
     var element = elements[0].getElement();
 
-    // If confirmed element is select tag, open the select box.
-    if (element.is('select')) {
-      this.selectBox = new HometypeSelectBox(element);
-      this.createHints('yellow', this.selectBox.getListElements());
-      return true;
-    }
-
     // Invoke a callback method if an element is confirmed.
     if (this.callback && this.callback(element) !== false) {
       // Return normal mode if only callback didn't return false.

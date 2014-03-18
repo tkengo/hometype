@@ -287,6 +287,12 @@ Command.enterHintMode = function() {
         element.focus();
         return false;
       }
+      else if (element.is('select')) {
+        // If confirmed element is select tag, open the select box.
+        var selectBox = new HometypeSelectBox(element);
+        processor.createHints('yellow', selectBox.getListElements());
+        return false;
+      }
       else {
         // Otherwise, emulate click event for element.
         Utility.clickElement(element);
