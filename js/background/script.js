@@ -78,9 +78,6 @@ RuntimeCommand.closedTabList = function(sender, params, sendResponse) {
  * Save options to local storage.
  */
 RuntimeCommand.setOptions = function(sender, params) {
-  // for (var i in params) {
-  //   localStorage.setItem(i, params[i]);
-  // }
   localStorage.setItem('options', JSON.stringify(params));
   notifyPort.postMessage(params);
 };
