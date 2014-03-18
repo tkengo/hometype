@@ -6,40 +6,36 @@
  * Entry point in Hometype.
  */
 
-var Options = new HometypeOptions();
-
-// Load the Hometype's options.
-Options.init(function() {
+// Set key binding if it was changed.
+HometypeOptions.getInstance().onLoaded(function(options) {
   $.each([ 'nmap', 'cmap', 'imap', 'vmap', 'fmap' ], function(index, map) {
-    if (Options[map]) {
-      for (var key in Options[map]) {
-        KeyMap[map].call(this, key, Options[map][key]);
-      }
-    }
+    $.each(options[map] || {}, function(key, command) {
+      KeyMap[map](key, command);
+    });
   });
+});
 
-  // Set an event listener to the key sequence object when options have loaded.
-  var key = new KeySequence();
-  key.onProcess(function (e, sequence, stack, currentKey) {
-    // Get command candidates from input keys.
-    var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
+// Set an event listener to the key sequence object when options have loaded.
+var key = new KeySequence();
+key.onProcess(function (e, sequence, stack, currentKey) {
+  // Get command candidates from input keys.
+  var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
 
-    if (candidate.length == 1 && candidate[0].key == sequence) {
-      // Execute the command if decided.
-      candidate[0].command.apply(window, candidate[0].args);
-      e.stopPropagation();
-      e.preventDefault();
+  if (candidate.length == 1 && candidate[0].key == sequence) {
+    // Execute the command if decided.
+    candidate[0].command.apply(window, candidate[0].args);
+    e.stopPropagation();
+    e.preventDefault();
 
-      // Reset key sequence to wait next command.
+    // Reset key sequence to wait next command.
+    this.reset();
+  }
+  else if (candidate.length == 0) {
+    // Delegate key event to current mode processor if command candidates was not found.
+    if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
       this.reset();
     }
-    else if (candidate.length == 0) {
-      // Delegate key event to current mode processor if command candidates was not found.
-      if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
-        this.reset();
-      }
-    }
-  });
+  }
 });
 
 $(document).ready(function() {
