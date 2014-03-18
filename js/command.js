@@ -11,14 +11,14 @@ var Command = {};
  * Scroll down.
  */
 Command.scrollDown = function() {
-  Viewport.scrollVertical(parseInt(Options.scroll_amount));
+  Viewport.scrollVertical(parseInt(Opt.scroll_amount));
 };
 
 /**
  * Scroll up.
  */
 Command.scrollUp = function() {
-  Viewport.scrollVertical(-parseInt(Options.scroll_amount));
+  Viewport.scrollVertical(-parseInt(Opt.scroll_amount));
 };
 
 /**

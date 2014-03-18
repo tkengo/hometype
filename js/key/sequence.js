@@ -63,7 +63,7 @@ KeySequence.prototype.processor = function(e) {
     }
   }
 
-  this.setTimerForResetKeySequence(Options.command_interval);
+  this.setTimerForResetKeySequence(Opt.command_interval);
 };
 
 /**
