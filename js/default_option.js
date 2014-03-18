@@ -29,7 +29,8 @@ HometypeDefaultOptions = {
     'L': 'forwardHistory',
     'u': 'restoreTab',
     'U': 'searchClosedTabs',
-    '<C-h>': 'searchHistories'
+    '<C-h>': 'searchHistories',
+    '?': 'showAssignedCommands'
   },
   cmap: {
     'Esc': 'cancelCommandMode',
@@ -50,5 +51,8 @@ HometypeDefaultOptions = {
   fmap: {
     'Esc': 'cancelHintMode',
     '<C-c>': 'cancelHintMode'
+  },
+  hmap: {
+    'Esc': 'cancelHelpMode'
   }
 };

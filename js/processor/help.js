@@ -6,6 +6,7 @@ var HelpModeProcessor = function() {
  * Callback method that invoke when enter the help mode.
  */
 HelpModeProcessor.prototype.notifyEnterMode = function() {
+  this.helpBox = new HometypeHelpBox();
   this.helpBox.show();
 };
 

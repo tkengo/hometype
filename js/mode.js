@@ -6,6 +6,17 @@
  * Manage mode.
  */
 
+/**
+ * Mode list.
+ */
+var ModeList = {
+  NORMAL_MODE: 'normal',
+  INSERT_MODE: 'insert',
+  HINT_MODE: 'hint',
+  VISUAL_MODE: 'visual',
+  COMMAND_MODE: 'command',
+  HELP_MODE: 'help'
+};
 
 /**
  * Constructor.
