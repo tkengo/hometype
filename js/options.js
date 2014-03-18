@@ -14,7 +14,7 @@ var HometypeOptions = (function() {
   /**
    * Hometype options value.
    */
-  var options = HometypeDefaultOptions;
+  var options = {};
 
   /**
    * Callback functions that is invoked when an option value was loaded or changed.
