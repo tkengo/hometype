@@ -6,16 +6,6 @@
  * Manage mode.
  */
 
-/**
- * Mode list.
- */
-var ModeList = {
-  NORMAL_MODE: 'normal',
-  INSERT_MODE: 'insert',
-  HINT_MODE: 'hint',
-  VISUAL_MODE: 'visual',
-  COMMAND_MODE: 'command'
-};
 
 /**
  * Constructor.
@@ -31,6 +21,7 @@ var HometypeMode = function() {
   this.modeProcessors[ModeList.HINT_MODE]    = new HintModeProcessor();
   this.modeProcessors[ModeList.VISUAL_MODE]  = new VisualModeProcessor();
   this.modeProcessors[ModeList.COMMAND_MODE] = new CommandModeProcessor();
+  this.modeProcessors[ModeList.HELP_MODE]    = new HelpModeProcessor();
 };
 
 /**

@@ -23,7 +23,8 @@ var _map = {
   insert: {},
   hint: {},
   visual: {},
-  command: {}
+  command: {},
+  help: {}
 }
 
 /**
@@ -87,6 +88,10 @@ KeyMap.cmap = function(key, command) {
   KeyMap.assign(ModeList.COMMAND_MODE, key, command);
 };
 
+KeyMap.hmap = function(key, command) {
+  KeyMap.assign(ModeList.HELP_MODE, key, command);
+};
+
 /**
  * Get an array of command candidate that is assigned specified key.
  *
@@ -132,4 +137,8 @@ KeyMap.candidate = function(mode, key) {
  */
 KeyMap.command = function(mode, key) {
   return Command[_map[mode][key]];
+};
+
+KeyMap.assignedCommands = function() {
+  return _map;
 };
