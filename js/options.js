@@ -29,7 +29,7 @@ var HometypeOptions = (function() {
   function setOptions(results)
   {
     var oldOptions = $.extend(options, {});
-    options = $.extend(true, options, results);
+    options = $.extend(options, results);
 
     $.each(callbacks, function(index, callback) {
       if (typeof callback == 'function') {
