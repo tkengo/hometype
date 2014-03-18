@@ -7,16 +7,17 @@
  */
 
 // Set key binding if it was changed.
-HometypeOptions.getInstance().onLoaded(function(options) {
+var loadCallback = function(options) {
   KeyMap.clear();
 
-  $.each(ModeList, function(key, mode) {
-    map = mode.substr(0, 1) + 'map';
-    $.each(options[map] || {}, function(key, command) {
+  $.each(options.key_bind, function(map, bind) {
+    $.each(bind, function(key, command) {
       KeyMap[map](key, command);
     });
   });
-});
+};
+HometypeOptions.getInstance().load(loadCallback);
+HometypeOptions.getInstance().onLoaded(loadCallback);
 
 // Set an event listener to the key sequence object when options have loaded.
 var key = new KeySequence();
