@@ -17,15 +17,26 @@ var HometypeOptions = (function() {
   var options = HometypeDefaultOptions;
 
   /**
+   * Callback functions that is invoked when an option value was loaded or changed.
+   */
+  var callbacks = [];
+
+  /**
    * Set options value to this object. This method is invoked in initialization
    * and receiving a notification from event page script when options value was
    * changed.
    */
   function setOptions(results)
   {
+    var oldOptions = $.extend(options, {});
+
     for (var key in results) {
       options[key] = results[key];
     }
+
+    $.each(callbacks, function(index, callback) {
+      callback(options, oldOptions);
+    });
   }
 
   /**
@@ -34,7 +45,16 @@ var HometypeOptions = (function() {
   function createInstance()
   {
     return {
-      options: options
+      /**
+       * options value
+       */
+      options: options,
+      /**
+       * Set callback method that is invoked when an option value was loaded or changed.
+       */
+      onLoaded: function(callback) {
+        callbacks.push(callback);
+      }
     };
   }
 
