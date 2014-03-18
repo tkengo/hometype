@@ -32,7 +32,9 @@ var HometypeOptions = (function() {
     options = $.extend(true, options, results);
 
     $.each(callbacks, function(index, callback) {
-      callback(options, oldOptions);
+      if (typeof callback == 'function') {
+        callback(options, oldOptions);
+      }
     });
   }
 
@@ -47,6 +49,16 @@ var HometypeOptions = (function() {
        */
       options: options,
       /**
+       * Load options in this instance.
+       */
+      load: function(callback) {
+        chrome.runtime.sendMessage({ command: 'getOptions' }, function(results) {
+          callbacks.push(callback);
+          setOptions(results);
+          callbacks.pop();
+        });
+      },
+      /**
        * Set callback method that is invoked when an option value was loaded or changed.
        */
       onLoaded: function(callback) {
@@ -54,9 +66,6 @@ var HometypeOptions = (function() {
       }
     };
   }
-
-  // Load options.
-  chrome.runtime.sendMessage({ command: 'getOptions' }, setOptions);
 
   // Set event listener to notify for this object when options value was changed.
   chrome.runtime.connect({ name: 'notifyOptions' }).onMessage.addListener(setOptions);
