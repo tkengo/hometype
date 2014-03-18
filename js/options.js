@@ -14,7 +14,7 @@ var HometypeOptions = (function() {
   /**
    * Hometype options value.
    */
-  var options = {};
+  var options = HometypeDefaultOptions;
 
   /**
    * Set options value to this object. This method is invoked in initialization
