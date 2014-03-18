@@ -34,12 +34,12 @@ var HometypeTab = function() {
 };
 
 HometypeTab.prototype.createAction = function(tab) {
-  context.tabs[tab.id] = tab;
+  this.tabs[tab.id] = tab;
   this.history.set(tab.id, [ { url: tab.url, title: tab.title } ]);
 };
 
 HometypeTab.prototype.removeAction = function(tab) {
-  delete context.tabs[tab.id];
+  delete this.tabs[tab.id];
   this.history.remove(tab.id);
 };
 
