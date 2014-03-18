@@ -21,7 +21,7 @@ var HometypeOptions = (function() {
    * and receiving a notification from event page script when options value was
    * changed.
    */
-  function setOptions(loadedOptions)
+  function setOptions(results)
   {
     for (var key in results) {
       options[key] = results[key];
