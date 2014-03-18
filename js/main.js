@@ -10,7 +10,8 @@
 HometypeOptions.getInstance().onLoaded(function(options) {
   KeyMap.clear();
 
-  $.each([ 'nmap', 'cmap', 'imap', 'vmap', 'fmap' ], function(index, map) {
+  $.each(ModeList, function(key, mode) {
+    map = mode.substr(0, 1) + 'map';
     $.each(options[map] || {}, function(key, command) {
       KeyMap[map](key, command);
     });
