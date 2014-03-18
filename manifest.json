@@ -44,7 +44,6 @@
       "js/key/identifiers.js",
       "js/key/sequence.js",
       "js/key/map.js",
-      "js/config.js",
       "js/viewport.js",
       "js/box/select.js",
       "js/box/command.js",
