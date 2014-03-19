@@ -41,6 +41,8 @@ dl dt, dl dd {
 #key_bind_list {
   width: 365px;
   height: 500px;
+  font-family: Monaco, Consolas, 'Courier New', Courier, monospace;
+  font-size: 10px;
 }
 
 .clearfix {
