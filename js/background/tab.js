@@ -18,7 +18,7 @@ var HometypeTab = function() {
   chrome.tabs.onDetached.addListener($.proxy(this.removeAction, this));
 
   chrome.tabs.onRemoved.addListener(function(tabId, removeInfo) {
-    context.closedTabStacks.push(context.tabs[tabId]);
+    context.closedTabStacks.unshift(context.tabs[tabId]);
   });
   chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
     context.tabs[tabId] = tab;
