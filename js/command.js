@@ -156,7 +156,8 @@ Command.searchClosedTabs = function() {
       var list = [];
       $.each(closedTabs, function(index, tab) {
         if (Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
-          list.push({ text: tab.title + '(' + tab.url + ')', url: tab.url, tabId: tab.id });
+          var listText = Utility.pad(index + 1, 2) + ': ' + tab.title + '(' + tab.url + ')';
+          list.push({ text: listText, url: tab.url, tabId: tab.id });
         }
       });
       return list;
