@@ -131,29 +131,14 @@ Command.restoreTab = function() {
  * Focus first element in window.
  */
 Command.focusFirstInput = function() {
-  var element = $(':text:screen:first');
-  if (element.length > 0) {
-    element.focus();
-  }
-  else {
-    $('textarea:screen:first').focus();
-  }
+  $(':insertable:screen:first').focus();
 };
 
 /**
  * Focus last element in window.
  */
 Command.focusLastInput = function() {
-  var element = $(':text:screen:last');
-  if (element.length > 0) {
-    var textarea = $('textarea:screen:last');
-    if (textarea.length > 0) {
-      textarea.focus();
-    }
-    else {
-      element.focus();
-    }
-  }
+  $(':insertable:screen:last').focus();
 };
 
 /**
