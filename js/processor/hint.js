@@ -6,7 +6,8 @@
  * Hint mode processor.
  */
 var HintModeProcessor = function() {
-  this.callback     = null;
+  this.chooseElementCallback   = null;
+  this.notifyLeaveModeCallback = null;
   this.hintElements = null;
 };
 
@@ -14,8 +15,13 @@ var HintModeProcessor = function() {
  * Callback method that invoke when leave the hint mode.
  */
 HintModeProcessor.prototype.notifyLeaveMode = function() {
-  this.callback = null;
+  this.chooseElementCallback = null;
   this.hintElements.removeAllHint();
+
+  if (this.notifyLeaveModeCallback) {
+    this.notifyLeaveModeCallback();
+    this.notifyLeaveModeCallback = null;
+  }
 };
 
 /**
@@ -42,7 +48,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     var element = elements[0].getElement();
 
     // Invoke a callback method if an element is confirmed.
-    if (this.callback && this.callback(element) !== false) {
+    if (this.chooseElementCallback && this.chooseElementCallback(element) !== false) {
       // Return normal mode if only callback didn't return false.
       Mode.changeMode(ModeList.NORMAL_MODE);
     }
@@ -76,8 +82,12 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
 /**
  * Set a callback method that is invoked when a hint is confirmed.
  *
- * @param function callback Callback method.
+ * @param function chooseElementCallback Callback method.
  */
-HintModeProcessor.prototype.onChooseElement = function(callback) {
-  this.callback = callback;
+HintModeProcessor.prototype.onChooseElement = function(chooseElementCallback) {
+  this.chooseElementCallback = chooseElementCallback;
+};
+
+HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
+  this.notifyLeaveModeCallback = notifyLeaveModeCallback;
 };
