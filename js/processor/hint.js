@@ -8,7 +8,6 @@
 var HintModeProcessor = function() {
   this.callback     = null;
   this.hintElements = null;
-  this.selectBox    = null;
 };
 
 /**
@@ -17,10 +16,6 @@ var HintModeProcessor = function() {
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.callback = null;
   this.hintElements.removeAllHint();
-
-  if (this.selectBox) {
-    this.selectBox.remove();
-  }
 };
 
 /**
