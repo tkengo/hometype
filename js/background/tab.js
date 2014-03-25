@@ -63,7 +63,7 @@ HometypeTab.prototype.openClosedTab = function(tabId) {
     }
   }
   else {
-    tab = this.closedTabStacks.pop();
+    tab = this.closedTabStacks.shift();
   }
 
   var params = {
