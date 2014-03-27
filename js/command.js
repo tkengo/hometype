@@ -271,7 +271,7 @@ Command.enterHintMode = function() {
   // Collect hint source targets.
   // Element already pushed to target is not pushed.
   var targets = [];
-  $(':clickable:screen, :submittable:screen, textarea:screen, :file:screen, :text:screen, :password:screen, :button:screen').each(function() {
+  $(':clickable:screen, :submittable:screen, :insertable:screen, :file:screen, :button:screen').each(function() {
     var currentTarget = $(this);
     if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
       targets.push(currentTarget);
@@ -283,7 +283,7 @@ Command.enterHintMode = function() {
     // and register choose element event listener.
     var processor = Mode.enterHintMode('yellow', targets);
     processor.onChooseElement(function(element) {
-      if (element.is('textarea, :text, :password, [contenteditable]')) {
+      if (element.is(':insertable')) {
         // If choosen element is form tag, focus to it.
         element.focus();
         return false;
