@@ -8,7 +8,7 @@
 var HometypeTab = function() {
   this.tabs = {};
   this.history = new HometypeHistory();
-  this.closedTabStacks = [];
+  this.closedTabStacks = JSON.parse(localStorage.getItem('closedTabs')) || [];
 
   this.loadAllTabs();
   chrome.tabs.onCreated.addListener($.proxy(this.createAction, this));
@@ -52,8 +52,9 @@ HometypeTab.prototype.removeAction = function(tabId) {
   if (this.closedTabStacks.length > 20) {
     this.closedTabStacks.shift();
   }
-  this.history.remove(tabId);
+  localStorage.setItem('closedTabs', JSON.stringify(this.closedTabStacks));
 
+  this.history.remove(tabId);
   delete this.tabs[tabId];
 };
 
@@ -109,6 +110,7 @@ HometypeTab.prototype.openClosedTab = function(tabId) {
   else {
     tab = this.closedTabStacks.shift();
   }
+  localStorage.setItem('closedTabs', JSON.stringify(this.closedTabStacks));
 
   var params = {
     windowId: tab.windowId,
