@@ -16,6 +16,9 @@ var HometypeTab = function() {
   chrome.tabs.onUpdated.addListener($.proxy(this.updateAction, this));
 };
 
+/**
+ * Load all tabs of current window for this object.
+ */
 HometypeTab.prototype.loadAllTabs = function() {
   var context = this;
   chrome.windows.getCurrent({ populate: true }, function(window) {
@@ -26,11 +29,24 @@ HometypeTab.prototype.loadAllTabs = function() {
   });
 };
 
+/**
+ * The method that is invoked when a new tab is created.
+ * The tab is saved to this object, and set its first history.
+ *
+ * @param integer tab A new tab object.
+ */
 HometypeTab.prototype.createAction = function(tab) {
   this.tabs[tab.id] = tab;
   this.history.set(tab.id, [ { url: tab.url, title: tab.title } ]);
 };
 
+/**
+ * The method that is invoked when a tab is removed.
+ * The tab is saved to this object as closed tab, and remove
+ * from its history. Last, it is deleted from this object.
+ *
+ * @param integer tab Removed tab id.
+ */
 HometypeTab.prototype.removeAction = function(tabId) {
   this.closedTabStacks.unshift(this.tabs[tabId]);
   this.history.remove(tabId);
@@ -38,6 +54,13 @@ HometypeTab.prototype.removeAction = function(tabId) {
   delete this.tabs[tabId];
 };
 
+/**
+ * The method that is invoked when a tab is updated.
+ *
+ * @param integer tabId      Updated tab id.
+ * @param object  changeInfo Lists the changes to the state of the tab that was updated.
+ * @param integer tab        Updated tab.
+ */
 HometypeTab.prototype.updateAction = function(tabId, changeInfo, tab) {
   this.tabs[tabId] = tab;
 
@@ -50,14 +73,21 @@ HometypeTab.prototype.updateAction = function(tabId, changeInfo, tab) {
   }
 };
 
-HometypeTab.prototype.storeClosedTab = function(tabId, removeInfo) {
-  this.closedTabStacks.unshift(context.tabs[tabId]);
-};
-
+/**
+ * Get histories.
+ *
+ * @param integer tabId The tab's id you want to get histories.
+ * @return array tab's histories.
+ */
 HometypeTab.prototype.getHistories = function(tabId) {
   return this.history.get(tabId);
 };
 
+/**
+ * Open recent closed tab.
+ *
+ * @param integer tabId The tab's id
+ */
 HometypeTab.prototype.openClosedTab = function(tabId) {
   if (this.closedTabStacks.length == 0) {
     return;
@@ -87,6 +117,11 @@ HometypeTab.prototype.openClosedTab = function(tabId) {
   chrome.tabs.create(params);
 };
 
+/**
+ * Get closed tab list.
+ *
+ * @return array closed tab list.
+ */
 HometypeTab.prototype.getClosedTabList = function() {
   return this.closedTabStacks;
 };
