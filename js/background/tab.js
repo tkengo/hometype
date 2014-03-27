@@ -49,6 +49,9 @@ HometypeTab.prototype.createAction = function(tab) {
  */
 HometypeTab.prototype.removeAction = function(tabId) {
   this.closedTabStacks.unshift(this.tabs[tabId]);
+  if (this.closedTabStacks.length > 20) {
+    this.closedTabStacks.shift();
+  }
   this.history.remove(tabId);
 
   delete this.tabs[tabId];
