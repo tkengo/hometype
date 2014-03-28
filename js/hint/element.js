@@ -19,8 +19,11 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.index     = index;
   this.key       = key;
 
-  this.srcElement = $(srcElement);
-  this.srcElement.addClass(this.className + '-area');
+  this.srcElement = srcElement;
+  // this.srcElement.addClass(this.className + '-area');
+  this.srcElement.className ?
+    this.srcElement.className += ' ' + this.className :
+    this.srcElement.className  = this.className;
 
   this.rawTipElement = this.createTipElement();
 };
@@ -31,8 +34,9 @@ var HintElement = function(srcElement, index, key, hintTheme) {
  */
 HintElement.prototype.createTipElement = function() {
   var top = 0, left = 0;
+  var rect = this.srcElement.getClientRects()[0];
 
-  if (this.srcElement.tag() == 'area') {
+  if (this.srcElement.tagName == 'area') {
     // Get a position from coords attribute if an element is a clickable map.
     var coords = this.srcElement.attr('coords').split(',');
     top = coords[1];
@@ -40,33 +44,49 @@ HintElement.prototype.createTipElement = function() {
   }
   else {
     // Usually get a position from an element offset.
-    top  = this.srcElement.offset().top - 10;
-    left = this.srcElement.offset().left - 10;
+    top  = rect.top  - 10;
+    left = rect.left - 10;
   }
 
   // Correct an element position if it is out of display.
-  if (top < Viewport.getScrollPosition().top) {
-    top = Viewport.getScrollPosition().top;
+  if (top < 0) {
+    top = 0;
   }
   if (left < 0) {
     left = 0;
   }
 
-  // Create a hint tip element in a calclated position.
-  var div = $('<div>').css({
-    'top': top + 'px',
-    'left': left + 'px'
-  }).addClass(this.className + ' hometype-hit-a-hint-base');
-
   // Set hint keys to a hint tip element.
+  var tipHtml = '';
   for (var i in this.key) {
-    div.append($('<span>').text(this.key[i]));
+    tipHtml += '<span>' + this.key[i] + '</span>';
   }
+  this.elementId = 'hometype-hit-a-hint-element-' + this.key;
 
-  // Set unique ID attribute to a hint tip element and return it.
-  this.elementId = 'hometype-hit-a-hint-element-' + div.text();
-  div.attr({ 'id': this.elementId })
-  return div;
+  var tip = document.createElement('div');
+  tip.className     = this.className + ' hometype-hit-a-hint-base';
+  tip.clickableItem = this.srcElement;
+  tip.style.left    = rect.left + window.scrollX + 'px';
+  tip.style.top     = rect.top  + window.scrollY  + 'px';
+  tip.rect          = rect;
+  tip.innerHTML     = tipHtml;
+  tip.id            = this.elementId;
+
+  // // Create a hint tip element in a calclated position.
+  // var div = $('<div>').css({
+  //   'top': (top + Viewport.getScrollPosition().top) + 'px',
+  //   'left': left + 'px'
+  // }).addClass(this.className + ' hometype-hit-a-hint-base');
+
+  // // Set hint keys to a hint tip element.
+  // for (var i in this.key) {
+  //   div.append($('<span>').text(this.key[i]));
+  // }
+
+  // // Set unique ID attribute to a hint tip element and return it.
+  // this.elementId = 'hometype-hit-a-hint-element-' + div.text();
+  // div.attr({ 'id': this.elementId })
+  return tip;
 };
 
 /**
@@ -109,7 +129,7 @@ HintElement.prototype.setPushed = function() {
  * Remove hint tip element.
  */
 HintElement.prototype.removeHintTip = function(animate) {
-  this.getElement().removeClass(this.className + '-area');
+  this.srcElement.className = this.srcElement.className.replace(this.className, '');
   if (animate === false) {
     this.getTipElement().remove();
   }

@@ -12,15 +12,20 @@ var HintElementCollection = function(hintTheme, target) {
   this.hintKeys = [];
 
   tipText = '';
+  parent = document.createElement("div");
   $.each(this.htmlElements, $.proxy(function(index, element) {
     var key = this.nextHintKey();
-    var element = new HintElement($(element), index, key, this.hintTheme);
+    var element = new HintElement(element, index, key, this.hintTheme);
     this.elements.push(element);
     this.hintKeys.push({ index: index, key: key });
-    tipText += element.getRawTipElement().get(0).outerHTML;
+    // tipText += element.getRawTipElement().get(0).outerHTML;
+    parent.appendChild(element.getRawTipElement());
   }, this));
+  console.log('b:' + Date.now());
 
-  $('html').append(tipText);
+  document.documentElement.appendChild(parent);
+  console.log('c:' + Date.now());
+  // $('html').append(tipText);
 };
 
 HintElementCollection.prototype.getElements = function() {
@@ -56,7 +61,9 @@ HintElementCollection.prototype.removeAllHint = function() {
 };
 
 HintElementCollection.prototype.show = function() {
+  console.log('d:' + Date.now());
   $('.hometype-hit-a-hint-base').fadeIn(100);
+  console.log('e:' + Date.now());
 };
 
 HintElementCollection.prototype.nextHintKey = function() {

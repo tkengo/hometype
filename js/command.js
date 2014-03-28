@@ -271,12 +271,48 @@ Command.enterHintMode = function() {
   // Collect hint source targets.
   // Element already pushed to target is not pushed.
   var targets = [];
-  $(':clickable:screen, :submittable:screen, :insertable:screen, :file:screen, :button:screen').each(function() {
-    var currentTarget = $(this);
-    if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
-      targets.push(currentTarget);
+  // $(':clickable:screen, :submittable:screen, :insertable:screen, :file:screen, :button:screen').each(function() {
+  //   var currentTarget = $(this);
+  //   if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
+  //     targets.push(currentTarget);
+  //   }
+  // });
+
+  xpath = [
+    "//a", "//textarea", "//button", "//select",
+    "//input[not(@type='hidden' or @disabled or @readonly)]",
+    "//*[@onclick or @tabindex or @contenteditable='true' or @contenteditable='']"
+  ].join(' | ');
+  results = document.evaluate(xpath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
+
+  var count = 0;
+  for (var i = 0; i < results.snapshotLength; i++) {
+    var element = results.snapshotItem(i);
+    var rect = element.getClientRects()[0];
+
+    if (!rect) {
+      count++;
     }
-  });
+    rect = rect || {};
+    var visibleInPosition = rect.bottom > 0 && rect.top  < window.innerHeight &&
+                            rect.right  > 0 && rect.left < window.innerWidth;
+
+    if (!visibleInPosition) {
+      continue;
+    }
+
+    var computedStyle  = window.getComputedStyle(element, null);
+    var visibleInStyle = computedStyle.getPropertyValue('visibility') == 'visible' &&
+                         computedStyle.getPropertyValue('display')    != 'none'    &&
+                         computedStyle.getPropertyValue('opacity')    != '100';
+
+    if (!visibleInStyle) {
+      continue;
+    }
+
+    targets.push(element);
+  }
+  console.log('a:' + Date.now());
 
   if (targets.length > 0) {
     // If there are at least one target elements, enter the hint mode with yellow theme,
