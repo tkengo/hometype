@@ -58,10 +58,10 @@ $(document).ready(function() {
   $(document.activeElement).blur();
 
   Mode.onModeChange(function(mode) {
-    $('.hometype-current-mode').remove();
-    if (mode != ModeList.NORMAL_MODE) {
-      var modeElement = $('<div>').addClass('hometype-current-mode').text(mode + ' mode');
-      modeElement.appendTo($('body')).css('opacity', 0.4).fadeTo('slow', 1.0);
-    }
+    // $('.hometype-current-mode').remove();
+    // if (mode != ModeList.NORMAL_MODE) {
+    //   var modeElement = $('<div>').addClass('hometype-current-mode').text(mode + ' mode');
+    //   modeElement.appendTo($('body')).css('opacity', 0.4).fadeTo('slow', 1.0);
+    // }
   });
 });

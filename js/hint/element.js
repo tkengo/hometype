@@ -22,8 +22,8 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.srcElement = srcElement;
   // this.srcElement.addClass(this.className + '-area');
   this.srcElement.className ?
-    this.srcElement.className += ' ' + this.className :
-    this.srcElement.className  = this.className;
+    this.srcElement.className += ' ' + this.className + '-area' :
+    this.srcElement.className  =       this.className + '-area';
 
   this.rawTipElement = this.createTipElement();
 };
@@ -66,8 +66,8 @@ HintElement.prototype.createTipElement = function() {
   var tip = document.createElement('div');
   tip.className     = this.className + ' hometype-hit-a-hint-base';
   tip.clickableItem = this.srcElement;
-  tip.style.left    = rect.left + window.scrollX + 'px';
-  tip.style.top     = rect.top  + window.scrollY  + 'px';
+  tip.style.left    = left + window.scrollX + 'px';
+  tip.style.top     = top  + window.scrollY  + 'px';
   tip.rect          = rect;
   tip.innerHTML     = tipHtml;
   tip.id            = this.elementId;
@@ -129,7 +129,7 @@ HintElement.prototype.setPushed = function() {
  * Remove hint tip element.
  */
 HintElement.prototype.removeHintTip = function(animate) {
-  this.srcElement.className = this.srcElement.className.replace(this.className, '');
+  this.srcElement.className = this.srcElement.className.replace(this.className + '-area', '');
   if (animate === false) {
     this.getTipElement().remove();
   }

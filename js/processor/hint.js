@@ -76,7 +76,7 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
   }
 
   this.hintElements = new HintElementCollection(theme, elements);
-  this.hintElements.show();
+  // this.hintElements.show();
 };
 
 /**

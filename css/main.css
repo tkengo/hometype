@@ -8,7 +8,7 @@
   color:#222222;
   z-index:1000001;
   font-family:'Osaka-Mono';
-  display:none;
+  /* display:none; */
 }
 .hometype-hit-a-hint-border {
   border:dashed 1px #900;

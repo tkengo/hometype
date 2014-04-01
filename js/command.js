@@ -285,15 +285,10 @@ Command.enterHintMode = function() {
   ].join(' | ');
   results = document.evaluate(xpath, document, null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null)
 
-  var count = 0;
   for (var i = 0; i < results.snapshotLength; i++) {
     var element = results.snapshotItem(i);
-    var rect = element.getClientRects()[0];
+    var rect = element.getClientRects()[0] || {};
 
-    if (!rect) {
-      count++;
-    }
-    rect = rect || {};
     var visibleInPosition = rect.bottom > 0 && rect.top  < window.innerHeight &&
                             rect.right  > 0 && rect.left < window.innerWidth;
 
@@ -312,7 +307,6 @@ Command.enterHintMode = function() {
 
     targets.push(element);
   }
-  console.log('a:' + Date.now());
 
   if (targets.length > 0) {
     // If there are at least one target elements, enter the hint mode with yellow theme,
