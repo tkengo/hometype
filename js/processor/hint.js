@@ -48,7 +48,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     var element = elements[0].getElement();
 
     // Invoke a callback method if an element is confirmed.
-    if (this.chooseElementCallback && this.chooseElementCallback(element) !== false) {
+    if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
       // Return normal mode if only callback didn't return false.
       Mode.changeMode(ModeList.NORMAL_MODE);
     }
@@ -76,7 +76,7 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
   }
 
   this.hintElements = new HintElementCollection(theme, elements);
-  this.hintElements.show();
+  // this.hintElements.show();
 };
 
 /**

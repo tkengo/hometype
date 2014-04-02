@@ -34,7 +34,7 @@ var HometypeSelectBox = function(select) {
       select.get(0).dispatchEvent(event);
     });
 
-    context.items.push(li);
+    context.items.push(li.get(0));
   });
 };
 
