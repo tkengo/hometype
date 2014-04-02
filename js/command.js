@@ -267,7 +267,7 @@ Command.backwardContentEditable = function() {
 /**
  * Enter the hint mode. Hint targets are clicable and form elements.
  */
-Command.enterHintMode = function() {
+Command.enterHintMode = function(option) {
   // Collect hint source targets.
   var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
 
@@ -291,6 +291,9 @@ Command.enterHintMode = function() {
       else {
         // Otherwise, emulate click event for element.
         Utility.clickElement(element);
+        if (option.continuous) {
+          return false;
+        }
       }
     });
   }
