@@ -107,11 +107,13 @@ KeyMap.candidate = function(mode, key) {
     if (keyMap.indexOf(key) == 0) {
       var map = maps[keyMap];
 
-      var command = '', args = [];
+      var command = '', args = {};
       if (map instanceof Array) {
         map = map.slice(0);
         command = map.shift();
-        args = map;
+        for (var i in map) {
+          args[map[i].replace('--', '')] = true;
+        }
       }
       else {
         command = map;
