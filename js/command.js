@@ -270,7 +270,7 @@ Command.backwardContentEditable = function() {
 Command.enterHintMode = function() {
   // Collect hint source targets.
   // Element already pushed to target is not pushed.
-  var targets = Dom.getClickableAndVisibleElements();
+  var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
 
   if (targets.length > 0) {
     // If there are at least one target elements, enter the hint mode with yellow theme,
