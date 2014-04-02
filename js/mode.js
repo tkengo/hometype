@@ -67,7 +67,6 @@ HometypeMode.prototype.changeMode = function(modeName) {
       callback.call(callback, this.mode, oldMode);
     }
   }
-  console.log('z:' + Date.now());
 
   // Notify the current mode processor that mode has changed.
   var oldProcessor     = this.getProcessor(oldMode);
@@ -91,9 +90,7 @@ HometypeMode.prototype.changeMode = function(modeName) {
  * @return Object hint mode processor.
  */
 HometypeMode.prototype.enterHintMode = function(theme, targets) {
-  console.log('x:' + Date.now());
   var processor = this.changeMode(ModeList.HINT_MODE);
-  console.log('s:' + Date.now());
   processor.createHints(theme, targets);
   return processor;
 };

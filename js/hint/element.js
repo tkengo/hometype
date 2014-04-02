@@ -20,7 +20,6 @@ var HintElement = function(srcElement, index, key, hintTheme) {
   this.key       = key;
 
   this.srcElement = srcElement;
-  // this.srcElement.addClass(this.className + '-area');
   this.srcElement.className ?
     this.srcElement.className += ' ' + this.className + '-area' :
     this.srcElement.className  =       this.className + '-area';
@@ -72,20 +71,6 @@ HintElement.prototype.createTipElement = function() {
   tip.innerHTML     = tipHtml;
   tip.id            = this.elementId;
 
-  // // Create a hint tip element in a calclated position.
-  // var div = $('<div>').css({
-  //   'top': (top + Viewport.getScrollPosition().top) + 'px',
-  //   'left': left + 'px'
-  // }).addClass(this.className + ' hometype-hit-a-hint-base');
-
-  // // Set hint keys to a hint tip element.
-  // for (var i in this.key) {
-  //   div.append($('<span>').text(this.key[i]));
-  // }
-
-  // // Set unique ID attribute to a hint tip element and return it.
-  // this.elementId = 'hometype-hit-a-hint-element-' + div.text();
-  // div.attr({ 'id': this.elementId })
   return tip;
 };
 
