@@ -269,7 +269,6 @@ Command.backwardContentEditable = function() {
  */
 Command.enterHintMode = function() {
   // Collect hint source targets.
-  // Element already pushed to target is not pushed.
   var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
 
   if (targets.length > 0) {
@@ -302,13 +301,8 @@ Command.enterHintMode = function() {
  * Open a new window if click a hint.
  */
 Command.enterNewWindowHintMode = function() {
-  var targets = [];
-  $(':clickable:screen:not(select), :submittable:screen:not(select)').each(function() {
-    var currentTarget = $(this);
-    if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
-      targets.push(currentTarget);
-    }
-  });
+  // Collect hint source targets.
+  var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
 
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('blue', targets);
