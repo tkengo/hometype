@@ -10,7 +10,7 @@
 var loadCallback = function(options) {
   KeyMap.clear();
 
-  $.each(options.key_bind, function(map, bind) {
+  $.each($.extend(options.default_key_bind, options.key_bind), function(map, bind) {
     $.each(bind, function(key, command) {
       KeyMap[map](key, command);
     });
