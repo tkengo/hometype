@@ -108,15 +108,15 @@ KeyMap.candidate = function(mode, key) {
       var map = maps[keyMap];
 
       var command = '', args = {};
-      if (map instanceof Array) {
-        map = map.slice(0);
-        command = map.shift();
-        for (var i in map) {
-          args[map[i].replace('--', '')] = true;
-        }
+      splitted = map.split(' ');
+      if (splitted.length == 1) {
+        command = map;
       }
       else {
-        command = map;
+        command = splitted.shift();
+        for (var i in splitted) {
+          args[splitted[i].replace('--', '')] = true;
+        }
       }
 
       result.push({
