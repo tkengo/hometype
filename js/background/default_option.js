@@ -1,7 +1,7 @@
 HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
-  key_bind: {
+  default_key_bind: {
     nmap: {
       'j': 'scrollDown',
       'k': 'scrollUp',
