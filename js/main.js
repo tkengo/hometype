@@ -27,7 +27,7 @@ key.onProcess(function (e, sequence, stack, currentKey) {
 
   if (candidate.length == 1 && candidate[0].key == sequence) {
     // Execute the command if decided.
-    candidate[0].command.apply(window, candidate[0].args);
+    candidate[0].command(candidate[0].args);
     e.stopPropagation();
     e.preventDefault();
 
