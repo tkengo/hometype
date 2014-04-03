@@ -292,6 +292,7 @@ Command.enterHintMode = function(option) {
         // Otherwise, emulate click event for element.
         Utility.clickElement(element);
         if (option.continuous) {
+          processor.createHints('yellow', Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath()));
           return false;
         }
       }
