@@ -10,7 +10,7 @@
 var loadCallback = function(options) {
   KeyMap.clear();
 
-  $.each(options.key_bind, function(map, bind) {
+  $.each($.extend(options.default_key_bind, options.key_bind), function(map, bind) {
     $.each(bind, function(key, command) {
       KeyMap[map](key, command);
     });
@@ -27,7 +27,7 @@ key.onProcess(function (e, sequence, stack, currentKey) {
 
   if (candidate.length == 1 && candidate[0].key == sequence) {
     // Execute the command if decided.
-    candidate[0].command.apply(window, candidate[0].args);
+    candidate[0].command(candidate[0].args);
     e.stopPropagation();
     e.preventDefault();
 
