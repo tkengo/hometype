@@ -1,7 +1,3 @@
-beforeEach(function() {
-  this.addMatchers(customMatchers);
-});
-
 describe('HometypeOption', function() {
   beforeEach(function() {
     this.instance = HometypeOptions.getInstance();
@@ -12,6 +8,14 @@ describe('HometypeOption', function() {
   });
 
   it('should modify option value', function() {
-    expect(this.instance.option).toBeEmpty();
+    expect(this.instance.options).toBeEmpty();
+
+    var option1 = { lv1: { lv2_1: 'test1', lv2_2: 'test2' } };
+    mock.fireEvent('chrome.runtime.connect.onMessage', option1);
+    expect(this.instance.options).toBe(option1);
+//
+//     var option2 = { lv1: { lv2_2: 'deep merge' } };
+//     this.instance.setOption(option2);
+//     expect(this.instance.option).toBe({ lv1: { lv2_1: 'test1', lv2_2: 'deep merge' } });
   });
 });
