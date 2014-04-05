@@ -7,15 +7,44 @@ describe('HometypeOption', function() {
     expect(this.instance).toBe(HometypeOptions.getInstance());
   });
 
-  it('should modify option value', function() {
+  it('should have empty option value at first', function() {
     expect(this.instance.options).toBeEmpty();
+  });
 
-    var option1 = { lv1: { lv2_1: 'test1', lv2_2: 'test2' } };
-    mock.fireEvent('chrome.runtime.connect.onMessage', option1);
-    expect(this.instance.options).toBe(option1);
-//
-//     var option2 = { lv1: { lv2_2: 'deep merge' } };
-//     this.instance.setOption(option2);
-//     expect(this.instance.option).toBe({ lv1: { lv2_1: 'test1', lv2_2: 'deep merge' } });
+  describe('loading options', function() {
+    var option = { lv1: { lv2_1: 'test1', lv2_2: 'test2' } };
+
+    beforeEach(function(done) {
+      loadOption.call(this, done, option);
+    });
+
+    it('should be loaded options value', function(done) {
+      expect(this.instance.options).toEqual(option);
+      done();
+    });
+  });
+
+  describe('callback registration', function() {
+    var loadedCallback = { callback: function() { } };;
+
+    beforeEach(function(done) {
+      spyOn(loadedCallback, 'callback');
+      this.instance.onLoaded(loadedCallback.callback);
+
+      loadOption.call(this, done, {});
+    });
+
+    it('should invoke callback method when option value was changed', function(done) {
+      expect(loadedCallback.callback).toHaveBeenCalled();
+      done();
+    });
   });
 });
+
+function loadOption(done, option) {
+  chrome.runtime.sendMessage = function(params, callback) {
+    callback(option);
+    done();
+  };
+  this.instance.load();
+}
