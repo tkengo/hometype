@@ -2,6 +2,8 @@
 
 Google Chrome をキーボードで操作するための拡張機能です。
 
+[![wercker status](https://app.wercker.com/status/ae1d66ed438061ad9bf7d19b4c00f0c2/s/ "wercker status")](https://app.wercker.com/project/bykey/ae1d66ed438061ad9bf7d19b4c00f0c2)
+
 # 操作方法
 
 以下のキーがデフォルトキーバインドとして設定されています。
