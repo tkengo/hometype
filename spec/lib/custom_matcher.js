@@ -3,7 +3,7 @@ var customMatchers = {
     return {
       compare: function(actual, expected) {
         return {
-          pass: actual == {} || actual == undefined
+          pass: util.equals(actual, {}) || actual == undefined
         };
       }
     };
