@@ -1,0 +1,9 @@
+box: wercker/nodejs@1.0.2
+build:
+    steps:
+        - aussiegeek/install-phantomjs@0.0.3
+        - npm-install
+        - npm-test
+        - script:
+            name: execute test
+            code: ./node_modules/karma/bin/karma start
