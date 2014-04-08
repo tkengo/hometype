@@ -120,6 +120,7 @@ h1, h2 {
 }
 .mode-list li {
   width: 300px;
+  height: 450px;
   float: left;
   margin: 0 20px;
 }
