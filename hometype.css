@@ -1,0 +1,132 @@
+html, body, h1, h2, hr, ul, li {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+}
+
+a, a:visited {
+  color: #4086cc;
+  text-decoration: none;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
+
+.header {
+  background-color: #4eb800;
+  height: 500px;
+  color: #fff;
+}
+.header-inner {
+  margin: 0 auto;
+  padding-top: 120px;
+  width: 1000px;
+}
+.header-description-area {
+  width: 600px;
+  margin-right: 50px;
+  float: left;
+}
+.header-description-area h1 {
+  color: #f5e8a3;
+  font-size: 40px;
+}
+.header-description-area h2 {
+  margin-top: 10px;
+  line-height: 150%;
+}
+.store {
+  border: solid 1px #fff;
+  border-radius: 4px;
+  width: 240px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 24px;
+  display: block;
+  color: #fff;
+  margin-top: 30px;
+}
+
+.container {
+  width: 1020px;
+  margin: 0 auto;
+}
+.container-header {
+  padding: 40px 0 20px 0;
+  font-size: 26px;
+}
+
+.separator {
+  border-width: 0;
+  border-bottom: solid 1px #ddd;
+}
+
+.latest-news {
+  font-size: 13px;
+  height: 75px;
+  line-height: 75px;
+  color: #7e7e7e;
+  text-align: center;
+  background-color: #ecf0f3;
+}
+.latest-news-commit-area {
+  margin-left: 20px;
+}
+.latest-news-update-date {
+  color: #222;
+}
+
+.introduction {
+  text-align: center;
+  background-color: #ecf0f3;
+  height: 300px;
+}
+.introduction-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.introduction-cell {
+  list-style: none;
+  float: left;
+  background-color: #fff;
+  width: 235px;
+  height: 130px;
+  margin: 3px;
+  padding: 5px;
+}
+.introduction-list-header {
+  font-size: 18px;
+  margin: 10px 0;
+}
+.introduction-list-contents {
+  list-style: none;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+
+.about-mode {
+  background-color: #fff;
+  text-align: center;
+}
+.mode-list {
+  list-style: none;
+}
+.mode-list li {
+  width: 300px;
+  float: left;
+  margin: 0 20px;
+}
+.mode-list-header {
+  font-size: 24px;
+  margin: 20px 0;
+}
+.mode-list-description {
+  text-align: left;
+}
