@@ -4,9 +4,6 @@ html, body, h1, h2, hr, ul, li {
   font-family: 'Open Sans', sans-serif;
 }
 
-body {
-}
-
 a, a:visited {
   color: #4086cc;
   text-decoration: none;
@@ -15,6 +12,14 @@ a, a:visited {
 h1, h2 {
   font-weight: normal;
 }
+
+
+.clearfix:before, .clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after { clear: both; }
+.clearfix       { *zoom: 1; }
 
 .header {
   background-color: #4eb800;
@@ -84,12 +89,11 @@ h1, h2 {
 .introduction {
   text-align: center;
   background-color: #ecf0f3;
-  height: 300px;
 }
 .introduction-list {
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0 0 20px 0;
 }
 .introduction-cell {
   list-style: none;
@@ -117,6 +121,7 @@ h1, h2 {
 }
 .mode-list {
   list-style: none;
+  margin-top: 30px;
 }
 .mode-list li {
   width: 300px;
@@ -130,4 +135,48 @@ h1, h2 {
 }
 .mode-list-description {
   text-align: left;
+}
+
+.key-bindings {
+  background-color: #fff;
+  text-align: center;
+}
+.key-bindings-table {
+  border-style: solid;
+  border-width: 1px 0 0 1px;
+  border-color: #eee;
+  float: left;
+  margin: 30px 10px;
+}
+.key-bindings-table th, .key-bindings-table td {
+  padding: 10px;
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  border-color: #eee;
+}
+.key-bindings-table th {
+  font-size: bold;
+  background-color: #fff;
+}
+.key-bindings-table td {
+  text-align: left;
+}
+.key-bindings-table tr:nth-child(odd) {
+  background-color: #f8f8f8;
+}
+.key-bindings-table-header1 {
+  width: 85px;
+}
+.key-bindings-table-header2 {
+  width: 350px;
+}
+
+.code {
+  background-color: #f8f8f8;
+  border: solid 1px #ddd;
+  border-radius: 3px;
+  padding: 0 6px;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-size: 13px;
+  font-weight: normal;
 }

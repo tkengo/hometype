@@ -5,7 +5,7 @@
   <link href="./hometype.css" media="all" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
   <div class="header">
     <div class="header-inner">
       <div class="header-description-area">
@@ -30,8 +30,8 @@
   <hr class="separator" />
   <div class="introduction">
     <div class="container">
-      <div class="container-header">You can do following with only the keyboard.</div>
-      <ul class="introduction-list">
+      <div class="container-header">You can do following with only the keyboard using this extension.</div>
+      <ul class="introduction-list clearfix">
         <li class="introduction-cell">
           <div class="introduction-list-header">Moving</div>
           <ul class="introduction-list-contents">
@@ -69,7 +69,7 @@
     <div class="container">
       <div class="container-header">Mode</div>
       <div class="description">Hometype has like vim's modes. All modes can be switched with keyboard manipulation.</div>
-      <ul class="mode-list">
+      <ul class="mode-list clearfix">
         <li>
           <img src="./images/normal_mode.gif" alt="Normal Mode" width="305" />
           <div class="mode-list-header">Normal Mode</div>
@@ -113,6 +113,125 @@
           </div>
         </li>
       </ul>
+    </div>
+  </div>
+  <hr class="separator" />
+  <div class="key-bindings">
+    <div class="container">
+      <div class="container-header">Key bindings</div>
+      <div class="description">Default key bindings in the normal mode is follow:</div>
+      <table class="key-bindings-table" cellpadding="0" cellspacing="0">
+        <tr>
+          <th class="key-bindings-table-header1">Key bind</th>
+          <th class="key-bindings-table-header2">Operation</th>
+        </tr>
+        <tr>
+          <td><span class="code">j</span> or <span class="code">C-e</span></td>
+          <td>Scroll down</td>
+        </tr>
+        <tr>
+          <td><span class="code">k</span> or <span class="code">C-y</span></td>
+          <td>Scroll up</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-d</span></td>
+          <td>Page half down</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-u</span></td>
+          <td>Page half up</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-f</span></td>
+          <td>Page down</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-b</span></td>
+          <td>Page up</td>
+        </tr>
+        <tr>
+          <td><span class="code">gg</span></td>
+          <td>Scroll to the top of the page</td>
+        </tr>
+        <tr>
+          <td><span class="code">G</span></td>
+          <td>Scroll to the bottom of the page</td>
+        </tr>
+        <tr>
+          <td><span class="code">H</span></td>
+          <td>Back to the history</td>
+        </tr>
+        <tr>
+          <td><span class="code">L</span></td>
+          <td>Forward to the history</td>
+        </tr>
+        <tr>
+          <td><span class="code">x</span></td>
+          <td>Close the current tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-p</span></td>
+          <td>Move to the previous tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-n</span></td>
+          <td>Move to the next tab</td>
+        </tr>
+      </table>
+      <table class="key-bindings-table" cellpadding="0" cellspacing="0">
+        <tr>
+          <th class="key-bindings-table-header1">Key bind</th>
+          <th class="key-bindings-table-header2">Operation</th>
+        </tr>
+        <tr>
+          <td><span class="code">I</span></td>
+          <td>Focus to an element appears first on the display</td>
+        </tr>
+        <tr>
+          <td><span class="code">A</span></td>
+          <td>Focus to an element appears last on the display</td>
+        </tr>
+        <tr>
+          <td><span class="code">u</span></td>
+          <td>Reopen nearest closed tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">U</span></td>
+          <td>Search recently closed tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">C-h</span></td>
+          <td>Search histories in the current tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">b</span></td>
+          <td>Search bookmarks and open it in the current tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">B</span></td>
+          <td>Search bookmarks and open it in a new tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">f</span></td>
+          <td>Follow a link in the current tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">F</span></td>
+          <td>Follow a link in a new tab</td>
+        </tr>
+        <tr>
+          <td><span class="code">v</span></td>
+          <td>Enter the visual mode to select a text</td>
+        </tr>
+        <tr>
+          <td><span class="code">i</span> or <span class="code">a</span></td>
+          <td>Enter the insert mode</td>
+        </tr>
+        <tr>
+          <td><span class="code">:</span></td>
+          <td>Enter the command mode</td>
+        </tr>
+      </table>
     </div>
   </div>
 </body>
