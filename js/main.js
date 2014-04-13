@@ -6,10 +6,18 @@
  * Entry point in Hometype.
  */
 
-// Set key binding if it was changed.
+// Load options and initialize Hometype
 HometypeOptions.getInstance().load(initialize);
-HometypeOptions.getInstance().onLoaded(loadedCallback);
+HometypeOptions.getInstance().onLoaded(bindCommand);
 
+/**
+ * Initialize Hometype
+ *
+ * 1. Check whether if the current url is matched in ignore url list.
+ * 2. Bind a command.
+ * 3. Register event onProcess in KyeSequence object.
+ * 4. Register event onFocus and onBlur to detect focusing to form.
+ */
 function initialize(options)
 {
   // If current url is included in ignore url list, do nothing.
@@ -17,7 +25,7 @@ function initialize(options)
     return;
   }
 
-  loadedCallback(options);
+  bindCommand(options);
 
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
@@ -59,7 +67,10 @@ function initialize(options)
   });
 }
 
-function loadedCallback(options)
+/**
+ * bind a command to a key.
+ */
+function bindCommand(options)
 {
   KeyMap.clear();
 
@@ -70,6 +81,9 @@ function loadedCallback(options)
   });
 }
 
+/**
+ * Check ignore urls
+ */
 function isIgnored(ignore_urls)
 {
   var currentUrl = window.location.href.replace(/\/$/, '');
