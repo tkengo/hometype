@@ -92,7 +92,13 @@ RuntimeCommand.getOptions = function(sender, params, sendResponse) {
     var result = options[params.key];
   }
   else {
-    var result = $.extend(HometypeDefaultOptions, options);
+    var result = $.extend({}, HometypeDefaultOptions, options);
+
+    for (var i in result) {
+      if (!result[i] && HometypeDefaultOptions[i]) {
+        result[i] = HometypeDefaultOptions[i];
+      }
+    }
   }
 
   sendResponse(result);
