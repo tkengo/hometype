@@ -72,13 +72,22 @@ function loadedCallback(options)
 
 function isIgnored(ignore_urls)
 {
-  var currentUrl = window.location.href;
+  var currentUrl = window.location.href.replace(/\/$/, '');
   for (var i in ignore_urls) {
-    var ignoreUrl = ignore_urls[i].replace(/\*/g, '.*').replace(/\/$/g, '');;
-    var regexp = new RegExp('^' + ignoreUrl + '$');
+    var ignoreUrl = ignore_urls[i];
 
-    if (regexp.test(currentUrl)) {
-      return true;
+    if (ignoreUrl.substr(0, 1) == '"' && ignoreUrl.substr(-1, 1) == '"') {
+      if (currentUrl == ignoreUrl.replace(/"/g, '').replace(/\/$/, '')) {
+        return true;
+      }
+    }
+    else {
+      ignoreUrl = ignoreUrl.replace(/\*/g, '.*');
+      var regexp = new RegExp(ignoreUrl);
+
+      if (regexp.test(currentUrl)) {
+        return true;
+      }
     }
   }
   return false;
