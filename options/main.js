@@ -15,6 +15,12 @@ $(document).ready(function() {
       bindList += "\r\n";
     });
     $('#key_bind_list').val(bindList);
+
+    var ignoreList = '';
+    $.each(options.ignore_urls, function(index, url) {
+      ignoreList += url + "\r\n";
+    });
+    $('#ignore_url_list').val(ignoreList);
   });
 
   $('#save').click(function() {
@@ -38,6 +44,17 @@ $(document).ready(function() {
 
       params.key_bind[value[0]][value[1]] = value[2];
     });
+
+    var ignoreList = $('#ignore_url_list').val();
+    params.ignore_urls = [];
+    $.each(ignoreList.split(/\r\n|\r|\n/), function(index, line) {
+      if (line == '') {
+        return true;
+      }
+
+      params.ignore_urls.push(line);
+    });
+
     chrome.runtime.sendMessage({ command: 'setOptions', params: params });
   });
 });
