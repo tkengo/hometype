@@ -63,7 +63,7 @@ function loadedCallback(options)
 {
   KeyMap.clear();
 
-  $.each($.extend(options.default_key_bind, options.key_bind), function(map, bind) {
+  $.each($.extend(true, {}, options.default_key_bind, options.key_bind), function(map, bind) {
     $.each(bind, function(key, command) {
       KeyMap[map](key, command);
     });
