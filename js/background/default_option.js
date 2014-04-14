@@ -53,7 +53,9 @@ HometypeDefaultOptions = {
     },
     fmap: {
       'Esc': 'cancelHintMode',
-      '<C-c>': 'cancelHintMode'
+      '<C-c>': 'cancelHintMode',
+      '<C-p>': 'moveLeftTab',
+      '<C-n>': 'moveRightTab'
     },
     hmap: {
       'Esc': 'cancelHelpMode'
