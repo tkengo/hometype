@@ -8,6 +8,11 @@
 var Command = {};
 
 /**
+ * Noop command.
+ */
+Command.noop = function() { };
+
+/**
  * Scroll down.
  */
 Command.scrollDown = function() {
