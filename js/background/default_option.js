@@ -10,6 +10,7 @@ HometypeDefaultOptions = {
       'f': 'enterHintMode',
       'F': 'enterHintMode --new',
       'cf': 'enterHintMode --continuous',
+      'cF': 'enterHintMode --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
       '<C-e>': 'scrollDown',
