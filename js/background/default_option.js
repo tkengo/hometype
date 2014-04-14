@@ -8,7 +8,7 @@ HometypeDefaultOptions = {
       'G': 'scrollToBottom',
       'gg': 'scrollToTop',
       'f': 'enterHintMode',
-      'F': 'enterNewWindowHintMode',
+      'F': 'enterHintMode --new',
       'cf': 'enterHintMode --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',

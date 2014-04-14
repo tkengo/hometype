@@ -275,11 +275,13 @@ Command.backwardContentEditable = function() {
 Command.enterHintMode = function(option) {
   // Collect hint source targets.
   var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
+  var newWindow = option.new || false;
+  var theme = newWindow ? 'blue' : 'yellow';
 
   if (targets.length > 0) {
     // If there are at least one target elements, enter the hint mode with yellow theme,
     // and register choose element event listener.
-    var processor = Mode.enterHintMode('yellow', targets);
+    var processor = Mode.enterHintMode(theme, targets);
     processor.onChooseElement(function(element) {
       if (element.is(':insertable')) {
         // If choosen element is form tag, focus to it.
@@ -295,28 +297,12 @@ Command.enterHintMode = function(option) {
       }
       else {
         // Otherwise, emulate click event for element.
-        Utility.clickElement(element);
+        Utility.clickElement(element, newWindow);
         if (option.continuous) {
-          processor.createHints('yellow', Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath()));
+          processor.createHints(theme, Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath()));
           return false;
         }
       }
-    });
-  }
-};
-
-/**
- * Enter the hint mode. Hint targets are clicable and form elements.
- * Open a new window if click a hint.
- */
-Command.enterNewWindowHintMode = function() {
-  // Collect hint source targets.
-  var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
-
-  if (targets.length > 0) {
-    var processor = Mode.enterHintMode('blue', targets);
-    processor.onChooseElement(function(element) {
-      Utility.clickElement(element, true);
     });
   }
 };
