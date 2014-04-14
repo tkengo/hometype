@@ -13,13 +13,20 @@ describe('HometypeOption', function() {
 
   describe('loading options', function() {
     var option = { lv1: { lv2_1: 'test1', lv2_2: 'test2' } };
+    var loadedCallback = { callback: function() { } };;
 
     beforeEach(function(done) {
-      loadOption.call(this, done, option);
+      spyOn(loadedCallback, 'callback');
+      loadOption.call(this, done, option, loadedCallback.callback);
     });
 
     it('should be loaded options value', function(done) {
       expect(this.instance.options).toEqual(option);
+      done();
+    });
+
+    it('should invoke callback', function(done) {
+      expect(loadedCallback.callback).toHaveBeenCalled();
       done();
     });
   });
@@ -41,10 +48,10 @@ describe('HometypeOption', function() {
   });
 });
 
-function loadOption(done, option) {
+function loadOption(done, option, loadedCallback) {
   chrome.runtime.sendMessage = function(params, callback) {
     callback(option);
     done();
   };
-  this.instance.load();
+  this.instance.load(loadedCallback);
 }

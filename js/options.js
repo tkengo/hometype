@@ -51,9 +51,13 @@ var HometypeOptions = (function() {
       /**
        * Load options in this instance.
        */
-      load: function() {
+      load: function(callback) {
         chrome.runtime.sendMessage({ command: 'getOptions' }, function(results) {
           setOptions(results);
+
+          if (typeof callback == 'function') {
+            callback(results);
+          }
         });
       },
       /**
