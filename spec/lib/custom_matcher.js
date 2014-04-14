@@ -7,5 +7,14 @@ var customMatchers = {
         };
       }
     };
+  },
+  toHave: function(util, customEqualityTesters) {
+    return {
+      compare: function(actual, expected) {
+        return {
+          pass: actual.length == expected
+        };
+      }
+    };
   }
 };
