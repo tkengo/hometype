@@ -7,7 +7,7 @@ describe('KeyMap', function() {
   });
 
   it('should assign a key to a command in any modes', function() {
-    var mode    = ModeList.NORMAL_MODE;
+    var mode = ModeList.NORMAL_MODE;
 
     KeyMap.assign(mode, key, command);
     expect(_map[mode][key]).toBe(command);

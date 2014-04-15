@@ -18,6 +18,11 @@ describe('HometypeMode', function() {
     expect(this.instance.getCurrentMode()).toBe(newMode);
   });
 
+  it('should be insert mode', function() {
+    this.instance.changeMode(ModeList.INSERT_MODE);
+    expect(this.instance.isInsertMode()).toBe(true);
+  });
+
   describe('changing mode', function() {
     var callbacks = {
       callback1: function() { },
