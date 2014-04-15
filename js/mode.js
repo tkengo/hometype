@@ -54,7 +54,7 @@ HometypeMode.prototype.getCurrentMode = function() {
 HometypeMode.prototype.changeMode = function(modeName) {
   // Nothing happens if mode didn't change.
   if (this.mode == modeName) {
-    return;
+    return this.getProcessor(this.mode);
   }
 
   var oldMode = this.mode;
