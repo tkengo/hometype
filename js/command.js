@@ -273,47 +273,43 @@ Command.backwardContentEditable = function() {
  * Enter the hint mode. Hint targets are clicable and form elements.
  */
 Command.enterHintMode = function(option) {
-  if (Mode.isInsertMode()) {
+  // Collect hint source targets.
+  var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
+  var newTab = option.new || false;
+  var theme = newTab ? 'blue' : 'yellow';
+
+  // Do nothing if there are not targets or the current mode is the insert mode
+  if (targets.length == 0 || Mode.isInsertMode()) {
     return;
   }
 
-  // Collect hint source targets.
-  var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
-  var newWindow = option.new || false;
-  var theme = newWindow ? 'blue' : 'yellow';
-
-  if (targets.length > 0) {
-    // If there are at least one target elements, enter the hint mode with yellow theme,
-    // and register choose element event listener.
-    var processor = Mode.enterHintMode(theme, targets);
-    processor.onChooseElement(function(element) {
-      if (element.is(':insertable')) {
-        // If choosen element is form tag, focus to it.
-        element.focus();
-        return false;
-      }
-      else if (element.is('select')) {
-        // If confirmed element is select tag, open the select box.
-        var selectBox = new HometypeSelectBox(element);
-        processor.createHints('yellow', selectBox.getListElements());
-        processor.onNotifyLeaveMode(function() { selectBox.remove(); });
-        return false;
-      }
-      else {
-        // Otherwise, emulate click event for element.
-        if (option.continuous) {
-          chrome.runtime.sendMessage({ command: 'enterContinuousMode' }, function(state) {
-            Utility.clickElement(element, newWindow);
-            setTimeout(function() { Command.enterHintMode(option); }, 300);
-          });
-          return false;
-        }
-        else {
-          Utility.clickElement(element, newWindow);
-        }
-      }
-    });
+  // Set continuous state in background if continuous option is true.
+  if (option.continuous) {
+    chrome.runtime.sendMessage({ command: 'enterContinuousMode' });
   }
+
+  // enter the hint mode, and register event listener to handle choosen element.
+  // 1. If choosen element is form tag, focus to it.
+  // 2. If choosen element is select tag, open the select box.
+  // 3. Otherwise, emulate click event for an element.
+  var processor = Mode.enterHintMode(theme, targets);
+  processor.onChooseElement(function(element) {
+    if (element.is(':insertable')) {
+      element.focus();
+    } else if (element.is('select')) {
+      var selectBox = new HometypeSelectBox(element);
+      processor.createHints('yellow', selectBox.getListElements());
+      processor.onNotifyLeaveMode(function() { selectBox.remove(); });
+    } else {
+      Utility.clickElement(element, newTab);
+      if (!option.continuous) {
+        return true;
+      }
+      setTimeout(function() { Command.enterHintMode(option); }, 300);
+    }
+
+    return false;
+  });
 };
 
 /**
