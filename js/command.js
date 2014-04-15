@@ -273,6 +273,10 @@ Command.backwardContentEditable = function() {
  * Enter the hint mode. Hint targets are clicable and form elements.
  */
 Command.enterHintMode = function(option) {
+  if (Mode.isInsertMode()) {
+    return;
+  }
+
   // Collect hint source targets.
   var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
   var newWindow = option.new || false;
@@ -297,10 +301,15 @@ Command.enterHintMode = function(option) {
       }
       else {
         // Otherwise, emulate click event for element.
-        Utility.clickElement(element, newWindow);
         if (option.continuous) {
-          processor.createHints(theme, Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath()));
+          chrome.runtime.sendMessage({ command: 'enterContinuousMode' }, function(state) {
+            Utility.clickElement(element, newWindow);
+            setTimeout(function() { Command.enterHintMode(option); }, 300);
+          });
           return false;
+        }
+        else {
+          Utility.clickElement(element, newWindow);
         }
       }
     });
@@ -336,6 +345,7 @@ Command.cancelCommandMode = function() {
  */
 Command.cancelHintMode = function() {
   if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
+    chrome.runtime.sendMessage({ command: 'leaveContinuousMode' });
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };

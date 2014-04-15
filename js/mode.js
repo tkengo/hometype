@@ -28,7 +28,7 @@ var HometypeMode = function() {
 
   this.modeProcessors = {};
   this.modeProcessors[ModeList.NORMAL_MODE]  = new NoopProcessor();
-  this.modeProcessors[ModeList.INSERT_MODE]  = new NoopProcessor();
+  this.modeProcessors[ModeList.INSERT_MODE]  = new InsertModeProcessor();
   this.modeProcessors[ModeList.HINT_MODE]    = new HintModeProcessor();
   this.modeProcessors[ModeList.VISUAL_MODE]  = new VisualModeProcessor();
   this.modeProcessors[ModeList.COMMAND_MODE] = new CommandModeProcessor();
@@ -119,6 +119,15 @@ HometypeMode.prototype.getProcessor = function(mode) {
   mode = mode || this.mode;
 
   return this.modeProcessors[mode];
+};
+
+/**
+ * Check if whether the current mode is the insert mode.
+ *
+ * @return boolean Return true if the current mode is the insert mode.
+ */
+HometypeMode.prototype.isInsertMode = function() {
+  return this.getCurrentMode() == ModeList.INSERT_MODE;
 };
 
 /**

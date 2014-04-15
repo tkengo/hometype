@@ -44,7 +44,8 @@ HometypeDefaultOptions = {
       'Esc': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab'
+      '<C-n>': 'moveRightTab',
+      '<C-f>': 'enterHintMode --continuous'
     },
     vmap: {
       'Esc': 'cancelVisualMode',
@@ -55,7 +56,8 @@ HometypeDefaultOptions = {
       'Esc': 'cancelHintMode',
       '<C-c>': 'cancelHintMode',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab'
+      '<C-n>': 'moveRightTab',
+      '<C-f>': 'enterHintMode --continuous'
     },
     hmap: {
       'Esc': 'cancelHelpMode'

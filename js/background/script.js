@@ -112,6 +112,30 @@ RuntimeCommand.getHistories = function(sender, params, sendResponse) {
 };
 
 /**
+ * Set continuous option.
+ *
+ * If continuous is true in local storage, Hometype immediately enters the hint
+ * mode after document ready. So you can follow a link continuous.
+ */
+RuntimeCommand.enterContinuousMode = function(sender, params, sendResponse) {
+  localStorage.setItem('continuous', true);
+  sendResponse(true);
+};
+/**
+ * Unset continuous option.
+ */
+RuntimeCommand.leaveContinuousMode = function(sender, params, sendResponse) {
+  localStorage.setItem('continuous', false);
+  sendResponse(false);
+};
+/**
+ * Get continuous state.
+ */
+RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
+  sendResponse(JSON.parse(localStorage.getItem('continuous') || false));
+};
+
+/**
  * ------------------------------------
  * OnConnect callback runtime methods.
  * ------------------------------------
