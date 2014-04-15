@@ -223,7 +223,7 @@ Command.searchHistories = function() {
  * Enter the visual mode.
  */
 Command.enterVisualMode = function() {
-  var targets = $(':visualable:screen');
+  var targets = Dom.searchVisibleElementsFrom(Dom.visualableXPath());
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('red', targets);
     processor.onChooseElement(function(element) {
