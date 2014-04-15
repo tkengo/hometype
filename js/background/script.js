@@ -118,21 +118,21 @@ RuntimeCommand.getHistories = function(sender, params, sendResponse) {
  * mode after document ready. So you can follow a link continuous.
  */
 RuntimeCommand.enterContinuousMode = function(sender, params, sendResponse) {
-  localStorage.setItem('continuous', true);
+  localStorage.setItem('continuous_tab_id', sender.tab.id);
   sendResponse(true);
 };
 /**
  * Unset continuous option.
  */
 RuntimeCommand.leaveContinuousMode = function(sender, params, sendResponse) {
-  localStorage.setItem('continuous', false);
+  localStorage.removeItem('continuous_tab_id');
   sendResponse(false);
 };
 /**
  * Get continuous state.
  */
 RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
-  sendResponse(JSON.parse(localStorage.getItem('continuous') || false));
+  sendResponse(localStorage.getItem('continuous_tab_id') == sender.tab.id);
 };
 
 /**
