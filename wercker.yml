@@ -7,3 +7,14 @@ build:
         - script:
             name: execute test
             code: ./node_modules/karma/bin/karma start
+deploy:
+    steps:
+        - script:
+            name: git
+            code: git clone -b gh-pages https://github.com/tkengo/hometype.git
+        - script:
+            name: cd
+            code: mv coverage hometype/.
+        - script:
+            name: commit
+            code: git add . && git commit -m 'Updated code coverage' && git push origin gh-pages
