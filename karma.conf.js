@@ -27,6 +27,7 @@ module.exports = function(config) {
       "js/processor/visual.js",
       "js/processor/command.js",
       "js/processor/hint.js",
+      "js/processor/insert.js",
       "js/processor/help.js",
       "js/command.js",
       "js/mode.js",

@@ -64,6 +64,12 @@ function initialize(options)
       }
     });
     $(document.activeElement).blur();
+
+    chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
+      if (status) {
+        Command.enterHintMode({ continuous: true });
+      }
+    });
   });
 }
 

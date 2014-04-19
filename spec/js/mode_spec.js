@@ -7,11 +7,20 @@ describe('HometypeMode', function() {
     expect(this.instance.getCurrentMode()).toBe(ModeList.NORMAL_MODE);
   });
 
+  it('should return the current mode processor if mode was not changed', function() {
+    expect(this.instance.changeMode(ModeList.NORMAL_MODE)).toBe(this.instance.getProcessor(ModeList.NORMAL_MODE));
+  });
+
   it('should return current mode', function() {
     var newMode = ModeList.HINT_MODE;
 
     this.instance.changeMode(newMode);
     expect(this.instance.getCurrentMode()).toBe(newMode);
+  });
+
+  it('should be insert mode', function() {
+    this.instance.changeMode(ModeList.INSERT_MODE);
+    expect(this.instance.isInsertMode()).toBe(true);
   });
 
   describe('changing mode', function() {

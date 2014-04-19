@@ -8,8 +8,9 @@ HometypeDefaultOptions = {
       'G': 'scrollToBottom',
       'gg': 'scrollToTop',
       'f': 'enterHintMode',
-      'F': 'enterNewWindowHintMode',
+      'F': 'enterHintMode --new',
       'cf': 'enterHintMode --continuous',
+      'cF': 'enterHintMode --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
       '<C-e>': 'scrollDown',
@@ -43,7 +44,8 @@ HometypeDefaultOptions = {
       'Esc': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab'
+      '<C-n>': 'moveRightTab',
+      '<C-f>': 'enterHintMode --continuous'
     },
     vmap: {
       'Esc': 'cancelVisualMode',
@@ -52,7 +54,10 @@ HometypeDefaultOptions = {
     },
     fmap: {
       'Esc': 'cancelHintMode',
-      '<C-c>': 'cancelHintMode'
+      '<C-c>': 'cancelHintMode',
+      '<C-p>': 'moveLeftTab',
+      '<C-n>': 'moveRightTab',
+      '<C-f>': 'enterHintMode --continuous'
     },
     hmap: {
       'Esc': 'cancelHelpMode'
