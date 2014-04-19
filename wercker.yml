@@ -16,7 +16,7 @@ deploy:
             code: git clone -b gh-pages https://github.com/tkengo/hometype.git
         - script:
             name: git config
-            code: cd hometype && git config user.email $GIT_EMAIL && git config user.name $GIT_USERNAME
+            code: cd hometype && git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_USERNAME"
         - script:
             name: cd
             code: mv coverage hometype/.
