@@ -22,4 +22,4 @@ deploy:
             code: mv coverage hometype/.
         - script:
             name: commit
-            code: git add . && git commit -m 'Updated code coverage' && git push origin gh-pages
+            code: cd hometype && git add . && git commit -m 'Updated code coverage' && git push origin gh-pages
