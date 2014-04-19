@@ -9,9 +9,14 @@ build:
             code: ./node_modules/karma/bin/karma start
 deploy:
     steps:
+        - wercker/add-ssh-key@0.0.3:
+            keyname: HOMETYPE_SSH_KEY
         - script:
             name: git
             code: git clone -b gh-pages https://github.com/tkengo/hometype.git
+        - script:
+            name: git config
+            code: cd hometype && git config user.email $GIT_EMAIL && git config user.name $GIT_USERNAME
         - script:
             name: cd
             code: mv coverage hometype/.
