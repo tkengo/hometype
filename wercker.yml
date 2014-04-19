@@ -13,7 +13,7 @@ deploy:
             keyname: HOMETYPE_SSH_KEY
         - script:
             name: git
-            code: git clone -b gh-pages https://github.com/tkengo/hometype.git
+            code: git clone -b gh-pages git@github.com:tkengo/hometype.git
         - script:
             name: git config
             code: cd hometype && git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_USERNAME"
