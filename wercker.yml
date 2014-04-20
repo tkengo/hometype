@@ -7,3 +7,8 @@ build:
         - script:
             name: execute test
             code: ./node_modules/karma/bin/karma start
+deploy:
+    steps:
+        - wercker/add-ssh-key@0.0.3:
+            keyname: HOMETYPE_SSH_KEY
+        - tkengo/update-coverages@0.0.2
