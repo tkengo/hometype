@@ -11,15 +11,4 @@ deploy:
     steps:
         - wercker/add-ssh-key@0.0.3:
             keyname: HOMETYPE_SSH_KEY
-        - script:
-            name: git
-            code: git clone -b gh-pages git@github.com:tkengo/hometype.git
-        - script:
-            name: git config
-            code: cd hometype && git config --global user.email "$GIT_EMAIL" && git config --global user.name "$GIT_USERNAME"
-        - script:
-            name: cd
-            code: mv coverage hometype/.
-        - script:
-            name: commit
-            code: cd hometype && git add . && git commit -m 'Updated code coverage' && git push origin gh-pages
+        - tkengo/update-coverages@0.0.1
