@@ -45,6 +45,10 @@ code {
   border-radius: 3px;
 }
 
+.left {
+  text-align: left;
+}
+
 /* clearfix */
 
 .clearfix:before, .clearfix:after {
@@ -221,6 +225,37 @@ table.introduction {
     .key-bindings table th:nth-child(1) {
       width: 95px;
     }
+
+/* change-logs */
+
+.change-logs-version {
+  text-align: left;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.change-logs-tag {
+  text-align: left;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 3px 7px;
+}
+.change-logs-bugfix-tag {
+  border: solid 1px #eee;
+  background-color: #eee;
+}
+.change-logs-improvement-tag {
+  border: solid 1px #eee;
+  background-color: #62a609;
+  color: #fff;
+}
+.change-logs ul {
+  margin: 6px 0 20px 0;
+}
+.change-logs li {
+  text-align: left;
+  line-height: 180%;
+}
 
 /* footer */
 

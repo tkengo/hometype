@@ -52,13 +52,13 @@
           <td>Select texts in the page</td>
         </tr>
         <tr>
-          <td>Follow the link</td>
-          <td>Select the select box</td>
+          <td>Follow a link</td>
+          <td>Select a value in a select box</td>
           <td>Histories</td>
           <td>Select the code snippet</td>
         </tr>
         <tr>
-          <td>Back and forward in history</td>
+          <td>Back and forward in the history</td>
           <td>&nbsp;</td>
           <td>Closed tabs</td>
           <td>&nbsp;</td>
@@ -105,7 +105,7 @@
     </ul>
   </section>
 
-  <section class="container-bn key-bindings">
+  <section class="container key-bindings">
     <h1>Key bindings</h1>
     <p class="description">Default key bindings in the normal mode is follow:</p>
     <table class="left">
@@ -228,6 +228,63 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <section class="container change-logs">
+    <h1>Change logs</h1>
+    <div class="change-logs-version">v1.0.0</div>
+    <div class="left"><span class="change-logs-tag change-logs-improvement-tag">Improvement</span></div>
+    <ul>
+      <li>Implemented <strong>continuous hint mode</strong>. You can use this function when you want to continue the hint mode even if an element is choosen. For example, checking continuously multi checkboxes of radio buttons.</li>
+      <li>Implemented <strong>ignored urls option</strong>. If ignored urls is set in the options page, Hometype is unavailable while staying in those urls.</li>
+      <li>Defined new command '<strong>noop</strong>'. It does nothing. You can use this command if you want to be unavailable specified key bind.</li>
+      <li>Improved performance very much when entering hint mode.</li>
+      <li>Stop displaying the current mode on the top of the page.</li>
+      <li>Writing tests using Jasmine 2.0, and executing CI using wercker.</li>
+    </ul>
+    <div class="change-logs-version">v0.1.3</div>
+    <div class="left"><span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span></div>
+    <ul>
+      <li>Updated Hometype icon.</li>
+      <li>Fixed a bug around restoreTab command.</li>
+    </ul>
+    <div class="change-logs-version">v0.1.2</div>
+    <div class="left"><span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span></div>
+    <ul>
+      <li>Hometype opens most oldest closed tab when executing restoreTab command. Fixed to opening most newest closed tab.</li>
+      <li>All tab histories was removing when Hometype was updated. Fixed it.</li>
+    </ul>
+    <div class="change-logs-version">v0.1.1</div>
+    <div class="left"><span class="change-logs-tag change-logs-improvement-tag">Improvement</span></div>
+    <ul>
+      <li>Provided line number in searched tab histories.</li>
+    </ul>
+    <div class="left"><span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span></div>
+    <ul>
+      <li>The order of closed tab histories was reverse. Fixed it.</li>
+      <li>focusFirstInput and focusLastInput sometimes worked well. Fixed it.</li>
+    </ul>
+    <div class="change-logs-version">v0.1.0</div>
+    <div class="left"><span class="change-logs-tag change-logs-improvement-tag">Improvement</span></div>
+    <ul>
+      <li>Implemented the options page.</li>
+      <li>Implemented the help mode that displays key bindings on the center of the page.</li>
+    </ul>
+    <div class="change-logs-version">v0.0.3</div>
+    <div class="left"><span class="change-logs-tag change-logs-improvement-tag">Improvement</span></div>
+    <ul>
+      <li>Improved performance using EventPage instead of BackgroundPage.</li>
+    </ul>
+    <div class="change-logs-version">v0.0.2</div>
+    <div class="left"><span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span></div>
+    <ul>
+      <li>Change this extension name from Chromekey to <strong>Hometype</strong></li>
+      <li>focusFirstInput and focusLastInput was not able to focus to a textarea tag. Fixed it.</li>
+    </ul>
+    <div class="change-logs-version">v0.0.1</div>
+    <ul>
+      <li>Hello world. This extension was released on Chrome webstore.</li>
+    </ul>
   </section>
 
   <footer>
