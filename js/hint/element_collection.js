@@ -11,16 +11,16 @@ var HintElementCollection = function(hintTheme, target) {
 
   this.hintKeys = [];
 
-  tipText = '';
-  $.each(this.htmlElements, $.proxy(function(index, element) {
+  var parent = document.createElement("div");
+  for (var i in this.htmlElements) {
     var key = this.nextHintKey();
-    var element = new HintElement($(element), index, key, this.hintTheme);
+    var element = new HintElement(this.htmlElements[i], i, key, this.hintTheme);
     this.elements.push(element);
-    this.hintKeys.push({ index: index, key: key });
-    tipText += element.getRawTipElement().get(0).outerHTML;
-  }, this));
+    this.hintKeys.push({ index: i, key: key });
+    parent.appendChild(element.getRawTipElement());
+  }
 
-  $('html').append(tipText);
+  document.documentElement.appendChild(parent);
 };
 
 HintElementCollection.prototype.getElements = function() {
@@ -53,10 +53,6 @@ HintElementCollection.prototype.removeAllHint = function() {
   for (var index in this.elements) {
     this.elements[index].removeHintTip(false);
   }
-};
-
-HintElementCollection.prototype.show = function() {
-  $('.hometype-hit-a-hint-base').fadeIn(100);
 };
 
 HintElementCollection.prototype.nextHintKey = function() {

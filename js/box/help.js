@@ -1,36 +1,35 @@
 
 var HELP_BOX_MARGIN = 20;
 
-var box_html = (function () {/*
-<div class="hometype-help-box">
-  <div class="hometype-help-box-wrap">
-    <table id="_hometype-help-box-commands-normal">
-      <tbody><tr><th>normal mode</th></tr><tr></tr></tbody>
-    </table>
-  </div>
-  <div class="hometype-help-box-wrap">
-    <table id="_hometype-help-box-commands-insert">
-      <tbody><tr><th>insert mode</th><th></th></tr></tbody>
-    </table>
-    <table id="_hometype-help-box-commands-visual">
-      <tbody><tr><th>visual mode</th><th></th></tr></tbody>
-    </table>
-  </div>
-  <div class="hometype-help-box-wrap">
-    <table id="_hometype-help-box-commands-hint">
-      <tbody><tr><th>hint mode</th><th></th></tr></tbody>
-    </table>
-    <table id="_hometype-help-box-commands-command">
-      <tbody><tr><th>command mode</th><th></th></tr></tbody>
-    </table>
-  </div>
-  <div class="hometype-help-box-wrap">
-    <table id="_hometype-help-box-commands-help">
-      <tbody><tr><th>help mode</th><th></th></tr></tbody>
-    </table>
-  </div>
-</div>
-*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1];
+var box_html = 
+  "<div class='hometype-help-box'> " +
+  "  <div class='hometype-help-box-wrap'> " +
+  "    <table id='_hometype-help-box-commands-normal'> " +
+  "      <tbody><tr><th>normal mode</th></tr><tr></tr></tbody> " +
+  "    </table> " +
+  "  </div> " +
+  "  <div class='hometype-help-box-wrap'> " +
+  "    <table id='_hometype-help-box-commands-insert'> " +
+  "      <tbody><tr><th>insert mode</th><th></th></tr></tbody> " +
+  "    </table> " +
+  "    <table id='_hometype-help-box-commands-visual'> " +
+  "      <tbody><tr><th>visual mode</th><th></th></tr></tbody> " +
+  "    </table> " +
+  "  </div> " +
+  "  <div class='hometype-help-box-wrap'> " +
+  "    <table id='_hometype-help-box-commands-hint'> " +
+  "      <tbody><tr><th>hint mode</th><th></th></tr></tbody> " +
+  "    </table> " +
+  "    <table id='_hometype-help-box-commands-command'> " +
+  "      <tbody><tr><th>command mode</th><th></th></tr></tbody> " +
+  "    </table> " +
+  "  </div> " +
+  "  <div class='hometype-help-box-wrap'> " +
+  "    <table id='_hometype-help-box-commands-help'> " +
+  "      <tbody><tr><th>help mode</th><th></th></tr></tbody> " +
+  "    </table> " +
+  "  </div> " +
+  "</div> ";
 
 var HometypeHelpBox = function() {
   var windowWidth = Viewport.getWindowSize().width;

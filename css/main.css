@@ -8,7 +8,6 @@
   color:#222222;
   z-index:1000001;
   font-family:'Osaka-Mono';
-  display:none;
 }
 .hometype-hit-a-hint-border {
   border:dashed 1px #900;
@@ -92,6 +91,8 @@
   font-size: 12px !important;
 }
 .hometype-command-box-candidate-area div {
+  background-color:#666666;
+  color:#ffffff;
   text-align:left;
   font-size:16px;
   font-family:'Osaka-Mono';

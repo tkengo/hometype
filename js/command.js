@@ -8,6 +8,11 @@
 var Command = {};
 
 /**
+ * Noop command.
+ */
+Command.noop = function() { };
+
+/**
  * Scroll down.
  */
 Command.scrollDown = function() {
@@ -218,7 +223,7 @@ Command.searchHistories = function() {
  * Enter the visual mode.
  */
 Command.enterVisualMode = function() {
-  var targets = $(':visualable:screen');
+  var targets = Dom.searchVisibleElementsFrom(Dom.visualableXPath());
   if (targets.length > 0) {
     var processor = Mode.enterHintMode('red', targets);
     processor.onChooseElement(function(element) {
@@ -267,61 +272,44 @@ Command.backwardContentEditable = function() {
 /**
  * Enter the hint mode. Hint targets are clicable and form elements.
  */
-Command.enterHintMode = function() {
+Command.enterHintMode = function(option) {
   // Collect hint source targets.
-  // Element already pushed to target is not pushed.
-  var targets = [];
-  $(':clickable:screen, :submittable:screen, :insertable:screen, :file:screen, :button:screen').each(function() {
-    var currentTarget = $(this);
-    if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
-      targets.push(currentTarget);
-    }
-  });
+  var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
+  var newTab = option.new || false;
+  var theme = newTab ? 'blue' : 'yellow';
 
-  if (targets.length > 0) {
-    // If there are at least one target elements, enter the hint mode with yellow theme,
-    // and register choose element event listener.
-    var processor = Mode.enterHintMode('yellow', targets);
-    processor.onChooseElement(function(element) {
-      if (element.is(':insertable')) {
-        // If choosen element is form tag, focus to it.
-        element.focus();
-        return false;
-      }
-      else if (element.is('select')) {
-        // If confirmed element is select tag, open the select box.
-        var selectBox = new HometypeSelectBox(element);
-        processor.createHints('yellow', selectBox.getListElements());
-        processor.onNotifyLeaveMode(function() { selectBox.remove(); });
-        return false;
-      }
-      else {
-        // Otherwise, emulate click event for element.
-        Utility.clickElement(element);
-      }
-    });
+  // Do nothing if there are not targets or the current mode is the insert mode
+  if (targets.length == 0 || Mode.isInsertMode()) {
+    return;
   }
-};
 
-/**
- * Enter the hint mode. Hint targets are clicable and form elements.
- * Open a new window if click a hint.
- */
-Command.enterNewWindowHintMode = function() {
-  var targets = [];
-  $(':clickable:screen:not(select), :submittable:screen:not(select)').each(function() {
-    var currentTarget = $(this);
-    if (targets.length == 0 || !currentTarget.isInner(targets[targets.length - 1])) {
-      targets.push(currentTarget);
-    }
-  });
-
-  if (targets.length > 0) {
-    var processor = Mode.enterHintMode('blue', targets);
-    processor.onChooseElement(function(element) {
-      Utility.clickElement(element, true);
-    });
+  // Set continuous state in background if continuous option is true.
+  if (option.continuous) {
+    chrome.runtime.sendMessage({ command: 'enterContinuousMode' });
   }
+
+  // enter the hint mode, and register event listener to handle choosen element.
+  // 1. If choosen element is form tag, focus to it.
+  // 2. If choosen element is select tag, open the select box.
+  // 3. Otherwise, emulate click event for an element.
+  var processor = Mode.enterHintMode(theme, targets);
+  processor.onChooseElement(function(element) {
+    if (element.is(':insertable')) {
+      element.focus();
+    } else if (element.is('select')) {
+      var selectBox = new HometypeSelectBox(element);
+      processor.createHints('yellow', selectBox.getListElements());
+      processor.onNotifyLeaveMode(function() { selectBox.remove(); });
+    } else {
+      Utility.clickElement(element, newTab);
+      if (!option.continuous) {
+        return true;
+      }
+      setTimeout(function() { Command.enterHintMode(option); }, 300);
+    }
+
+    return false;
+  });
 };
 
 /**
@@ -353,6 +341,7 @@ Command.cancelCommandMode = function() {
  */
 Command.cancelHintMode = function() {
   if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
+    chrome.runtime.sendMessage({ command: 'leaveContinuousMode' });
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };

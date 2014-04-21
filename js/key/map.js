@@ -107,14 +107,16 @@ KeyMap.candidate = function(mode, key) {
     if (keyMap.indexOf(key) == 0) {
       var map = maps[keyMap];
 
-      var command = '', args = [];
-      if (map instanceof Array) {
-        map = map.slice(0);
-        command = map.shift();
-        args = map;
+      var command = '', args = {};
+      splitted = map.split(' ');
+      if (splitted.length == 1) {
+        command = map;
       }
       else {
-        command = map;
+        command = splitted.shift();
+        for (var i in splitted) {
+          args[splitted[i].replace('--', '')] = true;
+        }
       }
 
       result.push({

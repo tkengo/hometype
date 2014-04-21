@@ -1,14 +1,16 @@
 HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
-  key_bind: {
+  default_key_bind: {
     nmap: {
       'j': 'scrollDown',
       'k': 'scrollUp',
       'G': 'scrollToBottom',
       'gg': 'scrollToTop',
       'f': 'enterHintMode',
-      'F': 'enterNewWindowHintMode',
+      'F': 'enterHintMode --new',
+      'cf': 'enterHintMode --continuous',
+      'cF': 'enterHintMode --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
       '<C-e>': 'scrollDown',
@@ -42,7 +44,8 @@ HometypeDefaultOptions = {
       'Esc': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab'
+      '<C-n>': 'moveRightTab',
+      '<C-f>': 'enterHintMode --continuous'
     },
     vmap: {
       'Esc': 'cancelVisualMode',
@@ -51,7 +54,10 @@ HometypeDefaultOptions = {
     },
     fmap: {
       'Esc': 'cancelHintMode',
-      '<C-c>': 'cancelHintMode'
+      '<C-c>': 'cancelHintMode',
+      '<C-p>': 'moveLeftTab',
+      '<C-n>': 'moveRightTab',
+      '<C-f>': 'enterHintMode --continuous'
     },
     hmap: {
       'Esc': 'cancelHelpMode'

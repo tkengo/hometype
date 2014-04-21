@@ -1,6 +1,7 @@
-* {
+html, body, input, h1, h2 {
   margin:0;
   padding:0;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -28,6 +29,10 @@ input, textarea {
   padding: 4px;
   border-radius: 3px;
 }
+textarea {
+  font-family: Monaco, Consolas, 'Courier New', Courier, monospace;
+  font-size: 10px;
+}
 
 dl dt {
   float: left;
@@ -41,8 +46,11 @@ dl dt, dl dd {
 #key_bind_list {
   width: 365px;
   height: 500px;
-  font-family: Monaco, Consolas, 'Courier New', Courier, monospace;
-  font-size: 10px;
+}
+
+#ignore_url_list {
+  width: 365px;
+  height: 200px;
 }
 
 .clearfix {

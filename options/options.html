@@ -1,6 +1,7 @@
 <html>
 <head>
-  <title>Hometype設定</title>
+  <title>Hometype Option</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="main.css" type="text/css" />
   <script type="text/javascript" src="../lib/jquery-2.0.1.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.extend.js"></script>
@@ -9,18 +10,22 @@
 </head>
 <body>
   <div class="header">
-    <h1>Hometype 設定</h1>
+    <h1>Hometype Option</h1>
   </div>
-  <div class="section">一般設定</div>
+  <div class="section">Basic option</div>
   <dl>
-    <dt>コマンド確定までのインターバル</dt>
+    <dt>Command interval</dt>
     <dd><input type="text" id="command_interval" size="7" /> ms</dd>
-    <dt>スクロール量</dt>
+    <dt>Amount of scrolling</dt>
     <dt><input type="text" id="scroll_amount" size="7" /></dt>
   </dl>
   <br><br>
-  <div class="section">キーバインド</div>
+  <div class="section">Key bindings</div>
   <textarea id="key_bind_list"></textarea>
+  <br>
+  <br>
+  <div class="section">Ignore url list</div>
+  <textarea id="ignore_url_list"></textarea>
   <br>
   <br>
   <div id="status"></div>

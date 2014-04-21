@@ -92,7 +92,13 @@ RuntimeCommand.getOptions = function(sender, params, sendResponse) {
     var result = options[params.key];
   }
   else {
-    var result = $.extend(HometypeDefaultOptions, options);
+    var result = $.extend({}, HometypeDefaultOptions, options);
+
+    for (var i in result) {
+      if (!result[i] && HometypeDefaultOptions[i]) {
+        result[i] = HometypeDefaultOptions[i];
+      }
+    }
   }
 
   sendResponse(result);
@@ -103,6 +109,30 @@ RuntimeCommand.getOptions = function(sender, params, sendResponse) {
  */
 RuntimeCommand.getHistories = function(sender, params, sendResponse) {
   sendResponse(Tab.getHistories(sender.tab.id));
+};
+
+/**
+ * Set continuous option.
+ *
+ * If continuous is true in local storage, Hometype immediately enters the hint
+ * mode after document ready. So you can follow a link continuous.
+ */
+RuntimeCommand.enterContinuousMode = function(sender, params, sendResponse) {
+  localStorage.setItem('continuous_tab_id', sender.tab.id);
+  sendResponse(true);
+};
+/**
+ * Unset continuous option.
+ */
+RuntimeCommand.leaveContinuousMode = function(sender, params, sendResponse) {
+  localStorage.removeItem('continuous_tab_id');
+  sendResponse(false);
+};
+/**
+ * Get continuous state.
+ */
+RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
+  sendResponse(localStorage.getItem('continuous_tab_id') == sender.tab.id);
 };
 
 /**
