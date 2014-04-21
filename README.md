@@ -1,29 +1,11 @@
 # Hometype
 
-Google Chrome をキーボードで操作するための拡張機能です。
+This is an extension to operate Google Chrome without touching a mouse.
 
-[![wercker status](https://app.wercker.com/status/ae1d66ed438061ad9bf7d19b4c00f0c2/s/master "wercker status")](https://app.wercker.com/project/bykey/ae1d66ed438061ad9bf7d19b4c00f0c2)
+See [Hometype page](http://tkengo.github.io/hometype) to get detail.
 
-# 操作方法
+[![wercker status](https://app.wercker.com/status/ae1d66ed438061ad9bf7d19b4c00f0c2/m/master "wercker status")](https://app.wercker.com/project/bykey/ae1d66ed438061ad9bf7d19b4c00f0c2)
 
-以下のキーがデフォルトキーバインドとして設定されています。
+# Installation
 
-* `j` `C-e` 下スクロール
-* `k` `C-y` 上スクロール
-* `C-d` 半ページ下スクロール
-* `C-u` 半ページ上スクロール
-* `C-f` 1ページ下スクロール
-* `C-b` 1ページ上スクロール
-* `gg` 先頭へスクロール
-* `G` 最後へスクロール
-* `H` 前に戻る
-* `L` 次に進む
-* `f` リンクを現在のタブで開くヒントモードへ移行
-* `F` リンクを新しいタブで開くヒントモードへ移行
-* `i` `a` フォームにフォーカスを当てるためのヒントモードへ移行
-* `x` 現在のタブを閉じる
-* `C-p` 前のタブへ移動する
-* `C-n` 次のタブへ移動する
-* `:` コマンドモードへ移行
-* `b` ブックマークを現在のタブで開くブックマークモードへ移行
-* `B` ブックマークを新しいタブで開くブックマークモードへ移行
+Please install from [Chrome webstore](https://chrome.google.com/webstore/detail/hometype/fngmcejiekfcoflogkfnmhableinjmln).
