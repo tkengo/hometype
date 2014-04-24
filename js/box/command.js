@@ -171,5 +171,3 @@ HometypeCommandBox.prototype.getSelected = function() {
 HometypeCommandBox.prototype.getText = function() {
   return this.text.val().replace(':', '');
 };
-
-var CommandBox = new HometypeCommandBox();
