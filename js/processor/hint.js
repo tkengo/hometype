@@ -18,6 +18,8 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.chooseElementCallback = null;
   this.hintElements.removeAllHint();
 
+  chrome.runtime.sendMessage({ command: 'leaveContinuousMode' });
+
   if (this.notifyLeaveModeCallback) {
     this.notifyLeaveModeCallback();
     this.notifyLeaveModeCallback = null;
