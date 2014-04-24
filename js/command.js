@@ -300,42 +300,14 @@ Command.enterNormalMode = function() {
   Mode.changeMode(ModeList.NORMAL_MODE);
 };
 
-/**
- * Return the normal mode from the command mode.
- */
-Command.cancelCommandMode = function() {
-  if (Mode.getCurrentMode() == ModeList.COMMAND_MODE) {
-    CommandBox.hide();
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
-
-/**
- * Return the normal mode from the hint mode.
- */
-Command.cancelHintMode = function() {
-  if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
-    chrome.runtime.sendMessage({ command: 'leaveContinuousMode' });
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
-
-/**
- * Return the normal mode from the visual mode.
- */
-Command.cancelVisualMode = function() {
-  if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
-    Viewport.resetContentEditable();
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
-
 Command.showAssignedCommands = function() {
   Mode.changeMode(ModeList.HELP_MODE);
 };
 
-Command.cancelHelpMode = function() {
-  if (Mode.getCurrentMode() == ModeList.HELP_MODE) {
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
+/**
+ * Defined alias.
+ */
+Command.cancelCommandMode = Command.enterNormalMode;
+Command.cancelHintMode    = Command.enterNormalMode;
+Command.cancelVisualMode  = Command.enterNormalMode;
+Command.cancelHelpMode    = Command.enterNormalMode;
