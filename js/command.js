@@ -294,6 +294,13 @@ Command.enterCommandMode = function() {
 };
 
 /**
+ * Enter the normal mode.
+ */
+Command.enterNormalMode = function() {
+  Mode.changeMode(ModeList.NORMAL_MODE);
+};
+
+/**
  * Return the normal mode from the command mode.
  */
 Command.cancelCommandMode = function() {
