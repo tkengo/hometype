@@ -36,7 +36,7 @@ HometypeDefaultOptions = {
       '?': 'showAssignedCommands'
     },
     cmap: {
-      'Esc': 'cancelCommandMode',
+      'Esc': 'enterNormalMode',
       '<C-n>': 'selectNextCandidate',
       '<C-p>': 'selectPrevCandidate'
     },
@@ -48,17 +48,17 @@ HometypeDefaultOptions = {
       '<C-f>': 'enterHintMode --continuous'
     },
     vmap: {
-      'Esc': 'cancelVisualMode'
+      'Esc': 'enterNormalMode'
     },
     fmap: {
-      'Esc': 'cancelHintMode',
-      '<C-c>': 'cancelHintMode',
+      'Esc': 'enterNormalMode',
+      '<C-c>': 'enterNormalMode',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab',
       '<C-f>': 'enterHintMode --continuous'
     },
     hmap: {
-      'Esc': 'cancelHelpMode'
+      'Esc': 'enterNormalMode'
     }
   }
 };
