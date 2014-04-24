@@ -35,11 +35,13 @@ HintElement.prototype.createTipElement = function() {
   var top = 0, left = 0;
   var rect = this.srcElement.getClientRects()[0];
 
-  if (this.srcElement.tagName == 'area') {
+  if (this.srcElement.tagName == 'AREA') {
     // Get a position from coords attribute if an element is a clickable map.
-    var coords = this.srcElement.attr('coords').split(',');
-    top = coords[1];
-    left = coords[0];
+    var coords = this.srcElement.coords.split(',');
+    rect = this.srcElement.parentNode.getClientRects()[0];
+
+    top  = rect.top  + parseInt(coords[1]) - 10;
+    left = rect.left + parseInt(coords[0]) - 10;
   }
   else {
     // Usually get a position from an element offset.
@@ -66,7 +68,7 @@ HintElement.prototype.createTipElement = function() {
   tip.className     = this.className + ' hometype-hit-a-hint-base';
   tip.clickableItem = this.srcElement;
   tip.style.left    = left + window.scrollX + 'px';
-  tip.style.top     = top  + window.scrollY  + 'px';
+  tip.style.top     = top  + window.scrollY + 'px';
   tip.rect          = rect;
   tip.innerHTML     = tipHtml;
   tip.id            = this.elementId;
