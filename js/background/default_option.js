@@ -48,9 +48,7 @@ HometypeDefaultOptions = {
       '<C-f>': 'enterHintMode --continuous'
     },
     vmap: {
-      'Esc': 'cancelVisualMode',
-      'n': 'forwardContentEditable',
-      'p': 'backwardContentEditable'
+      'Esc': 'cancelVisualMode'
     },
     fmap: {
       'Esc': 'cancelHintMode',

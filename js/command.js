@@ -235,42 +235,6 @@ Command.enterVisualMode = function() {
 };
 
 /**
- * Make next element content editable.
- */
-Command.forwardContentEditable = function() {
-  var current = Viewport.getCurrentContentEditable();
-  if (current.length > 0) {
-    Viewport.resetContentEditable(current);
-    var next = Viewport.getNextContentEditableElement(current);
-    if (next && next.length > 0) {
-      Viewport.setContentEditable(next);
-      setTimeout(function() { next.focus(); }, 100);
-    }
-    else {
-      Command.cancelVisualMode();
-    }
-  }
-};
-
-/**
- * Make previous element content editable.
- */
-Command.backwardContentEditable = function() {
-  var current = Viewport.getCurrentContentEditable();
-  if (current.length > 0) {
-    Viewport.resetContentEditable(current);
-    var prev = Viewport.getPrevContentEditableElement(current);
-    if (prev && prev.length > 0) {
-      Viewport.setContentEditable(prev);
-      setTimeout(function() { prev.focus(); }, 100);
-    }
-    else {
-      Command.cancelVisualMode();
-    }
-  }
-};
-
-/**
  * Enter the hint mode. Hint targets are clicable and form elements.
  */
 Command.enterHintMode = function(option) {
