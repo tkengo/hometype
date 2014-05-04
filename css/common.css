@@ -104,46 +104,24 @@ table {
     font-size: 32px;
   }
 
-/*　header　*/
+/* footer */
 
-header {
-  background: #62a609;
-  height: 470px;
+footer {
+  border-top: 1px solid #ddd;
+  padding: 50px 0;
+  font-size: 13px;
 }
-  header .header-inner {
-    margin: 0 auto;
-    padding: 90px 410px 0 0;
-    height: 380px;
-    width: 610px;
-    text-align: left;
-    background: url(./images/logo.png) 680px 105px no-repeat;
-  }
-    header .header-inner h1 {
-      font-size: 42px;
-      color: #f7e8ad;
-      font-weight: 400;
-      text-align: left;
-    }
-    header .header-inner h2 {
-      font-size: 20px;
-      margin: 20px 0 40px 0;
-      line-height: 150%;
-      color: #fff;
-      text-align: left;
-    }
-  header a.store {
-    color: #fff;
-    border: solid 1px #fff;
-    border-radius: 4px;
-    padding: 13px 40px 15px 37px;
-    font-size: 24px;
-    transition-duration: 0.5s;
-    text-decoration: none;
-  }
-  header a.store:hover {
-    color: #a6cd81;
-    border: solid 1px #a6cd81;
-  }
+
+
+
+
+
+
+
+
+
+
+
 
 /* header menu */
 
@@ -185,98 +163,4 @@ header {
 .header-menu-active {
   font-weight: bold;
   background-color: #ececec;
-}
-
-/* introduction */
-
-table.introduction {
-  margin: 25px 0 80px 0;
-}
-  table.introduction th {
-    width: 255px;
-  }
-
-/* mode */
-
-.mode {
-  height: 770px;
-
-}
-  .mode ul {
-    list-style: none;
-    margin-top: 50px;
-  }
-  .mode li {
-    width: 310px;
-    height: 300px;
-    float: left;
-    margin-right: 45px;
-    margin-bottom: 20px;
-  }
-  .mode li:nth-child(3n) {
-    margin-right: 0;
-  }
-  .mode h2 {
-    font-size: 24px;
-    margin: 20px 0;
-  }
-
-/* key-bindings */
-
-.key-bindings {
-  height: 780px;
-  position: relative;
-}
-  .key-bindings table {
-    position: absolute;
-    top:210px;
-    width: 490px;
-  }
-  .key-bindings table.left {
-    left: 0;
-  }
-  .key-bindings table.right{
-    right: 0;
-  }
-    .key-bindings table th:nth-child(1) {
-      width: 95px;
-    }
-
-/* change-logs */
-
-.change-logs-version {
-  text-align: left;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 10px 0;
-}
-.change-logs-tag {
-  text-align: left;
-  font-size: 14px;
-  border-radius: 4px;
-  padding: 3px 7px;
-}
-.change-logs-bugfix-tag {
-  border: solid 1px #eee;
-  background-color: #eee;
-}
-.change-logs-improvement-tag {
-  border: solid 1px #eee;
-  background-color: #62a609;
-  color: #fff;
-}
-.change-logs ul {
-  margin: 6px 0 20px 0;
-}
-.change-logs li {
-  text-align: left;
-  line-height: 180%;
-}
-
-/* footer */
-
-footer {
-  border-top: 1px solid #ddd;
-  padding: 50px 0;
-  font-size: 13px;
 }
