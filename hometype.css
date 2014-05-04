@@ -187,32 +187,6 @@ header {
   background-color: #ececec;
 }
 
-/* latest update */
-
-.latest-update {
-  text-align: center;
-  padding: 35px 0;
-  /* background-color: #f9fafb; */
-  /* border-bottom: 1px solid #ddd; */
-}
-  .latest-update span {
-    display: inline-block;
-    margin: 0 20px 0 0;
-    font-size: 13px;
-  }
-  .latest-update a.issue {
-    color: #666;
-    padding: 5px 10px;
-    background: #eee;
-    border-radius: 4px;
-    transition-duration: 0.5s;
-    text-decoration: none;
-    font-size: 13px;
-  }
-  .latest-update a.issue:hover {
-    background: #ddd;
-  }
-
 /* introduction */
 
 table.introduction {
