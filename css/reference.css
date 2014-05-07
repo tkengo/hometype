@@ -1,16 +1,3 @@
-.header {
-  background: #62a609;
-  height: 310px;
-}
-.header .header-inner {
-  margin: 0 auto;
-  padding: 0;
-  height: 310px;
-  width: 285px;
-  text-align: left;
-  background: url(../images/logo.png) 0px 15px no-repeat;
-}
-
 .reference-index {
   width: 1000px;
   border-width: 0;
