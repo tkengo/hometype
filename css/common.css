@@ -10,7 +10,7 @@ body {
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 }
 
-h1,h2,header a.store,p.description {
+h1,h2,a.store,p.description {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
 }
@@ -98,11 +98,26 @@ table {
 /* header */
 
 header {
-  background: #62a609;
+  background-color: #fff;
 }
+  header h1 {
+    float: left;
+    height: 50px;
+    line-height: 50px;
+  }
+    header h1 a,
+    header h1 a:visited,
+    header h1 a:hover {
+      font-size: 14px;
+      color: #62a609;
+      display: block;
+      padding: 0 30px;
+      font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+      font-weight: 500;
+      text-decoration: none;
+    }
+
   header ul {
-    margin: 0 auto;
-    width: 1020px;
     height: 50px;
     line-height: 50px;
     list-style: none;
@@ -112,8 +127,9 @@ header {
       list-style: none;
       float: left;
     }
-      header ul li a {
-        color: #fff;
+      header ul li a,
+      header ul li a:visited {
+        color: #525252;
         display: block;
         padding: 0 30px;
         transition-duration: 0.5s;
@@ -121,12 +137,11 @@ header {
 
       header ul li a:hover {
         text-decoration: none;
-        background-color: #ececec;
+        color: #a0a0a0;
       }
 
   .header-menu-active {
-    font-weight: bold;
-    background-color: #ececec;
+    box-shadow: #525252 0px -2px inset;
   }
 
 /* footer */
