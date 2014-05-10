@@ -108,6 +108,7 @@ Command.selectPrevCandidate = function() {
  */
 Command.cancelInsertMode = function() {
   $(document.activeElement).blur();
+  Mode.release();
   Mode.changeMode(ModeList.NORMAL_MODE);
 };
 
@@ -318,6 +319,7 @@ Command.enterHintMode = function(option) {
  */
 Command.enterInsertMode = function() {
   Mode.changeMode(ModeList.INSERT_MODE);
+  Mode.lock();
 };
 
 /**

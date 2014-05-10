@@ -33,6 +33,8 @@ var HometypeMode = function() {
   this.modeProcessors[ModeList.VISUAL_MODE]  = new VisualModeProcessor();
   this.modeProcessors[ModeList.COMMAND_MODE] = new CommandModeProcessor();
   this.modeProcessors[ModeList.HELP_MODE]    = new HelpModeProcessor();
+
+  this.lockMode= false;
 };
 
 /**
@@ -52,6 +54,10 @@ HometypeMode.prototype.getCurrentMode = function() {
  * @return Object The current mode processor
  */
 HometypeMode.prototype.changeMode = function(modeName) {
+  if (this.lockMode) {
+    return false;
+  }
+
   // Nothing happens if mode didn't change.
   if (this.mode == modeName) {
     return this.getProcessor(this.mode);
@@ -140,6 +146,31 @@ HometypeMode.prototype.isInsertMode = function() {
  */
 HometypeMode.prototype.onModeChange = function(callback) {
   this.callbacks.push(callback);
+};
+
+/**
+ * Lock changing the mode.
+ * Mode is able to be changed to any other mode If this method was called
+ * before changeMode method is called.
+ */
+HometypeMode.prototype.lock = function() {
+  this.lockMode = true;
+};
+
+/**
+ * Release mode locking status.
+ */
+HometypeMode.prototype.release = function() {
+  this.lockMode = false;
+};
+
+/**
+ * Check if whether mode was locked.
+ *
+ * @return boolean Return true if mode was locked, otherwise false.
+ */
+HometypeMode.prototype.isLock = function() {
+  return this.lockMode;
 };
 
 var Mode = new HometypeMode();
