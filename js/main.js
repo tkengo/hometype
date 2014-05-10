@@ -30,6 +30,14 @@ function initialize(options)
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
+    var isEditable = Dom.isEditable(document.activeElement);
+    if (isEditable && !Mode.isInsertMode()) {
+      Mode.changeMode(ModeList.INSERT_MODE);
+    }
+    if (!isEditable && Mode.isInsertMode()) {
+      Mode.changeMode(ModeList.NORMAL_MODE);
+    }
+
     // Get command candidates from input keys.
     var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
 
@@ -51,20 +59,6 @@ function initialize(options)
   });
 
   $(document).ready(function() {
-    // Enter the insert mode if focus to a textarea.
-    // Otherwise, Return the normal mode.
-    var focusTargets = ':text, :password, textarea, [contenteditable]';
-    $(document).on('focus', focusTargets, function() {
-      if (!$(this).is('[data-hometype-not-insert-mode]')) {
-        Mode.changeMode(ModeList.INSERT_MODE);
-      }
-    }).on('blur', focusTargets, function() {
-      if (!$(this).is('[data-hometype-not-insert-mode]')) {
-        Mode.changeMode(ModeList.NORMAL_MODE);
-      }
-    });
-    $(document.activeElement).blur();
-
     chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
       if (status) {
         Command.enterHintMode({ continuous: true });
