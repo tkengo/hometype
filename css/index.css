@@ -73,7 +73,7 @@ table.introduction {
     margin: 20px 0;
   }
 
-/* key-bindings */
+/* key bindings */
 
 .key-bindings {
   height: 780px;
@@ -94,33 +94,37 @@ table.introduction {
       width: 95px;
     }
 
-/* change-logs */
+/* change logs */
 
-.change-logs-version {
+.change-logs,
+.change-logs h2 {
   text-align: left;
-  font-size: 22px;
-  font-weight: bold;
-  margin: 10px 0;
 }
-.change-logs-tag {
-  text-align: left;
-  font-size: 14px;
-  border-radius: 4px;
-  padding: 3px 7px;
-}
-.change-logs-bugfix-tag {
-  border: solid 1px #eee;
-  background-color: #eee;
-}
-.change-logs-improvement-tag {
-  border: solid 1px #eee;
-  background-color: #62a609;
-  color: #fff;
-}
+  .change-logs span.change-logs-version {
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .change-logs span.change-logs-tag {
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 2px 6px;
+    vertical-align: 5px;
+  }
+  .change-logs span.change-logs-bugfix-tag {
+    background-color: #eee;
+  }
+  .change-logs span.change-logs-improvement-tag {
+      background-color: #62a609;
+      color: #fff;
+  }
+
 .change-logs ul {
-  margin: 6px 0 20px 0;
+  margin: 15px 0 40px 40px;
 }
-.change-logs li {
-  text-align: left;
-  line-height: 180%;
-}
+  .change-logs ul li {
+    text-align: left;
+    line-height: 180%;
+  }
