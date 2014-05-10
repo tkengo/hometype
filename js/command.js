@@ -296,6 +296,7 @@ Command.enterHintMode = function(option) {
   processor.onChooseElement(function(element) {
     if (element.is(':insertable')) {
       element.focus();
+      return true;
     } else if (element.is('select')) {
       var selectBox = new HometypeSelectBox(element);
       processor.createHints('yellow', selectBox.getListElements());
