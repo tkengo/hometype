@@ -113,18 +113,20 @@ table.introduction {
     padding: 2px 6px;
     vertical-align: 5px;
   }
+
   .change-logs span.change-logs-bugfix-tag {
     background-color: #eee;
   }
+
   .change-logs span.change-logs-improvement-tag {
       background-color: #62a609;
       color: #fff;
   }
 
-.change-logs ul {
-  margin: 15px 0 40px 40px;
-}
-  .change-logs ul li {
-    text-align: left;
-    line-height: 180%;
+  .change-logs ul {
+    margin: 15px 0 40px 40px;
   }
+    .change-logs ul li {
+      text-align: left;
+      line-height: 180%;
+    }
