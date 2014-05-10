@@ -12,13 +12,13 @@
     text-align: left;
     background: url(../images/logo.png) 680px 105px no-repeat;
   }
-    .title .title-inner h1 {
+    .title .title-inner h2 {
       font-size: 42px;
       color: #f7e8ad;
       font-weight: 400;
       text-align: left;
     }
-    .title .title-inner h2 {
+    .title .title-inner p.description {
       font-size: 20px;
       margin: 20px 0 40px 0;
       line-height: 150%;

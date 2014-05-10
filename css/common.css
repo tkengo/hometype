@@ -1,4 +1,4 @@
-html, body, header, footer, h1, h2, ul, li, p {
+html, body, header, footer, section, nav, h1, h2, ul, li, p {
   margin: 0;
   padding: 0;
   font-size: 1rem;
@@ -97,17 +97,17 @@ table {
 
 /* header */
 
-header {
+.header {
   background-color: #fff;
+  height: 50px;
+  line-height: 50px;
 }
-  header h1 {
+  .header h1 {
     float: left;
-    height: 50px;
-    line-height: 50px;
   }
-    header h1 a,
-    header h1 a:visited,
-    header h1 a:hover {
+    .header h1 a,
+    .header h1 a:visited,
+    .header h1 a:hover {
       font-size: 14px;
       color: #62a609;
       display: block;
@@ -117,32 +117,52 @@ header {
       text-decoration: none;
     }
 
-  header ul {
-    height: 50px;
-    line-height: 50px;
-    list-style: none;
+  .header nav {
+    float: left;
   }
-    header ul li {
-      font-size: 14px;
+    .header nav ul {
       list-style: none;
-      float: left;
     }
-      header ul li a,
-      header ul li a:visited {
-        color: #525252;
-        display: block;
-        padding: 0 30px;
-        transition-duration: 0.5s;
+      .header nav ul li {
+        font-size: 14px;
+        list-style: none;
+        float: left;
       }
+        .header nav ul li a,
+        .header nav ul li a:visited {
+          color: #525252;
+          display: block;
+          padding: 0 30px;
+          transition-duration: 0.5s;
+        }
 
-      header ul li a:hover {
-        text-decoration: none;
-        color: #a0a0a0;
-      }
+        .header nav ul li a:hover {
+          text-decoration: none;
+          color: #a0a0a0;
+        }
 
   .header-menu-active {
     box-shadow: #525252 0px -2px inset;
   }
+
+/*　page title　*/
+
+.page-title {
+  background: #62a609;
+  margin-bottom: 60px;
+}
+  .page-title .title-inner {
+    margin: 0 auto;
+    height: 150px;
+    line-height: 150px;
+    width: 1020px;
+  }
+    .page-title .title-inner h1 {
+      font-size: 42px;
+      color: #f7e8ad;
+      font-weight: 400;
+      text-align: left;
+    }
 
 /* footer */
 
