@@ -31,7 +31,7 @@ function initialize(options)
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
     var isEditable = Dom.isEditable(document.activeElement);
-    if (isEditable && !Mode.isInsertMode()) {
+    if (isEditable && Mode.isNormalMode()) {
       Mode.changeMode(ModeList.INSERT_MODE);
     }
     if (!isEditable && Mode.isInsertMode()) {

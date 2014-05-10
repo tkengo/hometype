@@ -128,6 +128,15 @@ HometypeMode.prototype.getProcessor = function(mode) {
 };
 
 /**
+ * Check if whether the current mode is the normal mode.
+ *
+ * @return boolean Return true if the current mode is the normal mode.
+ */
+HometypeMode.prototype.isNormalMode = function() {
+  return this.getCurrentMode() == ModeList.NORMAL_MODE;
+};
+
+/**
  * Check if whether the current mode is the insert mode.
  *
  * @return boolean Return true if the current mode is the insert mode.
