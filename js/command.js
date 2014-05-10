@@ -161,8 +161,8 @@ Command.searchClosedTabs = function() {
     processor.onUpdateBoxText(function(text) {
       var list = [];
       $.each(closedTabs, function(index, tab) {
-        if (Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
-          var listText = Utility.pad(index + 1, 2) + ': ' + tab.title + '(' + tab.url + ')';
+        if (tab && Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
+          var listText = Utility.pad(list.length + 1, 2) + ': ' + tab.title + '(' + tab.url + ')';
           list.push({ text: listText, url: tab.url, tabId: tab.id });
         }
       });
