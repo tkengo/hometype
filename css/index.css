@@ -1,0 +1,132 @@
+/*　title　*/
+
+.title {
+  background: #62a609;
+  height: 470px;
+}
+  .title .title-inner {
+    margin: 0 auto;
+    padding: 90px 410px 0 0;
+    height: 380px;
+    width: 610px;
+    text-align: left;
+    background: url(../images/logo.png) 680px 105px no-repeat;
+  }
+    .title .title-inner h2 {
+      font-size: 42px;
+      color: #f7e8ad;
+      font-weight: 400;
+      text-align: left;
+    }
+    .title .title-inner p.description {
+      font-size: 20px;
+      margin: 20px 0 40px 0;
+      line-height: 150%;
+      color: #fff;
+      text-align: left;
+    }
+    .title .title-inner a.store {
+      color: #fff;
+      border: solid 1px #fff;
+      border-radius: 4px;
+      padding: 13px 40px 15px 37px;
+      font-size: 24px;
+      transition-duration: 0.5s;
+      text-decoration: none;
+    }
+    .title .title-inner a.store:hover {
+      color: #a6cd81;
+      border: solid 1px #a6cd81;
+    }
+
+/* introduction */
+
+table.introduction {
+  margin: 25px 0 80px 0;
+}
+  table.introduction th {
+    width: 255px;
+  }
+
+/* mode */
+
+.mode {
+  height: 770px;
+
+}
+  .mode ul {
+    list-style: none;
+    margin-top: 50px;
+  }
+  .mode li {
+    width: 310px;
+    height: 300px;
+    float: left;
+    margin-right: 45px;
+    margin-bottom: 20px;
+  }
+  .mode li:nth-child(3n) {
+    margin-right: 0;
+  }
+  .mode h2 {
+    font-size: 24px;
+    margin: 20px 0;
+  }
+
+/* key bindings */
+
+.key-bindings {
+  height: 780px;
+  position: relative;
+}
+  .key-bindings table {
+    position: absolute;
+    top:210px;
+    width: 490px;
+  }
+  .key-bindings table.left {
+    left: 0;
+  }
+  .key-bindings table.right{
+    right: 0;
+  }
+    .key-bindings table th:nth-child(1) {
+      width: 95px;
+    }
+
+/* change logs */
+
+.change-logs,
+.change-logs h2 {
+  text-align: left;
+}
+  .change-logs span.change-logs-version {
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 10px;
+    display: inline-block;
+  }
+
+  .change-logs span.change-logs-tag {
+    font-size: 13px;
+    border-radius: 4px;
+    padding: 2px 6px;
+    vertical-align: 5px;
+  }
+
+  .change-logs span.change-logs-bugfix-tag {
+    background-color: #eee;
+  }
+
+  .change-logs span.change-logs-improvement-tag {
+      background-color: #62a609;
+      color: #fff;
+  }
+
+  .change-logs ul {
+    margin: 15px 0 40px 40px;
+  }
+    .change-logs ul li {
+      text-align: left;
+      line-height: 180%;
+    }

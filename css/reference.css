@@ -1,0 +1,14 @@
+.reference-index {
+  width: 1020px;
+  border-width: 0;
+}
+.reference-index tr:nth-child(even) {
+  background-color: #fff;
+}
+.reference-index th {
+  border-width: 0 0 1px 0;
+}
+.reference-index td {
+  width: 255px;
+  border-width: 0 0 1px 0;
+}
