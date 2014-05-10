@@ -294,8 +294,9 @@ Command.enterHintMode = function(option) {
   // 3. Otherwise, emulate click event for an element.
   var processor = Mode.enterHintMode(theme, targets);
   processor.onChooseElement(function(element) {
-    if (element.is(':insertable')) {
+    if (Dom.isEditable(element.get(0))) {
       element.focus();
+      return true;
     } else if (element.is('select')) {
       var selectBox = new HometypeSelectBox(element);
       processor.createHints('yellow', selectBox.getListElements());
