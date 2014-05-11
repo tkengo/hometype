@@ -93,44 +93,6 @@ KeyMap.hmap = function(key, command) {
 };
 
 /**
- * Get an array of command candidate that is assigned specified key.
- *
- * @param string mode The mode.
- * @param string key  Assigned key.
- * @return array An array that has command name and assigned key.
- */
-KeyMap.candidate = function(mode, key) {
-  var result = [];
-
-  var maps = _map[mode];
-  for (keyMap in maps) {
-    if (keyMap.indexOf(key) == 0) {
-      var map = maps[keyMap];
-
-      var command = '', args = {};
-      splitted = map.split(' ');
-      if (splitted.length == 1) {
-        command = map;
-      }
-      else {
-        command = splitted.shift();
-        for (var i in splitted) {
-          args[splitted[i].replace('--', '')] = true;
-        }
-      }
-
-      result.push({
-        key: keyMap,
-        command: Command[command],
-        args: args
-      });
-    }
-  }
-
-  return result;
-};
-
-/**
  * Get the command that is assigned specified key in specified mode.
  *
  * @param string mode The mode.
