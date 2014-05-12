@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hometype</title>
+  <meta name="description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。">
+  <meta name="viewport" content="width=1060px">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+  <link href="./../css/common.css" media="all" rel="stylesheet" type="text/css">
+  <link href="./../css/index.css" media="all" rel="stylesheet" type="text/css">
+  <meta property="og:title" content="Hometype" />
+  <meta property="og:description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。" />
+  <meta property="og:url" content="http://tkengo.github.io/hometype/ja/" />
+  <meta property="og:image" content="http://tkengo.github.io/hometype/images/ogp.png" />
+  <link rel="icon" href="./../images/favicon.ico" />
+  <link rel="apple-touch-iconprecomposed" href="./images/apple-touch.png">
+</head>
+<body>
+
+  <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <header>
+    <div class="header">
+      <h1><a href="#">Hometype</a></h1>
+      <nav>
+        <ul>
+          <li><a href="#" class="header-menu-active">紹介</a></li>
+          <li><a href="./reference.html">コマンドリファレンス</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="title">
+      <div class="title-inner">
+        <h2>ようこそHometypeが創るマウスレスの世界へ</h2>
+        <p class="description">Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。</p>
+        <a href="https://chrome.google.com/webstore/detail/hometype/fngmcejiekfcoflogkfnmhableinjmln" class="store" target="_blank">Chrome Store</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="container">
+    <h1>Hometypeでは以下のような操作ができます</h1>
+    <table class="introduction">
+      <thead>
+        <tr>
+          <th>移動</th>
+          <th>フォーム</th>
+          <th>検索</th>
+          <th>選択</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>画面スクロール</td>
+          <td>要素へのフォーカス</td>
+          <td>ブックマーク</td>
+          <td>ページ内テキストの選択</td>
+        </tr>
+        <tr>
+          <td>リンクを辿る</td>
+          <td>セレクトボックスを選択</td>
+          <td>履歴</td>
+          <td>コードスニペットの選択</td>
+        </tr>
+        <tr>
+          <td>履歴を進む/戻る</td>
+          <td>&nbsp;</td>
+          <td>閉じたタブ</td>
+          <td>&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+    <img src="./../images/screen.png" alt="screen" />
+  </section>
+
+  <section class="container mode">
+    <h1>モード</h1>
+    <p class="description">Hometypeはvimのようなモードを持っています。全てのモードはキーボード操作で切り替えることができます。</p>
+    <ul>
+      <li>
+        <img src="./../images/normal_mode.png" alt="Normal Mode" />
+        <h2>ノーマルモード</h2>
+        <p>Hometypeのデフォルトモードです。画面スクロールや履歴を戻ったり進んだりできます。</p>
+      </li>
+      <li>
+        <img src="./../images/insert_mode.png" alt="Insert Mode" />
+        <h2>インサートモード</h2>
+        <p>テキストエリアにフォーカスがある場合、自動的にインサートモードになります。文字入力をする必要があるので、インサートモードにはコマンドは割り当てられていません。</p>
+      </li>
+      <li>
+        <img src="./../images/hint_mode.png" alt="Hint Mode" />
+        <h2>ヒントモード</h2>
+        <p>画面に表示されている要素に対してヒントチップが表示されます。ヒントチップに記載されているキーを押下することで、リンクを辿ったり要素にフォーカスしたりできます。</p>
+      </li>
+      <li>
+        <img src="./../images/visual_mode.png" alt="Visual Mode" />
+        <h2>ビジュアルモード</h2>
+        <p>ビジュアルモードでは、要素内のテキストを選択するためのキャレットが現れます。Firefoxのキャレットブラウズモードのようなものです。</p>
+      </li>
+      <li>
+        <img src="./../images/command_mode.png" alt="Command Mode" />
+        <h2>コマンドモード</h2>
+        <p>ページ下部にコマンドバーが表示され、そこにコマンドを入力して実行することができます。また、このバーでは、ブックマーク、履歴、閉じたタブの検索もできます。</p>
+      </li>
+      <li>
+        <img src="./../images/help_mode.png" alt="Help Mode" />
+        <h2>ヘルプモード</h2>
+        <p>Hometypeで定義されているキーバインドの一覧が表示されます。</p>
+      </li>
+    </ul>
+  </section>
+
+  <section class="container key-bindings">
+    <h1>キーバインド</h1>
+    <p class="description">ノーマルモードでは以下のデフォルトのキーバインドが定義されています。</p>
+    <table class="left">
+      <thead>
+        <tr>
+          <th>キー</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>j</code> or <code>C-e</code></td>
+          <td>下へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>k</code> or <code>C-y</code></td>
+          <td>上へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>C-d</code></td>
+          <td>半ページ下へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>C-u</code></td>
+          <td>半ページ上へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>C-f</code></td>
+          <td>1ページ下へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>C-b</code></td>
+          <td>1ページ上へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>gg</code></td>
+          <td>ページの一番先頭へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>G</code></td>
+          <td>ページの一番下へスクロール</td>
+        </tr>
+        <tr>
+          <td><code>H</code></td>
+          <td>履歴を前に戻る</td>
+        </tr>
+        <tr>
+          <td><code>L</code></td>
+          <td>履歴を先に進む</td>
+        </tr>
+        <tr>
+          <td><code>x</code></td>
+          <td>現在のタブを閉じる</td>
+        </tr>
+        <tr>
+          <td><code>C-p</code></td>
+          <td>一つ左のタブに移動する</td>
+        </tr>
+        <tr>
+          <td><code>C-n</code></td>
+          <td>一つ右のタブに移動する</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="right">
+      <thead>
+        <tr>
+          <th>キー</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>I</code></td>
+          <td>画面の一番最初のテキストエリアにフォーカスする</td>
+        </tr>
+        <tr>
+          <td><code>A</code></td>
+          <td>画面の一番最後のテキストエリアにフォーカスする</td>
+        </tr>
+        <tr>
+          <td><code>u</code></td>
+          <td>最後に閉じたタブを開く</td>
+        </tr>
+        <tr>
+          <td><code>U</code></td>
+          <td>最近閉じたタブを検索して開く</td>
+        </tr>
+        <tr>
+          <td><code>C-h</code></td>
+          <td>履歴を検索して戻る</td>
+        </tr>
+        <tr>
+          <td><code>b</code></td>
+          <td>ブックマークを検索して現在のタブで開く</td>
+        </tr>
+        <tr>
+          <td><code>B</code></td>
+          <td>ブックマークを検索して新しいタブで開く</td>
+        </tr>
+        <tr>
+          <td><code>f</code></td>
+          <td>リンクを現在のタブで開く</td>
+        </tr>
+        <tr>
+          <td><code>F</code></td>
+          <td>リンクを新しいタブで開く</td>
+        </tr>
+        <tr>
+          <td><code>v</code></td>
+          <td>ビジュアルモードへ移行する</td>
+        </tr>
+        <tr>
+          <td><code>i</code> or <code>a</code></td>
+          <td>インサートモードへ移行する</td>
+        </tr>
+        <tr>
+          <td><code>:</code></td>
+          <td>コマンドモードへ移行する</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="container-bn">
+    <h1>Change logs</h1>
+    <div class="change-logs">
+      <h2>
+        <span class="change-logs-version">v1.0.2</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Improved accuracy of hint targets in the hint mode.</li>
+        <li>Detect insert mode when key was pushed, focusing and blurring is no longer detection for insert mode. So missing detection of the current mode dropped.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.0.1</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>In the hint mode an area tag was not included. Fixed it.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.0.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li>Implemented <strong>continuous hint mode</strong>. You can use this function when you want to continue the hint mode even if an element is choosen. For example, checking continuously multi checkboxes or radio buttons.</li>
+        <li>Implemented <strong>ignored urls option</strong>. If ignored urls is set in the options page, Hometype is unavailable while staying in those urls.</li>
+        <li>Defined new command '<strong>noop</strong>'. It does nothing. You can use this command if you want to be unavailable specified key bind.</li>
+        <li>Improved performance very much when entering hint mode.</li>
+        <li>Stop displaying the current mode on the top of the page.</li>
+        <li>Writing tests using Jasmine 2.0, and executing CI using wercker.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.3</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Updated Hometype icon.</li>
+        <li>Fixed a bug around restoreTab command.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.2</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Hometype opens most oldest closed tab when executing restoreTab command. Fixed to opening most newest closed tab.</li>
+        <li>All tab histories was removing when Hometype was updated. Fixed it.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.1</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Provided line number in searched tab histories.</li>
+        <li>The order of closed tab histories was reverse. Fixed it.</li>
+        <li>focusFirstInput and focusLastInput sometimes worked well. Fixed it.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li>Implemented the options page.</li>
+        <li>Implemented the help mode that displays key bindings on the center of the page.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.0.3</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li>Improved performance using EventPage instead of BackgroundPage.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.0.2</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Change this extension name from Chromekey to <strong>Hometype</strong></li>
+        <li>focusFirstInput and focusLastInput was not able to focus to a textarea tag. Fixed it.</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.0.1</span>
+      </h2>
+      <ul>
+        <li>Hello world. This extension was released on Chrome webstore.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
+  </footer>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35368510-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>
