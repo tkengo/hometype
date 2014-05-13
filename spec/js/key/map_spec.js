@@ -42,28 +42,4 @@ describe('KeyMap', function() {
     KeyMap.hmap(key, command);
     expect(_map[ModeList.HELP_MODE][key]).toBe(command);
   });
-
-  describe('command candidate', function() {
-    beforeEach(function() {
-      KeyMap.nmap('aa', 'noop');
-      KeyMap.nmap('ab', 'noop');
-      KeyMap.nmap('ac', 'noop --args');
-    });
-
-    it('should get candidate', function() {
-      expect(KeyMap.candidate(ModeList.NORMAL_MODE, 'a')).toHave(3);
-      expect(KeyMap.candidate(ModeList.NORMAL_MODE, 'aa')).toHave(1);
-    });
-
-    it('should not get candidate in the other mode', function() {
-      expect(KeyMap.candidate(ModeList.HINT_MODE, 'a')).toBeEmpty();
-    });
-
-    it('should include key, command, args in return value', function() {
-      var candidate = KeyMap.candidate(ModeList.NORMAL_MODE, 'ac');
-      expect(candidate[0].key).toBe('ac');
-      expect(candidate[0].command).toBe(Command['noop']);
-      expect(candidate[0].args.args).toBe(true);
-    });
-  });
 });
