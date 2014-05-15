@@ -2,15 +2,23 @@ var Executer = (function() {
   var previousOptions = {};
 
   var constructor = function(mode, key) {
+    if (!key) {
+      key = '__undefined__';
+      var command = mode;
+    }
+
     this.key        = key;
     this.candidates = [];
 
-    var commands = KeyMap.assignedCommands();
-
-    var maps = commands[mode];
-    for (keyMap in maps) {
-      if (keyMap.indexOf(key) == 0) {
-        this.candidates.push({ command: maps[keyMap], key: keyMap });
+    if (key == '__undefined__') {
+      this.candidates.push({ command: command, key: key });
+    } else {
+      var commands = KeyMap.assignedCommands();
+      var maps = commands[mode];
+      for (keyMap in maps) {
+        if (keyMap.indexOf(key) == 0) {
+          this.candidates.push({ command: maps[keyMap], key: keyMap });
+        }
       }
     }
   };
