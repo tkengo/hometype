@@ -1,16 +1,30 @@
-var Executer = function(mode, key) {
-  this.key        = key;
-  this.candidates = [];
+var Executer = (function() {
+  var previousOptions = {};
 
-  var commands = KeyMap.assignedCommands();
+  var constructor = function(mode, key) {
+    this.key        = key;
+    this.candidates = [];
 
-  var maps = commands[mode];
-  for (keyMap in maps) {
-    if (keyMap.indexOf(key) == 0) {
-      this.candidates.push({ command: maps[keyMap], key: keyMap });
+    var commands = KeyMap.assignedCommands();
+
+    var maps = commands[mode];
+    for (keyMap in maps) {
+      if (keyMap.indexOf(key) == 0) {
+        this.candidates.push({ command: maps[keyMap], key: keyMap });
+      }
     }
-  }
-};
+  };
+
+  constructor.previousOptions = function(command, args) {
+    if (args) {
+      previousOptions[command] = args || {};
+    } else {
+      return previousOptions[command] || {};
+    }
+  };
+
+  return constructor;
+})();
 
 Executer.prototype.noCommand = function() {
   return this.candidates.length == 0;
@@ -37,7 +51,16 @@ Executer.prototype.execute = function() {
   }
 
   for (var i = 0; i < commands.length; i++) {
-    Command[commands[i].command](commands[i].args);
+    var command = commands[i].command,
+        args    = commands[i].args;
+
+    if (command.substr(0, 1) == '@') {
+      command = command.substr(1);
+      args    = Executer.previousOptions(command);
+    }
+    Command[command](args);
+
+    Executer.previousOptions(command, args);
   }
 
   return true;
