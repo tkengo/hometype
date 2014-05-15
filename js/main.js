@@ -53,7 +53,7 @@ function initialize(options)
   $(document).ready(function() {
     chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
       if (status) {
-        Command.enterHintMode({ continuous: true });
+        new Executer('enterHintMode --continuous').execute();
       }
     });
   });
