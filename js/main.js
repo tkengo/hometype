@@ -38,30 +38,22 @@ function initialize(options)
       Mode.changeMode(ModeList.NORMAL_MODE);
     }
 
-    // Get command candidates from input keys.
-    var candidate = KeyMap.candidate(Mode.getCurrentMode(), sequence);
-
-    if (candidate.length == 1 && candidate[0].key == sequence) {
-      // Execute the command if decided.
-      candidate[0].command(candidate[0].args);
-      e.stopPropagation();
-      e.preventDefault();
-
-      // Reset key sequence to wait next command.
-      this.reset();
-    }
-    else if (candidate.length == 0) {
-      // Delegate key event to current mode processor if command candidates was not found.
+    var executer = new Executer(Mode.getCurrentMode(), sequence);
+    if (executer.noCommand()) {
       if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
         this.reset();
       }
+    } else if (executer.execute()) {
+      e.stopPropagation();
+      e.preventDefault();
+      this.reset();
     }
   });
 
   $(document).ready(function() {
     chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
       if (status) {
-        Command.enterHintMode({ continuous: true });
+        new Executer('enterHintMode --continuous').execute();
       }
     });
   });

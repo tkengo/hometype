@@ -51,7 +51,7 @@ HometypeDefaultOptions = {
       '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab',
-      '<C-f>': 'enterHintMode --continuous'
+      '<C-f>': '@enterHintMode'
     },
     vmap: {
       'Esc': 'enterNormalMode'
@@ -59,9 +59,14 @@ HometypeDefaultOptions = {
     fmap: {
       'Esc': 'enterNormalMode',
       '<C-c>': 'enterNormalMode',
+      '<C-e>': 'scrollDown @enterHintMode',
+      '<C-y>': 'scrollUp @enterHintMode',
+      '<C-d>': 'scrollDownHalf @enterHintMode',
+      '<C-u>': 'scrollUpHalf @enterHintMode',
+      '<C-f>': 'scrollDownPage @enterHintMode',
+      '<C-b>': 'scrollUpPage @enterHintMode',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab',
-      '<C-f>': 'enterHintMode --continuous'
+      '<C-n>': 'moveRightTab'
     },
     hmap: {
       'Esc': 'enterNormalMode'

@@ -235,7 +235,7 @@ Command.enterVisualMode = function() {
 };
 
 /**
- * Enter the hint mode. Hint targets are clicable and form elements.
+ * Enter the hint mode. Hint targets are clickable and form elements.
  */
 Command.enterHintMode = function(option) {
   // Collect hint source targets.
@@ -243,7 +243,7 @@ Command.enterHintMode = function(option) {
   var newTab = option.new || false;
   var theme = newTab ? 'blue' : 'yellow';
 
-  // Do nothing if there are not targets or the current mode is the insert mode
+  // Do nothing if there are not targets or the current mode is the insert mode.
   if (targets.length == 0 || Mode.isInsertMode()) {
     return;
   }
