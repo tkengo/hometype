@@ -235,43 +235,7 @@ Command.enterVisualMode = function() {
 };
 
 /**
- * Make next element content editable.
- */
-Command.forwardContentEditable = function() {
-  var current = Viewport.getCurrentContentEditable();
-  if (current.length > 0) {
-    Viewport.resetContentEditable(current);
-    var next = Viewport.getNextContentEditableElement(current);
-    if (next && next.length > 0) {
-      Viewport.setContentEditable(next);
-      setTimeout(function() { next.focus(); }, 100);
-    }
-    else {
-      Command.cancelVisualMode();
-    }
-  }
-};
-
-/**
- * Make previous element content editable.
- */
-Command.backwardContentEditable = function() {
-  var current = Viewport.getCurrentContentEditable();
-  if (current.length > 0) {
-    Viewport.resetContentEditable(current);
-    var prev = Viewport.getPrevContentEditableElement(current);
-    if (prev && prev.length > 0) {
-      Viewport.setContentEditable(prev);
-      setTimeout(function() { prev.focus(); }, 100);
-    }
-    else {
-      Command.cancelVisualMode();
-    }
-  }
-};
-
-/**
- * Enter the hint mode. Hint targets are clicable and form elements.
+ * Enter the hint mode. Hint targets are clickable and form elements.
  */
 Command.enterHintMode = function(option) {
   // Collect hint source targets.
@@ -279,7 +243,7 @@ Command.enterHintMode = function(option) {
   var newTab = option.new || false;
   var theme = newTab ? 'blue' : 'yellow';
 
-  // Do nothing if there are not targets or the current mode is the insert mode
+  // Do nothing if there are not targets or the current mode is the insert mode.
   if (targets.length == 0 || Mode.isInsertMode()) {
     return;
   }
@@ -330,41 +294,20 @@ Command.enterCommandMode = function() {
 };
 
 /**
- * Return the normal mode from the command mode.
+ * Enter the normal mode.
  */
-Command.cancelCommandMode = function() {
-  if (Mode.getCurrentMode() == ModeList.COMMAND_MODE) {
-    CommandBox.hide();
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
-
-/**
- * Return the normal mode from the hint mode.
- */
-Command.cancelHintMode = function() {
-  if (Mode.getCurrentMode() == ModeList.HINT_MODE) {
-    chrome.runtime.sendMessage({ command: 'leaveContinuousMode' });
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
-
-/**
- * Return the normal mode from the visual mode.
- */
-Command.cancelVisualMode = function() {
-  if (Mode.getCurrentMode() == ModeList.VISUAL_MODE) {
-    Viewport.resetContentEditable();
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
+Command.enterNormalMode = function() {
+  Mode.changeMode(ModeList.NORMAL_MODE);
 };
 
 Command.showAssignedCommands = function() {
   Mode.changeMode(ModeList.HELP_MODE);
 };
 
-Command.cancelHelpMode = function() {
-  if (Mode.getCurrentMode() == ModeList.HELP_MODE) {
-    Mode.changeMode(ModeList.NORMAL_MODE);
-  }
-};
+/**
+ * Defined alias.
+ */
+Command.cancelCommandMode = Command.enterNormalMode;
+Command.cancelHintMode    = Command.enterNormalMode;
+Command.cancelVisualMode  = Command.enterNormalMode;
+Command.cancelHelpMode    = Command.enterNormalMode;

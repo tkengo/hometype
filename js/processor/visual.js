@@ -8,3 +8,10 @@ VisualModeProcessor.prototype.onKeyDown = function(key, currentKey, e) {
     e.preventDefault();
   }
 };
+
+/**
+ * Callback method that invoke when leave the visual mode.
+ */
+VisualModeProcessor.prototype.notifyLeaveMode = function() {
+  Viewport.resetContentEditable();
+};

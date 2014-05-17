@@ -36,31 +36,40 @@ HometypeDefaultOptions = {
       '?': 'showAssignedCommands'
     },
     cmap: {
-      'Esc': 'cancelCommandMode',
+      'Esc': 'enterNormalMode',
       '<C-n>': 'selectNextCandidate',
       '<C-p>': 'selectPrevCandidate'
     },
     imap: {
       'Esc': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
+      '<C-e>': 'scrollDown',
+      '<C-y>': 'scrollUp',
+      '<C-d>': 'scrollDownHalf',
+      '<C-u>': 'scrollUpHalf',
+      '<C-f>': 'scrollDownPage',
+      '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab',
-      '<C-f>': 'enterHintMode --continuous'
+      '<C-f>': '@enterHintMode'
     },
     vmap: {
-      'Esc': 'cancelVisualMode',
-      'n': 'forwardContentEditable',
-      'p': 'backwardContentEditable'
+      'Esc': 'enterNormalMode'
     },
     fmap: {
-      'Esc': 'cancelHintMode',
-      '<C-c>': 'cancelHintMode',
+      'Esc': 'enterNormalMode',
+      '<C-c>': 'enterNormalMode',
+      '<C-e>': 'scrollDown @enterHintMode',
+      '<C-y>': 'scrollUp @enterHintMode',
+      '<C-d>': 'scrollDownHalf @enterHintMode',
+      '<C-u>': 'scrollUpHalf @enterHintMode',
+      '<C-f>': 'scrollDownPage @enterHintMode',
+      '<C-b>': 'scrollUpPage @enterHintMode',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab',
-      '<C-f>': 'enterHintMode --continuous'
+      '<C-n>': 'moveRightTab'
     },
     hmap: {
-      'Esc': 'cancelHelpMode'
+      'Esc': 'enterNormalMode'
     }
   }
 };
