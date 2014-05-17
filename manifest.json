@@ -9,6 +9,7 @@
     "tabs",
     "bookmarks",
     "webNavigation",
+    "storage",
     "<all_urls>"
   ],
 
