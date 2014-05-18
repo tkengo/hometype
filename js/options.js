@@ -52,11 +52,12 @@ var HometypeOptions = (function() {
        * Load options in this instance.
        */
       load: function(callback) {
-        chrome.runtime.sendMessage({ command: 'getOptions' }, function(results) {
-          setOptions(results);
+        chrome.storage.sync.get('options', function(results) {
+          var options = $.extend({}, HometypeDefaultOptions, results.options);
+          setOptions(options);
 
           if (typeof callback == 'function') {
-            callback(results);
+            callback(options);
           }
         });
       },
@@ -70,7 +71,9 @@ var HometypeOptions = (function() {
   }
 
   // Set event listener to notify for this object when options value was changed.
-  chrome.runtime.connect({ name: 'notifyOptions' }).onMessage.addListener(setOptions);
+  chrome.storage.onChanged.addListener(function(changes, areaName) {
+    setOptions(changes.options.newValue);
+  });
 
   // Return an object that has only 'getInstance' method to get singleton instance.
   return {

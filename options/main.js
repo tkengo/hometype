@@ -55,6 +55,9 @@ $(document).ready(function() {
       params.ignore_urls.push(line);
     });
 
+    chrome.storage.sync.set({ 'options': params }, function() {
+      $('#status').text('Saved!');
+    });
     chrome.runtime.sendMessage({ command: 'setOptions', params: params });
   });
 });
