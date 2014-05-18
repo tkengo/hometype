@@ -21,7 +21,7 @@ describe('HometypeOption', function() {
     });
 
     it('should be loaded options value', function(done) {
-      expect(this.instance.options).toEqual(option);
+      expect(this.instance.options).toEqual($.extend({}, HometypeDefaultOptions, option));
       done();
     });
 
@@ -49,8 +49,8 @@ describe('HometypeOption', function() {
 });
 
 function loadOption(done, option, loadedCallback) {
-  chrome.runtime.sendMessage = function(params, callback) {
-    callback(option);
+  chrome.storage.sync.get = function(key, callback) {
+    callback({ options: option });
     done();
   };
   this.instance.load(loadedCallback);

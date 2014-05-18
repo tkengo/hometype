@@ -13,6 +13,7 @@ module.exports = function(config) {
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
+      "js/default_option.js",
       "js/options.js",
       "js/key/identifiers.js",
       "js/key/sequence.js",
