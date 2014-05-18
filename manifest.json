@@ -23,7 +23,6 @@
     "persistent": false,
     "scripts": [
       "lib/jquery-2.0.1.min.js",
-      "js/background/default_option.js",
       "js/background/history.js",
       "js/background/tab.js",
       "js/background/script.js"
@@ -42,6 +41,7 @@
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
+      "js/default_option.js",
       "js/options.js",
       "js/key/identifiers.js",
       "js/key/sequence.js",
