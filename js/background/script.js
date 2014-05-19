@@ -134,11 +134,6 @@ RuntimeCommand.loadBookmarks = function(port) {
   });
 };
 
-var notifyPort;
-RuntimeCommand.notifyOptions = function(port) {
-  notifyPort = port;
-};
-
 (function() {
   /**
    * This is invoked when called chrome.runtime.sendMessage in content script.
