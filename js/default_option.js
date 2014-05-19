@@ -23,7 +23,7 @@ var HometypeDefaultOptions = {
       '<C-n>': 'moveRightTab',
       ':': 'enterCommandMode',
       'b': 'searchBookmarks',
-      'B': 'searchBookmarks',
+      'B': 'searchBookmarks --new',
       'i': 'enterInsertMode',
       'a': 'enterInsertMode',
       'I': 'focusFirstInput',
