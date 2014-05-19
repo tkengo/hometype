@@ -1,6 +1,16 @@
+/**
+ * Define Hometype default options.
+ */
 var HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
+
+  /**
+   * How to specify a command:
+   *   1. Only command name                            'commandName'
+   *   2. With arguments                               'commandName --hoge --moge'
+   *   3. Take over the option from previous execution '@commandName'
+   */
   default_key_bind: {
     nmap: {
       'j': 'scrollDown',
