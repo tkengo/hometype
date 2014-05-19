@@ -3,9 +3,6 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'spec/lib/jasmine-2.0.0/jasmine.js',
-      'spec/lib/jasmine-2.0.0/jasmine-html.js',
-      'spec/lib/jasmine-2.0.0/boot.js',
       'spec/lib/mocking.js',
       'spec/lib/custom_matcher.js',
       'spec/spec_helper.js',
@@ -33,7 +30,7 @@ module.exports = function(config) {
       "js/command.js",
       "js/mode.js",
       "js/main.js",
-      'spec/**/*.js'
+      'spec/js/**/*.js'
     ],
     exclude: [ ],
     preprocessors: {
