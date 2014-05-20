@@ -72,36 +72,6 @@ RuntimeCommand.restoreTab = function(sender, tabId) {
  */
 RuntimeCommand.closedTabList = function(sender, params, sendResponse) {
   sendResponse(Tab.getClosedTabList());
-}
-
-/**
- * Save options to local storage.
- */
-RuntimeCommand.setOptions = function(sender, params) {
-  localStorage.setItem('options', JSON.stringify(params));
-  notifyPort.postMessage(params);
-};
-
-/**
- * Get options from local storage.
- */
-RuntimeCommand.getOptions = function(sender, params, sendResponse) {
-  var options = JSON.parse(localStorage.getItem('options'));
-
-  if (params && params.key) {
-    var result = options[params.key];
-  }
-  else {
-    var result = $.extend({}, HometypeDefaultOptions, options);
-
-    for (var i in result) {
-      if (!result[i] && HometypeDefaultOptions[i]) {
-        result[i] = HometypeDefaultOptions[i];
-      }
-    }
-  }
-
-  sendResponse(result);
 };
 
 /**
@@ -162,11 +132,6 @@ RuntimeCommand.loadBookmarks = function(port) {
       port.postMessage(results);
     });
   });
-};
-
-var notifyPort;
-RuntimeCommand.notifyOptions = function(port) {
-  notifyPort = port;
 };
 
 (function() {

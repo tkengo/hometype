@@ -89,6 +89,11 @@ HintModeProcessor.prototype.onChooseElement = function(chooseElementCallback) {
   this.chooseElementCallback = chooseElementCallback;
 };
 
+/**
+ * Register callback that invokes when Ht leaves from the hint mode.
+ *
+ * @param function notifyleavemodeCallback Callback method.
+ */
 HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
   this.notifyLeaveModeCallback = notifyLeaveModeCallback;
 };

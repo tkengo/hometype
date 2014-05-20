@@ -174,11 +174,16 @@ Command.searchClosedTabs = function() {
 /**
  * Search a bookmark from chrome bookmark list.
  */
-Command.searchBookmarks = function(newTab) {
+Command.searchBookmarks = function(option) {
+  var newTab = option.new || false;
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
   processor.onEnter(function(text, selected) {
-    chrome.runtime.sendMessage({ command: 'createTab', params: { url: selected.url } });
+    if (newTab) {
+      chrome.runtime.sendMessage({ command: 'createTab', params: { url: selected.url } });
+    } else {
+      window.location.href = selected.url;
+    }
   });
 
   var port = chrome.runtime.connect({ name: 'loadBookmarks' });
