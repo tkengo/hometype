@@ -78,14 +78,14 @@ var Executer = (function() {
 /**
  * Check if whether this object has a command that should be executed.
  */
-Executer.prototype.noCommand = function() {
+Executer.prototype.noCandidate = function() {
   return this.candidates.length == 0;
 };
 
 /**
  * Check if whether a command that should be executed is fixed.
  */
-Executer.prototype.fixedCommand = function() {
+Executer.prototype.fixedCandidate = function() {
   return this.candidates.length == 1 && this.candidates[0].key == this.key;
 };
 
@@ -93,7 +93,7 @@ Executer.prototype.fixedCommand = function() {
  * Execute a command.
  */
 Executer.prototype.execute = function() {
-  if (!this.fixedCommand()) {
+  if (!this.fixedCandidate()) {
     return false;
   }
 
