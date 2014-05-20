@@ -78,14 +78,14 @@ var Executer = (function() {
 /**
  * Check if whether this object has a command that should be executed.
  */
-Executer.prototype.noCommand = function() {
+Executer.prototype.noCandidate = function() {
   return this.candidates.length == 0;
 };
 
 /**
  * Check if whether a command that should be executed is fixed.
  */
-Executer.prototype.fixedCommand = function() {
+Executer.prototype.fixedCandidate = function() {
   return this.candidates.length == 1 && this.candidates[0].key == this.key;
 };
 
@@ -93,7 +93,7 @@ Executer.prototype.fixedCommand = function() {
  * Execute a command.
  */
 Executer.prototype.execute = function() {
-  if (!this.fixedCommand()) {
+  if (!this.fixedCandidate()) {
     return false;
   }
 
@@ -102,7 +102,11 @@ Executer.prototype.execute = function() {
 
   for (var i = 0; i < map.length; i++) {
     if (map[i].substr(0, 2) != '--') {
-      commands.push({ command: map[i], args: {} });
+      if (Command[map[i]]) {
+        commands.push({ command: map[i], args: {} });
+      } else {
+        return false;
+      }
     } else {
       commands[commands.length - 1].args[map[i].replace('--', '')] = true;
     }

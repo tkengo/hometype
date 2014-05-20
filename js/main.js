@@ -39,7 +39,7 @@ function initialize(options)
     }
 
     var executer = new Executer(Mode.getCurrentMode(), sequence);
-    if (executer.noCommand()) {
+    if (executer.noCandidate()) {
       if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
         this.reset();
       }
