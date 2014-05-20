@@ -102,7 +102,11 @@ Executer.prototype.execute = function() {
 
   for (var i = 0; i < map.length; i++) {
     if (map[i].substr(0, 2) != '--') {
-      commands.push({ command: map[i], args: {} });
+      if (Command[map[i]]) {
+        commands.push({ command: map[i], args: {} });
+      } else {
+        return false;
+      }
     } else {
       commands[commands.length - 1].args[map[i].replace('--', '')] = true;
     }
