@@ -150,14 +150,7 @@ Command.focusLastInput = function() {
 Command.searchTabs = function() {
   var port = chrome.runtime.connect({ name: 'loadTabs' });
   port.onMessage.addListener(function(tabs) {
-    var box = $('<div>').addClass('hometype-tab-list-box');
-    for (var i = 0; i < tabs.length; i++) {
-      var tab = tabs[i];
-      var tabElement = $('<div>').addClass('hometype-tab-element').text(tab.title).appendTo(box);
-      $('<span>').addClass('hometype-tab-element-hint-key').text('[1]').prependTo(tabElement);
-      $('<img>').attr('src', tab.favIconUrl).attr('width', '16').prependTo(tabElement);
-    }
-    box.appendTo($('body')).screenCenter();
+    new HometypeTabListBox(tabs);
     port.disconnect();
   });
   port.postMessage();

@@ -50,6 +50,7 @@
       "js/box/select.js",
       "js/box/command.js",
       "js/box/help.js",
+      "js/box/tab_list.js",
       "js/hint/element.js",
       "js/hint/element_collection.js",
       "js/processor/noop.js",
