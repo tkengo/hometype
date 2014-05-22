@@ -82,6 +82,13 @@ RuntimeCommand.getHistories = function(sender, params, sendResponse) {
 };
 
 /**
+ * Select a tab.
+ */
+RuntimeCommand.selectTab = function(sender, tabId, sendResponse) {
+  chrome.tabs.update(tabId, { active: true, highlighted: true });
+};
+
+/**
  * Set continuous option.
  *
  * If continuous is true in local storage, Hometype immediately enters the hint

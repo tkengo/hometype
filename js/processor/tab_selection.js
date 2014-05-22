@@ -6,6 +6,7 @@
  * Tab selection mode processor.
  */
 var TabSelectionModeProcessor = function() {
+  this.tabListBox = null;
   this.notifyLeaveModeCallback = null;
 };
 
@@ -16,25 +17,31 @@ var TabSelectionModeProcessor = function() {
  * @param string        currentKey pushed key.
  * @param KeyboradEvent e          event.
  */
-TabSelectionModeProcessor.prototype.onKeyDown = function(key, currentKey, e) {
+TabSelectionModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
+  var tab = this.tabListBox.getBy(currentKey);
+  if (tab) {
+    chrome.runtime.sendMessage({ command: 'selectTab', params: tab.id });
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
   return true;
+};
+
+/**
+ * Create hints for source elements and show it.
+ *
+ * @param array elements Source elements.
+ */
+TabSelectionModeProcessor.prototype.createTabListBox = function(tabs) {
+  if (this.tabListBox) {
+    this.tabListBox.remove();
+  }
+
+  this.tabListBox = new HometypeTabListBox(tabs);
 };
 
 /**
  * Callback method that invoke when leave the tab selection mode.
  */
 TabSelectionModeProcessor.prototype.notifyLeaveMode = function() {
-  if (this.notifyLeaveModeCallback) {
-    this.notifyLeaveModeCallback();
-    this.notifyLeaveModeCallback = null;
-  }
-};
-
-/**
- * Register callback that invokes when Ht leaves from the tab selection mode.
- *
- * @param function notifyleavemodeCallback Callback method.
- */
-TabSelectionModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
-  this.notifyLeaveModeCallback = notifyLeaveModeCallback;
+  this.tabListBox.remove();
 };

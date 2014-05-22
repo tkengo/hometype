@@ -153,10 +153,8 @@ Command.focusLastInput = function() {
 Command.enterTabSelectionMode = function() {
   var port = chrome.runtime.connect({ name: 'loadTabs' });
   port.onMessage.addListener(function(tabs) {
-    var processor  = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
-    var tabListBox = new HometypeTabListBox(tabs);
-
-    processor.onNotifyLeaveMode(function() { tabListBox.remove(); });
+    var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
+    processor.createTabListBox(tabs);
 
     port.disconnect();
   });

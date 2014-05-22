@@ -4,6 +4,7 @@
 var HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
+  tab_selection_hint_keys: '123456789qwertyuiopasdfghjklzxcvbnm',
 
   /**
    * How to specify a command:
