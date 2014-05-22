@@ -23,7 +23,7 @@ var HometypeDefaultOptions = {
       'cF': 'enterHintMode --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
-      'm': 'searchTabs',
+      'm': 'enterTabSelectionMode',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',
@@ -80,6 +80,9 @@ var HometypeDefaultOptions = {
       '<C-n>': 'moveRightTab'
     },
     hmap: {
+      'Esc': 'enterNormalMode'
+    },
+    tmap: {
       'Esc': 'enterNormalMode'
     }
   }

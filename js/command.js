@@ -147,10 +147,17 @@ Command.focusLastInput = function() {
   $(':insertable:screen:last').focus();
 };
 
-Command.searchTabs = function() {
+/**
+ * Enter the tab selection mode.
+ */
+Command.enterTabSelectionMode = function() {
   var port = chrome.runtime.connect({ name: 'loadTabs' });
   port.onMessage.addListener(function(tabs) {
-    new HometypeTabListBox(tabs);
+    var processor  = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
+    var tabListBox = new HometypeTabListBox(tabs);
+
+    processor.onNotifyLeaveMode(function() { tabListBox.remove(); });
+
     port.disconnect();
   });
   port.postMessage();

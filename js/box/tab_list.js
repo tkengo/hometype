@@ -6,12 +6,19 @@
  * Tab list box.
  */
 var HometypeTabListBox = function(tabs) {
-  var box = $('<div>').addClass('hometype-tab-list-box');
+  this.box = $('<div>').addClass('hometype-tab-list-box');
   for (var i = 0; i < tabs.length; i++) {
     var tab = tabs[i];
-    var tabElement = $('<div>').addClass('hometype-tab-element').text(tab.title).appendTo(box);
+    var tabElement = $('<div>').addClass('hometype-tab-element').text(tab.title).appendTo(this.box);
     $('<span>').addClass('hometype-tab-element-hint-key').text('[1]').prependTo(tabElement);
     $('<img>').attr('src', tab.favIconUrl).attr('width', '16').prependTo(tabElement);
   }
-  box.appendTo($('body')).screenCenter();
+  this.box.appendTo($('body')).screenCenter();
+};
+
+/**
+ * Remove this box from DOM.
+ */
+HometypeTabListBox.prototype.remove = function() {
+  this.box.remove();
 };
