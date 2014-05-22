@@ -59,6 +59,7 @@
       "js/processor/hint.js",
       "js/processor/insert.js",
       "js/processor/help.js",
+      "js/processor/tab_selection.js",
       "js/command.js",
       "js/executer.js",
       "js/mode.js",

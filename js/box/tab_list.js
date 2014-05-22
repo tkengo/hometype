@@ -3,7 +3,7 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Select box.
+ * Tab list box.
  */
 var HometypeTabListBox = function(tabs) {
   var box = $('<div>').addClass('hometype-tab-list-box');
