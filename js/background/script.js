@@ -112,6 +112,17 @@ RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
  */
 
 /**
+ * Search tabs.
+ */
+RuntimeCommand.loadTabs = function(port) {
+  port.onMessage.addListener(function() {
+    chrome.tabs.query({ currentWindow: true }, function(tabs) {
+      port.postMessage(tabs);
+    });
+  });
+};
+
+/**
  * Get the bookmark list.
  */
 RuntimeCommand.loadBookmarks = function(port) {

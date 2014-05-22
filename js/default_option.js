@@ -23,6 +23,7 @@ var HometypeDefaultOptions = {
       'cF': 'enterHintMode --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
+      'm': 'searchTabs',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',

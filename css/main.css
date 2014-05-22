@@ -157,3 +157,34 @@
   font-size:14px;
   color:#222;
 }
+
+.hometype-tab-list-box {
+  position: absolute;
+  width: 900px;
+  background-color: #fff;
+  text-align: left;
+  opacity: 0.9;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.hometype-tab-element {
+  float: left;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  padding-left: 20px;
+  margin-right: 10px;
+  font-family:'Osaka-Mono' !important;
+}
+.hometype-tab-element-hint-key {
+  color: #f00;
+}
+.hometype-tab-element img {
+  position: absolute;
+  top: 7px;
+  left: 0;
+}
