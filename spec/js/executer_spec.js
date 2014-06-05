@@ -8,11 +8,28 @@ describe('Executer', function() {
     KeyMap.nmap('a',  'testCommand');
     KeyMap.nmap('ba', 'testCommand');
     KeyMap.nmap('bb', 'testCommand');
+    KeyMap.nmap('c',  '@testCommand');
   });
 
   describe('was passed a mode and key to arguments', function() {
     beforeEach(function() {
       executer = new Executer(ModeList.NORMAL_MODE, 'a');
+    });
+
+    it('should be fix a candidate', function() {
+      expect(executer.fixedCandidate()).toBe(true);
+      expect(executer.noCandidate()).toBe(false);
+    });
+
+    it('should invoke a command', function() {
+      expect(executer.execute()).toBe(true);
+      expect(Command.testCommand).toHaveBeenCalled();
+    });
+  });
+
+  describe('was passed a mode and key to arguments with previous option', function() {
+    beforeEach(function() {
+      executer = new Executer(ModeList.NORMAL_MODE, 'c');
     });
 
     it('should be fix a candidate', function() {
@@ -75,6 +92,22 @@ describe('Executer', function() {
   describe('was passed a command name to arguments', function() {
     beforeEach(function() {
       executer = new Executer('testCommand');
+    });
+
+    it('should be fix a candidate', function() {
+      expect(executer.fixedCandidate()).toBe(true);
+      expect(executer.noCandidate()).toBe(false);
+    });
+
+    it('should invoke a command', function() {
+      expect(executer.execute()).toBe(true);
+      expect(Command.testCommand).toHaveBeenCalled();
+    });
+  });
+
+  describe('was passed a command name to arguments with previous option', function() {
+    beforeEach(function() {
+      executer = new Executer('@testCommand');
     });
 
     it('should be fix a candidate', function() {
