@@ -15,7 +15,8 @@ var ModeList = {
   HINT_MODE: 'hint',
   VISUAL_MODE: 'visual',
   COMMAND_MODE: 'command',
-  HELP_MODE: 'help'
+  HELP_MODE: 'help',
+  TAB_SELECTION_MODE: 'tabSelection'
 };
 
 /**
@@ -27,14 +28,15 @@ var HometypeMode = function() {
   this.callbacks = [];
 
   this.modeProcessors = {};
-  this.modeProcessors[ModeList.NORMAL_MODE]  = new NoopProcessor();
-  this.modeProcessors[ModeList.INSERT_MODE]  = new InsertModeProcessor();
-  this.modeProcessors[ModeList.HINT_MODE]    = new HintModeProcessor();
-  this.modeProcessors[ModeList.VISUAL_MODE]  = new VisualModeProcessor();
-  this.modeProcessors[ModeList.COMMAND_MODE] = new CommandModeProcessor();
-  this.modeProcessors[ModeList.HELP_MODE]    = new HelpModeProcessor();
+  this.modeProcessors[ModeList.NORMAL_MODE]        = new NoopProcessor();
+  this.modeProcessors[ModeList.INSERT_MODE]        = new InsertModeProcessor();
+  this.modeProcessors[ModeList.HINT_MODE]          = new HintModeProcessor();
+  this.modeProcessors[ModeList.VISUAL_MODE]        = new VisualModeProcessor();
+  this.modeProcessors[ModeList.COMMAND_MODE]       = new CommandModeProcessor();
+  this.modeProcessors[ModeList.HELP_MODE]          = new HelpModeProcessor();
+  this.modeProcessors[ModeList.TAB_SELECTION_MODE] = new TabSelectionModeProcessor();
 
-  this.lockMode= false;
+  this.lockMode = false;
 };
 
 /**

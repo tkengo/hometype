@@ -4,6 +4,7 @@
 var HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
+  tab_selection_hint_keys: '123456789qwertyuiopasdfghjklzxcvbnm',
 
   /**
    * How to specify a command:
@@ -23,6 +24,7 @@ var HometypeDefaultOptions = {
       'cF': 'enterHintMode --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
+      'm': 'enterTabSelectionMode',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',
@@ -79,6 +81,9 @@ var HometypeDefaultOptions = {
       '<C-n>': 'moveRightTab'
     },
     hmap: {
+      'Esc': 'enterNormalMode'
+    },
+    tmap: {
       'Esc': 'enterNormalMode'
     }
   }

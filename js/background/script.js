@@ -82,6 +82,13 @@ RuntimeCommand.getHistories = function(sender, params, sendResponse) {
 };
 
 /**
+ * Select a tab.
+ */
+RuntimeCommand.selectTab = function(sender, tabId, sendResponse) {
+  chrome.tabs.update(tabId, { active: true, highlighted: true });
+};
+
+/**
  * Set continuous option.
  *
  * If continuous is true in local storage, Hometype immediately enters the hint
@@ -110,6 +117,17 @@ RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
  * OnConnect callback runtime methods.
  * ------------------------------------
  */
+
+/**
+ * Search tabs.
+ */
+RuntimeCommand.loadTabs = function(port) {
+  port.onMessage.addListener(function() {
+    chrome.tabs.query({ currentWindow: true }, function(tabs) {
+      port.postMessage(tabs);
+    });
+  });
+};
 
 /**
  * Get the bookmark list.

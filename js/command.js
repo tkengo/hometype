@@ -148,6 +148,20 @@ Command.focusLastInput = function() {
 };
 
 /**
+ * Enter the tab selection mode.
+ */
+Command.enterTabSelectionMode = function() {
+  var port = chrome.runtime.connect({ name: 'loadTabs' });
+  port.onMessage.addListener(function(tabs) {
+    var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
+    processor.createTabListBox(tabs);
+
+    port.disconnect();
+  });
+  port.postMessage();
+};
+
+/**
  * Search a tab from closed tab list.
  */
 Command.searchClosedTabs = function() {

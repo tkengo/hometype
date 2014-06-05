@@ -157,3 +157,38 @@
   font-size:14px;
   color:#222;
 }
+
+.hometype-tab-list-box {
+  position: absolute;
+  width: 900px;
+  background-color: #fff !important;;
+  text-align: left;
+  opacity: 0.9;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 1000000 !important;
+  border: solid 1px #888 !important;
+  font-size: 14px !important;
+}
+.hometype-tab-element {
+  float: left;
+  width: 170px;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  padding-left: 20px;
+  margin-right: 10px;
+  font-family:'Osaka-Mono' !important;
+  box-sizing: border-box !important;
+}
+.hometype-tab-element-hint-key {
+  color: #f00;
+}
+.hometype-tab-element img {
+  position: absolute;
+  top: 7px;
+  left: 0;
+}
