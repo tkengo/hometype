@@ -317,6 +317,7 @@ Command.enterCommandMode = function() {
  */
 Command.enterNormalMode = function() {
   Mode.changeMode(ModeList.NORMAL_MODE);
+  chrome.runtime.sendMessage({ command: 'leaveContinuousMode' });
 };
 
 Command.showAssignedCommands = function() {
