@@ -22,6 +22,7 @@ module.exports = function(config) {
       "js/box/tab_list.js",
       "js/hint/element.js",
       "js/hint/element_collection.js",
+      "js/hint/keys.js",
       "js/processor/noop.js",
       "js/processor/visual.js",
       "js/processor/command.js",
