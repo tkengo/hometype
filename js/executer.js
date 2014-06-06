@@ -102,8 +102,15 @@ Executer.prototype.execute = function() {
 
   for (var i = 0; i < map.length; i++) {
     if (map[i].substr(0, 2) != '--') {
-      if (Command[map[i]]) {
-        commands.push({ command: map[i], args: {} });
+      var command = map[i];
+      var previouse = false;
+      if (command.substr(0, 1) == '@') {
+        previouse = true;
+        command = command.substr(1);
+      }
+
+      if (Command[command]) {
+        commands.push({ command: command, args: {}, previouse: previouse });
       } else {
         return false;
       }
@@ -114,12 +121,8 @@ Executer.prototype.execute = function() {
 
   for (var i = 0; i < commands.length; i++) {
     var command = commands[i].command,
-        args    = commands[i].args;
+        args    = commands[i].previouse ? Executer.previousOptions(command) : commands[i].args;
 
-    if (command.substr(0, 1) == '@') {
-      command = command.substr(1);
-      args    = Executer.previousOptions(command);
-    }
     Command[command](args);
 
     Executer.previousOptions(command, args);
