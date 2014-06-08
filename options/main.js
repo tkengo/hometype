@@ -1,9 +1,13 @@
 $(document).ready(function() {
   HometypeOptions.getInstance().load(function(options) {
     $.each(options, function(key, value) {
-      var element = $('#' + key);
+      var element = $("input[name='" + key + "']");
       if (element.length > 0) {
-        element.val(value);
+        if (element.is(':radio')) {
+          element.val([ value ]);
+        } else {
+          element.val(value);
+        }
       }
     });
 
@@ -26,8 +30,8 @@ $(document).ready(function() {
   $('#save').click(function() {
     var params = {};
 
-    $(':input').each(function() {
-      params[$(this).attr('id')] = $(this).val();
+    $(':text, :radio:checked').each(function() {
+      params[$(this).attr('name')] = $(this).val();
     });
 
     var bindList = $('#key_bind_list').val();

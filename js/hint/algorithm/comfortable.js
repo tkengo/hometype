@@ -3,7 +3,7 @@
  * Licensed under MIT license.
  *   http://www.opensource.org/licenses/mit-license.php
  *
- * Manage hint keys.
+ * Comfortable hint key algorithm.
  */
 
 /**
@@ -11,7 +11,7 @@
  *
  * @param boolean targetLength Length of hint for target.
  */
-var HintKeys = function(targetLength) {
+var ComfortableHintAlgorithm = function(targetLength) {
   this.rhandKeys1 = 'jnmh';
   this.rhandKeys2 = 'ki';
   this.rhandKeys3 = 'lop';
@@ -20,8 +20,8 @@ var HintKeys = function(targetLength) {
   this.lhandKeys3 = 'ws';
   this.lhandKeys4 = 'qa';
 
-  this.allKeys = (this.rhandKeys1 + this.rhandKeys2 + this.rhandKeys3 +
-                  this.lhandKeys1 + this.lhandKeys2 + this.lhandKeys3 + this.lhandKeys4).split('');
+  this.allKeys = this.rhandKeys1 + this.rhandKeys2 + this.rhandKeys3 +
+                 this.lhandKeys1 + this.lhandKeys2 + this.lhandKeys3 + this.lhandKeys4;
 
   this.multiKey = this.allKeys.length < targetLength;
 
@@ -56,7 +56,7 @@ var HintKeys = function(targetLength) {
 /**
  * Pop a next hint key.
  */
-HintKeys.prototype.pop = function() {
+ComfortableHintAlgorithm.prototype.pop = function() {
   var key = '';
 
   if (this.multiKey) {
@@ -76,7 +76,7 @@ HintKeys.prototype.pop = function() {
 
     key = key2 + key1;
   } else {
-    key = this.allKeys.shift();
+    key = this.allKeys.charAt(this.keyIndex1++);
   }
 
   return key;

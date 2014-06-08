@@ -9,10 +9,11 @@ var HintElementCollection = function(hintTheme, target) {
 
   this.hintKeys = [];
 
+  var hintKeyAlgorithm = HintKeyFactory.create(this.htmlElements.length);
+
   var parent = document.createElement("div");
-  var hintKeys = new HintKeys(this.htmlElements.length);
   for (var i in this.htmlElements) {
-    var key = hintKeys.pop();
+    var key = hintKeyAlgorithm.pop();
     var element = new HintElement(this.htmlElements[i], i, key, this.hintTheme);
     this.elements.push(element);
     this.hintKeys.push({ index: i, key: key });
