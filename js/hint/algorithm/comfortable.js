@@ -25,6 +25,9 @@ var ComfortableHintAlgorithm = function(targetLength) {
 
   this.multiKey = this.allKeys.length < targetLength;
 
+  this.keyIndex1 = 0;
+  this.keyIndex2 = 0;
+
   if (this.multiKey) {
     this.combinations = [
       [ this.rhandKeys1, this.rhandKeys2 ],
@@ -48,8 +51,6 @@ var ComfortableHintAlgorithm = function(targetLength) {
     ];
 
     this.currentCombinationIndex = 0;
-    this.keyIndex1 = 0;
-    this.keyIndex2 = 0;
   }
 };
 
