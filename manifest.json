@@ -3,7 +3,7 @@
 
   "name": "Hometype",
   "description": "provide key board manipulation",
-  "version": "1.2.1",
+  "version": "1.2.2",
 
   "permissions": [
     "tabs",
@@ -41,6 +41,7 @@
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
+      "js/constants.js",
       "js/default_option.js",
       "js/options.js",
       "js/key/identifiers.js",
@@ -51,6 +52,9 @@
       "js/box/command.js",
       "js/box/help.js",
       "js/box/tab_list.js",
+      "js/hint/algorithm/standard.js",
+      "js/hint/algorithm/comfortable.js",
+      "js/hint/key_factory.js",
       "js/hint/element.js",
       "js/hint/element_collection.js",
       "js/processor/noop.js",

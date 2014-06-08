@@ -1,5 +1,3 @@
-var HintKeys = 'jfhkgyuiopqwertnmzxcvblasd';
-
 var HintElementCollection = function(hintTheme, target) {
   this.hintTheme = hintTheme || 'yellow';
   this.elements = [];
@@ -11,9 +9,11 @@ var HintElementCollection = function(hintTheme, target) {
 
   this.hintKeys = [];
 
+  var hintKeyAlgorithm = HintKeyFactory.create(this.htmlElements.length);
+
   var parent = document.createElement("div");
   for (var i in this.htmlElements) {
-    var key = this.nextHintKey();
+    var key = hintKeyAlgorithm.pop();
     var element = new HintElement(this.htmlElements[i], i, key, this.hintTheme);
     this.elements.push(element);
     this.hintKeys.push({ index: i, key: key });
@@ -53,24 +53,4 @@ HintElementCollection.prototype.removeAllHint = function() {
   for (var index in this.elements) {
     this.elements[index].removeHintTip(false);
   }
-};
-
-HintElementCollection.prototype.nextHintKey = function() {
-  var multiKey = this.htmlElements.length > HintKeys.length;
-
-  var key1 = HintKeys[this.keyIndex1];
-  var key2 = '';
-
-  if (multiKey) {
-    key2 = HintKeys[this.keyIndex2++];
-    if (this.keyIndex2 == HintKeys.length) {
-      this.keyIndex2 = 0;
-      this.keyIndex1++;
-    }
-  }
-  else {
-    this.keyIndex1++;
-  }
-
-  return key2 + key1;
 };

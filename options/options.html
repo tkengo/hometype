@@ -5,6 +5,7 @@
   <link rel="stylesheet" href="main.css" type="text/css" />
   <script type="text/javascript" src="../lib/jquery-2.0.1.min.js"></script>
   <script type="text/javascript" src="../lib/jquery.extend.js"></script>
+  <script type="text/javascript" src="../js/constants.js"></script>
   <script type="text/javascript" src="../js/default_option.js"></script>
   <script type="text/javascript" src="../js/options.js"></script>
   <script type="text/javascript" src="main.js"></script>
@@ -16,9 +17,16 @@
   <div class="section">Basic option</div>
   <dl>
     <dt>Command interval</dt>
-    <dd><input type="text" id="command_interval" size="7" /> ms</dd>
+    <dd><input type="text" name="command_interval" id="command_interval" size="7" /> ms</dd>
     <dt>Amount of scrolling</dt>
-    <dt><input type="text" id="scroll_amount" size="7" /></dt>
+    <dd><input type="text" name="scroll_amount" id="scroll_amount" size="7" /></dd>
+    <dt style="width:200px;height:60px;">Hint key algorithm</dt>
+    <dd>
+      <input type="radio" name="hint_key_algorithm" id="hint_key_standard" value="1" checked />
+      <label for="hint_key_standard">Standard Algorithm</label><br/>
+      <input type="radio" name="hint_key_algorithm" id="hint_key_comfortable" value="2" />
+      <label for="hint_key_comfortable">Comfortable Algorithm</label>
+    </dd>
   </dl>
   <br><br>
   <div class="section">Key bindings</div>

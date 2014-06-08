@@ -267,6 +267,13 @@ Command.enterHintMode = function(option) {
     return;
   }
 
+  // Sometimes, browser may have an active editable element in the hint mode,
+  // So Ht shifts the current mode to the insert mode if it have ones.
+  if (Dom.isEditable(document.activeElement)) {
+    Mode.changeMode(ModeList.INSERT_MODE);
+    return;
+  }
+
   // Set continuous state in background if continuous option is true.
   if (option.continuous) {
     chrome.runtime.sendMessage({ command: 'enterContinuousMode' });
