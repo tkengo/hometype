@@ -3,7 +3,7 @@
 
   "name": "Hometype",
   "description": "provide key board manipulation",
-  "version": "1.2.2",
+  "version": "1.2.3",
 
   "permissions": [
     "tabs",
