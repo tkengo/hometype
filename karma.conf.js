@@ -38,7 +38,13 @@ module.exports = function(config) {
       "js/command.js",
       "js/mode.js",
       "js/main.js",
-      'spec/js/**/*.js'
+      "spec/js/**/*.js",
+      {
+        pattern: 'spec/fixtures/**/*.html',
+        watched: true,
+        included: false,
+        served: true
+      }
     ],
     exclude: [ ],
     preprocessors: {
