@@ -51,6 +51,6 @@ HintElementCollection.prototype.hideUnmatchedElements = function(key) {
 
 HintElementCollection.prototype.removeAllHint = function() {
   for (var index in this.elements) {
-    this.elements[index].removeHintTip(false);
+    this.elements[index].removeHintTip();
   }
 };

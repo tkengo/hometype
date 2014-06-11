@@ -28,10 +28,6 @@ describe('Element', function() {
     expect(hintElement.getElement()).toBe(element);
   });
 
-  it('should return the tip element wrapped jquery', function() {
-    expect(hintElement.getTipElement().html()).toBe(hintElement.getRawTipElement().innerHTML);
-  });
-
   it('should return the hint key', function() {
     expect(hintElement.getKey()).toBe(key);
   });
