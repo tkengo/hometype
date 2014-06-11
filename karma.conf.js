@@ -3,10 +3,11 @@ module.exports = function(config) {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
+      "lib/jquery-2.0.1.min.js",
+      'spec/lib/jasmine-jquery.js',
       'spec/lib/mocking.js',
       'spec/lib/custom_matcher.js',
       'spec/spec_helper.js',
-      "lib/jquery-2.0.1.min.js",
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
@@ -37,7 +38,13 @@ module.exports = function(config) {
       "js/command.js",
       "js/mode.js",
       "js/main.js",
-      'spec/js/**/*.js'
+      "spec/js/**/*.js",
+      {
+        pattern: 'spec/fixtures/**/*.html',
+        watched: true,
+        included: false,
+        served: true
+      }
     ],
     exclude: [ ],
     preprocessors: {

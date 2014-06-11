@@ -84,14 +84,6 @@ HintElement.prototype.getElement = function() {
 };
 
 /**
- * Get the hint tip element.
- */
-HintElement.prototype.getTipElement = function() {
-  return $('#' + this.elementId);
-};
-
-/**
- * Get the hint tip element.
  * Use this if it is not still rendered to DOM.
  */
 HintElement.prototype.getRawTipElement = function() {
@@ -109,20 +101,16 @@ HintElement.prototype.getKey = function() {
  * Pushed first hint key.
  */
 HintElement.prototype.setPushed = function() {
-  $(this.getTipElement().children()[0]).addClass('hometype-hit-a-hint-pushed');
+  this.getRawTipElement().children[0].className = 'hometype-hit-a-hint-pushed';
 };
 
 /**
  * Remove hint tip element.
  */
-HintElement.prototype.removeHintTip = function(animate) {
+HintElement.prototype.removeHintTip = function() {
   this.srcElement.className = this.srcElement.className.replace(this.className + '-area', '');
-  if (animate === false) {
-    this.getTipElement().remove();
-  }
-  else {
-    this.getTipElement().fadeOut(100, function() {
-      $(this).remove();
-    });
+  var tip = this.getRawTipElement();
+  if (tip.parentNode) {
+    tip.parentNode.removeChild(tip);
   }
 };

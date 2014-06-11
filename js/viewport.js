@@ -102,48 +102,6 @@ HometypeScreen.prototype.getCurrentContentEditable = function() {
   return $('[data-hometype-contenteditable=true]');
 };
 
-HometypeScreen.prototype.getNextContentEditableElement = function(current) {
-  var next = null;
-
-  while (current.length > 0) {
-    next = current.next();
-    if (next.length > 0) {
-      if (next.is(':visualable:visible')) {
-        break;
-      }
-      else {
-        current = next;
-      }
-    }
-    else {
-      current = current.parent();
-    }
-  }
-
-  return next;
-};
-
-HometypeScreen.prototype.getPrevContentEditableElement = function(current) {
-  var prev = null;
-
-  while (current.length > 0) {
-    prev = current.prev();
-    if (prev.length > 0) {
-      if (prev.is(':visualable:visible')) {
-        break;
-      }
-      else {
-        current = prev;
-      }
-    }
-    else {
-      current = current.parent();
-    }
-  }
-
-  return prev;
-};
-
 /**
  * Add link element to DOM.
  *
