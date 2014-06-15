@@ -17,7 +17,7 @@ var HintElementCollection = function(hintTheme, target) {
     var element = new HintElement(this.htmlElements[i], i, key, this.hintTheme);
     this.elements.push(element);
     this.hintKeys.push({ index: i, key: key });
-    parent.appendChild(element.getRawTipElement());
+    parent.appendChild(element.getTipElement());
   }
 
   document.documentElement.appendChild(parent);

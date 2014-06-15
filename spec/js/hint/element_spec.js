@@ -8,11 +8,11 @@ describe('Element', function() {
     loadFixtures('hint/element.html');
     element = document.getElementById('no_class_target');
     hintElement = new HintElement(element, 0, key, theme);
-    document.documentElement.appendChild(hintElement.getRawTipElement());
+    document.documentElement.appendChild(hintElement.getTipElement());
   });
 
   it('should create a hint tip element', function() {
-    var tip = hintElement.getRawTipElement();
+    var tip = hintElement.getTipElement();
 
     expect(tip.tagName).toBe('DIV');
     expect(tip.innerText).toBe(key);
@@ -38,7 +38,7 @@ describe('Element', function() {
     });
 
     it('should be able to be referenced it', function() {
-      expect(hintElement.getRawTipElement().parentNode).toBeEmpty();
+      expect(hintElement.getTipElement().parentNode).toBeEmpty();
       expect(element.className).toBeEmpty();
     });
   });
@@ -49,7 +49,7 @@ describe('Element', function() {
     });
 
     it('should add a new class', function() {
-      var className = hintElement.getRawTipElement().children[0].className;
+      var className = hintElement.getTipElement().children[0].className;
       expect(className).toBe('hometype-hit-a-hint-pushed');
     });
   });

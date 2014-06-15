@@ -24,7 +24,7 @@ var HintElement = function(srcElement, index, key, hintTheme) {
     this.srcElement.className += ' ' + this.className + '-area' :
     this.srcElement.className  =       this.className + '-area';
 
-  this.rawTipElement = this.createTipElement();
+  this.tipElement = this.createTipElement();
 };
 
 /**
@@ -84,10 +84,11 @@ HintElement.prototype.getElement = function() {
 };
 
 /**
+ * Get the tip element.
  * Use this if it is not still rendered to DOM.
  */
-HintElement.prototype.getRawTipElement = function() {
-  return this.rawTipElement;
+HintElement.prototype.getTipElement = function() {
+  return this.tipElement;
 };
 
 /**
@@ -101,7 +102,7 @@ HintElement.prototype.getKey = function() {
  * Pushed first hint key.
  */
 HintElement.prototype.setPushed = function() {
-  this.getRawTipElement().children[0].className = 'hometype-hit-a-hint-pushed';
+  this.getTipElement().children[0].className = 'hometype-hit-a-hint-pushed';
 };
 
 /**
@@ -109,7 +110,7 @@ HintElement.prototype.setPushed = function() {
  */
 HintElement.prototype.removeHintTip = function() {
   this.srcElement.className = this.srcElement.className.replace(this.className + '-area', '');
-  var tip = this.getRawTipElement();
+  var tip = this.getTipElement();
   if (tip.parentNode) {
     tip.parentNode.removeChild(tip);
   }
