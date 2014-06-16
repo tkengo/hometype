@@ -124,6 +124,9 @@ RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
 RuntimeCommand.loadTabs = function(port) {
   port.onMessage.addListener(function() {
     chrome.tabs.query({ currentWindow: true }, function(tabs) {
+      for (var i = 0; i < tabs.length; i++) {
+        chrome.tabs.sendMessage(tabs[i].id, { index: i + 1 });
+      }
       port.postMessage(tabs);
     });
   });

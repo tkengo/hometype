@@ -56,6 +56,16 @@ function initialize(options)
         new Executer('enterHintMode --continuous').execute();
       }
     });
+    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+      var link = document.querySelector("link[rel~='icon']");
+      if (!link) {
+        link = document.createElement("link");
+        link.setAttribute("rel", "shortcut icon");
+        document.head.appendChild(link);
+      }
+      link.type = "image/x-icon";
+      link.href = 'http://tkengo.github.io/hometype/icons/' + request.index + '.png';
+    });
   });
 }
 
