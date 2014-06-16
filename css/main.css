@@ -172,14 +172,13 @@
 }
 .hometype-tab-element {
   float: left;
-  width: 170px;
+  width: 190px;
   height: 30px;
   line-height: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
-  padding-left: 20px;
   margin-right: 10px;
   font-family:'Osaka-Mono' !important;
   box-sizing: border-box !important;
