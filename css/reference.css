@@ -15,12 +15,23 @@
 
 .reference-content {
 }
-.reference-content h3 {
-  padding: 24px 0 8px 8px;
+.command-name {
+  padding: 24px 0 8px 0;
   text-align: left;
   border-bottom: dashed 1px #ddd;
+  margin: 18px 0;
   font-family: 'Open Sans', sans-serif;
   font-weight: 400;
+}
+.command-name h3 {
+  display: inline;
+  margin-right: 10px;
+}
+.command-note {
+  font-size: 12px;
+}
+code {
+  background-color: #eee;
 }
 .command-description {
   text-align: left;
