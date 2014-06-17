@@ -44,4 +44,18 @@ TabSelectionModeProcessor.prototype.createTabListBox = function(tabs) {
  */
 TabSelectionModeProcessor.prototype.notifyLeaveMode = function() {
   this.tabListBox.remove();
+
+  if (this.notifyLeaveModeCallback) {
+    this.notifyLeaveModeCallback();
+    this.notifyLeaveModeCallback = null;
+  }
+};
+
+/**
+ * Register callback that invokes when Ht leaves from the tab selection mode.
+ *
+ * @param function notifyleavemodeCallback Callback method.
+ */
+TabSelectionModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
+  this.notifyLeaveModeCallback = notifyLeaveModeCallback;
 };

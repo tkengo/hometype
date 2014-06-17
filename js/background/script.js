@@ -113,20 +113,39 @@ RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
 };
 
 /**
+ * Send a command to set the new favicon for all tabs.
+ */
+RuntimeCommand.setAllTabsFavicon = function(sender, params, sendResponse) {
+  chrome.tabs.query({ currentWindow: true }, function(tabs) {
+    for (var i = 0; i < tabs.length; i++) {
+      chrome.tabs.sendMessage(tabs[i].id, { message: 'setFavicon', index: i + 1 });
+    }
+  });
+};
+
+/**
+ * Send a command to undo the favicon for all tabs.
+ */
+RuntimeCommand.undoAllTabsFavicon = function(sender, params, sendResponse) {
+  chrome.tabs.query({ currentWindow: true }, function(tabs) {
+    for (var i = 0; i < tabs.length; i++) {
+      chrome.tabs.sendMessage(tabs[i].id, { message: 'undoFavicon' });
+    }
+  });
+};
+
+/**
  * ------------------------------------
  * OnConnect callback runtime methods.
  * ------------------------------------
  */
 
 /**
- * Search tabs.
+ * Load tabs.
  */
 RuntimeCommand.loadTabs = function(port) {
   port.onMessage.addListener(function() {
     chrome.tabs.query({ currentWindow: true }, function(tabs) {
-      for (var i = 0; i < tabs.length; i++) {
-        chrome.tabs.sendMessage(tabs[i].id, { index: i + 1 });
-      }
       port.postMessage(tabs);
     });
   });

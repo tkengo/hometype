@@ -151,10 +151,14 @@ Command.focusLastInput = function() {
  * Enter the tab selection mode.
  */
 Command.enterTabSelectionMode = function() {
+  chrome.runtime.sendMessage({ command: 'setAllTabsFavicon' });
   var port = chrome.runtime.connect({ name: 'loadTabs' });
   port.onMessage.addListener(function(tabs) {
     var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
     processor.createTabListBox(tabs);
+    processor.onNotifyLeaveMode(function() {
+      chrome.runtime.sendMessage({ command: 'undoAllTabsFavicon' });
+    });
 
     port.disconnect();
   });
