@@ -56,15 +56,14 @@ function initialize(options)
         new Executer('enterHintMode --continuous').execute();
       }
     });
+
+    var favicon = new TabIcon();
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-      var link = document.querySelector("link[rel~='icon']");
-      if (!link) {
-        link = document.createElement("link");
-        link.setAttribute("rel", "shortcut icon");
-        document.head.appendChild(link);
+      if (request.message == 'setFavicon') {
+        favicon.set(request.index);
+      } else if (request.message == 'undoFavicon') {
+        favicon.undo();
       }
-      link.type = "image/x-icon";
-      link.href = 'http://tkengo.github.io/hometype/icons/' + request.index + '.png';
     });
   });
 }
