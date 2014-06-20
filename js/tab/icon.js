@@ -20,7 +20,12 @@ TabIcon.prototype.set = function(index) {
   }
   this.link.type = "image/x-icon";
 
-  this.oldUrl = this.link.href;
+  if (this.link.href) {
+    this.oldUrl = this.link.href;
+  } else {
+    this.oldUrl = document.querySelector("meta[itemprop='image']").content;
+    this.hasFavicon = true;
+  }
   this.changed = true;
   this.link.href = 'http://tkengo.github.io/hometype/icons/' + index + '.png';
 };
