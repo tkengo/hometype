@@ -41,7 +41,7 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   if (this.searching) {
-    if (currentKey == 'Enter' && this.headElements.length == 1) {
+    if (currentKey == 'Enter' && this.headElements.length > 0) {
       this.chooseElementCallback($(this.headElements[0]));
     }
 
@@ -113,7 +113,7 @@ HintModeProcessor.prototype.regenerateHintsBy = function(text) {
   var headMatchedElements = [];
   for (var i = 0; i < this.originalElements.length; i++) {
     var element = this.originalElements[i];
-    var innerText = element.innerText.toLowerCase();
+    var innerText = element.innerText.trim().toLowerCase();
 
     if (innerText.indexOf(text) > -1) {
       regenerateElements.push(element);
