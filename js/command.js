@@ -151,10 +151,18 @@ Command.focusLastInput = function() {
  * Enter the tab selection mode.
  */
 Command.enterTabSelectionMode = function() {
+  chrome.runtime.sendMessage({
+    command: 'setTitleForAllTabs',
+    params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
+  });
+
   var port = chrome.runtime.connect({ name: 'loadTabs' });
   port.onMessage.addListener(function(tabs) {
     var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
     processor.createTabListBox(tabs);
+    processor.onNotifyLeaveMode(function() {
+      chrome.runtime.sendMessage({ command: 'resetTitleForAllTabs' });
+    });
 
     port.disconnect();
   });

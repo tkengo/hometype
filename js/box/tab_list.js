@@ -18,7 +18,6 @@ var HometypeTabListBox = function(tabs) {
 
     var tabElement = $('<div>').addClass('hometype-tab-element').text(tab.title).appendTo(box);
     $('<span>').addClass('hometype-tab-element-hint-key').text('[' + hintKey + ']').prependTo(tabElement);
-    $('<img>').attr('src', tab.favIconUrl).attr('width', '16').prependTo(tabElement);
 
     this.sourceMap[hintKey] = tab;
   }
