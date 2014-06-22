@@ -126,10 +126,10 @@ RuntimeCommand.setAllTabsFavicon = function(sender, params, sendResponse) {
 /**
  * Send a command to undo the favicon for all tabs.
  */
-RuntimeCommand.undoAllTabsFavicon = function(sender, params, sendResponse) {
+RuntimeCommand.resetAllTabsFavicon = function(sender, params, sendResponse) {
   chrome.tabs.query({ currentWindow: true }, function(tabs) {
     for (var i = 0; i < tabs.length; i++) {
-      chrome.tabs.sendMessage(tabs[i].id, { message: 'undoFavicon' });
+      chrome.tabs.sendMessage(tabs[i].id, { message: 'resetFavicon' });
     }
   });
 };

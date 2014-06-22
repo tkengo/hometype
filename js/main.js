@@ -61,8 +61,8 @@ function initialize(options)
     chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       if (request.message == 'setFavicon') {
         favicon.set(request.index);
-      } else if (request.message == 'undoFavicon') {
-        favicon.undo();
+      } else if (request.message == 'resetFavicon') {
+        favicon.reset();
       }
     });
   });

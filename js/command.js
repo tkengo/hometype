@@ -157,7 +157,7 @@ Command.enterTabSelectionMode = function() {
     var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
     processor.createTabListBox(tabs);
     processor.onNotifyLeaveMode(function() {
-      chrome.runtime.sendMessage({ command: 'undoAllTabsFavicon' });
+      chrome.runtime.sendMessage({ command: 'resetAllTabsFavicon' });
     });
 
     port.disconnect();

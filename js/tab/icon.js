@@ -12,6 +12,9 @@ var TabIcon = function() {
   this.hasFavicon = !!this.link;
 };
 
+/**
+ * Set the favicon for the current tab.
+ */
 TabIcon.prototype.set = function(index) {
   if (!this.hasFavicon) {
     this.link = document.createElement("link");
@@ -30,7 +33,10 @@ TabIcon.prototype.set = function(index) {
   this.link.href = 'http://tkengo.github.io/hometype/icons/' + index + '.png';
 };
 
-TabIcon.prototype.undo = function() {
+/**
+ * Reset the favicon for the current tab.
+ */
+TabIcon.prototype.reset = function() {
   if (!this.changed) {
     return;
   }
