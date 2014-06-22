@@ -55,7 +55,6 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 
   if (elements.length == 0) {
     // Return normal mode if there is no element matched hint key.
-    // Mode.changeMode(ModeList.NORMAL_MODE);
     this.startSearching();
     return true;
   }
@@ -100,7 +99,7 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
 
   this.hintElements = new HintElementCollection(theme, elements);
   this.theme = theme;
-  this.originalElements = this.hintElements.getElements();
+  this.originalElements = elements;
 };
 
 HintModeProcessor.prototype.regenerateHintsBy = function(text) {
@@ -111,25 +110,27 @@ HintModeProcessor.prototype.regenerateHintsBy = function(text) {
   text = text.toLowerCase();
 
   var regenerateElements = [];
-  var headElements = [];
+  var headMatchedElements = [];
   for (var i = 0; i < this.originalElements.length; i++) {
-    var element = this.originalElements[i].getElement();
+    var element = this.originalElements[i];
     var innerText = element.innerText.toLowerCase();
 
     if (innerText.indexOf(text) > -1) {
       regenerateElements.push(element);
     }
     if (innerText.substr(0, text.length) == text) {
-      headElements.push(element);
+      headMatchedElements.push(element);
     }
   }
 
-  this.hintElements = new HintElementCollection(this.theme, regenerateElements);
+  if (regenerateElements.length > 0) {
+    this.hintElements = new HintElementCollection(this.theme, regenerateElements);
 
-  if (headElements.length == 1) {
-    headElements[0].className = headElements[0].className + ' hometype-hit-a-hint-head-area';
+    headMatchedElements[0].className = headMatchedElements[0].className + ' hometype-hit-a-hint-head-area';
+    this.headElements = headMatchedElements;
+  } else {
+    this.hintElements = null;
   }
-  this.headElements = headElements;
 
   return regenerateElements;
 };
