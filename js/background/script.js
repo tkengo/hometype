@@ -113,23 +113,25 @@ RuntimeCommand.getContinuousState = function(sender, params, sendResponse) {
 };
 
 /**
- * Send a command to set the new favicon for all tabs.
+ * Set a tab hint key to the document title.
  */
-RuntimeCommand.setAllTabsFavicon = function(sender, params, sendResponse) {
+RuntimeCommand.setTitleForAllTabs = function(sender, params, sendResponse) {
   chrome.tabs.query({ currentWindow: true }, function(tabs) {
     for (var i = 0; i < tabs.length; i++) {
-      chrome.tabs.sendMessage(tabs[i].id, { message: 'setFavicon', index: i + 1 });
+      var code = "document.title = '[" + params.tab_selection_hint_keys.charAt(i) + "]' + document.title";
+      chrome.tabs.executeScript(tabs[i].id, { code: code });
     }
   });
 };
 
 /**
- * Send a command to undo the favicon for all tabs.
+ * Reset the document title.
  */
-RuntimeCommand.resetAllTabsFavicon = function(sender, params, sendResponse) {
+RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
   chrome.tabs.query({ currentWindow: true }, function(tabs) {
     for (var i = 0; i < tabs.length; i++) {
-      chrome.tabs.sendMessage(tabs[i].id, { message: 'resetFavicon' });
+      var code = "document.title = document.title.replace(/^\\[[0-9a-z]\\]/, '')";
+      chrome.tabs.executeScript(tabs[i].id, { code: code });
     }
   });
 };
