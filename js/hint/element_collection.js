@@ -54,3 +54,25 @@ HintElementCollection.prototype.removeAllHint = function() {
     this.elements[index].removeHintTip();
   }
 };
+
+HintElementCollection.prototype.matches = function(text) {
+  var results = [];
+  for (var i = 0; i < this.elements.length; i++) {
+    var element = this.elements[i];
+    if (element.getElement().innerText.toLowerCase().indexOf(text.toLowerCase()) > -1) {
+      results.push(element);
+    }
+  }
+
+  return results;
+};
+
+HintElementCollection.prototype.getAllKeys = function() {
+  var allKeys = [];
+
+  for (var i = 0; i <this.hintKeys.length; i++) {
+    allKeys.push(this.hintKeys[i].key);
+  }
+
+  return allKeys;
+};

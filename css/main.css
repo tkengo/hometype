@@ -35,7 +35,7 @@
 .hometype-hit-a-hint-red {
   background-color:#FFB2C7;
 }
-.hometype-hit-a-hint-red-area {
+.hometype-hit-a-hint-head-area, .hometype-hit-a-hint-red-area {
   background-color:#FFE2E3;
 }
 .hometype-hit-a-hint-pushed {

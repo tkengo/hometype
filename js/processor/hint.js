@@ -9,6 +9,9 @@ var HintModeProcessor = function() {
   this.chooseElementCallback   = null;
   this.notifyLeaveModeCallback = null;
   this.hintElements = null;
+  this.headElements = [];
+  this.searching = false;
+  this.commandBox = null;
 };
 
 /**
@@ -17,6 +20,11 @@ var HintModeProcessor = function() {
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.chooseElementCallback = null;
   this.hintElements.removeAllHint();
+  this.searching = false;
+
+  if (this.commandBox) {
+    this.commandBox.hide();
+  }
 
   if (this.notifyLeaveModeCallback) {
     this.notifyLeaveModeCallback();
@@ -32,19 +40,35 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
  * @param KeyboradEvent e          event.
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
-  // Cancel default.
-  e.stopPropagation();
-  e.preventDefault();
+  if (this.searching) {
+    if (currentKey == 'Enter' && this.headElements.length == 1) {
+      this.chooseElementCallback($(this.headElements[0]));
+    }
+
+    if (this.hintElements.getAllKeys().join().indexOf(currentKey) == -1) {
+      return true;
+    }
+  }
 
   // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
 
   if (elements.length == 0) {
     // Return normal mode if there is no element matched hint key.
-    Mode.changeMode(ModeList.NORMAL_MODE);
+    // Mode.changeMode(ModeList.NORMAL_MODE);
+    this.startSearching();
     return true;
   }
-  else if (elements.length == 1 && elements[0].getKey() == stack) {
+
+  // Cancel default.
+  e.stopPropagation();
+  e.preventDefault();
+
+  return this.choose(elements, stack);
+};
+
+HintModeProcessor.prototype.choose = function(elements, stack) {
+  if (elements.length == 1 && elements[0].getKey() == stack) {
     var element = elements[0].getElement();
 
     // Invoke a callback method if an element is confirmed.
@@ -54,8 +78,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     }
 
     return true;
-  }
-  else {
+  } else {
     // Hide unmatched elements if an element didn't confirm.
     this.hintElements.hideUnmatchedElements(stack);
     for (var i in elements) {
@@ -76,6 +99,39 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
   }
 
   this.hintElements = new HintElementCollection(theme, elements);
+  this.theme = theme;
+  this.originalElements = this.hintElements.getElements();
+};
+
+HintModeProcessor.prototype.regenerateHintsBy = function(text) {
+  if (this.hintElements) {
+    this.hintElements.removeAllHint();
+  }
+
+  text = text.toLowerCase();
+
+  var regenerateElements = [];
+  var headElements = [];
+  for (var i = 0; i < this.originalElements.length; i++) {
+    var element = this.originalElements[i].getElement();
+    var innerText = element.innerText.toLowerCase();
+
+    if (innerText.indexOf(text) > -1) {
+      regenerateElements.push(element);
+    }
+    if (innerText.substr(0, text.length) == text) {
+      headElements.push(element);
+    }
+  }
+
+  this.hintElements = new HintElementCollection(this.theme, regenerateElements);
+
+  if (headElements.length == 1) {
+    headElements[0].className = headElements[0].className + ' hometype-hit-a-hint-head-area';
+  }
+  this.headElements = headElements;
+
+  return regenerateElements;
 };
 
 /**
@@ -94,4 +150,33 @@ HintModeProcessor.prototype.onChooseElement = function(chooseElementCallback) {
  */
 HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
   this.notifyLeaveModeCallback = notifyLeaveModeCallback;
+};
+
+HintModeProcessor.prototype.startSearching = function() {
+  if (this.searching) {
+    return;
+  }
+
+  if (!this.commandBox) {
+    this.commandBox = new HometypeCommandBox();
+
+    var context = this;
+    this.commandBox.onUpdate(function(text) {
+      // var uppers = text.match(/[A-Z]+/);
+      // if (uppers) {
+      //   context.choose(context.hintElements.getElements(), uppers[0]);
+      // } else {
+        var regenerateElements = context.regenerateHintsBy(text);
+        if (regenerateElements.length == 1) {
+          context.chooseElementCallback($(regenerateElements[0]));
+        } else {
+          this.regenerateElements = regenerateElements;
+        }
+      // }
+    });
+  }
+
+  this.commandBox.show();
+
+  this.searching = true;
 };
