@@ -56,15 +56,6 @@ function initialize(options)
         new Executer('enterHintMode --continuous').execute();
       }
     });
-
-    var favicon = new TabIcon();
-    chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-      if (request.message == 'setFavicon') {
-        favicon.set(request.index);
-      } else if (request.message == 'resetFavicon') {
-        favicon.reset();
-      }
-    });
   });
 }
 
