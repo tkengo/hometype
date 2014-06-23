@@ -66,9 +66,13 @@
       "js/processor/tab_selection.js",
       "js/command.js",
       "js/executer.js",
+      "js/homedics.js",
       "js/mode.js",
       "js/main.js"
     ],
     "run_at": "document_start"
-  }]
+  }],
+  "web_accessible_resources": [
+    "dicts/*.ml"
+  ]
 }
