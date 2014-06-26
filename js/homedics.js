@@ -48,7 +48,7 @@ Homedics.convertMap = {
   }
 };
 
-Homedics.prototype.match = function(roman) {
+Homedics.prototype.roman2hiragana = function(roman) {
   var hiragana = '';
 
   for (var i = 0; i < roman.length; i++) {
@@ -80,5 +80,10 @@ Homedics.prototype.match = function(roman) {
   }
 
   return hiragana;
+};
+
+Homedics.prototype.match = function(str) {
+  var dictLetter = str.charAt(0);
+  var hiragana = this.roman2hiragana(str);
 };
 debugger;
