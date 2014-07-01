@@ -1,6 +1,33 @@
-var Homedics = function() {
+var Homedics = function(str) {
+  var hiragana    = this.getHiraganaCandidate(str);
+  var dict        = this.loadDict(str.charAt(0));
+  var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
+  var patterns    = [];
+  var regexp      = [];
+  var m, characters, words;
+
+  while (m = dictPattern.exec(dict)) {
+    patterns = patterns.concat(m[2].split(' '));
+  }
+  patterns = patterns.sort().join("\n").replace(/(.+)(\n^\1.+$)+/gm, '$1');
+
+  if (characters = patterns.match(/^.$/gm)) {
+    regexp.push('[' + characters.join('').replace(/(.)(\1)+/g, '$1') + ']');
+  }
+  if (words = patterns.match(/^..+$/gm)) {
+    regexp.push(words.join('|'));
+  }
+  if (hiragana) {
+    regexp.push(hiragana.join('|'));
+    regexp.push(this.toKatakana(hiragana.join('|')));
+  }
+
+  if (regexp.length > 0) {
+    this.regexp = new RegExp(regexp.join('|'));
+  }
 };
 
+Homedics.dicts = {};
 Homedics.convertMap = {
   'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お',
   'k': { 'a': 'か', 'i': 'き', 'u': 'く', 'e': 'け', 'o': 'こ',
@@ -48,6 +75,71 @@ Homedics.convertMap = {
   }
 };
 
+Homedics.prototype.loadDict = function(letter) {
+  if (Homedics.dicts[letter]) {
+    return Homedics.dicts[letter];
+  }
+
+  var xhr     = new XMLHttpRequest()
+  var dictUrl = chrome.extension.getURL('dicts/' + letter + '.ml');
+
+  xhr.open('GET', dictUrl, false);
+  xhr.send();
+  return Homedics.dicts[letter] = xhr.responseText;
+};
+
+Homedics.prototype.getHiraganaCandidate = function(roman) {
+  var hiragana = this.roman2hiragana(roman);
+  var halfRoman, candidate = [];
+
+  if (halfRoman = hiragana.match(/[a-z]+$/)) {
+    hiragana = hiragana.replace(/[a-z]/g, '');
+
+    var converted = this.convertHalfRomanToHiragana(halfRoman[0]);
+    for (var i = 0; i < converted.length; i++) {
+      candidate.push(hiragana + converted[i]);
+    }
+  } else {
+    candidate.push(hiragana);
+  }
+
+  return candidate;
+};
+
+Homedics.prototype.toKatakana = function(target) {
+  return target.replace(/[ぁ-ん]/g, function(s) {
+    return String.fromCharCode(s.charCodeAt(0) + 0x60);
+  });
+};
+
+Homedics.prototype.convertHalfRomanToHiragana = function(roman, depth) {
+  var candidate = [];
+
+  if (roman.length == 1) {
+    var map = Homedics.convertMap[roman];
+    if (typeof map == 'object') {
+      for (var i in map) {
+        if (typeof map[i] == 'object') {
+          for (var j in map[i]) {
+            candidate.push(map[i][j]);
+          }
+        } else {
+          candidate.push(map[i]);
+        }
+      }
+    } else {
+      candidate.push(map);
+    }
+  } else if (roman.length == 2) {
+    var map = Homedics.convertMap[roman.charAt(0)][roman.charAt(1)];
+    for (var i in map) {
+      candidate.push(map[i]);
+    }
+  }
+
+  return candidate;
+};
+
 Homedics.prototype.roman2hiragana = function(roman) {
   var hiragana = '';
 
@@ -82,8 +174,10 @@ Homedics.prototype.roman2hiragana = function(roman) {
   return hiragana;
 };
 
-Homedics.prototype.match = function(str) {
-  var dictLetter = str.charAt(0);
-  var hiragana = this.roman2hiragana(str);
+Homedics.prototype.match = function(target, callback) {
+  if (this.regexp) {
+    return target.match(this.regexp);
+  } else {
+    return false;
+  }
 };
-debugger;

@@ -107,6 +107,7 @@ HintModeProcessor.prototype.regenerateHintsBy = function(text) {
     this.hintElements.removeAllHint();
   }
 
+  var homedics = new Homedics(text);
   text = text.toLowerCase();
 
   var regenerateElements = [];
@@ -116,6 +117,9 @@ HintModeProcessor.prototype.regenerateHintsBy = function(text) {
     var innerText = element.innerText.trim().toLowerCase();
 
     if (innerText.indexOf(text) > -1) {
+      regenerateElements.push(element);
+    }
+    if (homedics.match(innerText)) {
       regenerateElements.push(element);
     }
     if (innerText.substr(0, text.length) == text) {

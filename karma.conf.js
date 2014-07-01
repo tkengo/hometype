@@ -36,6 +36,7 @@ module.exports = function(config) {
       "js/processor/tab_selection.js",
       "js/executer.js",
       "js/command.js",
+      "js/homedics.js",
       "js/mode.js",
       "js/main.js",
       "spec/js/**/*.js",
