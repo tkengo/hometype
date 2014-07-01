@@ -26,21 +26,24 @@ target_regexp = {
   p: /^>?[ぱぴぷぺぽ].*$/
 }
 
+results = target_regexp.inject({}){|r,l|r[l[0]] = {}; r }
+
 open(dict_url) do |f|
-  target_regexp.each do |letter, regexp|
-    results = {}
-    while line = f.gets
-      line = NKF.nkf('-E -w', line)
+  while line = f.gets
+    line = NKF.nkf('-E -w', line)
+    target_regexp.each do |letter, regexp|
       if line =~ regexp
         hiragana, kanji = line.gsub(/[a-z>]/, '').split(' ')
-        results[hiragana] = [] unless results[hiragana]
-        results[hiragana].concat(kanji.sub(/;.*/, '').split('/'))
+        results[letter][hiragana] = [] unless results[letter][hiragana]
+        results[letter][hiragana].concat(kanji.sub(/;.*/, '').split('/'))
       end
     end
+  end
 
+  results.each do |letter, dicts|
     open("dicts/#{letter}.ml", 'w') do |o|
-      results.each do |key, value|
-        o.puts "#{key}:#{value.uniq.join(' ').strip.gsub(/ +/, ' ')}"
+      dicts.each do |hiragana, value|
+        o.puts "#{hiragana}:#{value.uniq.join(' ').strip.gsub(/ +/, ' ')}"
       end
     end
   end
