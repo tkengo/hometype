@@ -1,6 +1,26 @@
-var Homedics = function(str) {
-  var hiragana    = this.getHiraganaCandidate(str);
-  var dict        = this.loadDict(str.charAt(0));
+/**
+ * Copyright (c) 2013 Kengo Tateishi (@tkengo)
+ * Licensed under MIT license.
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ * Manage Hometype dictionaries.
+ */
+
+/**
+ * You can pass a roman string to this constructor.
+ * Then, Homedics searches candidates from SKK dictionaries
+ * and builds a regular expression.
+ * You can check a string whether it matches with words in the
+ * dictionaries by invoking 'match' method.
+ *
+ * Dictionary files is placed in the dicts/ directory and separated
+ * by a head letter of words.
+ *
+ * @param string roman A checking target string.
+ */
+var Homedics = function(roman) {
+  var hiragana    = this.getHiraganaCandidates(roman);
+  var dict        = this.loadDict(roman.charAt(0));
   var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
   var patterns    = [];
   var regexp      = [];
@@ -9,7 +29,7 @@ var Homedics = function(str) {
   while (m = dictPattern.exec(dict)) {
     patterns = patterns.concat(m[2].split(' '));
   }
-  patterns = patterns.sort().join("\n").replace(/(.+)(\n^\1.+$)+/gm, '$1');
+  patterns = patterns.sort().join("\n").replace(/^(.+)$(\n^\1.+$)+/gm, '$1');
 
   if (characters = patterns.match(/^.$/gm)) {
     regexp.push('[' + characters.join('').replace(/(.)(\1)+/g, '$1') + ']');
@@ -28,7 +48,11 @@ var Homedics = function(str) {
 };
 
 Homedics.dicts = {};
-Homedics.convertMap = {
+
+/**
+ * Conversion map of roman to hiragana.
+ */
+Homedics.conversionMap = {
   'a': 'あ', 'i': 'い', 'u': 'う', 'e': 'え', 'o': 'お',
   'k': { 'a': 'か', 'i': 'き', 'u': 'く', 'e': 'け', 'o': 'こ',
     'y': { 'a': 'きゃ', 'i': 'きぃ', 'u': 'きゅ', 'e': 'きぇ', 'o': 'きょ' }
@@ -75,6 +99,13 @@ Homedics.convertMap = {
   }
 };
 
+/**
+ * Load a dictionary from dicts/*.ml with ajax from
+ * web_accessible_resources.
+ *
+ * @param string letter A head letter of a dictionary you want to load.
+ * @return string The content of a dictionary.
+ */
 Homedics.prototype.loadDict = function(letter) {
   if (Homedics.dicts[letter]) {
     return Homedics.dicts[letter];
@@ -88,7 +119,17 @@ Homedics.prototype.loadDict = function(letter) {
   return Homedics.dicts[letter] = xhr.responseText;
 };
 
-Homedics.prototype.getHiraganaCandidate = function(roman) {
+/**
+ * Get hiragana candidates.
+ *
+ * For example:
+ * If roman is 'sar', then return 'さら', 'さり', 'さる', 'され', 'さろ'
+ * If roman is 'kak', then return 'かか', 'かき', 'かく', 'かけ', 'かこ'
+ *
+ * @param string roman A roman string.
+ * @return array Hiragana candidates.
+ */
+Homedics.prototype.getHiraganaCandidates = function(roman) {
   var hiragana = this.roman2hiragana(roman);
   var halfRoman, candidate = [];
 
@@ -106,17 +147,33 @@ Homedics.prototype.getHiraganaCandidate = function(roman) {
   return candidate;
 };
 
+/**
+ * Convert hiragana to katakana.
+ *
+ * @param string target A string that converts from hiragana to katakana.
+ */
 Homedics.prototype.toKatakana = function(target) {
   return target.replace(/[ぁ-ん]/g, function(s) {
     return String.fromCharCode(s.charCodeAt(0) + 0x60);
   });
 };
 
+/**
+ * Convert half roman to hiragana.
+ *
+ * For example:
+ * If roman is 'a',  then return 'あ'
+ * If roman is 'k',  then return 'か', 'き', 'く', 'け', 'こ', 'きゃ', 'きぃ', 'きゅ', 'きぇ', 'きょ'
+ * If roman is 'ky', then return 'きゃ', 'きぃ', 'きゅ', 'きぇ', 'きょ'
+ *
+ * @param string roman A roman string.
+ * @return array Hiragana candidates.
+ */
 Homedics.prototype.convertHalfRomanToHiragana = function(roman, depth) {
   var candidate = [];
 
   if (roman.length == 1) {
-    var map = Homedics.convertMap[roman];
+    var map = Homedics.conversionMap[roman];
     if (typeof map == 'object') {
       for (var i in map) {
         if (typeof map[i] == 'object') {
@@ -131,7 +188,7 @@ Homedics.prototype.convertHalfRomanToHiragana = function(roman, depth) {
       candidate.push(map);
     }
   } else if (roman.length == 2) {
-    var map = Homedics.convertMap[roman.charAt(0)][roman.charAt(1)];
+    var map = Homedics.conversionMap[roman.charAt(0)][roman.charAt(1)];
     for (var i in map) {
       candidate.push(map[i]);
     }
@@ -140,12 +197,17 @@ Homedics.prototype.convertHalfRomanToHiragana = function(roman, depth) {
   return candidate;
 };
 
+/**
+ * Convert a roman string to a hiragana.
+ *
+ * @param string roman A string you want to convert.
+ */
 Homedics.prototype.roman2hiragana = function(roman) {
   var hiragana = '';
 
   for (var i = 0; i < roman.length; i++) {
     var str = roman.charAt(i),
-        map = Homedics.convertMap[str];
+        map = Homedics.conversionMap[str];
 
     while (true) {
       if (typeof map == 'string') {
@@ -174,7 +236,14 @@ Homedics.prototype.roman2hiragana = function(roman) {
   return hiragana;
 };
 
-Homedics.prototype.match = function(target, callback) {
+/**
+ * Check whether the target string is matched with words
+ * in a dictionary.
+ *
+ * @param string target
+ * @return boolean Return true if the target string is matched, otherwise false.
+ */
+Homedics.prototype.match = function(target) {
   if (this.regexp) {
     return target.match(this.regexp);
   } else {
