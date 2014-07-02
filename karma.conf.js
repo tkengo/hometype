@@ -4,9 +4,9 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     files: [
       "lib/jquery-2.0.1.min.js",
-      'spec/lib/jasmine-jquery.js',
-      'spec/lib/mocking.js',
-      'spec/lib/custom_matcher.js',
+      'spec/support/jasmine-jquery.js',
+      'spec/support/mocking.js',
+      'spec/support/custom_matcher.js',
       'spec/spec_helper.js',
       "lib/jquery.extend.js",
       "lib/utility.js",
