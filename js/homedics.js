@@ -99,6 +99,10 @@ Homedics.conversionMap = {
  * @return RegExp
  */
 Homedics.prototype.buildRegexp = function(roman) {
+  if (roman == '') {
+    return null;
+  }
+
   var hiragana    = this.getHiraganaCandidates(roman);
   var dict        = this.loadDict(roman.charAt(0));
   var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
