@@ -22,7 +22,8 @@ var Homedics = function(roman) {
   this.regexp = this.buildRegexp(roman);
 };
 
-Homedics.dicts = {};
+Homedics.dict   = '';
+Homedics.letter = '';
 
 /**
  * Dictionary letters array.
@@ -136,20 +137,21 @@ Homedics.prototype.buildRegexp = function(roman) {
  * @return string The content of a dictionary.
  */
 Homedics.prototype.loadDict = function(letter) {
-  if (!Homedics.dictLetters.indexOf(letter)) {
+  if (Homedics.dictLetters.indexOf(letter) == -1) {
     return '';
   }
 
-  if (Homedics.dicts[letter]) {
-    return Homedics.dicts[letter];
+  if (Homedics.letter == letter) {
+    return Homedics.dict;
   }
+  Homedics.letter = letter;
 
   var xhr     = new XMLHttpRequest()
   var dictUrl = chrome.extension.getURL('dicts/' + letter + '.ml');
 
   xhr.open('GET', dictUrl, false);
   xhr.send();
-  return Homedics.dicts[letter] = xhr.responseText;
+  return this.dict = xhr.responseText;
 };
 
 /**
