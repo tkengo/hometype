@@ -25,6 +25,14 @@ var Homedics = function(roman) {
 Homedics.dicts = {};
 
 /**
+ * Dictionary letters array.
+ */
+Homedics.dictLetters = [
+  'a', 'i', 'u', 'e', 'o', 'k', 's', 't', 'n', 'h', 'm', 'y',
+  'r', 'w', 'g', 'z', 'd', 'b', 'p', 'j', 'c', 'q', 'f'
+];
+
+/**
  * Conversion map of roman to hiragana.
  */
 Homedics.conversionMap = {
@@ -128,6 +136,10 @@ Homedics.prototype.buildRegexp = function(roman) {
  * @return string The content of a dictionary.
  */
 Homedics.prototype.loadDict = function(letter) {
+  if (!Homedics.dictLetters.indexOf(letter)) {
+    return '';
+  }
+
   if (Homedics.dicts[letter]) {
     return Homedics.dicts[letter];
   }
