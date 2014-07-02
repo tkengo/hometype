@@ -41,6 +41,7 @@
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
+      "lib/jp.js",
       "js/constants.js",
       "js/default_option.js",
       "js/options.js",
