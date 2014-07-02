@@ -19,32 +19,7 @@
  * @param string roman A checking target string.
  */
 var Homedics = function(roman) {
-  var hiragana    = this.getHiraganaCandidates(roman);
-  var dict        = this.loadDict(roman.charAt(0));
-  var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
-  var patterns    = [];
-  var regexp      = [];
-  var m, characters, words;
-
-  while (m = dictPattern.exec(dict)) {
-    patterns = patterns.concat(m[2].split(' '));
-  }
-  patterns = patterns.sort().join("\n").replace(/^(.+)$(\n^\1.+$)+/gm, '$1');
-
-  if (characters = patterns.match(/^.$/gm)) {
-    regexp.push('[' + characters.join('').replace(/(.)(\1)+/g, '$1') + ']');
-  }
-  if (words = patterns.match(/^..+$/gm)) {
-    regexp.push(words.join('|'));
-  }
-  if (hiragana) {
-    regexp.push(hiragana.join('|'));
-    regexp.push(this.toKatakana(hiragana.join('|')));
-  }
-
-  if (regexp.length > 0) {
-    this.regexp = new RegExp(regexp.join('|'));
-  }
+  this.regexp = this.buildRegexp(roman);
 };
 
 Homedics.dicts = {};
@@ -96,6 +71,43 @@ Homedics.conversionMap = {
   },
   'p': { 'a': 'ぱ', 'i': 'ぴ', 'u': 'ぷ', 'e': 'ぺ', 'o': 'ぽ',
     'y': { 'a': 'ぴゃ', 'i': 'ぴぃ', 'u': 'ぴゅ', 'e': 'ぴぇ', 'o': 'ぴょ' }
+  }
+};
+
+/**
+ * Build regular expression for dictionary matching.
+ *
+ * @param string roman
+ * @return RegExp
+ */
+Homedics.prototype.buildRegexp = function(roman) {
+  var hiragana    = this.getHiraganaCandidates(roman);
+  var dict        = this.loadDict(roman.charAt(0));
+  var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
+  var patterns    = [];
+  var regexp      = [];
+  var m, characters, words;
+
+  while (m = dictPattern.exec(dict)) {
+    patterns = patterns.concat(m[2].split(' '));
+  }
+  patterns = patterns.sort().join("\n").replace(/^(.+)$(\n^\1.+$)+/gm, '$1');
+
+  if (characters = patterns.match(/^.$/gm)) {
+    regexp.push('[' + characters.join('').replace(/(.)(\1)+/g, '$1') + ']');
+  }
+  if (words = patterns.match(/^..+$/gm)) {
+    regexp.push(words.join('|'));
+  }
+  if (hiragana) {
+    regexp.push(hiragana.join('|'));
+    regexp.push(this.toKatakana(hiragana.join('|')));
+  }
+
+  if (regexp.length > 0) {
+    return new RegExp(regexp.join('|'));
+  } else {
+    return null;
   }
 };
 
