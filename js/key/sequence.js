@@ -77,10 +77,6 @@ KeySequence.prototype.processor = function(e) {
 KeySequence.prototype.getKeyChar = function(e) {
   var key = KeyIdentifiers.toChar(e.keyIdentifier);
 
-  if (!key) {
-    return e.keyIdentifier;
-  }
-
   if (e.shiftKey) {
     key = key.toUpperCase();
   }

@@ -7,7 +7,7 @@
  */
 var KeyIdentifiers = {
   toChar: function(keyIdentifier) {
-    return this[keyIdentifier];
+    return this[keyIdentifier] || keyIdentifier;
   },
   "U+0008" : "BackSpace",
   "U+0009" : "Tab",
