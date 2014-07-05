@@ -1,26 +1,29 @@
 var HintElementCollection = function(hintTheme, target) {
-  this.hintTheme = hintTheme || 'yellow';
-  this.elements = [];
+  this.originalElements = target;
+  this.hintTheme        = hintTheme;
 
-  this.htmlElements = target;
+  this.createHints(target);
+};
 
-  this.keyIndex1 = 0;
-  this.keyIndex2 = 0;
+HintElementCollection.prototype.createHints = function(target) {
+  this.elements  = [];
+  this.hintKeys  = [];
 
-  this.hintKeys = [];
+  var keyAl  = HintKeyFactory.create(target.length);
+  var parent = document.createElement('div');
 
-  var hintKeyAlgorithm = HintKeyFactory.create(this.htmlElements.length);
+  for (var i = 0; i < target.length; i++) {
+    var key     = keyAl.pop();
+    var element = new HintElement(target[i], i, key, this.hintTheme);
 
-  var parent = document.createElement("div");
-  for (var i in this.htmlElements) {
-    var key = hintKeyAlgorithm.pop();
-    var element = new HintElement(this.htmlElements[i], i, key, this.hintTheme);
     this.elements.push(element);
     this.hintKeys.push({ index: i, key: key });
     parent.appendChild(element.getTipElement());
   }
 
   document.documentElement.appendChild(parent);
+
+  return target;
 };
 
 HintElementCollection.prototype.getElements = function() {
@@ -49,22 +52,49 @@ HintElementCollection.prototype.hideUnmatchedElements = function(key) {
   }
 };
 
-HintElementCollection.prototype.removeAllHint = function() {
-  for (var index in this.elements) {
-    this.elements[index].removeHintTip();
+HintElementCollection.prototype.regenerateHintsBy = function(text) {
+  var homedics           = new Homedics(text);
+  var originalElements   = this.originalElements;
+  var regenerateElements = [];
+
+  this.removeAllHint();
+
+  if (text == '') {
+    regenerateElements = originalElements;
+  } else {
+    for (var i = 0; i < originalElements.length; i++) {
+      var element = originalElements[i];
+      var result  = homedics.match(element.innerText.trim().toLowerCase());
+
+      if (result.match) {
+        regenerateElements.push(element);
+      }
+      if (result.head) {
+        element.className = element.className + ' hometype-hit-a-hint-head-area';
+      }
+    }
   }
+
+  return this.createHints(regenerateElements);
 };
 
-HintElementCollection.prototype.matches = function(text) {
+HintElementCollection.prototype.getHeadMatchedElements = function() {
   var results = [];
+
   for (var i = 0; i < this.elements.length; i++) {
-    var element = this.elements[i];
-    if (element.getElement().innerText.toLowerCase().indexOf(text.toLowerCase()) > -1) {
+    var element = this.elements[i].getElement();
+    if (element.className.indexOf('hometype-hit-a-hint-head-area') > -1) {
       results.push(element);
     }
   }
 
   return results;
+};
+
+HintElementCollection.prototype.removeAllHint = function() {
+  for (var index in this.elements) {
+    this.elements[index].removeHintTip();
+  }
 };
 
 HintElementCollection.prototype.getAllKeys = function() {

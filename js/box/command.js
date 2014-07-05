@@ -175,6 +175,6 @@ HometypeCommandBox.prototype.getText = function() {
 HometypeCommandBox.prototype.onUpdate = function(callback) {
   var text = this.text;
   this.text.get(0).addEventListener('keyup', function(e) {
-    callback(text.val());
+    callback(text.val(), e, KeyIdentifiers.toChar(e.keyIdentifier));
   });
 };

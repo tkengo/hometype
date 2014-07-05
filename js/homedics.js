@@ -19,6 +19,7 @@
  * @param string roman A checking target string.
  */
 var Homedics = function(roman) {
+  this.roman  = roman;
   this.regexp = this.buildRegexp(roman);
 };
 
@@ -86,7 +87,7 @@ Homedics.prototype.loadDict = function(letter) {
     return '';
   }
 
-  if (Homedics.letter == letter) {
+  if (Homedics.letter == letter && Homedics.dict != '') {
     return Homedics.dict;
   }
   Homedics.letter = letter;
@@ -96,7 +97,7 @@ Homedics.prototype.loadDict = function(letter) {
 
   xhr.open('GET', dictUrl, false);
   xhr.send();
-  return this.dict = xhr.responseText;
+  return Homedics.dict = xhr.responseText;
 };
 
 /**
@@ -104,12 +105,27 @@ Homedics.prototype.loadDict = function(letter) {
  * in a dictionary.
  *
  * @param string target
- * @return boolean Return true if the target string is matched, otherwise false.
+ * @return object A object value that has following key:
+ *                match: true if the target string is matched, otherwise false.
+ *                head:  true if the target string is matched in the its head, otherwise false.
  */
 Homedics.prototype.match = function(target) {
+  var result = false, position = -1, matches;
+
   if (this.regexp) {
-    return target.match(this.regexp);
-  } else {
-    return false;
+    if ((position = target.indexOf(this.roman)) > -1 || (matches = target.match(this.regexp))) {
+      result = true;
+    }
+
+    for (var i = 0; matches && i < matches.length; i++) {
+      if ((position = target.indexOf(matches[i])) == 0) {
+        break;
+      }
+    }
   }
+
+  return {
+    match: result,
+    head: position == 0
+  };
 };

@@ -40,16 +40,6 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
  * @param KeyboradEvent e          event.
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
-  if (this.searching) {
-    if (currentKey == 'Enter' && this.headElements.length > 0) {
-      this.chooseElementCallback($(this.headElements[0]));
-    }
-
-    if (this.hintElements.getAllKeys().join().indexOf(currentKey) == -1) {
-      return true;
-    }
-  }
-
   // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
 
@@ -98,45 +88,6 @@ HintModeProcessor.prototype.createHints = function(theme, elements) {
   }
 
   this.hintElements = new HintElementCollection(theme, elements);
-  this.theme = theme;
-  this.originalElements = elements;
-};
-
-HintModeProcessor.prototype.regenerateHintsBy = function(text) {
-  if (this.hintElements) {
-    this.hintElements.removeAllHint();
-  }
-
-  var homedics = new Homedics(text);
-  text = text.toLowerCase();
-
-  var regenerateElements = [];
-  var headMatchedElements = [];
-  for (var i = 0; i < this.originalElements.length; i++) {
-    var element = this.originalElements[i];
-    var innerText = element.innerText.trim().toLowerCase();
-
-    if (innerText.indexOf(text) > -1) {
-      regenerateElements.push(element);
-    }
-    if (homedics.match(innerText)) {
-      regenerateElements.push(element);
-    }
-    if (innerText.substr(0, text.length) == text) {
-      headMatchedElements.push(element);
-    }
-  }
-
-  if (regenerateElements.length > 0) {
-    this.hintElements = new HintElementCollection(this.theme, regenerateElements);
-
-    headMatchedElements[0].className = headMatchedElements[0].className + ' hometype-hit-a-hint-head-area';
-    this.headElements = headMatchedElements;
-  } else {
-    this.hintElements = null;
-  }
-
-  return regenerateElements;
 };
 
 /**
@@ -157,31 +108,36 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
   this.notifyLeaveModeCallback = notifyLeaveModeCallback;
 };
 
+/**
+ * Start searching in the hint mode.
+ */
 HintModeProcessor.prototype.startSearching = function() {
   if (this.searching) {
     return;
   }
 
   if (!this.commandBox) {
-    this.commandBox = new HometypeCommandBox();
-
     var context = this;
-    this.commandBox.onUpdate(function(text) {
-      // var uppers = text.match(/[A-Z]+/);
-      // if (uppers) {
-      //   context.choose(context.hintElements.getElements(), uppers[0]);
-      // } else {
-        var regenerateElements = context.regenerateHintsBy(text);
-        if (regenerateElements.length == 1) {
-          context.chooseElementCallback($(regenerateElements[0]));
-        } else {
-          this.regenerateElements = regenerateElements;
-        }
-      // }
-    });
+    this.commandBox = new HometypeCommandBox();
+    this.commandBox.onUpdate(function(text, e, key) { context.searchHints(text, e, key); });
   }
 
   this.commandBox.show();
-
   this.searching = true;
+};
+
+HintModeProcessor.prototype.searchHints = function(text, e, key) {
+  e.stopPropagation();
+  e.preventDefault();
+
+  var regenerateElements = this.hintElements.regenerateHintsBy(text.toLowerCase());
+  if (regenerateElements.length == 1) {
+    this.chooseElementCallback($(regenerateElements[0]));
+    return true;
+  }
+
+  var headMatchedElements = this.hintElements.getHeadMatchedElements();
+  if (key == 'Enter' && headMatchedElements.length > 0) {
+    this.chooseElementCallback($(headMatchedElements[0]));
+  }
 };
