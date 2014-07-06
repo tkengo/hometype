@@ -110,12 +110,12 @@ Homedics.prototype.loadDict = function(letter) {
  *                head:  true if the target string is matched in the its head, otherwise false.
  */
 Homedics.prototype.match = function(target) {
-  var result = false, position = -1, matches;
+  var position = target.indexOf(this.roman);
+  var matched  = position > -1;
 
-  if (this.regexp) {
-    if ((position = target.indexOf(this.roman)) > -1 || (matches = target.match(this.regexp))) {
-      result = true;
-    }
+  if (!matched && this.regexp) {
+    var matches = target.match(this.regexp);
+    matched = !!matches;
 
     for (var i = 0; matches && i < matches.length; i++) {
       if ((position = target.indexOf(matches[i])) == 0) {
@@ -125,7 +125,7 @@ Homedics.prototype.match = function(target) {
   }
 
   return {
-    match: result,
+    match: matched,
     head: position == 0
   };
 };
