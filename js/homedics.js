@@ -7,7 +7,7 @@
  */
 
 /**
- * You can pass a roman string to this constructor.
+ * You can pass a romaji string to this constructor.
  * Then, Homedics searches candidates from SKK dictionaries
  * and builds a regular expression.
  * You can check a string whether it matches with words in the
@@ -16,11 +16,11 @@
  * Dictionary files is placed in the dicts/ directory and separated
  * by a head letter of words.
  *
- * @param string roman A checking target string.
+ * @param string romaji A checking target string.
  */
-var Homedics = function(roman) {
-  this.roman  = roman;
-  this.regexp = this.buildRegexp(roman);
+var Homedics = function(romaji) {
+  this.romaji = romaji;
+  this.regexp = this.buildRegexp(romaji);
 };
 
 Homedics.dict   = '';
@@ -37,16 +37,16 @@ Homedics.dictLetters = [
 /**
  * Build regular expression for dictionary matching.
  *
- * @param string roman
+ * @param string romaji
  * @return RegExp
  */
-Homedics.prototype.buildRegexp = function(roman) {
-  if (roman == '') {
+Homedics.prototype.buildRegexp = function(romaji) {
+  if (romaji == '') {
     return null;
   }
 
-  var hiragana    = Jp.getHiraganaCandidates(roman);
-  var dict        = this.loadDict(roman.charAt(0));
+  var hiragana    = Jp.getHiraganaCandidates(romaji);
+  var dict        = this.loadDict(romaji.charAt(0));
   var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
   var patterns    = [];
   var regexp      = [];
@@ -110,7 +110,7 @@ Homedics.prototype.loadDict = function(letter) {
  *                head:  true if the target string is matched in the its head, otherwise false.
  */
 Homedics.prototype.match = function(target) {
-  var position = target.indexOf(this.roman);
+  var position = target.indexOf(this.romaji);
   var matched  = position > -1;
 
   if (!matched && this.regexp) {
