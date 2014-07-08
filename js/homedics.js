@@ -23,6 +23,7 @@ var Homedics = function(romaji) {
   this.regexp = this.buildRegexp(romaji);
 };
 
+Homedics.alphabetDict = '';
 Homedics.dict   = '';
 Homedics.letter = '';
 
@@ -46,8 +47,8 @@ Homedics.prototype.buildRegexp = function(romaji) {
   }
 
   var hiragana    = Jp.getHiraganaCandidates(romaji);
-  var dict        = this.loadDict(romaji.charAt(0));
-  var dictPattern = new RegExp('^(' + hiragana.join('|') + ').*:(.*)$', 'gm');
+  var dict        = this.loadDict(romaji.charAt(0)) + "\n" + this.loadAlphabetDict('alphabet');
+  var dictPattern = new RegExp('^(' + hiragana.concat(romaji).join('|') + ').*:(.*)$', 'gm');
   var patterns    = [];
   var regexp      = [];
   var m, characters, words;
@@ -98,6 +99,25 @@ Homedics.prototype.loadDict = function(letter) {
   xhr.open('GET', dictUrl, false);
   xhr.send();
   return Homedics.dict = xhr.responseText;
+};
+
+/**
+ * Load an alphabet dictionary from dicts/alphabet.ml with ajax from
+ * web_accessible_resources.
+ *
+ * @return string The content of an alphabet dictionary.
+ */
+Homedics.prototype.loadAlphabetDict = function() {
+  if (Homedics.alphabetDict != '') {
+    return Homedics.alphabetDict;
+  }
+
+  var xhr     = new XMLHttpRequest()
+  var dictUrl = chrome.extension.getURL('dicts/alphabet.ml');
+
+  xhr.open('GET', dictUrl, false);
+  xhr.send();
+  return Homedics.alphabetDict = xhr.responseText;
 };
 
 /**

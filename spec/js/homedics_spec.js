@@ -9,11 +9,14 @@ describe('Homedics', function() {
 
   var homedics;
   var dict       = 'そん:損 存 遜 村 尊 孫 巽 樽';
+  var alDict     = 'my:マイ';
   var dictLetter = 's';
   var dictUrl    = chrome.extension.getURL('dicts/' + dictLetter + '.ml');
+  var alDictUrl  = chrome.extension.getURL('dicts/alphabet.ml');
 
   beforeEach(function() {
     jasmine.Ajax.stubRequest(dictUrl).andReturn({ 'responseText': dict });
+    jasmine.Ajax.stubRequest(alDictUrl).andReturn({ 'responseText': alDict });
   });
 
   describe('loading of a dictionary', function() {
@@ -127,6 +130,17 @@ describe('Homedics', function() {
         expect(homedics.match('猿')).toEqual({ match: false, head: false });
 
         expect(homedics.match('とても損をする')).toEqual({ match: true, head: false });
+      });
+    });
+
+    context('when text is in an alphabet dictionary', function() {
+      beforeEach(function() {
+        homedics = new Homedics('my');
+      });
+
+      it("should match 'マイ'", function() {
+        expect(homedics.match('マイ・オークション')).toEqual({ match: true, head: true });
+        expect(homedics.match('念願のマイホーム')).  toEqual({ match: true, head: false });
       });
     });
   });
