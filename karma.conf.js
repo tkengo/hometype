@@ -5,6 +5,7 @@ module.exports = function(config) {
     files: [
       "lib/jquery-2.0.1.min.js",
       'spec/support/jasmine-jquery.js',
+      'spec/support/jasmine-ajax.js',
       'spec/support/mocking.js',
       'spec/support/custom_matcher.js',
       'spec/spec_helper.js',
@@ -45,6 +46,12 @@ module.exports = function(config) {
       {
         pattern: 'spec/fixtures/**/*.html',
         watched: true,
+        included: false,
+        served: true
+      },
+      {
+        pattern: 'dicts/*.ml',
+        watched: false,
         included: false,
         served: true
       }
