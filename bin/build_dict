@@ -5,6 +5,7 @@ require 'nkf'
 dict_url = 'http://openlab.jp/skk/skk/dic/SKK-JISYO.ML'
 
 target_regexp = {
+  alphabet: /^>?[a-z].*$/i,
   a: /^>?あ.*$/,
   i: /^>?い.*$/,
   u: /^>?う.*$/,
@@ -37,7 +38,7 @@ open(dict_url) do |f|
     line = NKF.nkf('-E -w', line)
     target_regexp.each do |letter, regexp|
       if line =~ regexp
-        hiragana, kanji = line.gsub(/[a-z>]/, '').split(' ')
+        hiragana, kanji = line.gsub(/([^a-z]+)[a-z]/, '\1').gsub('>', '').split(' ')
         results[letter][hiragana] = [] unless results[letter][hiragana]
         results[letter][hiragana].concat(kanji.sub(/;.*/, '').split('/'))
       end
