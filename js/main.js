@@ -16,7 +16,6 @@ HometypeOptions.getInstance().onLoaded(bindCommand);
  * 1. Check whether if the current url is matched in ignore url list.
  * 2. Bind a command.
  * 3. Register event onProcess in KyeSequence object.
- * 4. Register event onFocus and onBlur to detect focusing to form.
  */
 function initialize(options)
 {
@@ -32,16 +31,18 @@ function initialize(options)
   key.onProcess(function (e, sequence, stack, currentKey) {
     adjustCurrentMode();
 
-    var executer = new Executer(Mode.getCurrentMode(), sequence);
+    // Execute a command and reset key sequence.
+    // Delegate process to the processor of the current mode if a command was not found.
+    var executed, executer = new Executer(Mode.getCurrentMode(), sequence);
     if (executer.noCandidate()) {
       if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
         this.reset();
       }
-    } else if (executer.execute()) {
+    } else if (executed = executer.execute()) {
       this.reset();
     }
 
-    if (!Mode.isInsertMode()) {
+    if (executed || (options.stop_propagation && !Mode.isInsertMode())) {
       e.stopPropagation();
       e.preventDefault();
     }
