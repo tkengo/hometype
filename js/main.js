@@ -30,13 +30,7 @@ function initialize(options)
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
-    var isEditable = Dom.isEditable(document.activeElement);
-    if (isEditable && Mode.isNormalMode()) {
-      Mode.changeMode(ModeList.INSERT_MODE);
-    }
-    if (!isEditable && Mode.isInsertMode()) {
-      Mode.changeMode(ModeList.NORMAL_MODE);
-    }
+    adjustCurrentMode();
 
     var executer = new Executer(Mode.getCurrentMode(), sequence);
     if (executer.noCandidate()) {
@@ -60,6 +54,25 @@ function initialize(options)
       }
     });
   });
+}
+
+/**
+ * Adjust the current mode.
+ *
+ * 1. If active element is editable and the current mode is the normal mode,
+ *    change the current mode to the insert mode.
+ * 2. If active element is not editable and the current mode is the insert mode,
+ *    change the current mode to the normal mode.
+ */
+function adjustCurrentMode()
+{
+  var isEditable = Dom.isEditable(document.activeElement);
+  if (isEditable && Mode.isNormalMode()) {
+    Mode.changeMode(ModeList.INSERT_MODE);
+  }
+  if (!isEditable && Mode.isInsertMode()) {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
 }
 
 /**
