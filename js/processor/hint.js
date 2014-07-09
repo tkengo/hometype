@@ -45,7 +45,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 
   if (elements.length == 0) {
     // Return normal mode if there is no element matched hint key.
-    this.startSearching();
+    this.startSearching(currentKey);
     return true;
   }
 
@@ -111,25 +111,23 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
 /**
  * Start searching in the hint mode.
  */
-HintModeProcessor.prototype.startSearching = function() {
+HintModeProcessor.prototype.startSearching = function(currentKey) {
   if (this.searching) {
     return;
   }
 
   if (!this.commandBox) {
-    var context = this;
     this.commandBox = new HometypeCommandBox();
-    this.commandBox.onUpdate(function(text, e, key) { context.searchHints(text, e, key); });
+    this.commandBox.onUpdate(this.searchHints, this);
   }
 
   this.commandBox.show();
+  this.commandBox.setText(currentKey);
+  this.searchHints(currentKey, currentKey);
   this.searching = true;
 };
 
-HintModeProcessor.prototype.searchHints = function(text, e, key) {
-  e.stopPropagation();
-  e.preventDefault();
-
+HintModeProcessor.prototype.searchHints = function(text, key) {
   var result = false;
 
   var regenerateElements = this.hintElements.regenerateHintsBy(text.toLowerCase());

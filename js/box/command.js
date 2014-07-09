@@ -52,9 +52,9 @@ HometypeCommandBox.prototype.show = function() {
   this.box.css({
     top: scrollTop - (COMMAND_BOX_HEIGHT + COMMAND_BOX_MARGIN * 3),
     left: COMMAND_BOX_MARGIN
-  }).fadeIn(300);
-
-  this.text.focus();
+  }).fadeIn(300, $.proxy(function() {
+    this.text.focus();
+  }, this));
 };
 
 /**
@@ -172,9 +172,17 @@ HometypeCommandBox.prototype.getText = function() {
   return this.text.val().replace(':', '');
 };
 
-HometypeCommandBox.prototype.onUpdate = function(callback) {
+/**
+ * Set a text to the command box.
+ */
+HometypeCommandBox.prototype.setText = function(text) {
+  return this.text.val(text);
+};
+
+HometypeCommandBox.prototype.onUpdate = function(callback, context) {
   var text = this.text;
-  this.text.get(0).addEventListener('keyup', function(e) {
-    callback(text.val(), e, KeyIdentifiers.toChar(e.keyIdentifier));
+
+  text.get(0).addEventListener('keyup', function(e) {
+    callback.call(context || callback, text.val(), KeyIdentifiers.toChar(e.keyIdentifier));
   });
 };
