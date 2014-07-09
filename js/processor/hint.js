@@ -130,14 +130,19 @@ HintModeProcessor.prototype.searchHints = function(text, e, key) {
   e.stopPropagation();
   e.preventDefault();
 
+  var result = false;
+
   var regenerateElements = this.hintElements.regenerateHintsBy(text.toLowerCase());
   if (regenerateElements.length == 1) {
-    this.chooseElementCallback($(regenerateElements[0]));
-    return true;
+    result = this.chooseElementCallback($(regenerateElements[0]));
+  } else {
+    var headMatchedElements = this.hintElements.getHeadMatchedElements();
+    if (key == 'Enter' && headMatchedElements.length > 0) {
+      result = this.chooseElementCallback($(headMatchedElements[0]));
+    }
   }
 
-  var headMatchedElements = this.hintElements.getHeadMatchedElements();
-  if (key == 'Enter' && headMatchedElements.length > 0) {
-    this.chooseElementCallback($(headMatchedElements[0]));
+  if (result !== false) {
+    Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
