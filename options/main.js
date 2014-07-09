@@ -5,6 +5,8 @@ $(document).ready(function() {
       if (element.length > 0) {
         if (element.is(':radio')) {
           element.val([ value ]);
+        } else if (element.is(':checkbox')) {
+          element.prop('checked', value);
         } else {
           element.val(value);
         }
@@ -32,6 +34,9 @@ $(document).ready(function() {
 
     $(':text, :radio:checked').each(function() {
       params[$(this).attr('name')] = $(this).val();
+    });
+    $(':checkbox').each(function() {
+      params[$(this).attr('name')] = $(this).prop('checked');
     });
 
     var bindList = $('#key_bind_list').val();
