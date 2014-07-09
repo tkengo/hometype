@@ -42,7 +42,7 @@ function initialize(options)
       this.reset();
     }
 
-    if (executed || (Opt.event_propagation && !Mode.isInsertMode())) {
+    if (executed || (Opt.event_propagation && !Dom.isEditable(document.activeElement))) {
       e.stopPropagation();
       e.preventDefault();
     }
