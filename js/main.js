@@ -42,7 +42,7 @@ function initialize(options)
       this.reset();
     }
 
-    if (executed || (options.stop_propagation && !Mode.isInsertMode())) {
+    if (executed || (Opt.event_propagation && !Mode.isInsertMode())) {
       e.stopPropagation();
       e.preventDefault();
     }
