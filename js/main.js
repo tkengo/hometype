@@ -44,9 +44,12 @@ function initialize(options)
         this.reset();
       }
     } else if (executer.execute()) {
+      this.reset();
+    }
+
+    if (!Mode.isInsertMode()) {
       e.stopPropagation();
       e.preventDefault();
-      this.reset();
     }
   });
 
