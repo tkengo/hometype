@@ -49,12 +49,12 @@ var HometypeDefaultOptions = {
       '?': 'showAssignedCommands'
     },
     cmap: {
-      'Esc': 'enterNormalMode',
+      '<Esc>': 'enterNormalMode',
       '<C-n>': 'selectNextCandidate',
       '<C-p>': 'selectPrevCandidate'
     },
     imap: {
-      'Esc': 'cancelInsertMode',
+      '<Esc>': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
@@ -67,10 +67,10 @@ var HometypeDefaultOptions = {
       '<C-f>': '@enterHintMode'
     },
     vmap: {
-      'Esc': 'enterNormalMode'
+      '<Esc>': 'enterNormalMode'
     },
     fmap: {
-      'Esc': 'enterNormalMode',
+      '<Esc>': 'enterNormalMode',
       '<C-c>': 'enterNormalMode',
       '<C-e>': 'scrollDown @enterHintMode',
       '<C-y>': 'scrollUp @enterHintMode',
@@ -82,10 +82,10 @@ var HometypeDefaultOptions = {
       '<C-n>': 'moveRightTab'
     },
     hmap: {
-      'Esc': 'enterNormalMode'
+      '<Esc>': 'enterNormalMode'
     },
     tmap: {
-      'Esc': 'enterNormalMode'
+      '<Esc>': 'enterNormalMode'
     }
   }
 };
