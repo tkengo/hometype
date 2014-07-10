@@ -52,9 +52,12 @@ HometypeCommandBox.prototype.show = function() {
   this.box.css({
     top: scrollTop - (COMMAND_BOX_HEIGHT + COMMAND_BOX_MARGIN * 3),
     left: COMMAND_BOX_MARGIN
-  }).fadeIn(300, $.proxy(function() {
-    this.text.focus();
-  }, this));
+  }).show();
+
+  var context = this;
+  setTimeout(function() {
+    context.text.focus();
+  }, 10);
 };
 
 /**
