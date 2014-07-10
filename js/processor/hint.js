@@ -49,31 +49,29 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     return true;
   }
 
-  // Cancel default.
   e.stopPropagation();
   e.preventDefault();
 
-  return this.choose(elements, stack);
-};
-
-HintModeProcessor.prototype.choose = function(elements, stack) {
   if (elements.length == 1 && elements[0].getKey() == stack) {
-    var element = elements[0].getElement();
-
-    // Invoke a callback method if an element is confirmed.
-    if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
-      // Return normal mode if only callback didn't return false.
-      Mode.changeMode(ModeList.NORMAL_MODE);
-    }
-
+    this.confirm(elements[0].getElement());
     return true;
   } else {
-    // Hide unmatched elements if an element didn't confirm.
     this.hintElements.hideUnmatchedElements(stack);
-    for (var i in elements) {
-      elements[i].setPushed();
-    }
     return false;
+  }
+};
+
+/**
+ * Confirm an element and invoke a callback method.
+ * Return normal mode if the callback method returned false.
+ *
+ * @param DOMElement element A confirmed element.
+ */
+HintModeProcessor.prototype.confirm = function(element) {
+  // Invoke a callback method if an element is confirmed.
+  if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
+    // Return normal mode if only callback didn't return false.
+    Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
 
@@ -110,6 +108,8 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
 
 /**
  * Start searching in the hint mode.
+ *
+ * @param string currentKey
  */
 HintModeProcessor.prototype.startSearching = function(currentKey) {
   if (!this.searching) {
@@ -128,20 +128,23 @@ HintModeProcessor.prototype.startSearching = function(currentKey) {
   }, 10);
 };
 
-HintModeProcessor.prototype.searchHints = function(text, key) {
-  var result = false;
-
+/**
+ * Search texts in all hints and regenerate hints only matched by a search text.
+ * An element will be confirmed if there is only one regenerated hint.
+ *
+ * @param string text A search text.
+ * @param string currentkey
+ */
+HintModeProcessor.prototype.searchHints = function(text, currentKey) {
   var regenerateElements = this.hintElements.regenerateHintsBy(text.toLowerCase());
   if (regenerateElements.length == 1) {
-    result = this.chooseElementCallback($(regenerateElements[0]));
+    this.confirm(regenerateElements[0]);
   } else {
-    var headMatchedElements = this.hintElements.getHeadMatchedElements();
-    if (key == 'Enter' && headMatchedElements.length > 0) {
-      result = this.chooseElementCallback($(headMatchedElements[0]));
+    if (currentKey == 'Enter') {
+      var headMatchedElements = this.hintElements.getHeadMatchedElements();
+      if (headMatchedElements.length > 0) {
+        this.confirm(headMatchedElements[0]);
+      }
     }
-  }
-
-  if (result !== false) {
-    Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };

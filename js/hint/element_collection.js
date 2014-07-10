@@ -44,10 +44,13 @@ HintElementCollection.prototype.getMatchedElements = function(key) {
 };
 
 HintElementCollection.prototype.hideUnmatchedElements = function(key) {
-  for (var i in this.hintKeys) {
+  for (var i = 0; i < this.hintKeys.length; i++) {
     var hintKey = this.hintKeys[i];
+    var element = this.elements[hintKey.index];
     if (hintKey.key.indexOf(key) != 0) {
-      this.elements[hintKey.index].removeHintTip();
+      element.removeHintTip();
+    } else {
+      element.setPushed();
     }
   }
 };
