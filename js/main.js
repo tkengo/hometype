@@ -32,9 +32,10 @@ function initialize(options)
     // Adjust the current mode before key processing.
     adjustCurrentMode();
 
-    var processor  = Mode.getProcessor();
-    var delegation = 'onKeyDown' in processor;
-    var executer   = new Executer(Mode.getCurrentMode(), sequence);
+    var processor       = Mode.getProcessor();
+    var delegation      = 'onKeyDown' in processor;
+    var executer        = new Executer(Mode.getCurrentMode(), sequence);
+    var stopPropagation = (executer.hasCandidates() || delegation) && !Dom.isEditable(document.activeElement);
 
     // Execute a command and reset key sequence.
     // Delegate process to the processor of the current mode if a command was not found.
@@ -46,7 +47,7 @@ function initialize(options)
       this.reset();
     }
 
-    if ((executer.hasCandidates() || delegation) && !Dom.isEditable(document.activeElement)) {
+    if (stopPropagation) {
       e.stopPropagation();
       e.preventDefault();
     }

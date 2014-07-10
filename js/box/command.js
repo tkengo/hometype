@@ -54,10 +54,7 @@ HometypeCommandBox.prototype.show = function() {
     left: COMMAND_BOX_MARGIN
   }).show();
 
-  var context = this;
-  setTimeout(function() {
-    context.text.focus();
-  }, 10);
+  this.text.focus();
 };
 
 /**
