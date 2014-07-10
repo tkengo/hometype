@@ -44,7 +44,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   var elements = this.hintElements.getMatchedElements(stack);
 
   if (elements.length == 0) {
-    // Return normal mode if there is no element matched hint key.
+    // Search hint texts if there is no element matched hint key.
     this.startSearching(currentKey);
     return true;
   }
@@ -102,7 +102,7 @@ HintModeProcessor.prototype.onChooseElement = function(chooseElementCallback) {
 /**
  * Register callback that invokes when Ht leaves from the hint mode.
  *
- * @param function notifyleavemodeCallback Callback method.
+ * @param function notifyLeaveModeCallback Callback method.
  */
 HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
   this.notifyLeaveModeCallback = notifyLeaveModeCallback;
@@ -112,19 +112,20 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
  * Start searching in the hint mode.
  */
 HintModeProcessor.prototype.startSearching = function(currentKey) {
-  if (this.searching) {
-    return;
+  if (!this.searching) {
+    if (!this.commandBox) {
+      this.commandBox = new HometypeCommandBox();
+    }
+
+    this.commandBox.show();
+    this.commandBox.setText(currentKey);
+    this.searching = true;
   }
 
-  if (!this.commandBox) {
-    this.commandBox = new HometypeCommandBox();
-    this.commandBox.onUpdate(this.searchHints, this);
-  }
-
-  this.commandBox.show();
-  this.commandBox.setText(currentKey);
-  this.searchHints(currentKey, currentKey);
-  this.searching = true;
+  var context = this;
+  setTimeout(function() {
+    context.searchHints(context.commandBox.getText(), currentKey);
+  }, 10);
 };
 
 HintModeProcessor.prototype.searchHints = function(text, key) {

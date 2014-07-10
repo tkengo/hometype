@@ -178,11 +178,3 @@ HometypeCommandBox.prototype.getText = function() {
 HometypeCommandBox.prototype.setText = function(text) {
   return this.text.val(text);
 };
-
-HometypeCommandBox.prototype.onUpdate = function(callback, context) {
-  var text = this.text;
-
-  text.get(0).addEventListener('keyup', function(e) {
-    callback.call(context || callback, text.val(), KeyIdentifiers.toChar(e.keyIdentifier));
-  });
-};
