@@ -20,13 +20,3 @@ InsertModeProcessor.prototype.notifyLeaveMode = function() {
     }
   });
 };
-
-/**
- * Key processing.
- *
- * @param string        stack      key stack.
- * @param string        currentKey pushed key.
- * @param KeyboradEvent e          event.
- */
-InsertModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
-};

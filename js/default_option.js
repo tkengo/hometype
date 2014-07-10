@@ -4,7 +4,6 @@
 var HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
-  event_propagation: false,
   tab_selection_hint_keys: '123456789qwertyuiopasdfghjklzxcvbnm',
   hint_key_algorithm: Constant.hint_key.algorithm.standard,
 
