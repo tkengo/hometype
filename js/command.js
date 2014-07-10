@@ -295,20 +295,24 @@ Command.enterHintMode = function(option) {
   processor.onChooseElement(function(element) {
     if (Dom.isEditable(element.get(0))) {
       element.focus();
-      return true;
     } else if (element.is('select')) {
       var selectBox = new HometypeSelectBox(element);
       processor.createHints('yellow', selectBox.getListElements());
       processor.onNotifyLeaveMode(function() { selectBox.remove(); });
+      return false;
     } else {
-      Utility.clickElement(element, newTab);
-      if (!option.continuous) {
-        return true;
+      if (option.continuous) {
+        var timer = setTimeout(function() { Command.enterHintMode(option); }, 300);
+        window.onbeforeunload = function() { clearInterval(timer); };
       }
-      setTimeout(function() { Command.enterHintMode(option); }, 300);
+      Utility.clickElement(element, newTab);
+      if (option.continuous) {
+        window.onbeforeunload = undefined;
+        return false;
+      }
     }
 
-    return false;
+    return true;
   });
 };
 
