@@ -29,12 +29,12 @@ function initialize(options)
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
+    // Adjust the current mode before key processing.
+    adjustCurrentMode();
+
     var processor  = Mode.getProcessor();
     var delegation = 'onKeyDown' in processor;
     var executer   = new Executer(Mode.getCurrentMode(), sequence);
-
-    // Adjust the current mode before key processing.
-    adjustCurrentMode();
 
     // Execute a command and reset key sequence.
     // Delegate process to the processor of the current mode if a command was not found.
