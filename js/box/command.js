@@ -18,14 +18,12 @@ var HometypeCommandBox = function() {
 
   // Create command box elements.
   var box       = $('<div>')  .addClass('hometype-command-box')
-                              .attr('id', '_hometype-command-box')
                               .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(COMMAND_BOX_HEIGHT);
   var text      = $('<input>').attr('type', 'text')
                               .attr('data-hometype-not-insert-mode', true)
                               .appendTo(box);
   var candidate = $('<div>')  .addClass('hometype-command-box-candidate-area')
-                              .attr('id', '_hometype-command-box-candidate-area')
                               .width(windowWidth - COMMAND_BOX_MARGIN * 4)
                               .height(CANDIDATE_AREA_HEIGHT)
 
