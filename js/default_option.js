@@ -19,10 +19,10 @@ var HometypeDefaultOptions = {
       'k': 'scrollUp',
       'G': 'scrollToBottom',
       'gg': 'scrollToTop',
-      'f': 'enterHintMode',
-      'F': 'enterHintMode --new',
-      'cf': 'enterHintMode --continuous',
-      'cF': 'enterHintMode --new --continuous',
+      'f': 'followLink',
+      'F': 'followLink --new',
+      'cf': 'followLink --continuous',
+      'cF': 'followLink --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
       'm': 'enterTabSelectionMode',
@@ -64,7 +64,7 @@ var HometypeDefaultOptions = {
       '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab',
-      '<C-f>': '@enterHintMode'
+      '<C-f>': '@followLink'
     },
     vmap: {
       '<Esc>': 'enterNormalMode'
@@ -72,12 +72,12 @@ var HometypeDefaultOptions = {
     fmap: {
       '<Esc>': 'enterNormalMode',
       '<C-c>': 'enterNormalMode',
-      '<C-e>': 'scrollDown @enterHintMode',
-      '<C-y>': 'scrollUp @enterHintMode',
-      '<C-d>': 'scrollDownHalf @enterHintMode',
-      '<C-u>': 'scrollUpHalf @enterHintMode',
-      '<C-f>': 'scrollDownPage @enterHintMode',
-      '<C-b>': 'scrollUpPage @enterHintMode',
+      '<C-e>': 'scrollDown @followLink',
+      '<C-y>': 'scrollUp @followLink',
+      '<C-d>': 'scrollDownHalf @followLink',
+      '<C-u>': 'scrollUpHalf @followLink',
+      '<C-f>': 'scrollDownPage @followLink',
+      '<C-b>': 'scrollUpPage @followLink',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab'
     },

@@ -16,7 +16,7 @@ InsertModeProcessor.prototype.notifyLeaveMode = function() {
 
   chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
     if (status) {
-      new Executer('enterHintMode --continuous').execute();
+      new Executer('followLink --continuous').execute();
     }
   });
 };

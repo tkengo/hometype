@@ -264,7 +264,7 @@ Command.enterVisualMode = function() {
 /**
  * Enter the hint mode. Hint targets are clickable and form elements.
  */
-Command.enterHintMode = function(option) {
+Command.followLink = function(option) {
   // Collect hint source targets.
   var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
   var newTab = option.new || false;
@@ -302,7 +302,7 @@ Command.enterHintMode = function(option) {
       return false;
     } else {
       if (option.continuous) {
-        var timer = setTimeout(function() { Command.enterHintMode(option); }, 300);
+        var timer = setTimeout(function() { new Executer('@followLink').execute(); }, 300);
         window.onbeforeunload = function() { clearInterval(timer); };
       }
       Utility.clickElement(element, newTab);
