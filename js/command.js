@@ -342,11 +342,3 @@ Command.enterNormalMode = function() {
 Command.showAssignedCommands = function() {
   Mode.changeMode(ModeList.HELP_MODE);
 };
-
-/**
- * Defined alias.
- */
-Command.cancelCommandMode = Command.enterNormalMode;
-Command.cancelHintMode    = Command.enterNormalMode;
-Command.cancelVisualMode  = Command.enterNormalMode;
-Command.cancelHelpMode    = Command.enterNormalMode;
