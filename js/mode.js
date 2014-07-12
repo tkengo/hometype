@@ -15,8 +15,7 @@ var ModeList = {
   HINT_MODE: 'hint',
   VISUAL_MODE: 'visual',
   COMMAND_MODE: 'command',
-  HELP_MODE: 'help',
-  TAB_SELECTION_MODE: 'tabSelection'
+  HELP_MODE: 'help'
 };
 
 /**
@@ -34,7 +33,6 @@ var HometypeMode = function() {
   this.modeProcessors[ModeList.VISUAL_MODE]        = new VisualModeProcessor();
   this.modeProcessors[ModeList.COMMAND_MODE]       = new CommandModeProcessor();
   this.modeProcessors[ModeList.HELP_MODE]          = new HelpModeProcessor();
-  this.modeProcessors[ModeList.TAB_SELECTION_MODE] = new TabSelectionModeProcessor();
 
   this.lockMode = false;
 };

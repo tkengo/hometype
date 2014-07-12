@@ -14,8 +14,9 @@
  * These event listeners is reset when leave the command mode.
  */
 var CommandModeProcessor = function() {
-  this.updateBoxTextCallback = null;
-  this.enterCallback         = null;
+  this.updateBoxTextCallback   = null;
+  this.enterCallback           = null;
+  this.notifyLeaveModeCallback = null;
 
   this.commandBox = new HometypeCommandBox();
 };
@@ -34,7 +35,21 @@ CommandModeProcessor.prototype.notifyLeaveMode = function() {
   this.updateBoxTextCallback = null;
   this.enterCallback         = null;
 
+  if (this.notifyLeaveModeCallback) {
+    this.notifyLeaveModeCallback();
+    this.notifyLeaveModeCallback = null;
+  }
+
   this.commandBox.hide();
+};
+
+/**
+ * Register callback that invokes when Ht leaves from the command mode.
+ *
+ * @param function notifyLeaveModeCallback Callback method.
+ */
+CommandModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
+  this.notifyLeaveModeCallback = notifyLeaveModeCallback;
 };
 
 /**

@@ -75,7 +75,7 @@ HometypeCommandBox.prototype.hide = function() {
 HometypeCommandBox.prototype.showCandidate = function() {
   if (!this.candidate.is(':visible')) {
     this.recalculateAndSetPosition();
-    this.candidate.hide().fadeIn(300);
+    this.candidate.hide().show();
   }
 };
 
@@ -109,16 +109,20 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
   this.list = list;
 
   for (var i = 0; i < list.length; i++) {
-    var text = typeof list[i] == 'string' ? list[i] : list[i].text;
-    var div = $('<div>').html(Dom.escapeHTML(text)).attr('data-index', i);
+    var item = list[i];
+    var text = typeof item == 'string' ? item : item.text;
+
+    if (typeof item.escape == 'undefined') {
+      item.escape = true;
+    }
+    var div = $('<div>').html(item.escape ? Dom.escapeHTML(text) : text).attr('data-index', i);
 
     if (this.text.val() != '') {
       div.html(div.html().replace(new RegExp('(' + this.text.val() + ')', 'ig'), '<span class="hometype-matched-text">$1</span>'));
     }
-    div.html(Utility.pad(i + 1, 2) + ': ' + div.html());
 
-    if (list[i].url) {
-      var icon = $('<img>').attr('src', 'http://g.etfv.co/' + list[i].url).attr('width', '16').addClass('hometype-command-box-icon');
+    if (item.url) {
+      var icon = $('<img>').attr('src', 'http://g.etfv.co/' + item.url).attr('width', '16').addClass('hometype-command-box-icon');
       icon.prependTo(div);
     }
 

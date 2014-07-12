@@ -25,7 +25,7 @@ var HometypeDefaultOptions = {
       'cF': 'followLink --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
-      'm': 'enterTabSelectionMode',
+      'm': 'selectTab',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',
@@ -82,9 +82,6 @@ var HometypeDefaultOptions = {
       '<C-n>': 'moveRightTab'
     },
     hmap: {
-      '<Esc>': 'enterNormalMode'
-    },
-    tmap: {
       '<Esc>': 'enterNormalMode'
     }
   }

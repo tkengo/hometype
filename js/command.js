@@ -150,18 +150,37 @@ Command.focusLastInput = function() {
 /**
  * Enter the tab selection mode.
  */
-Command.enterTabSelectionMode = function() {
-  chrome.runtime.sendMessage({
-    command: 'setTitleForAllTabs',
-    params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
+Command.selectTab = function() {
+  var processor  = Mode.changeMode(ModeList.COMMAND_MODE);
+  var commandBox = processor.getCommandBox();
+  var port       = chrome.runtime.connect({ name: 'loadTabs' });
+
+  commandBox.setHeaderText('Tabs');
+  processor.onNotifyLeaveMode(function() {
+    chrome.runtime.sendMessage({ command: 'resetTitleForAllTabs' });
   });
 
-  var port = chrome.runtime.connect({ name: 'loadTabs' });
   port.onMessage.addListener(function(tabs) {
-    var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
-    processor.createTabListBox(tabs);
-    processor.onNotifyLeaveMode(function() {
-      chrome.runtime.sendMessage({ command: 'resetTitleForAllTabs' });
+    var list = [];
+    for (var i = 0; i < tabs.length; i++) {
+      var tab  = tabs[i];
+      var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
+      list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url });
+    };
+    commandBox.setCandidate(list);
+    commandBox.showCandidate();
+
+    chrome.runtime.sendMessage({
+      command: 'setTitleForAllTabs',
+      params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
+    });
+
+    processor.onUpdateBoxText(function(text) {
+      Mode.changeMode(ModeList.NORMAL_MODE);
+      var index = Opt.tab_selection_hint_keys.indexOf(text);
+      if (index > -1 && tabs[index]) {
+        chrome.runtime.sendMessage({ command: 'selectTab', params: tabs[index].id });
+      }
     });
 
     port.disconnect();
@@ -174,7 +193,6 @@ Command.enterTabSelectionMode = function() {
  */
 Command.searchClosedTabs = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
-
   processor.getCommandBox().setHeaderText('ClosedTabs');
   processor.onEnter(function(text, selected) {
     chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
@@ -198,8 +216,8 @@ Command.searchClosedTabs = function() {
  */
 Command.searchBookmarks = function(option) {
   var newTab = option.new || false;
-  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
+  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
   processor.getCommandBox().setHeaderText('Bookmarks');
   processor.onEnter(function(text, selected) {
     if (newTab) {
@@ -230,7 +248,6 @@ Command.searchBookmarks = function(option) {
  */
 Command.searchHistories = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
-
   processor.getCommandBox().setHeaderText('Histories');
   processor.onEnter(function(text, selected) {
     Utility.openUrl(selected.url);
