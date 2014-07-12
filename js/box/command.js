@@ -5,26 +5,29 @@
  *
  * Manage command box that is shown bottom of the display when enter the command mode.
  */
-var COMMAND_BOX_HEIGHT = 20;
 var CANDIDATE_AREA_HEIGHT = 180;
-var COMMAND_BOX_MARGIN = 8;
+var COMMAND_BOX_MARGIN = 0;
 var CANDIDATE_MAX_COUNT = 20;
 
 /**
  * Constructor
  */
-var HometypeCommandBox = function() {
+var HometypeCommandBox = function(header) {
   var windowWidth = Viewport.getWindowSize().width;
 
   // Create command box elements.
-  var box       = $('<div>')  .addClass('hometype-command-box')
-                              .width(windowWidth - COMMAND_BOX_MARGIN * 4)
-                              .height(COMMAND_BOX_HEIGHT);
-  var text      = $('<input>').attr('type', 'text')
-                              .attr('data-hometype-not-insert-mode', true)
+  var box       = $('<div>')  .addClass('hometype-command-box');
+  var header    = $('<div>')  .addClass('hometype-command-box-header')
+                              .text(header || 'Command')
                               .appendTo(box);
+  var triangle  = $('<div>')  .addClass('hometype-command-box-triangle')
+                              .appendTo(box);
+  var content   = $('<div>')  .addClass('hometype-command-box-content')
+                              .appendTo(box);
+  var text      = $('<input>').attr('type', 'text')
+                              .appendTo(content);
   var candidate = $('<div>')  .addClass('hometype-command-box-candidate-area')
-                              .width(windowWidth - COMMAND_BOX_MARGIN * 4)
+                              .width(windowWidth)
                               .height(CANDIDATE_AREA_HEIGHT)
 
   this.list      = [];
@@ -48,7 +51,7 @@ HometypeCommandBox.prototype.show = function() {
 
   // Place command box to calculated position and show it.
   this.box.css({
-    top: scrollTop - (COMMAND_BOX_HEIGHT + COMMAND_BOX_MARGIN * 3),
+    top: scrollTop - (this.box.outerHeight() + COMMAND_BOX_MARGIN * 3),
     left: COMMAND_BOX_MARGIN
   }).show();
 
@@ -89,7 +92,7 @@ HometypeCommandBox.prototype.recalculateAndSetPosition = function() {
   var children = this.candidate.children();
   this.candidate.height($(children[0]).outerHeight() * children.length);
   this.candidate.css({
-    top: scrollTop - this.candidate.height() - COMMAND_BOX_HEIGHT - COMMAND_BOX_MARGIN * 4,
+    top: scrollTop - this.candidate.height() - this.box.outerHeight() - COMMAND_BOX_MARGIN * 4,
     left: COMMAND_BOX_MARGIN
   });
 };
