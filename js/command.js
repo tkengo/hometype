@@ -185,8 +185,7 @@ Command.searchClosedTabs = function() {
       var list = [];
       $.each(closedTabs, function(index, tab) {
         if (tab && Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
-          var listText = Utility.pad(list.length + 1, 2) + ': ' + tab.title + '(' + tab.url + ')';
-          list.push({ text: listText, url: tab.url, tabId: tab.id });
+          list.push({ text: tab.title + '(' + tab.url + ')', url: tab.url, tabId: tab.id });
         }
       });
       return list;
@@ -215,7 +214,7 @@ Command.searchBookmarks = function(option) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
       $.each(bookmarks, function(index, bookmark) {
-        if (Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
+        if (text == '' || Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
           list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url });
         }
       });

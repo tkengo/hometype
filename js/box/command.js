@@ -108,9 +108,19 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
 
   this.list = list;
 
-  for (var i in list) {
+  for (var i = 0; i < list.length; i++) {
     var text = typeof list[i] == 'string' ? list[i] : list[i].text;
-    var div = $('<div>').text(text).attr('data-index', i);
+    var div = $('<div>').html(Dom.escapeHTML(text)).attr('data-index', i);
+
+    if (this.text.val() != '') {
+      div.html(div.html().replace(new RegExp('(' + this.text.val() + ')', 'ig'), '<span class="hometype-matched-text">$1</span>'));
+    }
+    div.html(Utility.pad(i + 1, 2) + ': ' + div.html());
+
+    if (list[i].url) {
+      var icon = $('<img>').attr('src', 'http://g.etfv.co/' + list[i].url).attr('width', '16').addClass('hometype-command-box-icon');
+      icon.prependTo(div);
+    }
 
     // Selected first item.
     if (i == 0) {

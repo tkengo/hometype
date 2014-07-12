@@ -42,6 +42,12 @@
   color:red;
 }
 
+.hometype-matched-text {
+  background-color:#fc3;
+  border:solid 1px #f66;
+  color:#f22;
+}
+
 .hometype-help-box {
   position:absolute;
   z-index:1000000;
@@ -150,6 +156,11 @@
 .hometype-command-box-candidate-area div.selected {
   background-color:#eee;
   color:#444;
+}
+.hometype-command-box-icon {
+  float:left !important;
+  margin:1px 4px 0 0 !important;
+  display:block !important;
 }
 
 .hometype-select-box {
