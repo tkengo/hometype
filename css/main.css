@@ -77,7 +77,6 @@
   height:22px !important;
   line-height:22px !important;
   font-size:14px !important;
-  /* padding:4px 5px 0 5px !important; */
   padding:1px 5px 0px 5px !important;
   color:#f7e8ad !important;
   background-color:#62a609 !important;
@@ -119,34 +118,38 @@
   box-shadow:0 !important;
 }
 .hometype-command-box-candidate-area {
-  background-color:#666666;
+  border-style:solid;
+  border-width:1px 0 0 0;
+  border-color:#aaa;
+  background-color:#fff;
   position:absolute;
   z-index:1000000;
   display:none;
-  color:#ffffff;
-  opacity:0.8;
-  padding:3px;
-  box-sizing: border-box;
-  font-size: 12px !important;
+  padding:0;
+  box-sizing:border-box;
+  font-size:12px !important;
 }
 .hometype-command-box-candidate-area div {
-  background-color:#666666;
-  color:#ffffff;
+  border-style:dotted;
+  border-width:0 0 1px 0;
+  border-color:#aaa;
+  background-color:transparent;
+  color:#333;
   text-align:left;
-  font-size:16px;
+  font-size:13px;
   font-family:'Osaka-Mono';
-  padding:5px;
-  height: 32px;
-  width: 100%;
-  word-break: break-all;
-  word-wrap: break-word;
-  overflow: hidden;
-  box-sizing: border-box;
+  padding:2px;
+  height:22px;
+  width:100%;
+  word-break:break-all;
+  word-wrap:break-word;
+  overflow:hidden;
+  box-sizing:border-box;
   line-height: 22px;
 }
 .hometype-command-box-candidate-area div.selected {
-  background-color:#ffffff;
-  color:#444444;
+  background-color:#eee;
+  color:#444;
 }
 
 .hometype-select-box {
