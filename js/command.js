@@ -175,6 +175,7 @@ Command.enterTabSelectionMode = function() {
 Command.searchClosedTabs = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
+  processor.getCommandBox().setHeaderText('ClosedTabs');
   processor.onEnter(function(text, selected) {
     chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
   });
@@ -200,6 +201,7 @@ Command.searchBookmarks = function(option) {
   var newTab = option.new || false;
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
+  processor.getCommandBox().setHeaderText('Bookmarks');
   processor.onEnter(function(text, selected) {
     if (newTab) {
       chrome.runtime.sendMessage({ command: 'createTab', params: { url: selected.url } });
@@ -230,6 +232,7 @@ Command.searchBookmarks = function(option) {
 Command.searchHistories = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
+  processor.getCommandBox().setHeaderText('Histories');
   processor.onEnter(function(text, selected) {
     Utility.openUrl(selected.url);
   });

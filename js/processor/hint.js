@@ -114,7 +114,7 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
 HintModeProcessor.prototype.startSearching = function(currentKey) {
   if (!this.searching) {
     if (!this.commandBox) {
-      this.commandBox = new HometypeCommandBox();
+      this.commandBox = new HometypeCommandBox('SearchHints');
     }
 
     this.commandBox.show();

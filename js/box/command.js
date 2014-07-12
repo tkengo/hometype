@@ -32,6 +32,7 @@ var HometypeCommandBox = function(header) {
 
   this.list      = [];
   this.box       = box;
+  this.header    = header;
   this.text      = text;
   this.candidate = candidate;
 
@@ -177,5 +178,12 @@ HometypeCommandBox.prototype.getText = function() {
  * Set a text to the command box.
  */
 HometypeCommandBox.prototype.setText = function(text) {
-  return this.text.val(text);
+  this.text.val(text);
+};
+
+/**
+ * Set a text to the header of the command box.
+ */
+HometypeCommandBox.prototype.setHeaderText = function(text) {
+  this.header.text(text);
 };
