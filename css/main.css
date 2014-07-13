@@ -1,11 +1,8 @@
 .hometype-hit-a-hint-base {
   position:absolute;
-  border:solid 1px #C4C4C4;
-  opacity:0.8;
-  padding:3px;
-  border-radius:3px;
+  padding:2px;
   font-size:12px;
-  color:#222222;
+  color:#333;
   z-index:1000001;
   font-family:'Osaka-Mono';
 }
@@ -15,16 +12,16 @@
   z-index:1000000;
 }
 .hometype-hit-a-hint-yellow {
-  background-color:#FFFF4D;
+  background-color:#fe0;
 }
 .hometype-hit-a-hint-yellow-area {
   background-color:#FDFFC3;
 }
 .hometype-hit-a-hint-blue {
-  background-color:#4DFFFF;
+  background-color:#81b9ff;
 }
 .hometype-hit-a-hint-blue-area {
-  background-color:#CDFFF3;
+  background-color:#c5e3ff;
 }
 .hometype-hit-a-hint-green {
   background-color:#B2FFC7;
@@ -33,10 +30,10 @@
   background-color:#E2FFE3;
 }
 .hometype-hit-a-hint-red {
-  background-color:#FFB2C7;
+  background-color:#ff8bb9;
 }
 .hometype-hit-a-hint-head-area, .hometype-hit-a-hint-red-area {
-  background-color:#FFE2E3;
+  background-color:#ffd3e0;
 }
 .hometype-hit-a-hint-pushed {
   color:red;

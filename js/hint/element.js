@@ -40,13 +40,13 @@ HintElement.prototype.createTipElement = function() {
     var coords = this.srcElement.coords.split(',');
     rect = this.srcElement.parentNode.getClientRects()[0];
 
-    top  = rect.top  + parseInt(coords[1]) - 10;
-    left = rect.left + parseInt(coords[0]) - 10;
+    top  = rect.top  + parseInt(coords[1]);
+    left = rect.left + parseInt(coords[0]);
   }
   else {
     // Usually get a position from an element offset.
-    top  = rect.top  - 10;
-    left = rect.left - 10;
+    top  = rect.top;
+    left = rect.left;
   }
 
   // Correct an element position if it is out of display.
