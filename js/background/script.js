@@ -132,7 +132,7 @@ RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
     for (var i = 0; i < tabs.length; i++) {
       var tab = tabs[i];
       if (!tab.url.match(/^chrome.*:\/\//)) {
-        var code = "document.title = document.title.replace(/^\\[[0-9a-z]\\]/, '')";
+        var code = "document.title = document.title.replace(/^\\[[0-9a-z]\\]/i, '')";
         chrome.tabs.executeScript(tab.id, { code: code });
       }
     }
