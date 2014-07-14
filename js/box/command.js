@@ -205,4 +205,5 @@ HometypeCommandBox.prototype.setText = function(text) {
  */
 HometypeCommandBox.prototype.setHeaderText = function(text) {
   this.header.text(text);
+  return this;
 };

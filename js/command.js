@@ -151,37 +151,54 @@ Command.focusLastInput = function() {
  * Enter the tab selection mode.
  */
 Command.selectTab = function() {
-  var processor  = Mode.changeMode(ModeList.COMMAND_MODE);
-  var commandBox = processor.getCommandBox();
-  var port       = chrome.runtime.connect({ name: 'loadTabs' });
-
-  commandBox.setHeaderText('Tabs');
-  processor.onNotifyLeaveMode(function() {
-    chrome.runtime.sendMessage({ command: 'resetTitleForAllTabs' });
-  });
-
-  port.onMessage.addListener(function(tabs) {
+  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
+  var commandBox      = processor.getCommandBox().setHeaderText('Tabs');
+  var port            = chrome.runtime.connect({ name: 'loadTabs' });
+  var createCandidate = function(tabs, filter) {
     var list = [];
+
     for (var i = 0; i < tabs.length; i++) {
       var tab  = tabs[i];
-      var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
-      list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url });
-    };
-    commandBox.setCandidate(list);
-    commandBox.showCandidate();
+      if (!filter || Utility.includedInProperties(tab, filter, [ 'title', 'url' ])) {
+        var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
+        list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, id: tab.id });
+      }
+    }
+
+    return list;
+  };
+  var selectTab = function(id) {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+    chrome.runtime.sendMessage({ command: 'selectTab', params: id });
+  };
+
+  port.onMessage.addListener(function(tabs) {
+    processor.onNotifyLeaveMode(function() {
+      chrome.runtime.sendMessage({ command: 'resetTitleForAllTabs' });
+    });
+    processor.onEnter(function(text, selected) {
+      selectTab(selected.id);
+    });
+    processor.onUpdateBoxText(function(text) {
+      var index = -1;
+      if (text) {
+        index = Opt.tab_selection_hint_keys.indexOf(text.charAt(text.length - 1));
+      }
+
+      if (index > -1 && tabs[index]) {
+        selectTab(tabs[index].id);
+      } else {
+        return createCandidate(tabs, text);
+      }
+    });
 
     chrome.runtime.sendMessage({
       command: 'setTitleForAllTabs',
       params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
     });
 
-    processor.onUpdateBoxText(function(text) {
-      Mode.changeMode(ModeList.NORMAL_MODE);
-      var index = Opt.tab_selection_hint_keys.indexOf(text);
-      if (index > -1 && tabs[index]) {
-        chrome.runtime.sendMessage({ command: 'selectTab', params: tabs[index].id });
-      }
-    });
+    commandBox.setCandidate(createCandidate(tabs));
+    commandBox.showCandidate();
 
     port.disconnect();
   });
