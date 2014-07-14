@@ -50,7 +50,7 @@ Homedics.prototype.buildRegexp = function(romaji) {
   var dict        = this.loadDict(romaji.charAt(0)) + "\n" + this.loadAlphabetDict('alphabet');
   var dictPattern = new RegExp('^(' + hiragana.concat(romaji).join('|') + ').*:(.*)$', 'gm');
   var patterns    = [];
-  var regexp      = [];
+  var regexp      = [ romaji ];
   var m, characters, words;
 
   while (m = dictPattern.exec(dict)) {
@@ -69,11 +69,7 @@ Homedics.prototype.buildRegexp = function(romaji) {
     regexp.push(Jp.toKatakana(hiragana.join('|')));
   }
 
-  if (regexp.length > 0) {
-    return new RegExp(regexp.join('|'));
-  } else {
-    return null;
-  }
+  return new RegExp(regexp.join('|'), 'ig');
 };
 
 /**
@@ -130,14 +126,12 @@ Homedics.prototype.loadAlphabetDict = function() {
  *                head:  true if the target string is matched in the its head, otherwise false.
  */
 Homedics.prototype.match = function(target) {
-  var position = target.indexOf(this.romaji);
-  var matched  = position > -1;
+  var position = -1;
+  var matches  = target.match(this.regexp);
 
-  if (!matched && this.regexp) {
-    var matches = target.match(this.regexp);
-    matched = !!matches;
-
-    for (var i = 0; matches && i < matches.length; i++) {
+  if (matches) {
+    matches = $.unique(matches);
+    for (var i = 0; i < matches.length; i++) {
       if ((position = target.indexOf(matches[i])) == 0) {
         break;
       }
@@ -145,7 +139,8 @@ Homedics.prototype.match = function(target) {
   }
 
   return {
-    match: matched,
+    matched: !!matches,
+    matches: matches,
     head: position == 0
   };
 };
