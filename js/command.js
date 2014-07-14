@@ -231,11 +231,12 @@ Command.searchBookmarks = function(option) {
   port.onMessage.addListener(function(bookmarks) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      $.each(bookmarks, function(index, bookmark) {
+      for (var i = 0; i < bookmarks.length; i++) {
+        var bookmark = bookmarks[i];
         if (text == '' || Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
           list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url });
         }
-      });
+      };
       port.disconnect();
       return list;
     });

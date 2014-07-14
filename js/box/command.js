@@ -108,6 +108,11 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
 
   this.list = list;
 
+  if (list.length == 0) {
+    var div = $('<div>').html('nothing').addClass('hometype-no-candidate');
+    this.candidate.append(div);
+  }
+
   for (var i = 0; i < list.length; i++) {
     var item = list[i];
     var text = typeof item == 'string' ? item : item.text;

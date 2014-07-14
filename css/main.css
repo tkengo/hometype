@@ -153,8 +153,12 @@
   line-height: 22px;
 }
 .hometype-command-box-candidate-area div.selected {
-  background-color:#eee;
   color:#444;
+  background-color:#ffa;
+}
+.hometype-command-box-candidate-area div.hometype-no-candidate {
+  color:#d00;
+  background-color:#ffa;
 }
 .hometype-command-box-icon {
   float:left !important;
