@@ -105,6 +105,55 @@ HintElement.prototype.setPushed = function() {
   this.getTipElement().children[0].className = 'hometype-hit-a-hint-pushed';
 };
 
+HintElement.prototype.highlight = function(targets) {
+  if (typeof targets == 'string') {
+    targets = [ targets ];
+  }
+
+  var highlight = function(element, text) {
+    if (element.nodeType == 3) {
+      var pos = element.data.toLowerCase().indexOf(text.toLowerCase());
+      if (pos > -1) {
+        var matchedNode     = element.splitText(pos);
+        var highlightedNode = document.createElement('span');
+
+        matchedNode.splitText(text.length);
+        highlightedNode.className = 'hometype-matched-text';
+        highlightedNode.appendChild(document.createTextNode(matchedNode.data));
+        element.parentNode.replaceChild(highlightedNode, matchedNode);
+        return true;
+      }
+
+      return false;
+    } else if (element.nodeType == 1 &&
+               element.childNodes &&
+               element.className.indexOf('hometype-matched-text') == -1 &&
+              !element.tagName.match(/(script|style)/i)) {
+      var nodes = element.childNodes;
+      for (var i = 0; i < nodes.length; i++) {
+        if (highlight(nodes[i], text)) {
+          i++;
+        }
+      }
+    }
+  }
+
+  for (var i = 0; i < targets.length; i++) {
+    highlight(this.getElement(), targets[i]);
+  }
+};
+
+HintElement.prototype.removeHighlight = function() {
+  var results = document.evaluate("//span[@class='hometype-matched-text']", this.getElement(), null, XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);
+  for (var i = 0; i < results.snapshotLength; i++) {
+    var element    = results.snapshotItem(i);
+    var parentNode = element.parentNode;
+
+    parentNode.replaceChild(element.firstChild, element);
+    parentNode.normalize();
+  }
+};
+
 /**
  * Remove hint tip element.
  */
@@ -118,4 +167,6 @@ HintElement.prototype.removeHintTip = function() {
   if (tip.parentNode) {
     tip.parentNode.removeChild(tip);
   }
+
+  this.removeHighlight();
 };

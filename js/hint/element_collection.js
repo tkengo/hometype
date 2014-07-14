@@ -2,10 +2,10 @@ var HintElementCollection = function(hintTheme, target) {
   this.originalElements = target;
   this.hintTheme        = hintTheme;
 
-  this.createHints(target);
+  this.createHintsFrom(target);
 };
 
-HintElementCollection.prototype.createHints = function(target) {
+HintElementCollection.prototype.createHintsFrom = function(target) {
   this.elements  = [];
   this.hintKeys  = [];
 
@@ -23,7 +23,7 @@ HintElementCollection.prototype.createHints = function(target) {
 
   document.documentElement.appendChild(parent);
 
-  return target;
+  return this.elements;
 };
 
 HintElementCollection.prototype.getElements = function() {
@@ -59,6 +59,7 @@ HintElementCollection.prototype.regenerateHintsBy = function(text) {
   var homedics           = new Homedics(text);
   var originalElements   = this.originalElements;
   var regenerateElements = [];
+  var matches            = [];
 
   this.removeAllHint();
 
@@ -69,8 +70,9 @@ HintElementCollection.prototype.regenerateHintsBy = function(text) {
       var element = originalElements[i];
       var result  = homedics.match(element.innerText.trim().toLowerCase());
 
-      if (result.match) {
+      if (result.matched) {
         regenerateElements.push(element);
+        matches.push(result.matches);
       }
       if (result.head) {
         element.className = element.className + ' hometype-hit-a-hint-head-area';
@@ -78,7 +80,12 @@ HintElementCollection.prototype.regenerateHintsBy = function(text) {
     }
   }
 
-  return this.createHints(regenerateElements);
+  regenerateElements = this.createHintsFrom(regenerateElements);
+  for (var i = 0; i < matches.length; i++) {
+    regenerateElements[i].highlight(matches[i]);
+  }
+
+  return regenerateElements;
 };
 
 HintElementCollection.prototype.getHeadMatchedElements = function() {
@@ -95,17 +102,7 @@ HintElementCollection.prototype.getHeadMatchedElements = function() {
 };
 
 HintElementCollection.prototype.removeAllHint = function() {
-  for (var index in this.elements) {
-    this.elements[index].removeHintTip();
+  for (var i = 0; i < this.elements.length; i++) {
+    this.elements[i].removeHintTip();
   }
-};
-
-HintElementCollection.prototype.getAllKeys = function() {
-  var allKeys = [];
-
-  for (var i = 0; i <this.hintKeys.length; i++) {
-    allKeys.push(this.hintKeys[i].key);
-  }
-
-  return allKeys;
 };
