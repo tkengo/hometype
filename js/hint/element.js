@@ -109,8 +109,11 @@ HintElement.prototype.setPushed = function() {
  * Remove hint tip element.
  */
 HintElement.prototype.removeHintTip = function() {
-  this.srcElement.className = this.srcElement.className.replace(this.className + '-area', '');
-  this.srcElement.className = this.srcElement.className.replace('hometype-hit-a-hint-head-area', '');
+  var element = this.getElement();
+
+  element.className = element.className.replace(this.className + '-area', '');
+  element.className = element.className.replace('hometype-hit-a-hint-head-area', '');
+
   var tip = this.getTipElement();
   if (tip.parentNode) {
     tip.parentNode.removeChild(tip);
