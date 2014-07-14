@@ -51,42 +51,42 @@ describe('Homedics', function() {
       });
 
       it('should match hiragana', function() {
-        expect(homedics.match('さ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('し'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('す'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('せ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('そ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('しゃ')).toEqual({ match: true, head: true });
-        expect(homedics.match('しぃ')).toEqual({ match: true, head: true });
-        expect(homedics.match('しゅ')).toEqual({ match: true, head: true });
-        expect(homedics.match('しぇ')).toEqual({ match: true, head: true });
-        expect(homedics.match('しょ')).toEqual({ match: true, head: true });
-        expect(homedics.match('あ'))  .toEqual({ match: false, head: false });
+        expect(homedics.match('さ'))  .toEqual({ matched: true,  matches: [ 'さ' ], head: true  });
+        expect(homedics.match('し'))  .toEqual({ matched: true,  matches: [ 'し' ], head: true  });
+        expect(homedics.match('す'))  .toEqual({ matched: true,  matches: [ 'す' ], head: true  });
+        expect(homedics.match('せ'))  .toEqual({ matched: true,  matches: [ 'せ' ], head: true  });
+        expect(homedics.match('そ'))  .toEqual({ matched: true,  matches: [ 'そ' ], head: true  });
+        expect(homedics.match('しゃ')).toEqual({ matched: true,  matches: [ 'し' ], head: true  });
+        expect(homedics.match('しぃ')).toEqual({ matched: true,  matches: [ 'し' ], head: true  });
+        expect(homedics.match('しゅ')).toEqual({ matched: true,  matches: [ 'し' ], head: true  });
+        expect(homedics.match('しぇ')).toEqual({ matched: true,  matches: [ 'し' ], head: true  });
+        expect(homedics.match('しょ')).toEqual({ matched: true,  matches: [ 'し' ], head: true  });
+        expect(homedics.match('あ'))  .toEqual({ matched: false, matches: null,     head: false });
 
-        expect(homedics.match('今度すしを食べたい')).toEqual({ match: true, head: false });
+        expect(homedics.match('今度すしを食べたい')).toEqual({ matched: true, matches: [ 'す', 'し' ], head: false });
       });
 
       it('should match katakana', function() {
-        expect(homedics.match('サ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('シ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('ス'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('セ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('ソ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('シャ')).toEqual({ match: true, head: true });
-        expect(homedics.match('シィ')).toEqual({ match: true, head: true });
-        expect(homedics.match('シュ')).toEqual({ match: true, head: true });
-        expect(homedics.match('シェ')).toEqual({ match: true, head: true });
-        expect(homedics.match('ショ')).toEqual({ match: true, head: true });
-        expect(homedics.match('ア'))  .toEqual({ match: false, head: false });
+        expect(homedics.match('サ'))  .toEqual({ matched: true,  matches: [ 'サ' ], head: true  });
+        expect(homedics.match('シ'))  .toEqual({ matched: true,  matches: [ 'シ' ], head: true  });
+        expect(homedics.match('ス'))  .toEqual({ matched: true,  matches: [ 'ス' ], head: true  });
+        expect(homedics.match('セ'))  .toEqual({ matched: true,  matches: [ 'セ' ], head: true  });
+        expect(homedics.match('ソ'))  .toEqual({ matched: true,  matches: [ 'ソ' ], head: true  });
+        expect(homedics.match('シャ')).toEqual({ matched: true,  matches: [ 'シ' ], head: true  });
+        expect(homedics.match('シィ')).toEqual({ matched: true,  matches: [ 'シ' ], head: true  });
+        expect(homedics.match('シュ')).toEqual({ matched: true,  matches: [ 'シ' ], head: true  });
+        expect(homedics.match('シェ')).toEqual({ matched: true,  matches: [ 'シ' ], head: true  });
+        expect(homedics.match('ショ')).toEqual({ matched: true,  matches: [ 'シ' ], head: true  });
+        expect(homedics.match('ア'))  .toEqual({ matched: false, matches: null,     head: false });
 
-        expect(homedics.match('あのスーパースター')).toEqual({ match: true, head: false });
+        expect(homedics.match('あのスーパースター')).toEqual({ matched: true, matches: [ 'ス' ], head: false });
       });
 
       it('should match kanji in dictionary', function() {
-        expect(homedics.match('損')).toEqual({ match: true, head: true });
-        expect(homedics.match('猿')).toEqual({ match: false, head: false });
+        expect(homedics.match('損')).toEqual({ matched: true,  matches: [ '損' ], head: true });
+        expect(homedics.match('猿')).toEqual({ matched: false, matches: null,     head: false });
 
-        expect(homedics.match('とても損をする')).toEqual({ match: true, head: false });
+        expect(homedics.match('とても損だ')).toEqual({ matched: true, matches: [ '損' ], head: false });
       });
     });
 
@@ -96,40 +96,40 @@ describe('Homedics', function() {
       });
 
       it("should match hiragana 'so'", function() {
-        expect(homedics.match('さ'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('し'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('す'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('せ'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('そ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('しゃ')).toEqual({ match: false, head: false });
-        expect(homedics.match('しぃ')).toEqual({ match: false, head: false });
-        expect(homedics.match('しゅ')).toEqual({ match: false, head: false });
-        expect(homedics.match('しぇ')).toEqual({ match: false, head: false });
-        expect(homedics.match('しょ')).toEqual({ match: false, head: false });
+        expect(homedics.match('さ'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('し'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('す'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('せ'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('そ'))  .toEqual({ matched: true,  matches: [ 'そ' ], head: true  });
+        expect(homedics.match('しゃ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('しぃ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('しゅ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('しぇ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('しょ')).toEqual({ matched: false, matches: null,     head: false });
 
-        expect(homedics.match('冷たいそうめん')).toEqual({ match: true, head: false });
+        expect(homedics.match('冷たいそうめん')).toEqual({ matched: true, matches: [ 'そ' ], head: false });
       });
 
       it("should match katakana 'so'", function() {
-        expect(homedics.match('サ'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('シ'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('ス'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('セ'))  .toEqual({ match: false, head: false });
-        expect(homedics.match('ソ'))  .toEqual({ match: true, head: true });
-        expect(homedics.match('シャ')).toEqual({ match: false, head: false });
-        expect(homedics.match('シィ')).toEqual({ match: false, head: false });
-        expect(homedics.match('シュ')).toEqual({ match: false, head: false });
-        expect(homedics.match('シェ')).toEqual({ match: false, head: false });
-        expect(homedics.match('ショ')).toEqual({ match: false, head: false });
+        expect(homedics.match('サ'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('シ'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('ス'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('セ'))  .toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('ソ'))  .toEqual({ matched: true,  matches: [ 'ソ' ], head: true  });
+        expect(homedics.match('シャ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('シィ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('シュ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('シェ')).toEqual({ matched: false, matches: null,     head: false });
+        expect(homedics.match('ショ')).toEqual({ matched: false, matches: null,     head: false });
 
-        expect(homedics.match('冷たいソーメン')).toEqual({ match: true, head: false });
+        expect(homedics.match('冷たいソーメン')).toEqual({ matched: true, matches: [ 'ソ' ], head: false });
       });
 
       it('should match kanji in dictionary', function() {
-        expect(homedics.match('損')).toEqual({ match: true, head: true });
-        expect(homedics.match('猿')).toEqual({ match: false, head: false });
+        expect(homedics.match('損')).toEqual({ matched: true,  matches: [ '損' ], head: true });
+        expect(homedics.match('猿')).toEqual({ matched: false, matches: null,     head: false });
 
-        expect(homedics.match('とても損をする')).toEqual({ match: true, head: false });
+        expect(homedics.match('とても損だ')).toEqual({ matched: true, matches: [ '損' ], head: false });
       });
     });
 
@@ -139,8 +139,8 @@ describe('Homedics', function() {
       });
 
       it("should match 'マイ'", function() {
-        expect(homedics.match('マイ・オークション')).toEqual({ match: true, head: true });
-        expect(homedics.match('念願のマイホーム')).  toEqual({ match: true, head: false });
+        expect(homedics.match('マイ・オークション')).toEqual({ matched: true, matches: [ 'マイ' ], head: true });
+        expect(homedics.match('念願のマイホーム')).  toEqual({ matched: true, matches: [ 'マイ' ], head: false });
       });
     });
   });
