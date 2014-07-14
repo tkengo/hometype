@@ -123,7 +123,7 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
     var div = $('<div>').html(item.escape ? Dom.escapeHTML(text) : text).attr('data-index', i);
 
     if (this.text.val() != '') {
-      div.html(div.html().replace(new RegExp('(' + this.text.val() + ')', 'ig'), '<span class="hometype-matched-text">$1</span>'));
+      Dom.highlight(div.get(0), this.text.val(), { ignoreCase: true });
     }
 
     if (item.url) {
