@@ -12,7 +12,7 @@
  * @param boolean targetLength Length of hint for target.
  */
 var StandardHintAlgorithm = function(targetLength) {
-  this.allKeys = 'jfhkgyuiopqwertnmzxcvblasd';
+  this.allKeys = 'JFHKGYUIOPQWERTNMZXCVBLASD';
   this.multiKey = this.allKeys.length < targetLength;
   this.keyIndex1 = 0;
   this.keyIndex2 = 0;
