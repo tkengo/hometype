@@ -46,13 +46,20 @@ Homedics.prototype.buildRegexp = function(romaji) {
     return null;
   }
 
-  var hiragana    = Jp.getHiraganaCandidates(romaji);
-  var dict        = this.loadDict(romaji.charAt(0)) + "\n" + this.loadAlphabetDict('alphabet');
-  var dictPattern = new RegExp('^(' + hiragana.concat(romaji).join('|') + ').*:(.*)$', 'gm');
-  var patterns    = [];
+  var dict        = this.loadAlphabetDict();
   var regexp      = [ romaji ];
+  var candidate   = [ romaji ];
+  var patterns    = [];
   var m, characters, words;
 
+  if (Utility.inArray([ 'a', 'i', 'u', 'e', 'o' ], romaji) || romaji.length > 1) {
+    candidate = candidate.concat(Jp.getHiraganaCandidates(romaji));
+    dict += "\n" + this.loadDict(romaji.charAt(0));
+  }
+  regexp.push(candidate.join('|'));
+  regexp.push(Jp.toKatakana(candidate.join('|')));
+
+  var dictPattern = new RegExp('^(' + candidate.join('|') + ').*:(.*)$', 'gm');
   while (m = dictPattern.exec(dict)) {
     patterns = patterns.concat(m[2].split(' '));
   }
@@ -63,10 +70,6 @@ Homedics.prototype.buildRegexp = function(romaji) {
   }
   if (words = patterns.match(/^..+$/gm)) {
     regexp.push(words.join('|'));
-  }
-  if (hiragana) {
-    regexp.push(hiragana.join('|'));
-    regexp.push(Jp.toKatakana(hiragana.join('|')));
   }
 
   return new RegExp(regexp.join('|'), 'ig');
