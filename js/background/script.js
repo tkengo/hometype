@@ -166,6 +166,9 @@ RuntimeCommand.loadBookmarks = function(port) {
       var find = function(node) {
         if (node.children) {
           for (var i in node.children) {
+            if (node.id != '1') {
+              node.children[i].title = node.title + '/' + node.children[i].title;
+            }
             find(node.children[i]);
           }
         }
