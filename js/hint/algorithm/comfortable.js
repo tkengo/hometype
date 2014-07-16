@@ -29,26 +29,19 @@ var ComfortableHintAlgorithm = function(targetLength) {
   this.keyIndex2 = 0;
 
   if (this.multiKey) {
-    this.combinations = [
-      [ this.rhandKeys1, this.rhandKeys2 ],
-      [ this.lhandKeys1, this.lhandKeys2 ],
-      [ this.rhandKeys1, this.rhandKeys3 ],
-      [ this.lhandKeys1, this.lhandKeys3 ],
-      [ this.rhandKeys2, this.rhandKeys1 ],
-      [ this.lhandKeys1, this.lhandKeys4 ],
-      [ this.rhandKeys2, this.rhandKeys3 ],
-      [ this.lhandKeys2, this.lhandKeys1 ],
-      [ this.rhandKeys3, this.rhandKeys1 ],
-      [ this.lhandKeys2, this.lhandKeys3 ],
-      [ this.rhandKeys3, this.rhandKeys2 ],
-      [ this.lhandKeys2, this.lhandKeys4 ],
-      [ this.lhandKeys3, this.lhandKeys1 ],
-      [ this.lhandKeys3, this.lhandKeys2 ],
-      [ this.lhandKeys3, this.lhandKeys4 ],
-      [ this.lhandKeys4, this.lhandKeys1 ],
-      [ this.lhandKeys4, this.lhandKeys2 ],
-      [ this.lhandKeys4, this.lhandKeys3 ]
-    ];
+    this.combinations = [];
+
+    for (var i = 1; i <= 3; i++) {
+      for (var j = 1; j <= 3; j++) {
+        this.combinations.push([ this['rhandKeys' + i], this['rhandKeys' + j] ]);
+      }
+    }
+
+    for (var i = 1; i <= 4; i++) {
+      for (var j = 1; j <= 4; j++) {
+        this.combinations.push([ this['lhandKeys' + i], this['lhandKeys' + j] ]);
+      }
+    }
 
     this.currentCombinationIndex = 0;
   }
@@ -66,6 +59,7 @@ ComfortableHintAlgorithm.prototype.pop = function() {
 
     var key1 = keys1.charAt(this.keyIndex1);
     var key2 = keys2.charAt(this.keyIndex2++);
+
     if (keys2.length <= this.keyIndex2) {
       this.keyIndex2 = 0;
       this.keyIndex1++;
@@ -73,6 +67,10 @@ ComfortableHintAlgorithm.prototype.pop = function() {
     if (keys1.length <= this.keyIndex1) {
       this.keyIndex1 = 0;
       this.currentCombinationIndex++;
+    }
+
+    if (key1 == key2) {
+      return this.pop();
     }
 
     key = key2 + key1;
