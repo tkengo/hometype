@@ -141,16 +141,16 @@
   background-color:transparent;
   color:#333;
   text-align:left;
-  font-size:13px;
+  font-size:11px;
   font-family:'Osaka-Mono';
   padding:2px;
-  height:22px;
+  height:20px;
   width:100%;
   word-break:break-all;
   word-wrap:break-word;
   overflow:hidden;
   box-sizing:border-box;
-  line-height: 22px;
+  line-height: 20px;
 }
 .hometype-command-box-candidate-area div.selected {
   color:#444;
@@ -162,7 +162,7 @@
 }
 .hometype-command-box-icon {
   float:left !important;
-  margin:1px 4px 0 0 !important;
+  margin:0 4px 0 0 !important;
   display:block !important;
 }
 
