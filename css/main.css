@@ -4,6 +4,7 @@
   font-size:12px;
   color:#333;
   z-index:1000001;
+  line-height:100%;
   font-family:'Osaka-Mono';
 }
 .hometype-hit-a-hint-border {
