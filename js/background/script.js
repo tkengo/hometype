@@ -139,6 +139,10 @@ RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
   });
 };
 
+RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
+  chrome.management.launchApp(params);
+};
+
 /**
  * ------------------------------------
  * OnConnect callback runtime methods.
@@ -177,6 +181,24 @@ RuntimeCommand.loadBookmarks = function(port) {
         }
       };
       find(tree[0]);
+      port.postMessage(results);
+    });
+  });
+};
+
+/**
+ * Get a list of applications.
+ */
+RuntimeCommand.loadApplications = function(port) {
+  port.onMessage.addListener(function() {
+    chrome.management.getAll(function(items) {
+      var results = [];
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (item.type.indexOf('_app') > -1) {
+          results.push(item);
+        }
+      }
       port.postMessage(results);
     });
   });

@@ -285,6 +285,39 @@ Command.searchHistories = function() {
 };
 
 /**
+ * Search applications.
+ */
+Command.searchApplications = function() {
+  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
+  var port            = chrome.runtime.connect({ name: 'loadApplications' });
+  var commandBox      = processor.getCommandBox().setHeaderText('Applications');
+  var createCandidate = function(apps, filter) {
+    var list = [];
+    for (var i = 0; i < apps.length; i++) {
+      var app = apps[i];
+      if (filter == '' || Utility.includedInProperties(app, filter, [ 'name', 'appLaunchUrl' ])) {
+        list.push({ text: app.name + '(' + app.appLaunchUrl + ')', url: app.appLaunchUrl, id: app.id });
+      }
+    };
+    port.disconnect();
+    return list;
+  };
+
+  processor.onEnter(function(text, selected) {
+    chrome.runtime.sendMessage({ command: 'launchApplication', params: selected.id });
+  });
+
+  port.onMessage.addListener(function(apps) {
+    processor.onUpdateBoxText(function(text) {
+      return createCandidate(apps, text);
+    });
+    commandBox.setCandidate(createCandidate(apps, ''));
+    commandBox.showCandidate();
+  });
+  port.postMessage();
+};
+
+/**
  * Enter the visual mode.
  */
 Command.enterVisualMode = function() {

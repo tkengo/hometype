@@ -37,6 +37,7 @@ var HometypeDefaultOptions = {
       ':': 'enterCommandMode',
       'b': 'searchBookmarks',
       'B': 'searchBookmarks --new',
+      'o': 'searchApplications',
       'i': 'enterInsertMode',
       'a': 'enterInsertMode',
       'I': 'focusFirstInput',
