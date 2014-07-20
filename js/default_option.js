@@ -57,15 +57,8 @@ var HometypeDefaultOptions = {
     imap: {
       '<Esc>': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
-      '<C-e>': 'scrollDown',
-      '<C-y>': 'scrollUp',
-      '<C-d>': 'scrollDownHalf',
-      '<C-u>': 'scrollUpHalf',
-      '<C-f>': 'scrollDownPage',
-      '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab',
-      '<C-f>': '@followLink'
+      '<C-n>': 'moveRightTab'
     },
     vmap: {
       '<Esc>': 'enterNormalMode'
