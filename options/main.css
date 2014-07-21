@@ -8,19 +8,117 @@ body {
   font-size: 14px;
   color: #666;
 }
-
 h1 {
   font-size: 20px;
 }
+hr {
+  border-style: dashed;
+  border-width: 0 0 1px 0;
+  border-color: #ccc;
+}
+code, .code {
+  padding:1px 5px;
+  font-size:12px;
+  font-weight:normal;
+  font-family:Consolas, "Liberation Mono", Courier, monospace;
+  border:1px solid #ddd;
+  background-color:#f8f8f8;
+  border-radius:3px;
+  line-height:150%;
+}
+a {
+  text-decoration: none;
+}
+a, a:visited {
+  color: #4183c4;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  width:1020px;
+  margin:10px 20px;
+}
+
+.description-area {
+  float:right;
+  width:500px;
+  margin:10px 0 0 0;
+  display:none;
+  background-color:#fff;
+}
+.description-area-inner {
+  border:solid 1px #ccc;
+  position:relative;
+  padding:15px 10px 10px 10px;
+  border-radius:4px;
+}
+.description-area-title {
+  position:absolute;
+  top:-10px;
+  background-color:#fff;
+  padding:0 10px;
+  font-weight: 700;
+}
+.description-area-content {
+  line-height:160%;
+  overflow:hidden;
+}
+
+.category {
+  border-style: dashed;
+  border-width: 0 0 1px 0;
+  border-color: #ccc;
+  width: 500px;
+  padding: 10px 0;
+}
+.category:last-child {
+  border-width: 0;
+}
+.category-header {
+  width: 100px;
+  font-size: 16px;
+  font-weight: 700;
+  float: left;
+}
+.category-content {
+  margin: 0 0 0 100px;
+}
 
 .section {
-  font-size: 18px;
+  font-size:18px;
+}
+
+.menu-section {
+  background-color:#fff;
+  color:#444;
+  height:26px;
+}
+.menu-section ul {
+  list-style:none;
+  margin:0;
+  padding:0;
+}
+.menu-section li {
+  list-style:none;
+  float:left;
+  width:150px;
+  height:26px;
+  line-height:26px;
+  text-align:center;
+  display:block;
+  cursor:pointer;
+
+}
+.active-menu-section {
+  box-shadow: #525252 0px -2px inset;
 }
 
 .header {
-  background-color: #363636;
-  color: #fff;
-  font-family: Antonio;
+  background-color: #62a609;
+  color: #f7e8ad;
+  font-family: 'Open Sans', sans-serif;
   padding: 6px;
 }
 
@@ -34,23 +132,50 @@ textarea {
   font-size: 10px;
 }
 
-dl dt {
+dt {
   float: left;
-  width: 300px;
+  width: 160px;
+  position: relative;
 }
-dl dt, dl dd {
-  height: 30px;
-  line-height: 30px;
+dd {
+  margin-left: 160px;
+}
+dt, dd {
+  line-height: 25px;
+  margin-bottom: 10px;
+}
+.help {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  margin-left: 3px;
+  font-size: 12px;
+  top: -4px;
+  color: #018b06;
+  font-weight: 400;
+  cursor: pointer;
+}
+.multi-selection {
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-color: #ccc;
+}
+.option-description {
+  display: none;
 }
 
 #key_bind_list {
-  width: 365px;
-  height: 500px;
+  width: 396px;
+  height: 551px;
 }
 
 #ignore_url_list {
-  width: 365px;
-  height: 200px;
+  width: 396px;
+  height: 100px;
+}
+
+#key-bindings {
+  display: none;
 }
 
 .clearfix {
