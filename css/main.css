@@ -7,6 +7,9 @@
   line-height:100%;
   font-family:'Osaka-Mono';
 }
+.hometype-hit-a-hint-base span {
+  font-family:'Osaka-Mono';
+}
 .hometype-hit-a-hint-border {
   border:dashed 1px #900;
   position:absolute;
