@@ -12,13 +12,13 @@
  * @param boolean targetLength Length of hint for target.
  */
 var ComfortableHintAlgorithm = function(targetLength) {
-  this.rhandKeys1 = 'JNMH';
-  this.rhandKeys2 = 'KI';
-  this.rhandKeys3 = 'LOP';
-  this.lhandKeys1 = 'RVGCF';
-  this.lhandKeys2 = 'ED';
-  this.lhandKeys3 = 'WS';
-  this.lhandKeys4 = 'QA';
+  this.rhandKeys1 = convertLettersByOption('JNMH');
+  this.rhandKeys2 = convertLettersByOption('KI');
+  this.rhandKeys3 = convertLettersByOption('LOP');
+  this.lhandKeys1 = convertLettersByOption('RVGCF');
+  this.lhandKeys2 = convertLettersByOption('ED');
+  this.lhandKeys3 = convertLettersByOption('WS');
+  this.lhandKeys4 = convertLettersByOption('QA');
 
   this.allKeys = this.rhandKeys1 + this.rhandKeys2 + this.rhandKeys3 +
                  this.lhandKeys1 + this.lhandKeys2 + this.lhandKeys3 + this.lhandKeys4;

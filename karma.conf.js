@@ -23,6 +23,7 @@ module.exports = function(config) {
       "js/box/select.js",
       "js/box/command.js",
       "js/box/help.js",
+      "js/hint/letter_conversion.js",
       "js/hint/algorithm/standard.js",
       "js/hint/algorithm/comfortable.js",
       "js/hint/key_factory.js",
