@@ -17,7 +17,7 @@ var RuntimeCommand = {};
 /**
  * Close a tab.
  */
-RuntimeCommand.closeTab = function(sender) {
+RuntimeCommand.closeTab = function(sender, params, response) {
   chrome.tabs.remove(sender.tab.id, null);
 };
 
@@ -149,13 +149,55 @@ RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
  * ------------------------------------
  */
 
+RuntimeCommand.convertFaviconToDataURL = function(url, callback) {
+  var img = document.createElement('img');
+  img.addEventListener('load', function() {
+    var canvas  = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+
+    canvas.width  = img.width;
+    canvas.height = img.height;
+    context.drawImage(img, 0, 0);
+    context.globalCompositeOperation = 'source-in';
+
+    callback(canvas.toDataURL());
+  });
+
+  img.src = 'chrome://favicon/' + url;
+};
+
+function con(urls, callback, depth, result)
+{
+  depth  = depth  || 0;
+  result = result || [];
+
+  var url = urls[depth];
+  if (url) {
+    RuntimeCommand.convertFaviconToDataURL(url, function(dataUrl) {
+      result.push(dataUrl);
+      con(urls, callback, depth + 1, result);
+    });
+  } else {
+    callback(result);
+  }
+}
+
 /**
  * Load tabs.
  */
 RuntimeCommand.loadTabs = function(port) {
   port.onMessage.addListener(function() {
     chrome.tabs.query({ currentWindow: true }, function(tabs) {
-      port.postMessage(tabs);
+      var urls = [];
+      for (var i = 0; i < tabs.length; i++) {
+        urls.push(tabs[i].url);
+      }
+      con(urls, function(results) {
+        for (var i = 0; i < results.length; i++) {
+          tabs[i].faviconDataUrl = results[i];
+        }
+        port.postMessage(tabs);
+      });
     });
   });
 };

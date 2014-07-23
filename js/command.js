@@ -161,7 +161,7 @@ Command.selectTab = function() {
       var tab  = tabs[i];
       if (!filter || Utility.includedInProperties(tab, filter, [ 'title', 'url' ])) {
         var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
-        list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, id: tab.id });
+        list.push({ icon: tab.faviconDataUrl, escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, id: tab.id });
       }
     }
 
