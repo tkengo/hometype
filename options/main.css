@@ -38,7 +38,7 @@ a:hover {
 
 .container {
   width:1020px;
-  margin:10px 20px;
+  margin:20px 20px;
 }
 
 .description-area {
@@ -93,7 +93,7 @@ a:hover {
 .menu-section {
   background-color:#fff;
   color:#444;
-  height:26px;
+  height:36px;
 }
 .menu-section ul {
   list-style:none;
@@ -109,6 +109,7 @@ a:hover {
   text-align:center;
   display:block;
   cursor:pointer;
+  padding:5px;
 
 }
 .active-menu-section {
@@ -119,7 +120,10 @@ a:hover {
   background-color: #62a609;
   color: #f7e8ad;
   font-family: 'Open Sans', sans-serif;
-  padding: 6px;
+  padding: 12px;
+}
+.header h1 {
+  font-weight:100;
 }
 
 input, textarea {
