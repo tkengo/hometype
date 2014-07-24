@@ -155,11 +155,7 @@ RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
 RuntimeCommand.loadTabs = function(port) {
   port.onMessage.addListener(function() {
     chrome.tabs.query({ currentWindow: true }, function(tabs) {
-      var urls = [];
-      for (var i = 0; i < tabs.length; i++) {
-        urls.push(tabs[i].url);
-      }
-      convertFaviconsToDataURL(urls, function(results) {
+      convertFaviconsToDataURL(Utility.collect(tabs, 'url'), function(results) {
         for (var i = 0; i < results.length; i++) {
           tabs[i].faviconDataUrl = results[i];
         }
