@@ -274,11 +274,12 @@ Command.searchHistories = function() {
   chrome.runtime.sendMessage({ command: 'getHistories' }, function(histories) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      $.each(histories, function(index, history) {
+      for (var i = histories.length - 1; i > -1; i--) {
+        var history = histories[i];
         if (Utility.includedInProperties(history, text, [ 'title', 'url' ])) {
           list.push({ text: history.title + '(' + history.url + ')', url: history.url });
         }
-      });
+      }
       return list;
     }, true);
   });
