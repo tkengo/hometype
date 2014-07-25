@@ -171,7 +171,7 @@ RuntimeCommand.loadTabs = function(port) {
 RuntimeCommand.loadBookmarks = function(port) {
   port.onMessage.addListener(function() {
     chrome.bookmarks.getSubTree('1', function(tree) {
-      var results = [];
+      var bookmarks = [];
       var find = function(node) {
         if (node.children) {
           for (var i in node.children) {
@@ -182,11 +182,17 @@ RuntimeCommand.loadBookmarks = function(port) {
           }
         }
         if (node.url) {
-          results.push(node);
+          bookmarks.push(node);
         }
       };
       find(tree[0]);
-      port.postMessage(results);
+
+      convertFaviconsToDataURL(Utility.collect(bookmarks, 'url'), function(results) {
+        for (var i = 0; i < results.length; i++) {
+          bookmarks[i].faviconDataUrl = results[i];
+        }
+        port.postMessage(bookmarks);
+      });
     });
   });
 };

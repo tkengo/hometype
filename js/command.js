@@ -161,7 +161,7 @@ Command.selectTab = function() {
       var tab  = tabs[i];
       if (!filter || Utility.includedInProperties(tab, filter, [ 'title', 'url' ])) {
         var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
-        list.push({ icon: tab.faviconDataUrl, escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, id: tab.id });
+        list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, icon: tab.faviconDataUrl, id: tab.id });
       }
     }
 
@@ -251,7 +251,7 @@ Command.searchBookmarks = function(option) {
       for (var i = 0; i < bookmarks.length; i++) {
         var bookmark = bookmarks[i];
         if (text == '' || Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
-          list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url });
+          list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url, icon: bookmark.faviconDataUrl });
         }
       };
       port.disconnect();
