@@ -126,7 +126,10 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
       Dom.highlight(div.get(0), this.text.val(), { ignoreCase: true });
     }
 
-    if (item.url) {
+    if (item.icon) {
+      var icon = $('<img>').attr('src', item.icon).attr('width', '16').addClass('hometype-command-box-icon');
+      icon.prependTo(div);
+    } else if (item.url) {
       var icon = $('<img>').attr('src', 'http://g.etfv.co/' + item.url).attr('width', '16').addClass('hometype-command-box-icon');
       icon.prependTo(div);
     }

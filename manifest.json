@@ -23,7 +23,9 @@
   "background": {
     "persistent": false,
     "scripts": [
+      "lib/utility.js",
       "lib/jquery-2.0.1.min.js",
+      "js/background/favicon.js",
       "js/background/history.js",
       "js/background/tab.js",
       "js/background/script.js"
