@@ -1,3 +1,23 @@
+dt {
+  float: left;
+  width: 120px;
+  position: relative;
+}
+dd {
+  margin-left: 120px;
+  text-align:left;
+  line-height: 160%;
+}
+dt, dd {
+  margin-bottom: 10px;
+}
+dl.span1 dt {
+  width: 60px;
+}
+dl.span1 dd {
+  margin-left: 60px;
+}
+
 .reference-index {
   width: 1020px;
   border-width: 0;
@@ -15,6 +35,21 @@
 
 .reference-content {
 }
+
+.reference-content img {
+  border-style: solid;
+  border-width: 1px 0 0 1px;
+  border-color: #eee;
+  box-shadow: 1px 1px 1px #ccc;
+  margin: 10px 10px 0 10px;
+}
+.reference-content img.top {
+  margin: 0 10px;
+}
+.illustration {
+  float: right;
+}
+
 .command-name {
   padding: 24px 0 8px 0;
   text-align: left;
@@ -35,4 +70,30 @@ code {
 }
 .command-description {
   text-align: left;
+  margin-bottom: 6px;
+}
+.command-options {
+  text-align: left;
+  padding: 6px;
+}
+.command-options ul {
+  list-style: none;
+}
+.command-options li {
+  list-style: none;
+}
+.command-options-header {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.option-description {
+  text-align: left;
+  margin: 0 0 6px 120px;
+}
+.option-name {
+  text-align: left;
+  width: 120px;
+  float: left;
 }

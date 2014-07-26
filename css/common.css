@@ -15,6 +15,10 @@ h1,h2,a.store,p.description {
   font-weight: 300;
 }
 
+strong {
+  font-family: 'Open Sans', sans-serif;
+}
+
 p {
   line-height: 160%;
 }
