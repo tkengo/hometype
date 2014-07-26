@@ -265,23 +265,30 @@ Command.searchBookmarks = function(option) {
  * Search a history.
  */
 Command.searchHistories = function() {
-  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
-  processor.getCommandBox().setHeaderText('Histories');
-  processor.onEnter(function(text, selected) {
-    Utility.openUrl(selected.url);
-  });
-
-  chrome.runtime.sendMessage({ command: 'getHistories' }, function(histories) {
-    processor.onUpdateBoxText(function(text) {
-      var list = [];
-      for (var i = histories.length - 1; i > -1; i--) {
-        var history = histories[i];
-        if (Utility.includedInProperties(history, text, [ 'title', 'url' ])) {
-          list.push({ text: history.title + '(' + history.url + ')', url: history.url });
-        }
+  var port            = chrome.runtime.connect({ name: 'loadHistories' });
+  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
+  var commandBox      = processor.getCommandBox().setHeaderText('Histories');
+  var createCandidate = function(histories, filter) {
+    var list = [];
+    for (var i = histories.length - 1; i > -1; i--) {
+      var history = histories[i];
+      if (!filter || Utility.includedInProperties(history, filter, [ 'title', 'url' ])) {
+        list.push({ text: history.title + '(' + history.url + ')', url: history.url, icon: history.faviconDataUrl });
       }
-      return list;
+    }
+    return list;
+  }
+
+  port.onMessage.addListener(function(histories) {
+    commandBox.setCandidate(createCandidate(histories));
+    commandBox.showCandidate();
+
+    processor.onUpdateBoxText(function(text) {
+      return createCandidate(histories, text);
     }, true);
+    processor.onEnter(function(text, selected) {
+      Utility.openUrl(selected.url);
+    });
   });
 };
 

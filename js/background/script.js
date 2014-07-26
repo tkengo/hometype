@@ -86,13 +86,6 @@ RuntimeCommand.closedTabList = function(sender, params, sendResponse) {
 };
 
 /**
- * Get the history list.
- */
-RuntimeCommand.getHistories = function(sender, params, sendResponse) {
-  sendResponse(Tab.getHistories(sender.tab.id));
-};
-
-/**
  * Select a tab.
  */
 RuntimeCommand.selectTab = function(sender, tabId, sendResponse) {
@@ -159,6 +152,19 @@ RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
  * OnConnect callback runtime methods.
  * ------------------------------------
  */
+
+/**
+ * Load the history list.
+ */
+RuntimeCommand.loadHistories = function(port) {
+  var histories = Tab.getHistories(port.sender.tab.id);
+  convertFaviconsToDataURL(Utility.collect(histories, 'url'), function(results) {
+    for (var i = 0; i < results.length; i++) {
+      histories[i].faviconDataUrl = results[i];
+    }
+    port.postMessage(histories);
+  });
+};
 
 /**
  * Load tabs.
