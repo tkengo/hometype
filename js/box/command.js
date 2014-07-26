@@ -66,7 +66,7 @@ HometypeCommandBox.prototype.hide = function() {
   this.box.hide();
   this.candidate.hide();
   $('div', this.candidate).remove();
-  this.text.val('');
+  this.text.val('').blur();
 };
 
 /**
