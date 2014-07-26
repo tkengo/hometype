@@ -61,13 +61,19 @@ CommandModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallb
  */
 CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   if (currentKey == 'Enter') {
-    var result = this.enterCallback ?
-                 this.enterCallback(this.commandBox.getText(), this.commandBox.getSelected()) :
-                 this.enter();
+    var text = this.commandBox.getText();
+    var result = true;
+    if (this.enterCallback) {
+      result = this.enterCallback(text, this.commandBox.getSelected());
+    }
 
     if (result !== false) {
       this.commandBox.hide();
       Mode.changeMode(ModeList.NORMAL_MODE);
+    }
+
+    if (!this.enterCallback) {
+      new Executer(text).execute();
     }
 
     return result;
@@ -128,11 +134,4 @@ CommandModeProcessor.prototype.onEnter = function(callback) {
  */
 CommandModeProcessor.prototype.getCommandBox = function() {
   return this.commandBox;
-};
-
-CommandModeProcessor.prototype.enter = function() {
-  var command = Command[this.commandBox.getText()]
-  if (command) {
-    command.call();
-  }
 };
