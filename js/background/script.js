@@ -22,6 +22,17 @@ RuntimeCommand.closeTab = function(sender, params, response) {
 };
 
 /**
+ * Open a url in the current tab or a new tab.
+ */
+RuntimeCommand.openUrl = function(sender, params, response) {
+  if (params.newTab) {
+    chrome.tabs.create({ url: params.url, active: true });
+  } else {
+    chrome.tabs.update({ url: params.url });
+  }
+};
+
+/**
  * Create a new tab.
  */
 RuntimeCommand.createTab = function(sender, params) {
