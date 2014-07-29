@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Hometype - Command Index</title>
-  <meta name="description" content="Hometype Command Index.">
+  <meta name="description" content="Hometype Command Index">
   <meta name="viewport" content="width=1060px">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
   <link href="./css/common.css" media="all" rel="stylesheet" type="text/css">
@@ -57,7 +57,7 @@
             <td><a href="#scrollDownHalf">scrollDownHalf</a></td>
             <td><a href="#moveLeftTab">moveLeftTab</a></td>
             <td><a href="#selectPrevCandidate">selectPrevCandidate</a></td>
-            <td><a href="#">enterVisualMode</a></td>
+            <td><a href="#enterVisualMode">enterVisualMode</a></td>
           </tr>
           <tr>
             <td><a href="#scrollDownPage">scrollDownPage</a></td>
@@ -251,7 +251,7 @@
           <img src="./images/reference/follow_link.png" border="0" alt="follow link" class="top">
           <img src="./images/reference/follow_link2.png" border="0" alt="follow link">
       </div>
-      <p class="command-description">Hometype shifts the hint mode and hint elements that has a hint key is shown on a link or an input element, and then you can type that hint key to follow the link or focus to input. Note that hint keys is <strong>CASE SENSITIVE</strong>.</p>
+      <p class="command-description">Hometype shifts to the hint mode and hint elements that has a hint key is shown on a link or an input element, and then you can type that hint key to follow the link or focus to input. Note that hint keys is <strong>CASE SENSITIVE</strong>.</p>
       <p class="command-description">In the hint mode you can search elements that include a text you inputted. To search elements, you have to type a key doesn't exist in hint keys shown in the display. For example if there are lowercase hint keys please start to type uppercase letters for searching, or if there are uppercase hint keys please start to type lowercase letters. You may notice that the command bar will be appeared in the bottom of the display when you started to search, and Hometype will make the matched text highlight. Searching text is <strong>CASE INSENSITVE</strong>.</p>
       <div class="command-options">
           <div class="command-options-header">options</div>
@@ -263,6 +263,15 @@
           </dl>
       </div>
       <p class="command-description">By default, <code>f</code> key is assigned to default followLink command. <code>cf</code> key is assigned to it with <code>--continuous</code> option. <code>F</code> is assigned to it with <code>--new</code> option. And <code>cF</code> is assigned to it with <code>--new</code> and <code>--continuous</code> options.</p>
+
+      <div class="command-name">
+          <h3 id="enterVisualMode">enterVisualMode</h3>
+          <span class="command-note">assigned to <code>v</code> by default</span>
+      </div>
+      <div class="illustration" style="width:268px;">
+          <img src="./images/reference/enter_visual_mode.png" border="0" alt="Enter Visual Mode" class="top">
+      </div>
+      <p class="command-description">If you invoked this command, Hometype shifts to the hint mode (hint elements have a red color), and then Chrome will focus to an element you chose to select the inner text of the element. This command is useful when you want to copy code snippets to the clipboard without touching a mouse. Note that you can't edit the text.</p>
 
       <div class="command-name">
           <h3 id="backHistory">backHistory</h3>
