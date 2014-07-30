@@ -35,7 +35,7 @@ var HometypeDefaultOptions = {
       '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab',
-      ':': 'enterCommandMode',
+      ':': 'executeCommand',
       'b': 'searchBookmarks',
       'B': 'searchBookmarks --new',
       'o': 'searchApplications',

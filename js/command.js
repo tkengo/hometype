@@ -405,7 +405,7 @@ Command.enterInsertMode = function() {
 /**
  * Enter the command mode.
  */
-Command.enterCommandMode = function() {
+Command.executeCommand = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
   processor.getCommandBox().setHeaderText(':');
 };
