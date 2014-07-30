@@ -63,13 +63,13 @@
             <td><a href="#scrollDownPage">scrollDownPage</a></td>
             <td><a href="#moveRightTab">moveRightTab</a></td>
             <td><a href="#searchClosedTabs">searchClosedTabs</a></td>
-            <td><a href="#">enterCommandMode</a></td>
+            <td><a href="#executeCommand">executeCommand</a></td>
           </tr>
           <tr>
             <td><a href="#scrollUp">scrollUp</a></td>
             <td><a href="#restoreTab">restoreTab</a></td>
             <td><a href="#searchBookmarks">searchBookmarks</a></td>
-            <td><a href="#">enterInsertMode</a></td>
+            <td><a href="#enterInsertMode">enterInsertMode</a></td>
           </tr>
           <tr>
             <td><a href="#scrollUpHalf">scrollUpHalf</a></td>
@@ -95,6 +95,12 @@
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
           </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
         </tbody>
       </table>
       <table class="reference-index">
@@ -102,21 +108,21 @@
           <tr>
             <th>History</th>
             <th>Form</th>
-            <th>Help</th>
+            <th></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><a href="#backHistory">backHistory</a></td>
-            <td><a href="#">focusFirstInput</a></td>
-            <td><a href="#">showAssignedCommands</a></td>
+            <td><a href="#focusFirstInput">focusFirstInput</a></td>
+            <td><a href="#"></a></td>
             <td><a href="#"></a></td>
           </tr>
           <tr>
             <td><a href="#forwardHistory">forwardHistory</a></td>
-            <td><a href="#">focusLastInput</a></td>
-            <td><a href="#">cancelHelpMode</a></td>
+            <td><a href="#focusLastInput">focusLastInput</a></td>
+            <td><a href="#"></a></td>
             <td><a href="#"></a></td>
           </tr>
         </tbody>
@@ -274,6 +280,24 @@
       <p class="command-description">If you invoked this command, Hometype shifts to the hint mode (hint elements have a red color), and then Chrome will focus to an element you chose to select the inner text of the element. This command is useful when you want to copy code snippets to the clipboard without touching a mouse. Note that you can't edit the text.</p>
 
       <div class="command-name">
+          <h3 id="executeCommand">executeCommand</h3>
+          <span class="command-note">assigned to <code>:</code> by default</span>
+      </div>
+      <p class="command-description">The command bar will be shown in the bottom of the display, and then you can execute a command by typing a command name you want to execute in the command bar.</p>
+
+      <div class="command-name">
+          <h3 id="enterInsertMode">enterInsertMode</h3>
+          <span class="command-note">assigned to <code>i</code> and <code>a</code> by default</span>
+      </div>
+      <p class="command-description">Sometimes Hometype might detect a wrong mode. For example, when Chrome has a focus on a text input element, you might notice the current mode is not the insert mode. In that case you can enter the insert mode forces by invoking this command.</p>
+
+      <div class="command-name">
+          <h3 id="enterNormalMode">enterNormalMode</h3>
+          <span class="command-note">assigned to <code>Esc</code> by default in except normal mode</span>
+      </div>
+      <p class="command-description">The current mode will be change to the normal mode.</p>
+
+      <div class="command-name">
           <h3 id="backHistory">backHistory</h3>
           <span class="command-note">assigned to <code>H</code> by default</span>
       </div>
@@ -284,6 +308,18 @@
           <span class="command-note">assigned to <code>L</code> by default</span>
       </div>
       <p class="command-description">Forward to the next in the history.</p>
+
+      <div class="command-name">
+          <h3 id="focusFirstInput">focusFirstInput</h3>
+          <span class="command-note">assigned to <code>I</code> by default</span>
+      </div>
+      <p class="command-description">You can focus to a first appeared input element on the display.</p>
+
+      <div class="command-name">
+          <h3 id="lastFirstInput">lastFirstInput</h3>
+          <span class="command-note">assigned to <code>A</code> by default</span>
+      </div>
+      <p class="command-description">You can focus to a last appeared input element on the display.</p>
     </div>
   </section>
 
