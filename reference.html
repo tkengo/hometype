@@ -207,7 +207,7 @@
           <span class="command-note">assigned to <code>C-n</code> by default in the command mode</span>
       </div>
       <div class="illustration" style="width:268px;">
-          <img src="./images/reference/select_candidate.gif" border="0" alt="select candidate">
+          <img src="./images/reference/select_candidate.gif" border="0" alt="select candidate" class="top">
       </div>
       <p class="command-description">In the command mode, you can select next candidate by executing this command if search results have one more candidate. For example, when you were searching bookmarks by executing <a href="#searchBookmarks">searchBookmarks</a> command and multi bookmarks was hit, then you have to select a bookmark you want to open. So now is a good time to execute this command.</p>
 
@@ -221,7 +221,7 @@
           <h3 id="searchClosedTabs">searchClosedTabs</h3>
           <span class="command-note">assigned to <code>U</code> by default</span>
       </div>
-      <p class="command-description">You can search closed tabs and reopen a tab you selected. Hometype searches text you inputted to a command bar from a page title or a url. Searching text is <strong>CASE INSENSITVE</strong>. Unfortunately, reopend tab don't have histories, so you can't follow histories to back or forward. Hometyp has 20 tabs history.</p>
+      <p class="command-description">You can search closed tabs and reopen a tab you selected. Hometype searches text you inputted to a command bar from a page title or a url. Searching text is <strong>CASE INSENSITVE</strong>. Unfortunately, reopend tab don't have histories, so you can't follow histories to back or forward. Hometyp has 20 closed tabs.</p>
 
       <div class="command-name">
           <h3 id="searchBookmarks">searchBookmarks</h3>
@@ -235,7 +235,7 @@
               <dd>Open a bookmark you selected in a new tab.</dd>
           </dl>
       </div>
-      <p class="command-description">By default, <code>b</code> key is assigned to default searchBookmarks command, so a bookmark you selected will be opened in the current tab. <code>B</code> key is assigned to it with <code>--continuous</code> option.</p>
+      <p class="command-description">By default, <code>b</code> key is assigned to default searchBookmarks command, so a bookmark you selected will be opened in the current tab. <code>B</code> key is assigned to it with <code>--new</code> option.</p>
 
       <div class="command-name">
           <h3 id="searchHistories">searchHistories</h3>
@@ -247,7 +247,7 @@
           <h3 id="searchApplications">searchApplications</h3>
           <span class="command-note">assigned to <code>o</code> by default</span>
       </div>
-      <p class="command-description">You can search applications installed in the Google Chrome and open it in a new tab. Hometype searches text you inputted to a command bar from an application title or a url. Searching text is <strong>CASE INSENSITVE</strong>.</p>
+      <p class="command-description">You can search applications installed in the Google Chrome and launch it in a new tab. Hometype searches text you inputted to a command bar from an application title or a url. Searching text is <strong>CASE INSENSITVE</strong>.</p>
 
       <div class="command-name">
           <h3 id="followLink">followLink</h3>
@@ -258,7 +258,7 @@
           <img src="./images/reference/follow_link2.png" border="0" alt="follow link">
       </div>
       <p class="command-description">Hometype shifts to the hint mode and hint elements that has a hint key is shown on a link or an input element, and then you can type that hint key to follow the link or focus to input. Note that hint keys is <strong>CASE SENSITIVE</strong>.</p>
-      <p class="command-description">In the hint mode you can search elements that include a text you inputted. To search elements, you have to type a key doesn't exist in hint keys shown in the display. For example if there are lowercase hint keys please start to type uppercase letters for searching, or if there are uppercase hint keys please start to type lowercase letters. You may notice that the command bar will be appeared in the bottom of the display when you started to search, and Hometype will make the matched text highlight. Searching text is <strong>CASE INSENSITVE</strong>.</p>
+      <p class="command-description">In the hint mode you can filter elements that include a text you inputted. To filter elements, you have to type a key doesn't exist in hint keys shown in the display. For example if there are lowercase hint keys please start to type uppercase letters for searching, or if there are uppercase hint keys please start to type lowercase letters. You may notice that the command bar will be appeared in the bottom of the display when you started to search, and Hometype will make the matched text highlight. Searching text is <strong>CASE INSENSITVE</strong>.</p>
       <div class="command-options">
           <div class="command-options-header">options</div>
           <dl>
@@ -324,6 +324,9 @@
   </section>
 
   <footer>
+    <a href="./ja/reference.html">Japanese Document</a>
+    <br/>
+    <br/>
     &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
   </footer>
 
