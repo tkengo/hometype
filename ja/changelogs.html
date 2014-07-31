@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <title>Hometype - Change Logs</title>
-  <meta name="description" content="Hometype Change Logs.">
+  <meta name="description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。">
   <meta name="viewport" content="width=1060px">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
-  <link href="./css/common.css" media="all" rel="stylesheet" type="text/css">
-  <link href="./css/changelogs.css" media="all" rel="stylesheet" type="text/css">
+  <link href="../css/common.css" media="all" rel="stylesheet" type="text/css">
+  <link href="../css/changelogs.css" media="all" rel="stylesheet" type="text/css">
   <meta property="og:title" content="Hometype" />
-  <meta property="og:description" content="Hometype provides keyboard manipulation for Hackers. This is an extension to operate Google Chrome without touching a mouse." />
+  <meta property="og:description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。" />
   <meta property="og:url" content="http://tkengo.github.io/hometype/" />
   <meta property="og:image" content="http://tkengo.github.io/hometype/images/ogp.png" />
   <link rel="icon" href="./images/favicon.ico" />
@@ -23,9 +23,9 @@
       <h1><a href="#">Hometype</a></h1>
       <nav>
         <ul>
-          <li><a href="./index.html">Introduction</a></li>
-          <li><a href="./reference.html">Command Reference</a></li>
-          <li><a href="#" class="header-menu-active">Change Logs</a></li>
+          <li><a href="./index.html">紹介</a></li>
+          <li><a href="./reference.html">コマンドリファレンス</a></li>
+          <li><a href="#" class="header-menu-active">変更履歴</a></li>
         </ul>
       </nav>
     </div>
@@ -47,9 +47,9 @@
       </h2>
       <ul>
           <li>
-            Added hint key algorithm.<br/>
-            1. Standard algorithm. Hint keys is created from random keys.<br/>
-            2. Comfortable algorithm. You can type a hint key with one hand as possible.
+            ヒントキーの生成アルゴリズムを追加しました。<br/>
+            1. Standard algorithm. 従来通りのヒントキーを生成します。<br/>
+            2. Comfortable algorithm. 出来るだけ片手でヒントキーをタイプできるようにヒントキーを生成します。
           </li>
       </ul>
 
@@ -58,7 +58,7 @@
         <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
       </h2>
       <ul>
-          <li>Implemented tab selection mode. This mode can select an opened tab in the chrome browser with keyboard. In default, if you pushed <i>m</i> key, the current mode shifts to the tab selection mode.</li>
+          <li>タブ選択モードを実装しました。Google Chrome 上に開かれているタブをキーボードで選択することができます。</li>
       </ul>
 
       <h2>
@@ -67,8 +67,8 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>Use chrome.storage instead of localStorage in Hometype options. Thanks to that, Hometype options will be synchronized each browsers in your laptop or desktop.</li>
-        <li>Both 'B' and 'b' opened a bookmark in a new tab. Now, 'b' opens it in the current tab.</li>
+        <li>Hometype のオプションを保存するストレージに chrome.storage を使うようになりました。それによって Hometype のオプションは各端末の Google Chrome 間で同期できるようになりました。</li>
+        <li>'B' でも 'b' でも新しいタブでブックマークが開いてしまう不具合を修正しました。</li>
       </ul>
 
       <h2>
@@ -76,9 +76,9 @@
         <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
       </h2>
       <ul>
-        <li>Multi commands can be defined by separating them with space.</li>
-        <li><i>@command</i> can execute with last executed <i>command</i>'s option.</li>
-        <li>Each cancelXXX commands is to become alias for enterNormalMode.</li>
+        <li>スペースで区切ることで複数のコマンドをバインドすることができるようになりました。</li>
+        <li><i>@command</i> と定義することで、最後に呼び出した同じコマンドのオプションを引き継いで実行することができるようになりました。</li>
+        <li>各 cancelXXX コマンドは enterNormalMode に置き換わりました。</li>
       </ul>
 
       <h2>
@@ -86,8 +86,8 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>Improved accuracy of hint targets in the hint mode.</li>
-        <li>Detect insert mode when key was pushed, focusing and blurring is no longer detection for insert mode. So missing detection of the current mode dropped.</li>
+        <li>ヒントキーを生成する要素をより正確に判定できるようになりました。</li>
+        <li>キーが押下された時にインサートモードに移行するべきかどうかを判定するようになりました。これによってインサートモードの誤検知がなくなりました。</li>
       </ul>
 
       <h2>
@@ -95,7 +95,7 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>In the hint mode an area tag was not included. Fixed it.</li>
+        <li>ヒントモードに area タグが含まれていなかった不具合を修正しました。</li>
       </ul>
 
       <h2>
@@ -103,12 +103,12 @@
         <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
       </h2>
       <ul>
-        <li>Implemented <strong>continuous hint mode</strong>. You can use this function when you want to continue the hint mode even if an element is choosen. For example, checking continuously multi checkboxes or radio buttons.</li>
-        <li>Implemented <strong>ignored urls option</strong>. If ignored urls is set in the options page, Hometype is unavailable while staying in those urls.</li>
-        <li>Defined new command '<strong>noop</strong>'. It does nothing. You can use this command if you want to be unavailable specified key bind.</li>
-        <li>Improved performance very much when entering hint mode.</li>
-        <li>Stop displaying the current mode on the top of the page.</li>
-        <li>Writing tests using Jasmine 2.0, and executing CI using wercker.</li>
+        <li><strong>継続的ヒントモード</strong>を実装しました。この機能により、ヒントモード時に要素を選んでもヒントモードから抜けずに継続して次のヒントを表示できるようになりました。これは、たとえば、複数のチェックボックスやラジオボタンを連続して選択する時に便利です。</li>
+        <li><strong>Hometypeを無効にするURL</strong>が設定できるようになりました。オプションページで無効 URL が設定されていれば、それにマッチするページでは Hometype が無効になります。</li>
+        <li>新しいコマンド '<strong>noop</strong>' が実装されました。このコマンドは何もしません。キーバインドを無効にしたい時に使用してください。</li>
+        <li>ヒントモードでのパフォーマンスを劇的に向上しました。</li>
+        <li>現在のモードを表示するのを止めました。</li>
+        <li>Jasmine 2.0 を使ってテストを書き、wercker を使って CI を行うようになりました。</li>
       </ul>
 
       <h2>
@@ -116,8 +116,8 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>Updated Hometype icon.</li>
-        <li>Fixed a bug around restoreTab command.</li>
+        <li>Hometype のアイコンを新しくしました。</li>
+        <li>restoreTab 周りの軽微な不具合を修正しました。</li>
       </ul>
 
       <h2>
@@ -125,8 +125,8 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>Hometype opens most oldest closed tab when executing restoreTab command. Fixed to opening most newest closed tab.</li>
-        <li>All tab histories was removing when Hometype was updated. Fixed it.</li>
+        <li>restoreTab コマンドを実行した時にもっとも新しいタブではなく、最も古いタブを開きなおしていた不具合を修正しました。</li>
+        <li>Hometype がバージョンアップされた時にタブの履歴が消えていた不具合を修正しました。</li>
       </ul>
 
       <h2>
@@ -135,9 +135,9 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>Provided line number in searched tab histories.</li>
-        <li>The order of closed tab histories was reverse. Fixed it.</li>
-        <li>focusFirstInput and focusLastInput sometimes worked well. Fixed it.</li>
+        <li>タブ履歴に行番号をつけました。</li>
+        <li>閉じたタブの履歴を検索する時、並び順が逆になっていたのを修正しました。</li>
+        <li>focusFirstInput と focusLastInput の不具合を修正しました。</li>
       </ul>
 
       <h2>
@@ -145,8 +145,8 @@
         <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
       </h2>
       <ul>
-        <li>Implemented the options page.</li>
-        <li>Implemented the help mode that displays key bindings on the center of the page.</li>
+        <li>オプションページを新たに実装しました。</li>
+        <li>キーバインドを表示するヘルプモードを実装しました。</li>
       </ul>
 
       <h2>
@@ -154,7 +154,7 @@
         <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
       </h2>
       <ul>
-        <li>Improved performance using EventPage instead of BackgroundPage.</li>
+        <li>BackgroundPage の代わりに EventPage を使ってパフォーマンスを向上させました。</li>
       </ul>
 
       <h2>
@@ -162,21 +162,21 @@
         <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
       </h2>
       <ul>
-        <li>Change this extension name from Chromekey to <strong>Hometype</strong></li>
-        <li>focusFirstInput and focusLastInput was not able to focus to a textarea tag. Fixed it.</li>
+        <li>拡張機能の名前が Chromekey から <strong>Hometype</strong> に変更されました。</li>
+        <li>focusFirstInput と focusLastInput が textarea タグにフォーカスしない不具合を修正しました。</li>
       </ul>
 
       <h2>
         <span class="change-logs-version">v0.0.1</span>
       </h2>
       <ul>
-        <li>Hello world. This extension was released on Chrome webstore.</li>
+        <li>拡張機能が Chrome Web Storeにリリースされました。</li>
       </ul>
     </div>
   </section>
 
   <footer>
-    <a href="./ja/changelogs.html">Japanese Document</a>
+    <a href="../changelogs.html">英語版</a>
     <br/>
     <br/>
     &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
