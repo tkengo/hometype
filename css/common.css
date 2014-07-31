@@ -22,11 +22,9 @@ strong {
 p {
   line-height: 160%;
 }
-
 p.description {
   font-size: 20px;
 }
-
 a {
   text-decoration: none;
 }
@@ -75,6 +73,10 @@ table {
   table td {
     text-align: left;
   }
+
+.left {
+  text-align: left;
+}
 
 /* container */
 
