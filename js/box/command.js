@@ -129,9 +129,6 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
     if (item.icon) {
       var icon = $('<img>').attr('src', item.icon).attr('width', '16').addClass('hometype-command-box-icon');
       icon.prependTo(div);
-    } else if (item.url) {
-      var icon = $('<img>').attr('src', 'http://g.etfv.co/' + item.url).attr('width', '16').addClass('hometype-command-box-icon');
-      icon.prependTo(div);
     }
 
     // Selected first item.
