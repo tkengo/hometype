@@ -75,7 +75,7 @@
           </tr>
           <tr>
             <td><a href="#scrollUpHalf">scrollUpHalf</a></td>
-            <td><a href="#"></a></td>
+            <td><a href="#selectTab">selectTab</a></td>
             <td><a href="#searchHistories">searchHistories</a></td>
             <td><a href="#">enterNormalMode</a></td>
           </tr>
@@ -110,7 +110,7 @@
           <tr>
             <th>History</th>
             <th>Form</th>
-            <th></th>
+            <th>Others</th>
             <th></th>
           </tr>
         </thead>
@@ -118,7 +118,7 @@
           <tr>
             <td><a href="#backHistory">backHistory</a></td>
             <td><a href="#focusFirstInput">focusFirstInput</a></td>
-            <td><a href="#"></a></td>
+            <td><a href="#noop">noop</a></td>
             <td><a href="#"></a></td>
           </tr>
           <tr>
@@ -203,6 +203,16 @@
           <span class="command-note">assigned to <code>u</code> by default</span>
       </div>
       <p class="command-description">Reopen a nearest closed tab. Note that the reopened tab doesn't have histories.</p>
+
+      <div class="command-name">
+          <h3 id="selectTab">selectTab</h3>
+          <span class="command-note">assigned to <code>m</code> by default</span>
+      </div>
+      <div class="illustration" style="width:268px;">
+          <img src="./images/reference/select_tab_title.png" border="0" alt="select tab" class="top">
+          <img src="./images/reference/select_tab.png" border="0" alt="select tab">
+      </div>
+      <p class="command-description">You can search tabs opened in Google Chrome and select a tab you want to show. When this command was invoked, Hometype gives one letter to the head of the title of each tabs, and then if you type one of them, a tab corresponded to the letter you typed will be selected. A letter is <strong>CASE SENSITIVE</strong>. If there is no matched letter Hometype filters tabs by searching from tab's title or tab's url.</p>
 
       <div class="command-name">
           <h3 id="selectNextCandidate">selectNextCandidate</h3>
@@ -322,6 +332,12 @@
           <span class="command-note">assigned to <code>A</code> by default</span>
       </div>
       <p class="command-description">You can focus to a last appeared input element on the display.</p>
+
+      <div class="command-name">
+          <h3 id="noop">noop</h3>
+          <span class="command-note">assigned to <i>nothing</i> by default</span>
+      </div>
+      <p class="command-description">This command is nothing. Please use this when you want to make specified key bind unavailable.</p>
     </div>
   </section>
 

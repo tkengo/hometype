@@ -75,7 +75,7 @@
           </tr>
           <tr>
             <td><a href="#scrollUpHalf">scrollUpHalf</a></td>
-            <td><a href="#"></a></td>
+            <td><a href="#selectTab">selectTab</a></td>
             <td><a href="#searchHistories">searchHistories</a></td>
             <td><a href="#">enterNormalMode</a></td>
           </tr>
@@ -110,7 +110,7 @@
           <tr>
             <th>履歴</th>
             <th>フォーム</th>
-            <th></th>
+            <th>その他</th>
             <th></th>
           </tr>
         </thead>
@@ -118,7 +118,7 @@
           <tr>
             <td><a href="#backHistory">backHistory</a></td>
             <td><a href="#focusFirstInput">focusFirstInput</a></td>
-            <td><a href="#"></a></td>
+            <td><a href="#noop">noop</a></td>
             <td><a href="#"></a></td>
           </tr>
           <tr>
@@ -203,6 +203,16 @@
           <span class="command-note">デフォルトキーバインド <code>u</code></span>
       </div>
       <p class="command-description">一番最後に閉じたタブを開き直します。ただし、履歴は残っていません。</p>
+
+      <div class="command-name">
+          <h3 id="selectTab">selectTab</h3>
+          <span class="command-note">デフォルトキーバインド <code>m</code></span>
+      </div>
+      <div class="illustration" style="width:268px;">
+          <img src="../images/reference/select_tab_title.png" border="0" alt="select tab" class="top">
+          <img src="../images/reference/select_tab.png" border="0" alt="select tab">
+      </div>
+      <p class="command-description">Google Chrome で開いているタブを検索して、選択したいタブを選択することが出来ます。このコマンドが実行されると、Hometype は各タブのタイトルの先頭に1文字つけます。その1文字をタイプすることによって目的のタブを選択することができます。<strong>文字は大文字と小文字を区別します</strong>。もしマッチする文字がなければ、タブの一覧がタブのタイトル及び URL からフィルタされます。</p>
 
       <div class="command-name">
           <h3 id="selectNextCandidate">selectNextCandidate</h3>
@@ -323,6 +333,12 @@
           <span class="command-note">デフォルトキーバインド <code>A</code></span>
       </div>
       <p class="command-description">画面上に最後に現れるフォーム要素にフォーカスします。</p>
+
+      <div class="command-name">
+          <h3 id="noop">noop</h3>
+          <span class="command-note">デフォルトキーバインド <i>なし</i></span>
+      </div>
+      <p class="command-description">このコマンドはなにもしません。デフォルトのキーバインドを削除するために使って下さい。</p>
     </div>
   </section>
 
