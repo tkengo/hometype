@@ -220,14 +220,20 @@ RuntimeCommand.loadBookmarks = function(port) {
 RuntimeCommand.loadApplications = function(port) {
   port.onMessage.addListener(function() {
     chrome.management.getAll(function(items) {
-      var results = [];
+      var apps = [];
       for (var i = 0; i < items.length; i++) {
         var item = items[i];
         if (item.type.indexOf('_app') > -1) {
-          results.push(item);
+          apps.push(item);
         }
       }
-      port.postMessage(results);
+
+      convertFaviconsToDataURL(Utility.collect(apps, 'appLaunchUrl'), function(results) {
+        for (var i = 0; i < results.length; i++) {
+          apps[i].faviconDataUrl = results[i];
+        }
+        port.postMessage(apps);
+      });
     });
   });
 };

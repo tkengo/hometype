@@ -304,7 +304,8 @@ Command.searchApplications = function() {
     for (var i = 0; i < apps.length; i++) {
       var app = apps[i];
       if (filter == '' || Utility.includedInProperties(app, filter, [ 'name', 'appLaunchUrl' ])) {
-        list.push({ text: app.name + '(' + app.appLaunchUrl + ')', url: app.appLaunchUrl, id: app.id });
+        var name = app.appLaunchUrl ?  app.name + '(' + app.appLaunchUrl + ')' : app.name;
+        list.push({ text: name, url: app.appLaunchUrl, id: app.id, icon: app.faviconDataUrl });
       }
     };
     port.disconnect();
