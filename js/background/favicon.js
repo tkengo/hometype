@@ -21,9 +21,8 @@ function convertFaviconsToDataURL(urls, callback, startIndex, result)
   startIndex = startIndex || 0;
   result     = result     || [];
 
-  var url = urls[startIndex];
-  if (url) {
-    convertFaviconToDataURL(url, function(dataUrl) {
+  if (urls.length > startIndex) {
+    convertFaviconToDataURL(urls[startIndex], function(dataUrl) {
       result.push(dataUrl);
       convertFaviconsToDataURL(urls, callback, startIndex + 1, result);
     });
