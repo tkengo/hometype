@@ -1,4 +1,4 @@
-html, body, header, footer, section, nav, h1, h2, ul, li, p {
+html, body, header, footer, section, nav, h1, h2, ul, li {
   margin: 0;
   padding: 0;
   font-size: 16px;
@@ -19,8 +19,19 @@ strong {
   font-family: 'Open Sans', sans-serif;
 }
 
+hr {
+  border-style: solid;
+  border-width: 1px 0 0 0;
+  border-color: #eee;
+}
+
 p {
   line-height: 160%;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #525252;
+  margin-bottom: 10px;
 }
 p.description {
   font-size: 20px;
@@ -37,7 +48,7 @@ a:hover {
   text-decoration: underline;
 }
 
-code {
+code, .code {
   padding: 1px 5px;
   font-size: 13px;
   font-weight: normal;
@@ -45,6 +56,7 @@ code {
   border: 1px solid #ddd;
   background-color: #f8f8f8;
   border-radius: 3px;
+  line-height:150%;
 }
 
 /* table */
@@ -57,22 +69,41 @@ table {
   border-color: #ddd;
   background: #fff;
 }
-  table tr:nth-child(even) {
-    background-color: #f8f8f8;
-  }
-  table th,table td {
-    padding: 10px;
-    border-style: solid;
-    border-width: 0 1px 1px 0;
-    border-color: #ddd;
-  }
-  table th {
-    font-size: bold;
-    background: #fff;
-  }
-  table td {
-    text-align: left;
-  }
+table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+table th,table td {
+  padding: 10px;
+  border-style: solid;
+  border-width: 0 1px 1px 0;
+  border-color: #ddd;
+}
+table th {
+  font-size: bold;
+  background: #fff;
+}
+table td {
+  text-align: left;
+}
+
+dt {
+  float: left;
+  width: 120px;
+  position: relative;
+}
+dd {
+  margin-left: 120px;
+  text-align:left;
+  line-height: 160%;
+}
+dt, dd {
+  margin-bottom: 10px;
+}
+dl.span1  dt { width: 60px; }
+dl.span1  dd { margin-left: 60px; }
+dl.span10 dt { width: 190px; }
+dl.span10 dd { margin-left: 190px; }
+
 
 .left {
   text-align: left;

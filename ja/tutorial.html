@@ -18,7 +18,7 @@
 
   <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
   <header class="header">
-    <h1><a href="http://tkengo.github.io/hometype/ja/">Hometype 2</a></h1>
+    <h1><a href="./index.html">Hometype 2</a></h1>
     <nav>
       <ul>
         <li><a href="./index.html">紹介</a></li>
@@ -37,15 +37,126 @@
     </div>
 
     <div class="container">
-      <p class="left">ここはHometypeを使い始めたばかりのユーザーのためのチュートリアルページです。ここではHometypeによる簡単なキーボード操作を説明していますので、ここを読んで感覚をつかんでいきましょう。</p>
-      <h1>Hometype について</h1>
+      <div class="left">
+        <p>ここはHometypeを使い始めたばかりのユーザーのためのチュートリアルページです。ここではHometypeによる簡単なキーボード操作と簡単なカスタマイズ方法を説明していますので、ここを読んで感覚をつかんでいきましょう。</p>
+
+        <h1>スクローリング</h1>
+        <p>Hometypeでは以下のキーボード操作で画面を移動できます。まずはこのチュートリアルの画面を上下に自由に移動してみましょう。</p>
+        <br/>
+        <dl>
+          <dt><code>j</code> / <code>C-e</code></dt>
+          <dd>画面を<strong>少しだけ</strong>下方向にスクロールします。</dd>
+          <dt><code>k</code> / <code>C-y</code></dt>
+          <dd>画面を<strong>少しだけ</strong>上方向にスクロールします。</dd>
+        </dl>
+        <hr/>
+        <dl>
+          <dt><code>C-d</code></dt>
+          <dd>画面を<strong>半ページ分</strong>下方向にスクロールします。</dd>
+          <dt><code>C-u</code></dt>
+          <dd>画面を<strong>半ページ分</strong>上方向にスクロールします。</dd>
+        </dl>
+        <hr/>
+        <dl>
+          <dt><code>C-f</code></dt>
+          <dd>画面を<strong>1ページ分</strong>下方向にスクロールします。</dd>
+          <dt><code>C-b</code></dt>
+          <dd>画面を<strong>1ページ分</strong>上方向にスクロールします。</dd>
+        </dl>
+        <hr/>
+        <dl>
+          <dt><code>G</code></dt>
+          <dd>画面の<strong>一番下</strong>までスクロールします。</dd>
+          <dt><code>gg</code></dt>
+          <dd>画面の<strong>一番上</strong>までスクロールします。</dd>
+        </dl>
+
+        <h1>ブラウジング</h1>
+        <p>画面を上下にスクロールするコマンドを覚えることで、マウスを使わずにこのチュートリアルを読むことが出来るようになりました。それではこのページから別のページへ移動するために、たとえば<a href="./reference.html">このリンク(Hometypeのリファレンスページ)</a>や<a href="https://github.com/tkengo/hometype">このリンク(Hometypeのリポジトリ)</a>、または<a href="http://balloonbros.cc">このリンク(Balloonbrosのサイト)</a>をマウスを使わずに<strong>リンクをクリック</strong>するのはどうすればよいのでしょうか。</p>
+        <p>そのためには<strong>ヒント</strong>を使います。ヒントモードに入ると画面内に存在するリンクまたはフォーム(テキスト、チェックボックス、セレクトボックス、など)に対して1文字または2文字のアルファベットが表示されます。これが<strong>ヒント</strong>です。表示されたヒントのアルファベット(大文字と小文字は区別されます)をタイプすると、その要素をクリックすることができます。早速試してみましょう。</p>
+        <br/>
+        <dl class="span1">
+          <dt><code>f</code></dt>
+          <dd>ヒントモードに入ります。リンクは<strong>現在のタブ</strong>で開かれます。</dd>
+          <dt><code>F</code></dt>
+          <dd>ヒントモードに入ります。リンクは<strong>新しいタブ</strong>で開かれます。</dd>
+        </dl>
+        <br/>
+        <p>それからヒントモード中はリンクのテキストを検索してヒントを絞り込むことができます。ヒントモードに入った後に "<strong>HOME</strong>" とタイプしてみてください。(ヒントが小文字で表示されている場合。ヒントが大文字の場合は "<strong>home</strong>" とタイプしてみてください。つまり表示されているヒントと逆の文字を使います。ヒントに大文字を使うか小文字を使うかはオプションページで設定することができます。)リンク内のテキストが検索されて、一致するものはハイライトされ、一致しないものはヒントから除外されることがわかります。</p>
+        <p>テキストの検索では大文字小文字を区別しません。また、Hometypeでは独自に日本語辞書を持っていますので、ひらがな・カタカナ・漢字も検索することができます。たとえば検索テキストに "<strong>link</strong>" または "<strong>rinku</strong>" などと入力すると、"<strong>りんく</strong>" または "<strong>リンク</strong>" がマッチします。</p>
+        <p>ヒントモードを抜けるためには <code>Esc</code> を押下してください。</p>
+
+        <h1>ヒストリー</h1>
+        <p>Hometypeではブラウザが保持する履歴を移動、または検索することができます。さっき覚えたスクローリングとヒントモードを使ってHometypeのサイトのリンクを行き来して、履歴を進んだり戻ったり試してみましょう。</p>
+        <br/>
+        <dl class="span1">
+          <dt><code>H</code></dt>
+          <dd>履歴を1つ戻ります。</dd>
+          <dt><code>L</code></dt>
+          <dd>履歴を1つ進みます。</dd>
+        </dl>
+        <hr/>
+        <dl class="span1">
+          <dt><code>C-h</code></dt>
+          <dd>過去20件の履歴を検索して特定の履歴まで戻ることができます。</dd>
+        </dl>
+        <br/>
+        <p>履歴の検索では <code>C-p</code> 及び <code>C-n</code> で候補を上下に移動することができます。そこさえもマウスいらずです。</p>
+
+        <h1>タブ</h1>
+        <p>タブの操作やタブ間の移動についても以下のキーボード操作で行うことができます。</p>
+        <br/>
+        <dl class="span1">
+          <dt><code>x</code></dt>
+          <dd>現在のタブを閉じます。</dd>
+          <dt><code>u</code></dt>
+          <dd>直近に閉じたタブを開き直します。</dd>
+          <dt><code>U</code></dt>
+          <dd>過去20件の閉じたタブを検索して開き直すことができます。</dd>
+        </dl>
+        <hr/>
+        <dl class="span1">
+          <dt><code>C-p</code></dt>
+          <dd>現在のタブのひとつ左側のタブへ移動します。</dd>
+          <dt><code>C-n</code></dt>
+          <dd>現在のタブのひとつ右側のタブへ移動します。</dd>
+          <dt><code>m</code></dt>
+          <dd>現在のタブ一覧を開いて特定のタブへ移動することができます。</dd>
+        </dl>
+        <br/>
+        <p><code>U</code> や <code>m</code> を押下した時に検索窓が表示されますが、この時も <code>C-p</code> 及び <code>C-n</code> で候補を上下に移動することができます。</p>
+
+        <h1>カスタマイズ</h1>
+        <p>ここまでのチュートリアルで日常的なブラウジングについては、おそらくほぼキーボードだけでGoogle Chromeを操作できるようになっていると思います。ただし、このチュートリアルではすべての機能を紹介しきれていません。他にも便利な機能が多数ありますので、使いながら徐々に慣れていくことをおすすめします。</p>
+        <p>ここからはHometypeをより便利に使いやすくするためのオプションページでのカスタマイズ方法について紹介していきます。拡張機能の一覧ページ(アドレスバーに<strong>chrome://extensions</strong>と入力)へ行き、そこでHometypeを探すと<strong>オプション</strong>というリンクが見つかりますので、それをクリックすることでHometypeのオプションページに移動できます。</p>
+
+        <h1>イグノアリスト</h1>
+        <p>HometyeはキーボードでGoogle Chromeを操作する拡張機能です。その性質から、Webサイトに既に実装してあるキーボードショートカットと衝突を起こし、うまく動いてくれない場合があります。そういった場合はHometypeを無効にしたいURLをオプションページのIgnore urlsに追加しましょう。</p>
+        <p>オプションページのIgnore urlsはテキストエリアになっています。改行区切りで複数のURLを指定することができます。また正規表現を使えるので、たとえばGmail全体でHometypeを無効にするのは <strong>https://mail.google.com/*</strong> のように記述することで可能です。</p>
+
+        <h1>キーバインド</h1>
+        <p>Hometypeでのブラウザ操作は、全てコマンドを呼び出すことによって可能にしています。たとえば下方向のスクロールは <a href="./reference.html#scrollDown">scrollDown</a>、ヒントモードへの移行は <a href="./reference.html#followLink">followLink</a>、履歴を戻るのは <a href="./reference.html#backHistory">backHistory</a>、がそれぞれ呼び出されています。そしてそれぞれのコマンドが各キーにバインドされることによって、キーボードを押下した時にバインドされたコマンドが呼び出されることができます。Hometypeに実装されているコマンドは<a href="./reference.html">コマンドリファレンス</a>を参考にしてください。</p>
+        <p>Hometypeはデフォルトでコマンドに対するキーバインドを持っていますのでが、キーバインドはユーザー側で自由に追加・削除をすることができますので、自分が使いやすいキーバインド設定に変えてみましょう。キーバインドを変更するためにはオプションページのKey Bindingsのページで設定を追加していきます。Key Bindingsのテキストエリアに以下の形式で設定を追加していきましょう。</p>
+        <p><code>map-type assigned-keys executed-commands [--options]</code></p>
+        <dl class="span10">
+          <dt><strong>map-type</strong></dt>
+          <dd><strong>nmap</strong>, <strong>cmap</strong>, <strong>imap</strong>, <strong>vmap</strong>, <strong>fmap</strong>を指定できます。これらはそれぞれ <strong>ノーマルモード</strong>, <strong>コマンドモード</strong>, <strong>インサートモード</strong>, <strong>ビジュアルモード</strong>, <strong>ヒントモード</strong> でのキーバインド設定となります。</dd>
+          <dt><strong>assigned-keys</strong></dt>
+          <dd>コマンドに対応するキーを指定します。2文字以上の複数キーも指定できます。</dd>
+          <dt><strong>executed-commands</strong></dt>
+          <dd>実行するコマンドを指定します。指定したいオプションがあればここで一緒に指定します。2つ以上の複数のコマンドも指定できます。コマンド名の最初に <strong>@</strong> をつけると、最後に実行したコマンドのオプションが引き継がれて実行されます。</dd>
+        </dl>
+        <p>例えば以下の様にキーバインドを設定できます。</p>
+        <div class="code">
+          nmap j scrollDown<br/>
+          vmap &lt;C-c&gt; enterNormalMode<br/>
+          imap Jf scrollDown followLink
+        </div>
+      </div>
     </div>
   </section>
 
   <footer>
-    <a href="../index.html">英語版</a>
-    <br/>
-    <br/>
     &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
   </footer>
 
