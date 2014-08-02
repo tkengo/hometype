@@ -37,21 +37,18 @@ dl.span1 dd {
 }
 
 .reference-content img {
-  border-style: solid;
-  border-width: 1px 0 0 1px;
-  border-color: #eee;
-  box-shadow: 1px 1px 1px #ccc;
-  margin: 10px 10px 0 10px;
+  border: solid 1px #ddd;
+  margin: 10px 0 0 30px;
 }
 .reference-content img.top {
-  margin: 0 10px;
+  margin: 0 30px;
 }
 .illustration {
   float: right;
 }
 
 .command-name {
-  padding: 24px 0 8px 0;
+  padding: 40px 0 8px 0;
   text-align: left;
   border-bottom: dashed 1px #ddd;
   margin: 18px 0;
