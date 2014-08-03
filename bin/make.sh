@@ -20,11 +20,11 @@ fi
 
 git clone git@github.com:tkengo/hometype.git $PUBLISH_DIR
 
+cd $PUBLISH_DIR && ./bin/build_dict
+
 for ignore_file in $IGNORE_FILES; do
     rm -fr $PUBLISH_DIR/$ignore_file
 done
-
-cd $PUBLISH_DIR && ./bin/build_dict
 
 cd $BASE_DIR && zip -r $ZIP_FILE ${PUBLISH_DIR##*/}
 rm -fr $PUBLISH_DIR
