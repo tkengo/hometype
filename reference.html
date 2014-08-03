@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hometype - Command Index</title>
-  <meta name="description" content="Hometype Command Index.">
+  <title>Hometype 2 - Command Index</title>
+  <meta name="description" content="Hometype Command Index">
   <meta name="viewport" content="width=1060px">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
   <link href="./css/common.css" media="all" rel="stylesheet" type="text/css">
@@ -18,15 +18,18 @@
 <body>
 
   <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
-  <header class="header">
-    <h1><a href="#">Hometype</a></h1>
-    <nav>
-      <ul>
-        <li><a href="./index.html">Introduction</a></li>
-        <li><a href="#" class="header-menu-active">Command Reference</a></li>
-        <li><a href="./changelogs.html">Change Logs</a></li>
-      </ul>
-    </nav>
+  <header>
+    <div class="header">
+      <h1><a href="./index.html">Hometype 2</a></h1>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Introduction</a></li>
+          <li><a href="./ja/tutorial.html">Tutorial</a></li>
+          <li><a href="#" class="header-menu-active">Command Reference</a></li>
+          <li><a href="./changelogs.html">Change Logs</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
   <section>
@@ -50,50 +53,56 @@
           <tr>
             <td><a href="#scrollDown">scrollDown</a></td>
             <td><a href="#closeTab">closeTab</a></td>
-            <td><a href="#">selectNextCandidate</a></td>
-            <td><a href="#">enterHintMode</a></td>
+            <td><a href="#selectNextCandidate">selectNextCandidate</a></td>
+            <td><a href="#followLink">followLink</a></td>
           </tr>
           <tr>
             <td><a href="#scrollDownHalf">scrollDownHalf</a></td>
             <td><a href="#moveLeftTab">moveLeftTab</a></td>
-            <td><a href="#">selectPrevCandidate</a></td>
-            <td><a href="#">enterVisualMode</a></td>
+            <td><a href="#selectPrevCandidate">selectPrevCandidate</a></td>
+            <td><a href="#enterVisualMode">enterVisualMode</a></td>
           </tr>
           <tr>
             <td><a href="#scrollDownPage">scrollDownPage</a></td>
             <td><a href="#moveRightTab">moveRightTab</a></td>
-            <td><a href="#">searchClosedTabs</a></td>
-            <td><a href="#">enterCommandMode</a></td>
+            <td><a href="#searchClosedTabs">searchClosedTabs</a></td>
+            <td><a href="#executeCommand">executeCommand</a></td>
           </tr>
           <tr>
             <td><a href="#scrollUp">scrollUp</a></td>
             <td><a href="#restoreTab">restoreTab</a></td>
-            <td><a href="#">searchBookmarks</a></td>
-            <td><a href="#">enterInsertMode</a></td>
+            <td><a href="#searchBookmarks">searchBookmarks</a></td>
+            <td><a href="#enterInsertMode">enterInsertMode</a></td>
           </tr>
           <tr>
             <td><a href="#scrollUpHalf">scrollUpHalf</a></td>
-            <td><a href="#"></a></td>
-            <td><a href="#">searchHistories</a></td>
-            <td><a href="#">cancelHintMode</a></td>
+            <td><a href="#selectTab">selectTab</a></td>
+            <td><a href="#searchHistories">searchHistories</a></td>
+            <td><a href="#">enterNormalMode</a></td>
           </tr>
           <tr>
             <td><a href="#scrollUpPage">scrollUpPage</a></td>
             <td><a href="#"></a></td>
+            <td><a href="#searchApplications">searchApplications</a></td>
             <td><a href="#"></a></td>
-            <td><a href="#">cancelVisualMode</a></td>
           </tr>
           <tr>
             <td><a href="#scrollToTop">scrollToTop</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
-            <td><a href="#">canceCommandMode</a></td>
+            <td><a href="#"></a></td>
           </tr>
           <tr>
             <td><a href="#scrollToBottom">scrollToBottom</a></td>
             <td><a href="#"></a></td>
             <td><a href="#"></a></td>
-            <td><a href="#">cancelInsertMode</a></td>
+            <td><a href="#"></a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
           </tr>
         </tbody>
       </table>
@@ -102,21 +111,21 @@
           <tr>
             <th>History</th>
             <th>Form</th>
-            <th>Help</th>
+            <th>Others</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><a href="#backHistory">backHistory</a></td>
-            <td><a href="#">focusFirstInput</a></td>
-            <td><a href="#">showAssignedCommands</a></td>
+            <td><a href="#focusFirstInput">focusFirstInput</a></td>
+            <td><a href="#noop">noop</a></td>
             <td><a href="#"></a></td>
           </tr>
           <tr>
             <td><a href="#forwardHistory">forwardHistory</a></td>
-            <td><a href="#">focusLastInput</a></td>
-            <td><a href="#">cancelHelpMode</a></td>
+            <td><a href="#focusLastInput">focusLastInput</a></td>
+            <td><a href="#"></a></td>
             <td><a href="#"></a></td>
           </tr>
         </tbody>
@@ -126,7 +135,7 @@
     <div class="container-bn reference-content">
       <div class="command-name">
           <h3 id="scrollDown">scrollDown</h3>
-          <span class="command-note">assigned to <code>j</code> by default</span>
+          <span class="command-note">assigned to <code>j</code> and <code>C-e</code> by default</span>
       </div>
       <p class="command-description">Scroll down the current page. Scroll amount is set from "Amount of scrolling" in the option page. The default value is 50.</p>
 
@@ -182,19 +191,124 @@
           <h3 id="moveLeftTab">moveLeftTab</h3>
           <span class="command-note">assigned to <code>C-p</code> by default</span>
       </div>
-      <p class="command-description">Move the current tab to a left.</p>
+      <p class="command-description">Move the current tab to a left ones.</p>
 
       <div class="command-name">
           <h3 id="moveRightTab">moveRightTab</h3>
           <span class="command-note">assigned to <code>C-n</code> by default</span>
       </div>
-      <p class="command-description">Move the current tab to a right.</p>
+      <p class="command-description">Move the current tab to a right ones.</p>
 
       <div class="command-name">
           <h3 id="restoreTab">restoreTab</h3>
           <span class="command-note">assigned to <code>u</code> by default</span>
       </div>
-      <p class="command-description">Reopen a nearest closed tab. Note that the repoened tab doesn't have histories.</p>
+      <p class="command-description">Reopen a nearest closed tab. Note that the reopened tab doesn't have histories.</p>
+
+      <div class="command-name">
+          <h3 id="selectTab">selectTab</h3>
+          <span class="command-note">assigned to <code>m</code> by default</span>
+      </div>
+      <div class="illustration" style="width: 299px;">
+          <img src="./images/reference/select_tab_title.png" border="0" alt="select tab" class="top">
+          <img src="./images/reference/select_tab.png" border="0" alt="select tab">
+      </div>
+      <p class="command-description">You can search tabs opened in Google Chrome and select a tab you want to show. When this command was invoked, Hometype gives one letter to the head of the title of each tabs, and then if you type one of them, a tab corresponded to the letter you typed will be selected. A letter is <strong>CASE SENSITIVE</strong>. If there is no matched letter Hometype filters tabs by searching from tab's title or tab's url.</p>
+
+      <div class="command-name">
+          <h3 id="selectNextCandidate">selectNextCandidate</h3>
+          <span class="command-note">assigned to <code>C-n</code> by default in the command mode</span>
+      </div>
+      <div class="illustration" style="width: 308px;">
+          <img src="./images/reference/select_candidate.gif" border="0" alt="select candidate" class="top">
+      </div>
+      <p class="command-description">In the command mode, you can select next candidate by executing this command if search results have one more candidate. For example, when you were searching bookmarks by executing <a href="#searchBookmarks">searchBookmarks</a> command and multi bookmarks was hit, then you have to select a bookmark you want to open. So now is a good time to execute this command.</p>
+
+      <div class="command-name">
+          <h3 id="selectPrevCandidate">selectPrevCandidate</h3>
+          <span class="command-note">assigned to <code>C-p</code> by default in the command mode</span>
+      </div>
+      <p class="command-description">Same as <a href="#selectNextCandidate">selectNextCandidate</a>. Difference between this command and it is only a moving direction.</p>
+
+      <div class="command-name">
+          <h3 id="searchClosedTabs">searchClosedTabs</h3>
+          <span class="command-note">assigned to <code>U</code> by default</span>
+      </div>
+      <p class="command-description">You can search closed tabs and reopen a tab you selected. Hometype searches text you inputted to a command bar from a page title or a url. Searching text is <strong>CASE INSENSITVE</strong>. Unfortunately, reopend tab don't have histories, so you can't follow histories to back or forward. Hometyp has 20 closed tabs.</p>
+
+      <div class="command-name">
+          <h3 id="searchBookmarks">searchBookmarks</h3>
+          <span class="command-note">assigned to <code>b</code> or <code>B</code> by default</span>
+      </div>
+      <p class="command-description">You can search all bookmarks stored at Google Chrome and open a bookmark you selected. Hometype searches text you inputted to a command bar from a bookmark title or a url. Searching text is <strong>CASE INSENSITVE</strong>.</p>
+      <div class="command-options">
+          <div class="command-options-header">options</div>
+          <dl class="span1">
+              <dt><code>--new</code></dt>
+              <dd>Open a bookmark you selected in a new tab.</dd>
+          </dl>
+      </div>
+      <p class="command-description">By default, <code>b</code> key is assigned to default searchBookmarks command, so a bookmark you selected will be opened in the current tab. <code>B</code> key is assigned to it with <code>--new</code> option.</p>
+
+      <div class="command-name">
+          <h3 id="searchHistories">searchHistories</h3>
+          <span class="command-note">assigned to <code>C-h</code> by default</span>
+      </div>
+      <p class="command-description">You can search current tab's histories and back to at history url you selected. Hometype searches text you inputted to a command bar from a page title or a url. Searching text is <strong>CASE INSENSITVE</strong>.</p>
+
+      <div class="command-name">
+          <h3 id="searchApplications">searchApplications</h3>
+          <span class="command-note">assigned to <code>o</code> by default</span>
+      </div>
+      <p class="command-description">You can search applications installed in the Google Chrome and launch it in a new tab. Hometype searches text you inputted to a command bar from an application title or a url. Searching text is <strong>CASE INSENSITVE</strong>.</p>
+
+      <div class="command-name">
+          <h3 id="followLink">followLink</h3>
+          <span class="command-note">assigned to <code>f</code> or <code>cf</code> or <code>F</code> or <code>cF</code> by default</span>
+      </div>
+      <div class="illustration" style="width: 292px;">
+          <img src="./images/reference/follow_link.png" border="0" alt="follow link" class="top">
+          <img src="./images/reference/follow_link2.png" border="0" alt="follow link">
+      </div>
+      <p class="command-description">Hometype shifts to the hint mode and hint elements that has a hint key is shown on a link or an input element, and then you can type that hint key to follow the link or focus to input. Note that hint keys is <strong>CASE SENSITIVE</strong>.</p>
+      <p class="command-description">In the hint mode you can filter elements that include a text you inputted. To filter elements, you have to type a key doesn't exist in hint keys shown in the display. For example if there are lowercase hint keys please start to type uppercase letters for searching, or if there are uppercase hint keys please start to type lowercase letters. You may notice that the command bar will be appeared in the bottom of the display when you started to search, and Hometype will make the matched text highlight. Searching text is <strong>CASE INSENSITVE</strong>.</p>
+      <div class="command-options">
+          <div class="command-options-header">options</div>
+          <dl>
+              <dt><code>--new</code></dt>
+              <dd>Follow a link in a new tab. Hint color becomes blue when this option is available.</dd>
+              <dt><code>--continuous</code></dt>
+              <dd>You can use this option when you want to continue the hint mode even if an element is confirmed. For example, checking continuously multi checkboxes or radio buttons or following links continuously.</dd>
+          </dl>
+      </div>
+      <p class="command-description">By default, <code>f</code> key is assigned to default followLink command. <code>cf</code> key is assigned to it with <code>--continuous</code> option. <code>F</code> is assigned to it with <code>--new</code> option. And <code>cF</code> is assigned to it with <code>--new</code> and <code>--continuous</code> options.</p>
+
+      <div class="command-name">
+          <h3 id="enterVisualMode">enterVisualMode</h3>
+          <span class="command-note">assigned to <code>v</code> by default</span>
+      </div>
+      <div class="illustration" style="width: 295px;">
+          <img src="./images/reference/enter_visual_mode.png" border="0" alt="Enter Visual Mode" class="top">
+      </div>
+      <p class="command-description">If you invoked this command, Hometype shifts to the hint mode (hint elements have a red color), and then Chrome will focus to an element you chose to select the inner text of the element. This command is useful when you want to copy code snippets to the clipboard without touching a mouse. Note that you can't edit the text.</p>
+
+      <div class="command-name">
+          <h3 id="executeCommand">executeCommand</h3>
+          <span class="command-note">assigned to <code>:</code> by default</span>
+      </div>
+      <p class="command-description">The command bar will be shown in the bottom of the display, and then you can execute a command by typing a command name you want to execute in the command bar.</p>
+
+      <div class="command-name">
+          <h3 id="enterInsertMode">enterInsertMode</h3>
+          <span class="command-note">assigned to <code>i</code> and <code>a</code> by default</span>
+      </div>
+      <p class="command-description">Sometimes Hometype might detect a wrong mode. For example, when Chrome has a focus on a text input element, you might notice the current mode is not the insert mode. In that case you can enter the insert mode forces by invoking this command.</p>
+
+      <div class="command-name">
+          <h3 id="enterNormalMode">enterNormalMode</h3>
+          <span class="command-note">assigned to <code>Esc</code> by default in except normal mode</span>
+      </div>
+      <p class="command-description">The current mode will be change to the normal mode.</p>
 
       <div class="command-name">
           <h3 id="backHistory">backHistory</h3>
@@ -207,10 +321,31 @@
           <span class="command-note">assigned to <code>L</code> by default</span>
       </div>
       <p class="command-description">Forward to the next in the history.</p>
+
+      <div class="command-name">
+          <h3 id="focusFirstInput">focusFirstInput</h3>
+          <span class="command-note">assigned to <code>I</code> by default</span>
+      </div>
+      <p class="command-description">You can focus to a first appeared input element on the display.</p>
+
+      <div class="command-name">
+          <h3 id="lastFirstInput">lastFirstInput</h3>
+          <span class="command-note">assigned to <code>A</code> by default</span>
+      </div>
+      <p class="command-description">You can focus to a last appeared input element on the display.</p>
+
+      <div class="command-name">
+          <h3 id="noop">noop</h3>
+          <span class="command-note">assigned to <i>nothing</i> by default</span>
+      </div>
+      <p class="command-description">This command is nothing. Please use this when you want to make specified key bind unavailable.</p>
     </div>
   </section>
 
   <footer>
+    <a href="./ja/reference.html">Japanese Document</a>
+    <br/>
+    <br/>
     &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
   </footer>
 

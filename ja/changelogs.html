@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hometype 2 - Change Logs</title>
+  <meta name="description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。">
+  <meta name="viewport" content="width=1060px">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+  <link href="../css/common.css" media="all" rel="stylesheet" type="text/css">
+  <link href="../css/changelogs.css" media="all" rel="stylesheet" type="text/css">
+  <meta property="og:title" content="Hometype" />
+  <meta property="og:description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。" />
+  <meta property="og:url" content="http://tkengo.github.io/hometype/" />
+  <meta property="og:image" content="http://tkengo.github.io/hometype/images/ogp.png" />
+  <link rel="icon" href="./images/favicon.ico" />
+  <link rel="apple-touch-iconprecomposed" href="./images/apple-touch.png">
+</head>
+<body>
+
+  <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <header>
+    <div class="header">
+      <h1><a href="./index.html">Hometype 2</a></h1>
+      <nav>
+        <ul>
+          <li><a href="./index.html">紹介</a></li>
+          <li><a href="./tutorial.html">チュートリアル</a></li>
+          <li><a href="./reference.html">コマンドリファレンス</a></li>
+          <li><a href="#" class="header-menu-active">変更履歴</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section>
+    <div class="page-title">
+      <div class="title-inner">
+        <h1>Change Logs</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-bn">
+    <div class="change-logs">
+      <h2>
+        <span class="change-logs-version">v2.0.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+          <li>タブセレクトモードは廃止になりました。代わりにコマンドモードでタブを検索して選択できるようになりました。</li>
+          <li>ヒントモード中に要素内のテキストを検索してヒントを絞り込めるようにしました。候補が一致している部分はハイライトされます。</li>
+          <li>ヒントキーの大文字小文字を選択できるようになりました。</li>
+          <li>一部コマンド名が変更になりました。</li>
+          <li>ブックマーク検索はブックマークフォルダも検索対象に含めるようになりました。</li>
+          <li>Google Chrome にインストールされているアプリもコマンドモードで検索して開けるようになりました。</li>
+          <li>コマンドモードの候補リストに URL が含まれていればアイコンを表示するようにしました。</li>
+          <li>コマンドモードでの絞り込みにおいて、候補が一致してる部分はハイライトするようになりました。</li>
+          <li>全体的にデザインを改善しました。</li>
+          <li>その他軽微な不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.2.2</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+          <li>
+            ヒントキーの生成アルゴリズムを追加しました。<br/>
+            1. Standard algorithm. 従来通りのヒントキーを生成します。<br/>
+            2. Comfortable algorithm. 出来るだけ片手でヒントキーをタイプできるようにヒントキーを生成します。
+          </li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.2.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+          <li>タブ選択モードを実装しました。Google Chrome 上に開かれているタブをキーボードで選択することができます。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.1.1</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Hometype のオプションを保存するストレージに chrome.storage を使うようになりました。それによって Hometype のオプションは各端末の Google Chrome 間で同期できるようになりました。</li>
+        <li>'B' でも 'b' でも新しいタブでブックマークが開いてしまう不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.1.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li>スペースで区切ることで複数のコマンドをバインドすることができるようになりました。</li>
+        <li><i>@command</i> と定義することで、最後に呼び出した同じコマンドのオプションを引き継いで実行することができるようになりました。</li>
+        <li>各 cancelXXX コマンドは enterNormalMode に置き換わりました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.0.2</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>ヒントキーを生成する要素をより正確に判定できるようになりました。</li>
+        <li>キーが押下された時にインサートモードに移行するべきかどうかを判定するようになりました。これによってインサートモードの誤検知がなくなりました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.0.1</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>ヒントモードに area タグが含まれていなかった不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v1.0.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li><strong>継続的ヒントモード</strong>を実装しました。この機能により、ヒントモード時に要素を選んでもヒントモードから抜けずに継続して次のヒントを表示できるようになりました。これは、たとえば、複数のチェックボックスやラジオボタンを連続して選択する時に便利です。</li>
+        <li><strong>Hometypeを無効にするURL</strong>が設定できるようになりました。オプションページで無効 URL が設定されていれば、それにマッチするページでは Hometype が無効になります。</li>
+        <li>新しいコマンド '<strong>noop</strong>' が実装されました。このコマンドは何もしません。キーバインドを無効にしたい時に使用してください。</li>
+        <li>ヒントモードでのパフォーマンスを劇的に向上しました。</li>
+        <li>現在のモードを表示するのを止めました。</li>
+        <li>Jasmine 2.0 を使ってテストを書き、wercker を使って CI を行うようになりました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.3</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>Hometype のアイコンを新しくしました。</li>
+        <li>restoreTab 周りの軽微な不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.2</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>restoreTab コマンドを実行した時にもっとも新しいタブではなく、最も古いタブを開きなおしていた不具合を修正しました。</li>
+        <li>Hometype がバージョンアップされた時にタブの履歴が消えていた不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.1</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>タブ履歴に行番号をつけました。</li>
+        <li>閉じたタブの履歴を検索する時、並び順が逆になっていたのを修正しました。</li>
+        <li>focusFirstInput と focusLastInput の不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.1.0</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li>オプションページを新たに実装しました。</li>
+        <li>キーバインドを表示するヘルプモードを実装しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.0.3</span>
+        <span class="change-logs-tag change-logs-improvement-tag">Improvement</span>
+      </h2>
+      <ul>
+        <li>BackgroundPage の代わりに EventPage を使ってパフォーマンスを向上させました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.0.2</span>
+        <span class="change-logs-tag change-logs-bugfix-tag">Bugfix</span>
+      </h2>
+      <ul>
+        <li>拡張機能の名前が Chromekey から <strong>Hometype</strong> に変更されました。</li>
+        <li>focusFirstInput と focusLastInput が textarea タグにフォーカスしない不具合を修正しました。</li>
+      </ul>
+
+      <h2>
+        <span class="change-logs-version">v0.0.1</span>
+      </h2>
+      <ul>
+        <li>拡張機能が Chrome Web Storeにリリースされました。</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <a href="../changelogs.html">英語版</a>
+    <br/>
+    <br/>
+    &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
+  </footer>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35368510-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>
+

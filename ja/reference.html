@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Hometype 2 - コマンドリファレンス</title>
+  <meta name="description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。">
+  <meta name="viewport" content="width=1060px">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+  <link href="../css/common.css" media="all" rel="stylesheet" type="text/css">
+  <link href="../css/reference.css" media="all" rel="stylesheet" type="text/css">
+  <meta property="og:title" content="Hometype" />
+  <meta property="og:description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。" />
+  <meta property="og:url" content="http://tkengo.github.io/hometype/" />
+  <meta property="og:image" content="http://tkengo.github.io/hometype/images/ogp.png" />
+  <link rel="icon" href="./images/favicon.ico" />
+  <link rel="apple-touch-iconprecomposed" href="./images/apple-touch.png">
+</head>
+<body>
+
+  <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
+  <header>
+    <div class="header">
+      <h1><a href="./index.html">Hometype 2</a></h1>
+      <nav>
+        <ul>
+          <li><a href="./index.html">紹介</a></li>
+          <li><a href="./tutorial.html">チュートリアル</a></li>
+          <li><a href="#" class="header-menu-active">コマンドリファレンス</a></li>
+          <li><a href="./changelogs.html">変更履歴</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section>
+    <div class="page-title">
+      <div class="title-inner">
+        <h1>コマンドリファレンス</h1>
+      </div>
+    </div>
+
+    <div class="container">
+      <table class="reference-index">
+        <thead>
+          <tr>
+            <th>スクロール</th>
+            <th>タブ操作</th>
+            <th>検索</th>
+            <th>モード</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#scrollDown">scrollDown</a></td>
+            <td><a href="#closeTab">closeTab</a></td>
+            <td><a href="#selectNextCandidate">selectNextCandidate</a></td>
+            <td><a href="#followLink">followLink</a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollDownHalf">scrollDownHalf</a></td>
+            <td><a href="#moveLeftTab">moveLeftTab</a></td>
+            <td><a href="#selectPrevCandidate">selectPrevCandidate</a></td>
+            <td><a href="#enterVisualMode">enterVisualMode</a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollDownPage">scrollDownPage</a></td>
+            <td><a href="#moveRightTab">moveRightTab</a></td>
+            <td><a href="#searchClosedTabs">searchClosedTabs</a></td>
+            <td><a href="#executeCommand">executeCommand</a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollUp">scrollUp</a></td>
+            <td><a href="#restoreTab">restoreTab</a></td>
+            <td><a href="#searchBookmarks">searchBookmarks</a></td>
+            <td><a href="#enterInsertMode">enterInsertMode</a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollUpHalf">scrollUpHalf</a></td>
+            <td><a href="#selectTab">selectTab</a></td>
+            <td><a href="#searchHistories">searchHistories</a></td>
+            <td><a href="#">enterNormalMode</a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollUpPage">scrollUpPage</a></td>
+            <td><a href="#"></a></td>
+            <td><a href="#searchApplications">searchApplications</a></td>
+            <td><a href="#"></a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollToTop">scrollToTop</a></td>
+            <td><a href="#"></a></td>
+            <td><a href="#"></a></td>
+            <td><a href="#"></a></td>
+          </tr>
+          <tr>
+            <td><a href="#scrollToBottom">scrollToBottom</a></td>
+            <td><a href="#"></a></td>
+            <td><a href="#"></a></td>
+            <td><a href="#"></a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="reference-index">
+        <thead>
+          <tr>
+            <th>履歴</th>
+            <th>フォーム</th>
+            <th>その他</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#backHistory">backHistory</a></td>
+            <td><a href="#focusFirstInput">focusFirstInput</a></td>
+            <td><a href="#noop">noop</a></td>
+            <td><a href="#"></a></td>
+          </tr>
+          <tr>
+            <td><a href="#forwardHistory">forwardHistory</a></td>
+            <td><a href="#focusLastInput">focusLastInput</a></td>
+            <td><a href="#"></a></td>
+            <td><a href="#"></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="container-bn reference-content">
+      <div class="command-name">
+          <h3 id="scrollDown">scrollDown</h3>
+          <span class="command-note">デフォルトキーバインド <code>j</code> と <code>C-e</code></span>
+      </div>
+      <p class="command-description">下方向にスクロールします。スクロール量はオプションページの "Amount of scrolling" で変更することができます。デフォルトは50pxです。</p>
+
+      <div class="command-name">
+          <h3 id="scrollDownHalf">scrollDownHalf</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-d</code></span>
+      </div>
+      <p class="command-description">画面半分だけ下方向にスクロールします。</p>
+
+      <div class="command-name">
+          <h3 id="scrollDownPage">scrollDownPage</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-f</code></span>
+      </div>
+      <p class="command-description">1画面分だけ下方向にスクロールします。</p>
+
+      <div class="command-name">
+          <h3 id="scrollUp">scrollUp</h3>
+          <span class="command-note">デフォルトキーバインド <code>k</code> と <code>C-y</code></span>
+      </div>
+      <p class="command-description">上方向にスクロールします。スクロール量はオプションページの "Amount of scrolling" で変更することができます。デフォルトは50pxです。</p>
+
+      <div class="command-name">
+          <h3 id="scrollUpHalf">scrollUpHalf</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-u</code></span>
+      </div>
+      <p class="command-description">画面半分だけ上方向にスクロールします。</p>
+
+      <div class="command-name">
+          <h3 id="scrollUpPage">scrollUpPage</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-b</code></span>
+      </div>
+      <p class="command-description">1画面分だけ上方向にスクロールします。</p>
+
+      <div class="command-name">
+          <h3 id="scrollToTop">scrollToTop</h3>
+          <span class="command-note">デフォルトキーバインド <code>gg</code></span>
+      </div>
+      <p class="command-description">ページの一番上までスクロールします。</p>
+
+      <div class="command-name">
+          <h3 id="scrollToBottom">scrollToBottom</h3>
+          <span class="command-note">デフォルトキーバインド <code>G</code></span>
+      </div>
+      <p class="command-description">ページの一番下までスクロールします。</p>
+
+      <div class="command-name">
+          <h3 id="closeTab">closeTab</h3>
+          <span class="command-note">デフォルトキーバインド <code>x</code></span>
+      </div>
+      <p class="command-description">現在のタブを閉じます。</p>
+
+      <div class="command-name">
+          <h3 id="moveLeftTab">moveLeftTab</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-p</code></span>
+      </div>
+      <p class="command-description">現在のタブのひとつ左側のタブを選択します。</p>
+
+      <div class="command-name">
+          <h3 id="moveRightTab">moveRightTab</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-n</code></span>
+      </div>
+      <p class="command-description">現在のタブのひとつ右側のタブを選択します。</p>
+
+      <div class="command-name">
+          <h3 id="restoreTab">restoreTab</h3>
+          <span class="command-note">デフォルトキーバインド <code>u</code></span>
+      </div>
+      <p class="command-description">一番最後に閉じたタブを開き直します。ただし、履歴は残っていません。</p>
+
+      <div class="command-name">
+          <h3 id="selectTab">selectTab</h3>
+          <span class="command-note">デフォルトキーバインド <code>m</code></span>
+      </div>
+      <div class="illustration" style="width: 299px;">
+          <img src="../images/reference/select_tab_title.png" border="0" alt="select tab" class="top">
+          <img src="../images/reference/select_tab.png" border="0" alt="select tab">
+      </div>
+      <p class="command-description">Google Chrome で開いているタブを検索して、選択したいタブを選択することが出来ます。このコマンドが実行されると、Hometype は各タブのタイトルの先頭に1文字つけます。その1文字をタイプすることによって目的のタブを選択することができます。<strong>文字は大文字と小文字を区別します</strong>。もしマッチする文字がなければ、タブの一覧がタブのタイトル及び URL からフィルタされます。</p>
+
+      <div class="command-name">
+          <h3 id="selectNextCandidate">selectNextCandidate</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-n</code> (コマンドモードの場合のみ)</span>
+      </div>
+      <div class="illustration" style="width: 308px;">
+          <img src="../images/reference/select_candidate.gif" border="0" alt="select candidate" class="top">
+      </div>
+      <p class="command-description">コマンドモードで検索結果が複数ある場合に、候補を選択することができます。たとえば、<a href="#searchBookmarks">searchBookmarks</a>を使ってブラウザのブックマークを検索している時に複数の候補がヒットした場合、どのブックマークを開くのかを選ぶ必要がありますが、そういう時にこのコマンドを使って候補を選択することができます。</p>
+
+      <div class="command-name">
+          <h3 id="selectPrevCandidate">selectPrevCandidate</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-p</code> (コマンドモードの場合のみ)</span>
+      </div>
+      <p class="command-description">概要は<a href="#selectNextCandidate">selectNextCandidate</a>と同じで、候補を移動する方向が違うだけです。</p>
+
+      <div class="command-name">
+          <h3 id="searchClosedTabs">searchClosedTabs</h3>
+          <span class="command-note">デフォルトキーバインド <code>U</code></span>
+      </div>
+      <p class="command-description">今までに閉じられたタブを検索して、もう一度開くことができます。コマンドバーにテキストを入力すると、ページのタイトル及びURLから検索します。検索は<strong>大文字と小文字を区別しません</strong>。開き直したタブは履歴をもっていないので、履歴を戻ったり進んだりすることができません。最大で20個の閉じたタブを保持しています。</p>
+
+      <div class="command-name">
+          <h3 id="searchBookmarks">searchBookmarks</h3>
+          <span class="command-note">デフォルトキーバインド <code>b</code> または <code>B</code></span>
+      </div>
+      <p class="command-description">Google Chromeに保存されているブックマークを検索して、開くことができます。コマンドバーにテキストを入力すると、ブックマークのタイトル及びURLから検索します。検索は<strong>大文字と小文字を区別しません</strong>。</p>
+      <div class="command-options">
+          <div class="command-options-header">オプション</div>
+          <dl class="span1">
+              <dt><code>--new</code></dt>
+              <dd>ブックマークを新しいタブで開きます。</dd>
+          </dl>
+      </div>
+      <p class="command-description"><code>b</code> はデフォルトで現在のページでブックマークが開かれます。<code>B</code> は <code>--new</code> オプション付きで実行されるので、新しいページでブックマークが開かれます。</p>
+
+      <div class="command-name">
+          <h3 id="searchHistories">searchHistories</h3>
+          <span class="command-note">デフォルトキーバインド <code>C-h</code></span>
+      </div>
+      <p class="command-description">現在のタブの履歴を検索して、戻ったり進んだりすることができます。コマンドバーにテキストを入力すると、履歴ページのタイトル及びURLから検索します。検索は<strong>大文字と小文字を区別しません</strong>。</p>
+
+      <div class="command-name">
+          <h3 id="searchApplications">searchApplications</h3>
+          <span class="command-note">デフォルトキーバインド <code>o</code></span>
+      </div>
+      <p class="command-description">Google Chromeにインストールされているアプリを検索して、起動させることができます。コマンドバーにテキストを入力すると、アプリケーションの名前及びURLから検索します。検索は<strong>大文字と小文字を区別しません</strong>。</p>
+
+      <div class="command-name">
+          <h3 id="followLink">followLink</h3>
+          <span class="command-note">デフォルトキーバインド <code>f</code> または <code>cf</code> または <code>F</code> または <code>cF</code></span>
+      </div>
+      <div class="illustration" style="width: 292px;">
+          <img src="../images/reference/follow_link.png" border="0" alt="follow link" class="top">
+          <img src="../images/reference/follow_link2.png" border="0" alt="follow link">
+      </div>
+      <p class="command-description">このコマンドを実行すると、Hometypeはヒントモードへ移行してヒントキーをもったヒントチップが各リンク要素及びフォーム要素に対して表示されます。ヒントキーを押下することで、リンクを辿ったりフォームにフォーカスしたりすることができます。ヒントキーは<strong>大文字と小文字を区別します</strong>。</p>
+      <p class="command-description">また、ヒントモードでは、要素に含まれるテキストを検索してヒントを絞り込むことができます。ヒントを絞り込むには、ヒントキーに存在しないキーを押下して検索を始める必要があります。たとえばヒントキーが小文字の場合は大文字の単語を入力して検索してください。また逆にヒントキーが大文字の場合は小文字の単語を入力して検索してください。すると画面下部にコマンドバーが表示され、マッチしたテキストがハイライトされます。検索は<strong>大文字と小文字を区別しません</strong>。</p>
+      <p class="command-description">Hometypeでは辞書データを持っており、日本語の文字列にマッチすることもできます。たとえばリンクに "愛" という単語が含まれていた場合、ローマ字で"ai" (もしくは"AI") と入力することで "愛" にマッチすることができます。</p>
+      <div class="command-options">
+          <div class="command-options-header">オプション</div>
+          <dl>
+              <dt><code>--new</code></dt>
+              <dd>リンクを新しいタブで開きます。このオプションをつけると、ヒントチップの色が青色に変わります。</dd>
+              <dt><code>--continuous</code></dt>
+              <dd>このオプションをつけると継続的ヒントモードとなり、要素を選択したとしてもノーマルモードには戻りません。たとえば、複数のチェックボックスやラジオボタンを一括でチェックしたい時などに使えるかもしれません。</dd>
+          </dl>
+      </div>
+      <p class="command-description"><code>f</code> は現在のタブでリンクを開きます。<code>cf</code> は <code>--continuous</code> オプション付きでコマンドを実行します。<code>F</code> は <code>--new</code> オプション付きで実行し、<code>cF</code> は <code>--new</code> と <code>--continuous</code> オプションを付けて実行されます。</p>
+
+      <div class="command-name">
+          <h3 id="enterVisualMode">enterVisualMode</h3>
+          <span class="command-note">デフォルトキーバインド <code>v</code></span>
+      </div>
+      <div class="illustration" style="width: 295px;">
+          <img src="../images/reference/enter_visual_mode.png" border="0" alt="Enter Visual Mode" class="top">
+      </div>
+      <p class="command-description">このコマンドを実行すると、ヒントモードへ移行します(ヒントチップは赤色)。ヒントキーを押下すると、その要素に対してフォーカスします。このコマンドは例えば、コードスニペットを選択してコピーしたい時などに役立ちます。フォーカスした要素の編集はできません。</p>
+
+      <div class="command-name">
+          <h3 id="executeCommand">executeCommand</h3>
+          <span class="command-note">デフォルトキーバインド <code>:</code></span>
+      </div>
+      <p class="command-description">コマンドバーが画面下部に表示され、そこに実行したいコマンドを入力すれば、そのコマンドが実行されます。</p>
+
+      <div class="command-name">
+          <h3 id="enterInsertMode">enterInsertMode</h3>
+          <span class="command-note">デフォルトキーバインド <code>i</code> と <code>a</code></span>
+      </div>
+      <p class="command-description">Hometypeは、たまに現在のモードの検出を間違えてしまうことがあります。たとえば、テキスト要素に対してフォーカスをしているにも関わらず、ノーマルモードのままになっていることがあります。そのような場合にこのコマンドを実行することで、強制的にインサートモードに移行させることができます。</p>
+
+      <div class="command-name">
+          <h3 id="enterNormalMode">enterNormalMode</h3>
+          <span class="command-note">デフォルトキーバインド <code>Esc</code> (ノーマルモード以外の場合)</span>
+      </div>
+      <p class="command-description">ノーマルモードに戻ります。</p>
+
+      <div class="command-name">
+          <h3 id="backHistory">backHistory</h3>
+          <span class="command-note">デフォルトキーバインド <code>H</code></span>
+      </div>
+      <p class="command-description">履歴を1つ前に戻ります。</p>
+
+      <div class="command-name">
+          <h3 id="forwardHistory">forwardHistory</h3>
+          <span class="command-note">デフォルトキーバインド <code>L</code></span>
+      </div>
+      <p class="command-description">履歴を1つ先に進みます。</p>
+
+      <div class="command-name">
+          <h3 id="focusFirstInput">focusFirstInput</h3>
+          <span class="command-note">デフォルトキーバインド <code>I</code></span>
+      </div>
+      <p class="command-description">画面上に最初に現れるフォーム要素にフォーカスします。</p>
+
+      <div class="command-name">
+          <h3 id="lastFirstInput">lastFirstInput</h3>
+          <span class="command-note">デフォルトキーバインド <code>A</code></span>
+      </div>
+      <p class="command-description">画面上に最後に現れるフォーム要素にフォーカスします。</p>
+
+      <div class="command-name">
+          <h3 id="noop">noop</h3>
+          <span class="command-note">デフォルトキーバインド <i>なし</i></span>
+      </div>
+      <p class="command-description">このコマンドはなにもしません。デフォルトのキーバインドを削除するために使って下さい。</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="../reference.html">英語版</a>
+    <br/>
+    <br/>
+    &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
+  </footer>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-35368510-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+</body>
+</html>

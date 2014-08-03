@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Hometype</title>
+  <title>Hometype 2</title>
   <meta name="description" content="Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。">
   <meta name="viewport" content="width=1060px">
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
@@ -20,12 +20,13 @@
   <a href="https://github.com/tkengo/hometype"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
   <header>
     <div class="header">
-      <h1><a href="#">Hometype</a></h1>
+      <h1><a href="#">Hometype 2</a></h1>
       <nav>
         <ul>
           <li><a href="#" class="header-menu-active">紹介</a></li>
-          <li><a href="../reference.html">コマンドリファレンス</a></li>
-          <li><a href="../changelogs.html">変更履歴</a></li>
+          <li><a href="./tutorial.html">チュートリアル</a></li>
+          <li><a href="./reference.html">コマンドリファレンス</a></li>
+          <li><a href="./changelogs.html">変更履歴</a></li>
         </ul>
       </nav>
     </div>
@@ -35,6 +36,7 @@
         <p class="description">Hometypeはマウスに触ることなくGoogle Chromeを操作できる拡張機能です。</p>
         <a href="https://chrome.google.com/webstore/detail/hometype/fngmcejiekfcoflogkfnmhableinjmln" class="store" target="_blank">Chrome Store</a>
       </div>
+      <p id="pickup">ver2.0。より快適な操作を、新しいHometypeで。<p>
     </div>
   </header>
 
@@ -70,7 +72,7 @@
         </tr>
       </tbody>
     </table>
-    <img src="./../images/screen.png" alt="screen" />
+    <img src="./../images/screen.gif" alt="screen" />
   </section>
 
   <section class="container mode">
@@ -173,6 +175,14 @@
           <td><code>C-n</code></td>
           <td>一つ右のタブに移動する</td>
         </tr>
+        <tr>
+          <td><code>I</code></td>
+          <td>一番最初のテキストエリアにフォーカスする</td>
+        </tr>
+        <tr>
+          <td><code>A</code></td>
+          <td>一番最後のテキストエリアにフォーカスする</td>
+        </tr>
       </tbody>
     </table>
     <table class="right">
@@ -183,14 +193,6 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><code>I</code></td>
-          <td>画面の一番最初のテキストエリアにフォーカスする</td>
-        </tr>
-        <tr>
-          <td><code>A</code></td>
-          <td>画面の一番最後のテキストエリアにフォーカスする</td>
-        </tr>
         <tr>
           <td><code>u</code></td>
           <td>最後に閉じたタブを開く</td>
@@ -212,12 +214,28 @@
           <td>ブックマークを検索して新しいタブで開く</td>
         </tr>
         <tr>
+          <td><code>m</code></td>
+          <td>タブを検索して選択する</td>
+        </tr>
+        <tr>
+          <td><code>o</code></td>
+          <td>アプリを検索して新しいタブで起動する</td>
+        </tr>
+        <tr>
           <td><code>f</code></td>
           <td>リンクを現在のタブで開く</td>
         </tr>
         <tr>
           <td><code>F</code></td>
           <td>リンクを新しいタブで開く</td>
+        </tr>
+        <tr>
+          <td><code>cf</code></td>
+          <td>リンクを継続的に現在のタブで開く</td>
+        </tr>
+        <tr>
+          <td><code>cF</code></td>
+          <td>リンクを継続的に新しいタブで開く</td>
         </tr>
         <tr>
           <td><code>v</code></td>
@@ -233,6 +251,11 @@
         </tr>
       </tbody>
     </table>
+  </section>
+
+  <section class="container-bn">
+    <h1>サポート</h1>
+    <p class="left">Hometypeはオープンソースです。開発元は<a href="http://balloonbros.cc" target="_blank">Balloonbros</a>チームですが、他の活動的なユーザーによっても支えられています。もしHometypeが期待通りに動作しなかったり不具合を見つけた場合は、是非私達に知らせて下さい。info@balloonbros.ccにメールしたり<a href="https://github.com/tkengo/hometype/issues" target="_blank">githubに報告</a>してもらえると助かります。可能な限り早く対応したいと思います。新しい機能の追加についてプルリクエストを送ってくれるのも歓迎します。</p>
   </section>
 
   <footer>
