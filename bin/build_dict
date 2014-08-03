@@ -1,0 +1,55 @@
+#!/usr/bin/env ruby
+
+require 'open-uri'
+require 'nkf'
+dict_url = 'http://openlab.jp/skk/skk/dic/SKK-JISYO.ML'
+
+target_regexp = {
+  alphabet: /^>?[a-z].*$/i,
+  a: /^>?あ.*$/,
+  i: /^>?い.*$/,
+  u: /^>?う.*$/,
+  e: /^>?え.*$/,
+  o: /^>?お.*$/,
+  k: /^>?[かきくけこ].*$/,
+  s: /^>?[さしすせそ].*$/,
+  t: /^>?[たちつてと].*$/,
+  n: /^>?[なにぬねの].*$/,
+  h: /^>?[はひふへほ].*$/,
+  m: /^>?[まみむめも].*$/,
+  y: /^>?[やゆよ].*$/,
+  r: /^>?[らりるれろ].*$/,
+  w: /^>?わ.*$/,
+  g: /^>?[がぎぐげご].*$/,
+  z: /^>?[ざじずぜぞ].*$/,
+  d: /^>?[だぢづでど].*$/,
+  b: /^>?[ばびぶべぼ].*$/,
+  p: /^>?[ぱぴぷぺぽ].*$/,
+  j: /^>?じ.*$/,
+  c: /^>?[かしくせこち].*$/,
+  q: /^>?く.*$/,
+  f: /^>?ふ.*$/
+}
+
+results = target_regexp.inject({}){|r,l|r[l[0]] = {}; r }
+
+open(dict_url) do |f|
+  while line = f.gets
+    line = NKF.nkf('-E -w', line)
+    target_regexp.each do |letter, regexp|
+      if line =~ regexp
+        hiragana, kanji = line.gsub(/([^a-z]+)[a-z]/, '\1').gsub('>', '').split(' ')
+        results[letter][hiragana] = [] unless results[letter][hiragana]
+        results[letter][hiragana].concat(kanji.sub(/;.*/, '').split('/'))
+      end
+    end
+  end
+
+  results.each do |letter, dicts|
+    open("dicts/#{letter}.ml", 'w') do |o|
+      dicts.each do |hiragana, value|
+        o.puts "#{hiragana}:#{value.uniq.join(' ').strip.gsub(/ +/, ' ')}"
+      end
+    end
+  end
+end

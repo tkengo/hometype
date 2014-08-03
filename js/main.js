@@ -16,7 +16,6 @@ HometypeOptions.getInstance().onLoaded(bindCommand);
  * 1. Check whether if the current url is matched in ignore url list.
  * 2. Bind a command.
  * 3. Register event onProcess in KyeSequence object.
- * 4. Register event onFocus and onBlur to detect focusing to form.
  */
 function initialize(options)
 {
@@ -30,33 +29,56 @@ function initialize(options)
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();
   key.onProcess(function (e, sequence, stack, currentKey) {
-    var isEditable = Dom.isEditable(document.activeElement);
-    if (isEditable && Mode.isNormalMode()) {
-      Mode.changeMode(ModeList.INSERT_MODE);
-    }
-    if (!isEditable && Mode.isInsertMode()) {
-      Mode.changeMode(ModeList.NORMAL_MODE);
-    }
+    // Adjust the current mode before key processing.
+    adjustCurrentMode();
 
-    var executer = new Executer(Mode.getCurrentMode(), sequence);
+    var processor       = Mode.getProcessor();
+    var delegation      = 'onKeyDown' in processor;
+    var executer        = new Executer(Mode.getCurrentMode(), sequence);
+    var stopPropagation = (executer.hasCandidates() || delegation) && !Dom.isEditable(document.activeElement);
+
+    // Execute a command and reset key sequence.
+    // Delegate process to the processor of the current mode if a command was not found.
     if (executer.noCandidate()) {
-      if (Mode.getProcessor().onKeyDown(stack, currentKey, e)) {
+      if (delegation && processor.onKeyDown(stack, currentKey, e)) {
         this.reset();
       }
     } else if (executer.execute()) {
+      this.reset();
+    }
+
+    if (stopPropagation) {
       e.stopPropagation();
       e.preventDefault();
-      this.reset();
     }
   });
 
   $(document).ready(function() {
     chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
       if (status) {
-        new Executer('enterHintMode --continuous').execute();
+        new Executer('followLink --continuous').execute();
       }
     });
   });
+}
+
+/**
+ * Adjust the current mode.
+ *
+ * 1. If active element is editable and the current mode is the normal mode,
+ *    change the current mode to the insert mode.
+ * 2. If active element is not editable and the current mode is the insert mode,
+ *    change the current mode to the normal mode.
+ */
+function adjustCurrentMode()
+{
+  var isEditable = Dom.isEditable(document.activeElement);
+  if (isEditable && Mode.isNormalMode()) {
+    Mode.changeMode(ModeList.INSERT_MODE);
+  }
+  if (!isEditable && Mode.isInsertMode()) {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+  }
 }
 
 /**

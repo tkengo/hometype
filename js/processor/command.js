@@ -14,8 +14,9 @@
  * These event listeners is reset when leave the command mode.
  */
 var CommandModeProcessor = function() {
-  this.updateBoxTextCallback = null;
-  this.enterCallback         = null;
+  this.updateBoxTextCallback   = null;
+  this.enterCallback           = null;
+  this.notifyLeaveModeCallback = null;
 
   this.commandBox = new HometypeCommandBox();
 };
@@ -34,7 +35,21 @@ CommandModeProcessor.prototype.notifyLeaveMode = function() {
   this.updateBoxTextCallback = null;
   this.enterCallback         = null;
 
+  if (this.notifyLeaveModeCallback) {
+    this.notifyLeaveModeCallback();
+    this.notifyLeaveModeCallback = null;
+  }
+
   this.commandBox.hide();
+};
+
+/**
+ * Register callback that invokes when Ht leaves from the command mode.
+ *
+ * @param function notifyLeaveModeCallback Callback method.
+ */
+CommandModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
+  this.notifyLeaveModeCallback = notifyLeaveModeCallback;
 };
 
 /**
@@ -46,13 +61,19 @@ CommandModeProcessor.prototype.notifyLeaveMode = function() {
  */
 CommandModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   if (currentKey == 'Enter') {
-    var result = this.enterCallback ?
-                 this.enterCallback(this.commandBox.getText(), this.commandBox.getSelected()) :
-                 this.enter();
+    var text = this.commandBox.getText();
+    var result = true;
+    if (this.enterCallback) {
+      result = this.enterCallback(text, this.commandBox.getSelected());
+    }
 
     if (result !== false) {
       this.commandBox.hide();
       Mode.changeMode(ModeList.NORMAL_MODE);
+    }
+
+    if (!this.enterCallback) {
+      new Executer(text).execute();
     }
 
     return result;
@@ -113,11 +134,4 @@ CommandModeProcessor.prototype.onEnter = function(callback) {
  */
 CommandModeProcessor.prototype.getCommandBox = function() {
   return this.commandBox;
-};
-
-CommandModeProcessor.prototype.enter = function() {
-  var command = Command[this.commandBox.getText()]
-  if (command) {
-    command.call();
-  }
 };

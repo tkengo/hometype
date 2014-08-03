@@ -9,6 +9,9 @@ var HintModeProcessor = function() {
   this.chooseElementCallback   = null;
   this.notifyLeaveModeCallback = null;
   this.hintElements = null;
+  this.headElements = [];
+  this.searching = false;
+  this.commandBox = null;
 };
 
 /**
@@ -17,6 +20,11 @@ var HintModeProcessor = function() {
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.chooseElementCallback = null;
   this.hintElements.removeAllHint();
+  this.searching = false;
+
+  if (this.commandBox) {
+    this.commandBox.hide();
+  }
 
   if (this.notifyLeaveModeCallback) {
     this.notifyLeaveModeCallback();
@@ -32,36 +40,38 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
  * @param KeyboradEvent e          event.
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
-  // Cancel default.
-  e.stopPropagation();
-  e.preventDefault();
-
   // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
 
   if (elements.length == 0) {
-    // Return normal mode if there is no element matched hint key.
-    Mode.changeMode(ModeList.NORMAL_MODE);
+    // Search hint texts if there is no element matched hint key.
+    this.startSearching(currentKey);
     return true;
   }
-  else if (elements.length == 1 && elements[0].getKey() == stack) {
-    var element = elements[0].getElement();
 
-    // Invoke a callback method if an element is confirmed.
-    if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
-      // Return normal mode if only callback didn't return false.
-      Mode.changeMode(ModeList.NORMAL_MODE);
-    }
+  e.stopPropagation();
+  e.preventDefault();
 
+  if (elements.length == 1 && elements[0].getKey() == stack) {
+    this.confirm(elements[0].getElement());
     return true;
-  }
-  else {
-    // Hide unmatched elements if an element didn't confirm.
+  } else {
     this.hintElements.hideUnmatchedElements(stack);
-    for (var i in elements) {
-      elements[i].setPushed();
-    }
     return false;
+  }
+};
+
+/**
+ * Confirm an element and invoke a callback method.
+ * Return normal mode if the callback method returned false.
+ *
+ * @param DOMElement element A confirmed element.
+ */
+HintModeProcessor.prototype.confirm = function(element) {
+  // Invoke a callback method if an element is confirmed.
+  if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
+    // Return normal mode if only callback didn't return false.
+    Mode.changeMode(ModeList.NORMAL_MODE);
   }
 };
 
@@ -90,8 +100,51 @@ HintModeProcessor.prototype.onChooseElement = function(chooseElementCallback) {
 /**
  * Register callback that invokes when Ht leaves from the hint mode.
  *
- * @param function notifyleavemodeCallback Callback method.
+ * @param function notifyLeaveModeCallback Callback method.
  */
 HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback) {
   this.notifyLeaveModeCallback = notifyLeaveModeCallback;
+};
+
+/**
+ * Start searching in the hint mode.
+ *
+ * @param string currentKey
+ */
+HintModeProcessor.prototype.startSearching = function(currentKey) {
+  if (!this.searching) {
+    if (!this.commandBox) {
+      this.commandBox = new HometypeCommandBox('SearchHints');
+    }
+
+    this.commandBox.show();
+    this.commandBox.setText(currentKey);
+    this.searching = true;
+  }
+
+  var context = this;
+  setTimeout(function() {
+    context.searchHints(context.commandBox.getText(), currentKey);
+  }, 10);
+};
+
+/**
+ * Search texts in all hints and regenerate hints only matched by a search text.
+ * An element will be confirmed if there is only one regenerated hint.
+ *
+ * @param string text A search text.
+ * @param string currentkey
+ */
+HintModeProcessor.prototype.searchHints = function(text, currentKey) {
+  var regenerateElements = this.hintElements.regenerateHintsBy(text.toLowerCase());
+  if (regenerateElements.length == 1) {
+    this.confirm(regenerateElements[0].getElement());
+  } else {
+    if (currentKey == 'Enter') {
+      var headMatchedElements = this.hintElements.getHeadMatchedElements();
+      if (headMatchedElements.length > 0) {
+        this.confirm(headMatchedElements[0]);
+      }
+    }
+  }
 };

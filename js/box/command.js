@@ -5,32 +5,34 @@
  *
  * Manage command box that is shown bottom of the display when enter the command mode.
  */
-var COMMAND_BOX_HEIGHT = 20;
 var CANDIDATE_AREA_HEIGHT = 180;
-var COMMAND_BOX_MARGIN = 8;
+var COMMAND_BOX_MARGIN = 0;
 var CANDIDATE_MAX_COUNT = 20;
 
 /**
  * Constructor
  */
-var HometypeCommandBox = function() {
+var HometypeCommandBox = function(header) {
   var windowWidth = Viewport.getWindowSize().width;
 
   // Create command box elements.
-  var box       = $('<div>')  .addClass('hometype-command-box')
-                              .attr('id', '_hometype-command-box')
-                              .width(windowWidth - COMMAND_BOX_MARGIN * 4)
-                              .height(COMMAND_BOX_HEIGHT);
-  var text      = $('<input>').attr('type', 'text')
-                              .attr('data-hometype-not-insert-mode', true)
+  var box       = $('<div>')  .addClass('hometype-command-box');
+  var header    = $('<div>')  .addClass('hometype-command-box-header')
+                              .text(header || 'Command')
                               .appendTo(box);
+  var triangle  = $('<div>')  .addClass('hometype-command-box-triangle')
+                              .appendTo(box);
+  var content   = $('<div>')  .addClass('hometype-command-box-content')
+                              .appendTo(box);
+  var text      = $('<input>').attr('type', 'text')
+                              .appendTo(content);
   var candidate = $('<div>')  .addClass('hometype-command-box-candidate-area')
-                              .attr('id', '_hometype-command-box-candidate-area')
-                              .width(windowWidth - COMMAND_BOX_MARGIN * 4)
+                              .width(windowWidth)
                               .height(CANDIDATE_AREA_HEIGHT)
 
   this.list      = [];
   this.box       = box;
+  this.header    = header;
   this.text      = text;
   this.candidate = candidate;
 
@@ -50,9 +52,9 @@ HometypeCommandBox.prototype.show = function() {
 
   // Place command box to calculated position and show it.
   this.box.css({
-    top: scrollTop - (COMMAND_BOX_HEIGHT + COMMAND_BOX_MARGIN * 3),
+    top: scrollTop - (this.box.outerHeight() + COMMAND_BOX_MARGIN * 3),
     left: COMMAND_BOX_MARGIN
-  }).fadeIn(300);
+  }).show();
 
   this.text.focus();
 };
@@ -64,7 +66,7 @@ HometypeCommandBox.prototype.hide = function() {
   this.box.hide();
   this.candidate.hide();
   $('div', this.candidate).remove();
-  this.text.val('');
+  this.text.val('').blur();
 };
 
 /**
@@ -73,7 +75,7 @@ HometypeCommandBox.prototype.hide = function() {
 HometypeCommandBox.prototype.showCandidate = function() {
   if (!this.candidate.is(':visible')) {
     this.recalculateAndSetPosition();
-    this.candidate.hide().fadeIn(300);
+    this.candidate.hide().show();
   }
 };
 
@@ -91,7 +93,7 @@ HometypeCommandBox.prototype.recalculateAndSetPosition = function() {
   var children = this.candidate.children();
   this.candidate.height($(children[0]).outerHeight() * children.length);
   this.candidate.css({
-    top: scrollTop - this.candidate.height() - COMMAND_BOX_HEIGHT - COMMAND_BOX_MARGIN * 4,
+    top: scrollTop - this.candidate.height() - this.box.outerHeight() - COMMAND_BOX_MARGIN * 4,
     left: COMMAND_BOX_MARGIN
   });
 };
@@ -106,9 +108,28 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
 
   this.list = list;
 
-  for (var i in list) {
-    var text = typeof list[i] == 'string' ? list[i] : list[i].text;
-    var div = $('<div>').text(text).attr('data-index', i);
+  if (list.length == 0) {
+    var div = $('<div>').html('nothing').addClass('hometype-no-candidate');
+    this.candidate.append(div);
+  }
+
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i];
+    var text = typeof item == 'string' ? item : item.text;
+
+    if (typeof item.escape == 'undefined') {
+      item.escape = true;
+    }
+    var div = $('<div>').html(item.escape ? Dom.escapeHTML(text) : text).attr('data-index', i);
+
+    if (this.text.val() != '') {
+      Dom.highlight(div.get(0), this.text.val(), { ignoreCase: true });
+    }
+
+    if (item.icon) {
+      var icon = $('<img>').attr('src', item.icon).attr('width', '16').addClass('hometype-command-box-icon');
+      icon.prependTo(div);
+    }
 
     // Selected first item.
     if (i == 0) {
@@ -170,4 +191,19 @@ HometypeCommandBox.prototype.getSelected = function() {
  */
 HometypeCommandBox.prototype.getText = function() {
   return this.text.val().replace(':', '');
+};
+
+/**
+ * Set a text to the command box.
+ */
+HometypeCommandBox.prototype.setText = function(text) {
+  this.text.val(text);
+};
+
+/**
+ * Set a text to the header of the command box.
+ */
+HometypeCommandBox.prototype.setHeaderText = function(text) {
+  this.header.text(text);
+  return this;
 };

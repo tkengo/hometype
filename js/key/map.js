@@ -24,8 +24,7 @@ var _map = {
   hint: {},
   visual: {},
   command: {},
-  help: {},
-  tabSelection: {}
+  help: {}
 }
 
 /**
@@ -97,16 +96,6 @@ KeyMap.cmap = function(key, command) {
  */
 KeyMap.hmap = function(key, command) {
   KeyMap.assign(ModeList.HELP_MODE, key, command);
-};
-
-/**
- * Assign key to command in tab selection mode.
- *
- * @param string key     Assigned key
- * @param string command Command that assigned in key
- */
-KeyMap.tmap = function(key, command) {
-  KeyMap.assign(ModeList.TAB_SELECTION_MODE, key, command);
 };
 
 /**

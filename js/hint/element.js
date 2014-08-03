@@ -40,13 +40,13 @@ HintElement.prototype.createTipElement = function() {
     var coords = this.srcElement.coords.split(',');
     rect = this.srcElement.parentNode.getClientRects()[0];
 
-    top  = rect.top  + parseInt(coords[1]) - 10;
-    left = rect.left + parseInt(coords[0]) - 10;
+    top  = rect.top  + parseInt(coords[1]);
+    left = rect.left + parseInt(coords[0]);
   }
   else {
     // Usually get a position from an element offset.
-    top  = rect.top  - 10;
-    left = rect.left - 10;
+    top  = rect.top;
+    left = rect.left;
   }
 
   // Correct an element position if it is out of display.
@@ -105,13 +105,33 @@ HintElement.prototype.setPushed = function() {
   this.getTipElement().children[0].className = 'hometype-hit-a-hint-pushed';
 };
 
+HintElement.prototype.highlight = function(targets) {
+  if (typeof targets == 'string') {
+    targets = [ targets ];
+  }
+
+  for (var i = 0; i < targets.length; i++) {
+    Dom.highlight(this.getElement(), targets[i], { ignoreCase: true });
+  }
+};
+
+HintElement.prototype.removeHighlight = function() {
+  Dom.removeHighlight(this.getElement());
+};
+
 /**
  * Remove hint tip element.
  */
 HintElement.prototype.removeHintTip = function() {
-  this.srcElement.className = this.srcElement.className.replace(this.className + '-area', '');
+  var element = this.getElement();
+
+  element.className = element.className.replace(this.className + '-area', '');
+  element.className = element.className.replace('hometype-hit-a-hint-head-area', '');
+
   var tip = this.getTipElement();
   if (tip.parentNode) {
     tip.parentNode.removeChild(tip);
   }
+
+  this.removeHighlight();
 };

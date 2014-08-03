@@ -150,19 +150,55 @@ Command.focusLastInput = function() {
 /**
  * Enter the tab selection mode.
  */
-Command.enterTabSelectionMode = function() {
-  chrome.runtime.sendMessage({
-    command: 'setTitleForAllTabs',
-    params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
-  });
+Command.selectTab = function() {
+  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
+  var commandBox      = processor.getCommandBox().setHeaderText('Tabs');
+  var port            = chrome.runtime.connect({ name: 'loadTabs' });
+  var createCandidate = function(tabs, filter) {
+    var list = [];
 
-  var port = chrome.runtime.connect({ name: 'loadTabs' });
+    for (var i = 0; i < tabs.length; i++) {
+      var tab  = tabs[i];
+      if (!filter || Utility.includedInProperties(tab, filter, [ 'title', 'url' ])) {
+        var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
+        list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, icon: tab.faviconDataUrl, id: tab.id });
+      }
+    }
+
+    return list;
+  };
+  var selectTab = function(id) {
+    Mode.changeMode(ModeList.NORMAL_MODE);
+    chrome.runtime.sendMessage({ command: 'selectTab', params: id });
+  };
+
   port.onMessage.addListener(function(tabs) {
-    var processor = Mode.changeMode(ModeList.TAB_SELECTION_MODE);
-    processor.createTabListBox(tabs);
     processor.onNotifyLeaveMode(function() {
       chrome.runtime.sendMessage({ command: 'resetTitleForAllTabs' });
     });
+    processor.onEnter(function(text, selected) {
+      selectTab(selected.id);
+    });
+    processor.onUpdateBoxText(function(text) {
+      var index = -1;
+      if (text) {
+        index = Opt.tab_selection_hint_keys.indexOf(text.charAt(text.length - 1));
+      }
+
+      if (index > -1 && tabs[index]) {
+        selectTab(tabs[index].id);
+      } else {
+        return createCandidate(tabs, text);
+      }
+    });
+
+    chrome.runtime.sendMessage({
+      command: 'setTitleForAllTabs',
+      params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
+    });
+
+    commandBox.setCandidate(createCandidate(tabs));
+    commandBox.showCandidate();
 
     port.disconnect();
   });
@@ -174,7 +210,7 @@ Command.enterTabSelectionMode = function() {
  */
 Command.searchClosedTabs = function() {
   var processor = Mode.changeMode(ModeList.COMMAND_MODE);
-
+  processor.getCommandBox().setHeaderText('ClosedTabs');
   processor.onEnter(function(text, selected) {
     chrome.runtime.sendMessage({ command: 'restoreTab', params: selected.tabId });
   });
@@ -184,8 +220,7 @@ Command.searchClosedTabs = function() {
       var list = [];
       $.each(closedTabs, function(index, tab) {
         if (tab && Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
-          var listText = Utility.pad(list.length + 1, 2) + ': ' + tab.title + '(' + tab.url + ')';
-          list.push({ text: listText, url: tab.url, tabId: tab.id });
+          list.push({ text: tab.title + '(' + tab.url + ')', url: tab.url, tabId: tab.id });
         }
       });
       return list;
@@ -198,8 +233,9 @@ Command.searchClosedTabs = function() {
  */
 Command.searchBookmarks = function(option) {
   var newTab = option.new || false;
-  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
 
+  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+  processor.getCommandBox().setHeaderText('Bookmarks');
   processor.onEnter(function(text, selected) {
     if (newTab) {
       chrome.runtime.sendMessage({ command: 'createTab', params: { url: selected.url } });
@@ -212,11 +248,12 @@ Command.searchBookmarks = function(option) {
   port.onMessage.addListener(function(bookmarks) {
     processor.onUpdateBoxText(function(text) {
       var list = [];
-      $.each(bookmarks, function(index, bookmark) {
-        if (Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
-          list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url });
+      for (var i = 0; i < bookmarks.length; i++) {
+        var bookmark = bookmarks[i];
+        if (text == '' || Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
+          list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url, icon: bookmark.faviconDataUrl });
         }
-      });
+      };
       port.disconnect();
       return list;
     });
@@ -228,23 +265,65 @@ Command.searchBookmarks = function(option) {
  * Search a history.
  */
 Command.searchHistories = function() {
-  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+  var port            = chrome.runtime.connect({ name: 'loadHistories' });
+  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
+  var commandBox      = processor.getCommandBox().setHeaderText('Histories');
+  var createCandidate = function(histories, filter) {
+    var list = [];
+    for (var i = histories.length - 1; i > -1; i--) {
+      var history = histories[i];
+      if (!filter || Utility.includedInProperties(history, filter, [ 'title', 'url' ])) {
+        list.push({ text: history.title + '(' + history.url + ')', url: history.url, icon: history.faviconDataUrl });
+      }
+    }
+    return list;
+  }
+
+  port.onMessage.addListener(function(histories) {
+    commandBox.setCandidate(createCandidate(histories));
+    commandBox.showCandidate();
+
+    processor.onUpdateBoxText(function(text) {
+      return createCandidate(histories, text);
+    }, true);
+    processor.onEnter(function(text, selected) {
+      Utility.openUrl(selected.url);
+    });
+  });
+};
+
+/**
+ * Search applications.
+ */
+Command.searchApplications = function() {
+  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
+  var port            = chrome.runtime.connect({ name: 'loadApplications' });
+  var commandBox      = processor.getCommandBox().setHeaderText('Applications');
+  var createCandidate = function(apps, filter) {
+    var list = [];
+    for (var i = 0; i < apps.length; i++) {
+      var app = apps[i];
+      if (filter == '' || Utility.includedInProperties(app, filter, [ 'name', 'appLaunchUrl' ])) {
+        var name = app.appLaunchUrl ?  app.name + '(' + app.appLaunchUrl + ')' : app.name;
+        list.push({ text: name, url: app.appLaunchUrl, id: app.id, icon: app.faviconDataUrl });
+      }
+    };
+    port.disconnect();
+    return list;
+  };
 
   processor.onEnter(function(text, selected) {
-    Utility.openUrl(selected.url);
+    chrome.runtime.sendMessage({ command: 'launchApplication', params: selected.id });
   });
 
-  chrome.runtime.sendMessage({ command: 'getHistories' }, function(histories) {
+  port.onMessage.addListener(function(apps) {
     processor.onUpdateBoxText(function(text) {
-      var list = [];
-      $.each(histories, function(index, history) {
-        if (Utility.includedInProperties(history, text, [ 'title', 'url' ])) {
-          list.push({ text: history.title + '(' + history.url + ')', url: history.url });
-        }
-      });
-      return list;
-    }, true);
+      return createCandidate(apps, text);
+    });
+    commandBox.setCandidate(createCandidate(apps, ''));
+    commandBox.showCandidate();
   });
+  port.postMessage();
 };
 
 /**
@@ -264,7 +343,7 @@ Command.enterVisualMode = function() {
 /**
  * Enter the hint mode. Hint targets are clickable and form elements.
  */
-Command.enterHintMode = function(option) {
+Command.followLink = function(option) {
   // Collect hint source targets.
   var targets = Dom.searchVisibleElementsFrom(Dom.clickableAndInsertableXPath());
   var newTab = option.new || false;
@@ -295,20 +374,24 @@ Command.enterHintMode = function(option) {
   processor.onChooseElement(function(element) {
     if (Dom.isEditable(element.get(0))) {
       element.focus();
-      return true;
     } else if (element.is('select')) {
       var selectBox = new HometypeSelectBox(element);
       processor.createHints('yellow', selectBox.getListElements());
       processor.onNotifyLeaveMode(function() { selectBox.remove(); });
+      return false;
     } else {
-      Utility.clickElement(element, newTab);
-      if (!option.continuous) {
-        return true;
+      if (option.continuous) {
+        var timer = setTimeout(function() { new Executer('@followLink').execute(); }, 300);
+        window.onbeforeunload = function() { clearInterval(timer); };
       }
-      setTimeout(function() { Command.enterHintMode(option); }, 300);
+      Utility.clickElement(element, newTab);
+      if (option.continuous) {
+        window.onbeforeunload = undefined;
+        return false;
+      }
     }
 
-    return false;
+    return true;
   });
 };
 
@@ -323,8 +406,9 @@ Command.enterInsertMode = function() {
 /**
  * Enter the command mode.
  */
-Command.enterCommandMode = function() {
-  Mode.changeMode(ModeList.COMMAND_MODE);
+Command.executeCommand = function() {
+  var processor = Mode.changeMode(ModeList.COMMAND_MODE);
+  processor.getCommandBox().setHeaderText(':');
 };
 
 /**
@@ -338,11 +422,3 @@ Command.enterNormalMode = function() {
 Command.showAssignedCommands = function() {
   Mode.changeMode(ModeList.HELP_MODE);
 };
-
-/**
- * Defined alias.
- */
-Command.cancelCommandMode = Command.enterNormalMode;
-Command.cancelHintMode    = Command.enterNormalMode;
-Command.cancelVisualMode  = Command.enterNormalMode;
-Command.cancelHelpMode    = Command.enterNormalMode;

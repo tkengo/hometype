@@ -81,6 +81,9 @@ var Executer = (function() {
 Executer.prototype.noCandidate = function() {
   return this.candidates.length == 0;
 };
+Executer.prototype.hasCandidates = function() {
+  return !this.noCandidate();
+};
 
 /**
  * Check if whether a command that should be executed is fixed.

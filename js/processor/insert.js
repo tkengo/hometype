@@ -16,17 +16,7 @@ InsertModeProcessor.prototype.notifyLeaveMode = function() {
 
   chrome.runtime.sendMessage({ command: 'getContinuousState' }, function(status) {
     if (status) {
-      new Executer('enterHintMode --continuous').execute();
+      new Executer('followLink --continuous').execute();
     }
   });
-};
-
-/**
- * Key processing.
- *
- * @param string        stack      key stack.
- * @param string        currentKey pushed key.
- * @param KeyboradEvent e          event.
- */
-InsertModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 };

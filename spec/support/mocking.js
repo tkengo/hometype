@@ -22,5 +22,10 @@ chrome = {
         }
       };
     }
+  },
+  extension: {
+    getURL: function(path) {
+      return path;
+    }
   }
 };

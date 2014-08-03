@@ -17,8 +17,19 @@ var RuntimeCommand = {};
 /**
  * Close a tab.
  */
-RuntimeCommand.closeTab = function(sender) {
+RuntimeCommand.closeTab = function(sender, params, response) {
   chrome.tabs.remove(sender.tab.id, null);
+};
+
+/**
+ * Open a url in the current tab or a new tab.
+ */
+RuntimeCommand.openUrl = function(sender, params, response) {
+  if (params.newTab) {
+    chrome.tabs.create({ url: params.url, active: true });
+  } else {
+    chrome.tabs.update({ url: params.url });
+  }
 };
 
 /**
@@ -75,13 +86,6 @@ RuntimeCommand.closedTabList = function(sender, params, sendResponse) {
 };
 
 /**
- * Get the history list.
- */
-RuntimeCommand.getHistories = function(sender, params, sendResponse) {
-  sendResponse(Tab.getHistories(sender.tab.id));
-};
-
-/**
  * Select a tab.
  */
 RuntimeCommand.selectTab = function(sender, tabId, sendResponse) {
@@ -130,10 +134,17 @@ RuntimeCommand.setTitleForAllTabs = function(sender, params, sendResponse) {
 RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
   chrome.tabs.query({ currentWindow: true }, function(tabs) {
     for (var i = 0; i < tabs.length; i++) {
-      var code = "document.title = document.title.replace(/^\\[[0-9a-z]\\]/, '')";
-      chrome.tabs.executeScript(tabs[i].id, { code: code });
+      var tab = tabs[i];
+      if (!tab.url.match(/^chrome.*:\/\//)) {
+        var code = "document.title = document.title.replace(/^\\[[0-9a-z]\\]/i, '')";
+        chrome.tabs.executeScript(tab.id, { code: code });
+      }
     }
   });
+};
+
+RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
+  chrome.management.launchApp(params);
 };
 
 /**
@@ -143,12 +154,30 @@ RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
  */
 
 /**
+ * Load the history list.
+ */
+RuntimeCommand.loadHistories = function(port) {
+  var histories = Tab.getHistories(port.sender.tab.id);
+  convertFaviconsToDataURL(Utility.collect(histories, 'url'), function(results) {
+    for (var i = 0; i < results.length; i++) {
+      histories[i].faviconDataUrl = results[i];
+    }
+    port.postMessage(histories);
+  });
+};
+
+/**
  * Load tabs.
  */
 RuntimeCommand.loadTabs = function(port) {
   port.onMessage.addListener(function() {
     chrome.tabs.query({ currentWindow: true }, function(tabs) {
-      port.postMessage(tabs);
+      convertFaviconsToDataURL(Utility.collect(tabs, 'url'), function(results) {
+        for (var i = 0; i < results.length; i++) {
+          tabs[i].faviconDataUrl = results[i];
+        }
+        port.postMessage(tabs);
+      });
     });
   });
 };
@@ -159,19 +188,52 @@ RuntimeCommand.loadTabs = function(port) {
 RuntimeCommand.loadBookmarks = function(port) {
   port.onMessage.addListener(function() {
     chrome.bookmarks.getSubTree('1', function(tree) {
-      var results = [];
+      var bookmarks = [];
       var find = function(node) {
         if (node.children) {
           for (var i in node.children) {
+            if (node.id != '1') {
+              node.children[i].title = node.title + '/' + node.children[i].title;
+            }
             find(node.children[i]);
           }
         }
         if (node.url) {
-          results.push(node);
+          bookmarks.push(node);
         }
       };
       find(tree[0]);
-      port.postMessage(results);
+
+      convertFaviconsToDataURL(Utility.collect(bookmarks, 'url'), function(results) {
+        for (var i = 0; i < results.length; i++) {
+          bookmarks[i].faviconDataUrl = results[i];
+        }
+        port.postMessage(bookmarks);
+      });
+    });
+  });
+};
+
+/**
+ * Get a list of applications.
+ */
+RuntimeCommand.loadApplications = function(port) {
+  port.onMessage.addListener(function() {
+    chrome.management.getAll(function(items) {
+      var apps = [];
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        if (item.type.indexOf('_app') > -1) {
+          apps.push(item);
+        }
+      }
+
+      convertFaviconsToDataURL(Utility.collect(apps, 'appLaunchUrl'), function(results) {
+        for (var i = 0; i < results.length; i++) {
+          apps[i].faviconDataUrl = results[i];
+        }
+        port.postMessage(apps);
+      });
     });
   });
 };

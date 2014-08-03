@@ -4,8 +4,9 @@
 var HometypeDefaultOptions = {
   command_interval: 300,
   scroll_amount: 50,
-  tab_selection_hint_keys: '123456789qwertyuiopasdfghjklzxcvbnm',
+  tab_selection_hint_keys: '123456789QWERTYUIOPASDFGHJKLZXCVBNM',
   hint_key_algorithm: Constant.hint_key.algorithm.standard,
+  hint_key_type: Constant.hint_key.letter_type.lowercase,
 
   /**
    * How to specify a command:
@@ -19,13 +20,13 @@ var HometypeDefaultOptions = {
       'k': 'scrollUp',
       'G': 'scrollToBottom',
       'gg': 'scrollToTop',
-      'f': 'enterHintMode',
-      'F': 'enterHintMode --new',
-      'cf': 'enterHintMode --continuous',
-      'cF': 'enterHintMode --new --continuous',
+      'f': 'followLink',
+      'F': 'followLink --new',
+      'cf': 'followLink --continuous',
+      'cF': 'followLink --new --continuous',
       'x': 'closeTab',
       'v': 'enterVisualMode',
-      'm': 'enterTabSelectionMode',
+      'm': 'selectTab',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',
@@ -34,9 +35,10 @@ var HometypeDefaultOptions = {
       '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab',
-      ':': 'enterCommandMode',
+      ':': 'executeCommand',
       'b': 'searchBookmarks',
       'B': 'searchBookmarks --new',
+      'o': 'searchApplications',
       'i': 'enterInsertMode',
       'a': 'enterInsertMode',
       'I': 'focusFirstInput',
@@ -49,43 +51,33 @@ var HometypeDefaultOptions = {
       '?': 'showAssignedCommands'
     },
     cmap: {
-      'Esc': 'enterNormalMode',
+      '<Esc>': 'enterNormalMode',
       '<C-n>': 'selectNextCandidate',
       '<C-p>': 'selectPrevCandidate'
     },
     imap: {
-      'Esc': 'cancelInsertMode',
+      '<Esc>': 'cancelInsertMode',
       '<C-c>': 'cancelInsertMode',
-      '<C-e>': 'scrollDown',
-      '<C-y>': 'scrollUp',
-      '<C-d>': 'scrollDownHalf',
-      '<C-u>': 'scrollUpHalf',
-      '<C-f>': 'scrollDownPage',
-      '<C-b>': 'scrollUpPage',
       '<C-p>': 'moveLeftTab',
-      '<C-n>': 'moveRightTab',
-      '<C-f>': '@enterHintMode'
+      '<C-n>': 'moveRightTab'
     },
     vmap: {
-      'Esc': 'enterNormalMode'
+      '<Esc>': 'enterNormalMode'
     },
     fmap: {
-      'Esc': 'enterNormalMode',
+      '<Esc>': 'enterNormalMode',
       '<C-c>': 'enterNormalMode',
-      '<C-e>': 'scrollDown @enterHintMode',
-      '<C-y>': 'scrollUp @enterHintMode',
-      '<C-d>': 'scrollDownHalf @enterHintMode',
-      '<C-u>': 'scrollUpHalf @enterHintMode',
-      '<C-f>': 'scrollDownPage @enterHintMode',
-      '<C-b>': 'scrollUpPage @enterHintMode',
+      '<C-e>': 'scrollDown @followLink',
+      '<C-y>': 'scrollUp @followLink',
+      '<C-d>': 'scrollDownHalf @followLink',
+      '<C-u>': 'scrollUpHalf @followLink',
+      '<C-f>': 'scrollDownPage @followLink',
+      '<C-b>': 'scrollUpPage @followLink',
       '<C-p>': 'moveLeftTab',
       '<C-n>': 'moveRightTab'
     },
     hmap: {
-      'Esc': 'enterNormalMode'
-    },
-    tmap: {
-      'Esc': 'enterNormalMode'
+      '<Esc>': 'enterNormalMode'
     }
   }
 };

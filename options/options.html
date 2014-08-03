@@ -11,33 +11,134 @@
   <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
+  <div class="menu-section">
+    <ul>
+      <li class="js-menu-section active-menu-section" data-ref="basic-options">Basic Options</li>
+      <li class="js-menu-section " data-ref="key-bindings">Key bindings</li>
+    </ul>
+  </div>
   <div class="header">
     <h1>Hometype Option</h1>
   </div>
-  <div class="section">Basic option</div>
-  <dl>
-    <dt>Command interval</dt>
-    <dd><input type="text" name="command_interval" id="command_interval" size="7" /> ms</dd>
-    <dt>Amount of scrolling</dt>
-    <dd><input type="text" name="scroll_amount" id="scroll_amount" size="7" /></dd>
-    <dt style="width:200px;height:60px;">Hint key algorithm</dt>
-    <dd>
-      <input type="radio" name="hint_key_algorithm" id="hint_key_standard" value="1" checked />
-      <label for="hint_key_standard">Standard Algorithm</label><br/>
-      <input type="radio" name="hint_key_algorithm" id="hint_key_comfortable" value="2" />
-      <label for="hint_key_comfortable">Comfortable Algorithm</label>
-    </dd>
-  </dl>
-  <br><br>
-  <div class="section">Key bindings</div>
-  <textarea id="key_bind_list"></textarea>
-  <br>
-  <br>
-  <div class="section">Ignore url list</div>
-  <textarea id="ignore_url_list"></textarea>
-  <br>
-  <br>
-  <div id="status"></div>
-  <button id="save">Save</button>
+  <div class="container">
+    <div class="js-option-panel" id="basic-options">
+      <div id="description-area" class="description-area">
+        <div class="description-area-inner">
+          <div class="description-area-title" id="description-area-title"></div>
+          <div class="description-area-content" id="description-area-content"><div>&nbsp;</div></div>
+        </div>
+      </div>
+      <div class="category">
+        <div class="category-header">Basic</div>
+        <dl class="category-content">
+          <dt>Command Interval<span class="js-help help" data-name="command_interval">[?]</span></dt>
+          <dd><input type="text" name="command_interval" id="command_interval" size="7" /> ms</dd>
+          <dt>Amount of Scrolling<span class="js-help help" data-name="scroll_amount">[?]</span></dt>
+          <dd><input type="text" name="scroll_amount" id="scroll_amount" size="7" /> px</dd>
+        </dl>
+      </div>
+      <div class="category">
+        <div class="category-header">Hint</div>
+        <dl class="category-content">
+          <dt>Key algorithm<span class="js-help help" data-name="hint_key_algorithm">[?]</span></dt>
+          <dd>
+            <input type="radio" name="hint_key_algorithm" id="hint_key_standard" value="1" checked />
+            <label for="hint_key_standard">Standard</label><br/>
+            <input type="radio" name="hint_key_algorithm" id="hint_key_comfortable" value="2" />
+            <label for="hint_key_comfortable">Comfortable</label><br/>
+          </dd>
+          <dt>Letter Type<span class="js-help help" data-name="hint_letter_type">[?]</span></dt>
+          <dd>
+            <input type="radio" name="hint_letter_type" id="hint_letter_lowercase" value="1" checked />
+            <label for="hint_letter_lowercase">lowercase</label><br/>
+            <input type="radio" name="hint_letter_type" id="hint_letter_uppercase" value="2" />
+            <label for="hint_letter_uppercase">UPPERCASE</label><br/>
+          </dd>
+        </dl>
+      </div>
+      <div class="category">
+        <div class="category-header">Ignore urls</div>
+        <div class="category-content">
+          <textarea name=ignore_url_list" id="ignore_url_list" placeholder="https://mail.google.com/mail/* etc..."></textarea>
+          You can specify url at each lines using regular expression to make Hometype unavailable.
+        </div>
+      </div>
+
+      <div class="option-description">
+        <div id="title-for-command_interval">Command Interval</div>
+        <div id="desc-for-command_interval">
+          This option value is the time till a command is confirmed. It is available only if there aren't a confirmed command when you typed keys.
+        </div>
+        <div id="title-for-scroll_amount">Amount of Scrolling</div>
+        <div id="desc-for-scroll_amount">
+          This is used when <code>scrollDown</code> and <code>scrollUp</code> is called.
+        </div>
+        <div id="title-for-hint_characters">Hint Characters</div>
+        <div id="desc-for-hint_characters">
+          Hint characters is used as a hint tip key when Hometype shifts the hint mode. This is <strong>CASE SENSITIVE</strong>.
+        </div>
+        <div id="title-for-hint_key_algorithm">Hint Key Algorithm</div>
+        <div id="desc-for-hint_key_algorithm">
+          Select an algorithm that generates hint keys in the hint mode.<br/>
+          <dl>
+            <dt>1. Standard</dt>
+            <dd>Characters used as hint keys in this algorithm is <strong>jfhkgyuiopqwertnmzxcvblasd</strong>. Hint keys in the hint mode are generated by fetching a character from it.</dd>
+            <dt>2. Comfortable</dt>
+            <dd>This algorithm tries to generate hint keys as possible as type with only one hand. In most case, this is usable more than Standard Algorithm.</dd>
+          </dl>
+        </div>
+        <div id="title-for-hint_letter_type">Hint Key Type</div>
+        <div id="desc-for-hint_letter_type">
+          Select an hint letter type.<br/>
+          <dl>
+            <dt>1. lowercase</dt>
+            <dd>Hint keys generated by the algorithm is converted to <strong>lowercase</strong></dd>
+            <dt>2. UPPERCASE</dt>
+            <dd>Hint keys generated by the algorithm is converted to <strong>UPPERCASE</strong></dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+
+    <div class="js-option-panel" id="key-bindings">
+      <div class="description-area" style="display:block;">
+        <div class="description-area-inner">
+          <div class="description-area-title">Key Bindings</div>
+          <div class="description-area-content">
+            You can customize key bindings to specify following format:
+            <div style="margin:4px 0;">
+              <code>map-type assigned-keys executed-commands [--options]</code>
+            </div>
+            For example,
+            <div style="margin:4px 0;">
+              <div class="code">
+                nmap j scrollDown<br/>
+                vmap &lt;C-c&gt; enterNormalMode<br/>
+                imap Jf scrollDown followLink
+              </div>
+            </div>
+            <dl>
+              <dt>map-type</dt>
+              <dd>You can specify <strong>nmap</strong>, <strong>cmap</strong>, <strong>imap</strong>, <strong>vmap</strong>, <strong>fmap</strong>. Each types correspond to key bindings in the <strong>normal mode</strong>, <strong>command mode</strong>, <strong>insert mode</strong>, <strong>visual mode</strong>, <strong>hint mode</strong>.</dd>
+              <dt>assigned-keys</dt>
+              <dd>You can specify keys to invoke a command you want to execute. Multi keys is available.</dd>
+              <dt>executed-commands</dt>
+              <dd>You can specify commands you want to executed with its options. Multi commands also is available. If you give <strong>@</strong> character to the head of the command, Hometype takes over its options that was executed previous when the command will be executed.</dd>
+            </dl>
+            To get more information for commands please see <a href="http://tkengo.github.io/hometype/reference.html" target="_blank">Hometype command reference</a>
+          </div>
+        </div>
+      </div>
+      <div class="category">
+        <div class="category-header">Key Bindings</div>
+        <div class="category-content">
+          <textarea id="key_bind_list"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div id="status"></div>
+    <button id="save">Save</button>
+  </div>
 </body>
 </html>

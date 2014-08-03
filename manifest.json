@@ -10,6 +10,7 @@
     "bookmarks",
     "webNavigation",
     "storage",
+    "management",
     "<all_urls>"
   ],
 
@@ -22,7 +23,9 @@
   "background": {
     "persistent": false,
     "scripts": [
+      "lib/utility.js",
       "lib/jquery-2.0.1.min.js",
+      "js/background/favicon.js",
       "js/background/history.js",
       "js/background/tab.js",
       "js/background/script.js"
@@ -41,6 +44,7 @@
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
+      "lib/jp.js",
       "js/constants.js",
       "js/default_option.js",
       "js/options.js",
@@ -51,7 +55,7 @@
       "js/box/select.js",
       "js/box/command.js",
       "js/box/help.js",
-      "js/box/tab_list.js",
+      "js/hint/letter_conversion.js",
       "js/hint/algorithm/standard.js",
       "js/hint/algorithm/comfortable.js",
       "js/hint/key_factory.js",
@@ -63,12 +67,15 @@
       "js/processor/hint.js",
       "js/processor/insert.js",
       "js/processor/help.js",
-      "js/processor/tab_selection.js",
       "js/command.js",
       "js/executer.js",
+      "js/homedics.js",
       "js/mode.js",
       "js/main.js"
     ],
     "run_at": "document_start"
-  }]
+  }],
+  "web_accessible_resources": [
+    "dicts/*.ml"
+  ]
 }
