@@ -1,4 +1,9 @@
 $(document).ready(function() {
+  $('.js-translate').each(function() {
+    var el = $(this);
+    el.html(chrome.i18n.getMessage(el.data('translate')));
+  });
+
   HometypeOptions.getInstance().load(function(options) {
     $.each(options, function(key, value) {
       var element = $("input[name='" + key + "']");
