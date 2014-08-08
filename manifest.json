@@ -20,6 +20,8 @@
     "128": "icons/icon128.png"
   },
 
+  "default_locale": "en",
+
   "background": {
     "persistent": false,
     "scripts": [
