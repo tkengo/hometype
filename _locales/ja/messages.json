@@ -29,6 +29,9 @@
   "letter_type": {
     "message": "文字種別"
   },
+  "hint_auto_confirm": {
+    "message": "リンク確定時に自動的に遷移する"
+  },
   "lowercase": {
     "message": "小文字"
   },
@@ -69,6 +72,9 @@
         <dd>生成されるヒントキーは<strong>大文字</strong>になります。</dd>
       </dl>
     "
+  },
+  "desc_for_hint_auto_confirm": {
+    "message": "このオプションにチェックをいれると、ヒントモード中に要素をテキスト検索してマッチした要素が1つに絞られた場合、自動的にその要素をクリックして次の画面へ遷移するようになります。"
   },
   "desc_for_ignore_urls": {
     "message": "Hometypeを無効にしたいURLを改行区切りで指定することができます。正規表現を使えます。"

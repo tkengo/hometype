@@ -148,6 +148,9 @@ dt, dd {
   line-height: 25px;
   margin-bottom: 10px;
 }
+.help-wrapper {
+  position: relative;
+}
 .help {
   width: 16px;
   height: 16px;

@@ -137,7 +137,7 @@ HintModeProcessor.prototype.startSearching = function(currentKey) {
  */
 HintModeProcessor.prototype.searchHints = function(text, currentKey) {
   var regenerateElements = this.hintElements.regenerateHintsBy(text.toLowerCase());
-  if (regenerateElements.length == 1) {
+  if (regenerateElements.length == 1 && Opt.hint_auto_confirm) {
     this.confirm(regenerateElements[0].getElement());
   } else {
     if (currentKey == 'Enter') {
