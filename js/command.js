@@ -217,12 +217,27 @@ Command.searchClosedTabs = function() {
 
   chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
     processor.onUpdateBoxText(function(text) {
-      var list = [];
-      $.each(closedTabs, function(index, tab) {
-        if (tab && Utility.includedInProperties(tab, text, [ 'title', 'url' ])) {
-          list.push({ text: tab.title + '(' + tab.url + ')', url: tab.url, tabId: tab.id });
+      var homedics = new Homedics(text);
+      var list     = [];
+
+      for (var i = 0; i < closedTabs.length; i++) {
+        var tab = closedTabs[i];
+
+        if (tab) {
+          var urlMatched   = homedics.match(tab.url);
+          var titleMatched = homedics.match(tab.title);
+
+          if (text == '' || urlMatched.matched || titleMatched.matched) {
+            list.push({
+              text: tab.title + '(' + tab.url + ')',
+              url: tab.url,
+              tabId: tab.id,
+              highlights: (urlMatched.matches || []).concat(titleMatched.matches || [])
+            });
+          }
         }
-      });
+      }
+
       return list;
     }, true);
   });
