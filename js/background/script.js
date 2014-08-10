@@ -143,6 +143,9 @@ RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
   });
 };
 
+/**
+ * Launch an application.
+ */
 RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
   chrome.management.launchApp(params);
 };
