@@ -28,6 +28,7 @@ var HometypeDefaultOptions = {
       'x': 'closeTab',
       'v': 'enterVisualMode',
       'm': 'selectTab',
+      'yy': 'yankUrl',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',

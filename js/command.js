@@ -148,6 +148,13 @@ Command.focusLastInput = function() {
 };
 
 /**
+ * Yank a url.
+ */
+Command.yankUrl = function() {
+  chrome.runtime.sendMessage({ command: 'copyToClipboard', params: window.location.href });
+};
+
+/**
  * Enter the tab selection mode.
  */
 Command.selectTab = function() {
