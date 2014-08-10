@@ -74,9 +74,10 @@ HintElementCollection.prototype.regenerateHintsBy = function(text) {
         regenerateElements.push(element);
         matches.push(result.matches);
       }
-      if (result.head) {
-        element.className = element.className + ' hometype-hit-a-hint-head-area';
-      }
+    }
+
+    if (regenerateElements.length > 0) {
+      regenerateElements[0].className = regenerateElements[0].className + ' hometype-hit-a-hint-head-area';
     }
   }
 
