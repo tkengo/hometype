@@ -89,17 +89,15 @@ HintElementCollection.prototype.regenerateHintsBy = function(text) {
   return regenerateElements;
 };
 
-HintElementCollection.prototype.getHeadMatchedElements = function() {
-  var results = [];
-
+HintElementCollection.prototype.getFilteringMatchedElement = function() {
   for (var i = 0; i < this.elements.length; i++) {
     var element = this.elements[i].getElement();
     if (element.className.indexOf('hometype-hit-a-hint-head-area') > -1) {
-      results.push(element);
+      return element;
     }
   }
 
-  return results;
+  return null;
 };
 
 HintElementCollection.prototype.removeAllHint = function() {

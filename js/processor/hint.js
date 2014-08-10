@@ -141,9 +141,9 @@ HintModeProcessor.prototype.searchHints = function(text, currentKey) {
     this.confirm(regenerateElements[0].getElement());
   } else {
     if (currentKey == 'Enter') {
-      var headMatchedElements = this.hintElements.getHeadMatchedElements();
-      if (headMatchedElements.length > 0) {
-        this.confirm(headMatchedElements[0]);
+      var matchedElement = this.hintElements.getFilteringMatchedElement();
+      if (matchedElement) {
+        this.confirm(matchedElement);
       }
     }
   }
