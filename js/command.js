@@ -154,19 +154,6 @@ Command.selectTab = function() {
   var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
   var commandBox      = processor.getCommandBox().setHeaderText('Tabs');
   var port            = chrome.runtime.connect({ name: 'loadTabs' });
-  var createCandidate = function(tabs, filter) {
-    var list = [];
-
-    for (var i = 0; i < tabs.length; i++) {
-      var tab  = tabs[i];
-      if (!filter || Utility.includedInProperties(tab, filter, [ 'title', 'url' ])) {
-        var char = '<span class="hometype-char-text">' + Opt.tab_selection_hint_keys.charAt(i) + '</span> ';
-        list.push({ escape: false, text: ' - ' + char + Dom.escapeHTML(tab.title + '(' + tab.url + ')'), url: tab.url, icon: tab.faviconDataUrl, id: tab.id });
-      }
-    }
-
-    return list;
-  };
   var selectTab = function(id) {
     Mode.changeMode(ModeList.NORMAL_MODE);
     chrome.runtime.sendMessage({ command: 'selectTab', params: id });
@@ -188,7 +175,7 @@ Command.selectTab = function() {
       if (index > -1 && tabs[index]) {
         selectTab(tabs[index].id);
       } else {
-        return createCandidate(tabs, text);
+        return filterTabs(tabs, text);
       }
     });
 
@@ -197,7 +184,7 @@ Command.selectTab = function() {
       params: { tab_selection_hint_keys: Opt.tab_selection_hint_keys }
     });
 
-    commandBox.setCandidate(createCandidate(tabs));
+    commandBox.setCandidate(filterTabs(tabs, ''));
     commandBox.showCandidate();
 
     port.disconnect();
@@ -217,28 +204,7 @@ Command.searchClosedTabs = function() {
 
   chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
     processor.onUpdateBoxText(function(text) {
-      var homedics = new Homedics(text);
-      var list     = [];
-
-      for (var i = 0; i < closedTabs.length; i++) {
-        var tab = closedTabs[i];
-
-        if (tab) {
-          var urlMatched   = homedics.match(tab.url);
-          var titleMatched = homedics.match(tab.title);
-
-          if (text == '' || urlMatched.matched || titleMatched.matched) {
-            list.push({
-              text: tab.title + '(' + tab.url + ')',
-              url: tab.url,
-              tabId: tab.id,
-              highlights: (urlMatched.matches || []).concat(titleMatched.matches || [])
-            });
-          }
-        }
-      }
-
-      return list;
+      return filterClosedTabs(text, closedTabs);
     }, true);
   });
 };
@@ -262,15 +228,8 @@ Command.searchBookmarks = function(option) {
   var port = chrome.runtime.connect({ name: 'loadBookmarks' });
   port.onMessage.addListener(function(bookmarks) {
     processor.onUpdateBoxText(function(text) {
-      var list = [];
-      for (var i = 0; i < bookmarks.length; i++) {
-        var bookmark = bookmarks[i];
-        if (text == '' || Utility.includedInProperties(bookmark, text, [ 'title', 'url' ])) {
-          list.push({ text: bookmark.title + '(' + bookmark.url + ')', url: bookmark.url, icon: bookmark.faviconDataUrl });
-        }
-      };
       port.disconnect();
-      return list;
+      return filterBookmarks(text, bookmarks);
     });
   });
   port.postMessage();
@@ -283,23 +242,13 @@ Command.searchHistories = function() {
   var port            = chrome.runtime.connect({ name: 'loadHistories' });
   var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
   var commandBox      = processor.getCommandBox().setHeaderText('Histories');
-  var createCandidate = function(histories, filter) {
-    var list = [];
-    for (var i = histories.length - 1; i > -1; i--) {
-      var history = histories[i];
-      if (!filter || Utility.includedInProperties(history, filter, [ 'title', 'url' ])) {
-        list.push({ text: history.title + '(' + history.url + ')', url: history.url, icon: history.faviconDataUrl });
-      }
-    }
-    return list;
-  }
 
   port.onMessage.addListener(function(histories) {
-    commandBox.setCandidate(createCandidate(histories));
+    commandBox.setCandidate(filterHistories(histories, ''));
     commandBox.showCandidate();
 
     processor.onUpdateBoxText(function(text) {
-      return createCandidate(histories, text);
+      return filterHistories(histories, text);
     }, true);
     processor.onEnter(function(text, selected) {
       Utility.openUrl(selected.url);
@@ -314,18 +263,6 @@ Command.searchApplications = function() {
   var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
   var port            = chrome.runtime.connect({ name: 'loadApplications' });
   var commandBox      = processor.getCommandBox().setHeaderText('Applications');
-  var createCandidate = function(apps, filter) {
-    var list = [];
-    for (var i = 0; i < apps.length; i++) {
-      var app = apps[i];
-      if (filter == '' || Utility.includedInProperties(app, filter, [ 'name', 'appLaunchUrl' ])) {
-        var name = app.appLaunchUrl ?  app.name + '(' + app.appLaunchUrl + ')' : app.name;
-        list.push({ text: name, url: app.appLaunchUrl, id: app.id, icon: app.faviconDataUrl });
-      }
-    };
-    port.disconnect();
-    return list;
-  };
 
   processor.onEnter(function(text, selected) {
     chrome.runtime.sendMessage({ command: 'launchApplication', params: selected.id });
@@ -333,10 +270,11 @@ Command.searchApplications = function() {
 
   port.onMessage.addListener(function(apps) {
     processor.onUpdateBoxText(function(text) {
-      return createCandidate(apps, text);
+      return filterApplications(apps, text);
     });
-    commandBox.setCandidate(createCandidate(apps, ''));
+    commandBox.setCandidate(filterApplications(apps, ''));
     commandBox.showCandidate();
+    port.disconnect();
   });
   port.postMessage();
 };
