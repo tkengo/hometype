@@ -151,6 +151,22 @@ RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
 };
 
 /**
+ * Copy a text to the clipboard.
+ */
+RuntimeCommand.copyToClipboard = function(sender, params, sendResponse) {
+  var textArea = document.createElement('textarea');
+  textArea.style.cssText = 'position:absolute;top:-9999px';
+
+  document.body.appendChild(textArea);
+
+  textArea.value = params;
+  textArea.select();
+  document.execCommand('copy');
+
+  document.body.removeChild(textArea);
+};
+
+/**
  * ------------------------------------
  * OnConnect callback runtime methods.
  * ------------------------------------
