@@ -1,4 +1,4 @@
-function filterClosedTabs(text, tabs)
+function filterClosedTabs(tabs, text)
 {
   var homedics = new Homedics(text);
   var list     = [];
@@ -24,7 +24,7 @@ function filterClosedTabs(text, tabs)
   return list;
 }
 
-function filterBookmarks(text, bookmarks)
+function filterBookmarks(bookmarks, text)
 {
   var homedics = new Homedics(text);
   var list     = [];

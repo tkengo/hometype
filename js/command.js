@@ -204,7 +204,7 @@ Command.searchClosedTabs = function() {
 
   chrome.runtime.sendMessage({ command: 'closedTabList' }, function(closedTabs) {
     processor.onUpdateBoxText(function(text) {
-      return filterClosedTabs(text, closedTabs);
+      return filterClosedTabs(closedTabs, text);
     }, true);
   });
 };
@@ -229,7 +229,7 @@ Command.searchBookmarks = function(option) {
   port.onMessage.addListener(function(bookmarks) {
     processor.onUpdateBoxText(function(text) {
       port.disconnect();
-      return filterBookmarks(text, bookmarks);
+      return filterBookmarks(bookmarks, text);
     });
   });
   port.postMessage();
