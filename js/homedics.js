@@ -143,7 +143,7 @@ Homedics.prototype.match = function(target) {
 
   return {
     matched: !!matches,
-    matches: matches,
+    matches: matches || [],
     head: position == 0
   };
 };

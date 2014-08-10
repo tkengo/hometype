@@ -122,8 +122,11 @@ HometypeCommandBox.prototype.setCandidate = function(list) {
     }
     var div = $('<div>').html(item.escape ? Dom.escapeHTML(text) : text).attr('data-index', i);
 
-    if (this.text.val() != '') {
-      Dom.highlight(div.get(0), this.text.val(), { ignoreCase: true });
+    // if (this.text.val() != '') {
+    //   Dom.highlight(div.get(0), this.text.val(), { ignoreCase: true });
+    // }
+    for (var j = 0; item.highlights && j < item.highlights.length; j++) {
+      Dom.highlight(div.get(0), item.highlights[j], { ignoreCase: true });
     }
 
     if (item.icon) {

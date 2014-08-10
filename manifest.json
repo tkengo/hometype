@@ -69,6 +69,7 @@
       "js/processor/hint.js",
       "js/processor/insert.js",
       "js/processor/help.js",
+      "js/filter.js",
       "js/command.js",
       "js/executer.js",
       "js/homedics.js",
