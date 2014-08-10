@@ -11,6 +11,7 @@
     "webNavigation",
     "storage",
     "management",
+    "clipboardRead",
     "<all_urls>"
   ],
 
