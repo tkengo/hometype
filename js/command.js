@@ -151,10 +151,10 @@ Command.focusLastInput = function() {
  * Enter the tab selection mode.
  */
 Command.selectTab = function() {
-  var processor       = Mode.changeMode(ModeList.COMMAND_MODE);
-  var commandBox      = processor.getCommandBox().setHeaderText('Tabs');
-  var port            = chrome.runtime.connect({ name: 'loadTabs' });
-  var selectTab = function(id) {
+  var processor  = Mode.changeMode(ModeList.COMMAND_MODE);
+  var commandBox = processor.getCommandBox().setHeaderText('Tabs');
+  var port       = chrome.runtime.connect({ name: 'loadTabs' });
+  var selectTab  = function(id) {
     Mode.changeMode(ModeList.NORMAL_MODE);
     chrome.runtime.sendMessage({ command: 'selectTab', params: id });
   };
