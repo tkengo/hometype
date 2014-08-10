@@ -143,8 +143,27 @@ RuntimeCommand.resetTitleForAllTabs = function(sender, params, sendResponse) {
   });
 };
 
+/**
+ * Launch an application.
+ */
 RuntimeCommand.launchApplication = function(sender, params, sendResponse) {
   chrome.management.launchApp(params);
+};
+
+/**
+ * Copy a text to the clipboard.
+ */
+RuntimeCommand.copyToClipboard = function(sender, params, sendResponse) {
+  var textArea = document.createElement('textarea');
+  textArea.style.cssText = 'position:absolute;top:-9999px';
+
+  document.body.appendChild(textArea);
+
+  textArea.value = params;
+  textArea.select();
+  document.execCommand('copy');
+
+  document.body.removeChild(textArea);
 };
 
 /**
