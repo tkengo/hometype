@@ -29,6 +29,7 @@ var HometypeDefaultOptions = {
       'v': 'enterVisualMode',
       'm': 'selectTab',
       'yy': 'yankUrl',
+      'P': 'togglePin',
       '<C-e>': 'scrollDown',
       '<C-y>': 'scrollUp',
       '<C-d>': 'scrollDownHalf',

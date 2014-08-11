@@ -155,6 +155,13 @@ Command.yankUrl = function() {
 };
 
 /**
+ * Toggle the pin state in the current tab.
+ */
+Command.togglePin = function() {
+  chrome.runtime.sendMessage({ command: 'togglePin' });
+};
+
+/**
  * Enter the tab selection mode.
  */
 Command.selectTab = function() {

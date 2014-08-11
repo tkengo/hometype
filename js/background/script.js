@@ -167,6 +167,17 @@ RuntimeCommand.copyToClipboard = function(sender, params, sendResponse) {
 };
 
 /**
+ * Toggle the pin state in the current tab.
+ */
+RuntimeCommand.togglePin = function(sender, params, sendResponse) {
+  chrome.tabs.get(sender.tab.id, function(tab) {
+    chrome.tabs.update(sender.tab.id, {
+      pinned: !tab.pinned
+    });
+  });
+};
+
+/**
  * ------------------------------------
  * OnConnect callback runtime methods.
  * ------------------------------------
