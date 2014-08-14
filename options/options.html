@@ -29,7 +29,7 @@
         </div>
       </div>
       <div class="category">
-        <div class="js-translate category-header" data-translate="basic_config">Basic</div>
+        <div class="js-translate category-header" data-translate="basic_config"></div>
         <dl class="category-content">
           <dt>
             <span class="js-translate" data-translate="command_interval"></span>
@@ -45,28 +45,35 @@
       </div>
       <div class="category">
         <div class="js-translate category-header" data-translate="hint_config"></div>
-        <dl class="category-content">
-          <dt>
-            <span class="js-translate" data-translate="key_algorithm"></span>
-            <span class="js-help help" data-name="hint_key_algorithm">[?]</span>
-          </dt>
-          <dd>
-            <input type="radio" name="hint_key_algorithm" id="hint_key_standard" value="1" checked />
-            <label for="hint_key_standard" class="js-translate" data-translate="standard"></label><br/>
-            <input type="radio" name="hint_key_algorithm" id="hint_key_comfortable" value="2" />
-            <label for="hint_key_comfortable" class="js-translate" data-translate="comfortable"></label><br/>
-          </dd>
-          <dt>
-            <span class="js-translate" data-translate="letter_type"></span>
-            <span class="js-help help" data-name="hint_letter_type">[?]</span>
-          </dt>
-          <dd>
-            <input type="radio" name="hint_letter_type" id="hint_letter_lowercase" value="1" checked />
-            <label for="hint_letter_lowercase" class="js-translate" data-translate="lowercase"></label><br/>
-            <input type="radio" name="hint_letter_type" id="hint_letter_uppercase" value="2" />
-            <label for="hint_letter_uppercase" class="js-translate" data-translate="uppercase"></label><br/>
-          </dd>
-        </dl>
+        <div class="category-content">
+          <dl>
+            <dt>
+              <span class="js-translate" data-translate="key_algorithm"></span>
+              <span class="js-help help" data-name="hint_key_algorithm">[?]</span>
+            </dt>
+            <dd>
+              <input type="radio" name="hint_key_algorithm" id="hint_key_standard" value="1" checked />
+              <label for="hint_key_standard" class="js-translate" data-translate="standard"></label><br/>
+              <input type="radio" name="hint_key_algorithm" id="hint_key_comfortable" value="2" />
+              <label for="hint_key_comfortable" class="js-translate" data-translate="comfortable"></label><br/>
+            </dd>
+            <dt>
+              <span class="js-translate" data-translate="letter_type"></span>
+              <span class="js-help help" data-name="hint_letter_type">[?]</span>
+            </dt>
+            <dd>
+              <input type="radio" name="hint_letter_type" id="hint_letter_lowercase" value="1" checked />
+              <label for="hint_letter_lowercase" class="js-translate" data-translate="lowercase"></label><br/>
+              <input type="radio" name="hint_letter_type" id="hint_letter_uppercase" value="2" />
+              <label for="hint_letter_uppercase" class="js-translate" data-translate="uppercase"></label><br/>
+            </dd>
+          </dl>
+          <div class="help-wrapper">
+            <input type="checkbox" id="hint_auto_confirm" name="hint_auto_confirm">
+            <label for="hint_auto_confirm" class="js-translate" data-translate="hint_auto_confirm"></label>
+            <span class="js-help help" data-name="hint_auto_confirm">[?]</span>
+          </div>
+        </div>
       </div>
       <div class="category">
         <div class="js-translate category-header" data-translate="ignore_urls"></div>
@@ -89,6 +96,8 @@
         <div id="desc-for-hint_key_algorithm" class="js-translate" data-translate="desc_for_key_algorithm"></div>
         <div id="title-for-hint_letter_type" class="js-translate" data-translate="letter_type"></div>
         <div id="desc-for-hint_letter_type" class="js-translate" data-translate="desc_for_letter_type"></div>
+        <div id="title-for-hint_auto_confirm" class="js-translate" data-translate="hint_auto_confirm"></div>
+        <div id="desc-for-hint_auto_confirm" class="js-translate" data-translate="desc_for_hint_auto_confirm"></div>
       </div>
     </div>
 
