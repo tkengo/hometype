@@ -52,13 +52,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   var elements = this.hintElements.getMatchedElements(stack);
 
   if (this.extendMode) {
-    if (currentKey == 'm') {
-      this.extendAction = 'mouseover';
-    } else if (currentKey == 'y') {
-      this.extendAction = 'yankUrl';
-    } else {
-      this.extendAction = 'click';
-    }
+    this.extendAction = ActionMap.get(currentKey);
     this.extendMode = false;
     return true;
   } else if (elements.length == 0) {

@@ -25,6 +25,7 @@ module.exports = function(config) {
       "js/box/command.js",
       "js/box/help.js",
       "js/hint/action.js",
+      "js/hint/action_map.js",
       "js/hint/letter_conversion.js",
       "js/hint/algorithm/standard.js",
       "js/hint/algorithm/comfortable.js",
