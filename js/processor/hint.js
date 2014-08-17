@@ -12,6 +12,14 @@ var HintModeProcessor = function() {
   this.commandBox              = null;
   this.headElements            = [];
   this.searching               = false;
+  this.extendAction            = 'click';
+};
+
+/**
+ * Callback method that invoke when enter the hint mode.
+ */
+HintModeProcessor.prototype.notifyEnterMode = function() {
+  this.extendAction = 'click';
 };
 
 /**
@@ -43,9 +51,23 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
 
-  if (elements.length == 0) {
-    // Search hint texts if there is no element matched hint key.
-    this.startSearching(currentKey);
+  if (this.extendMode) {
+    if (currentKey == 'm') {
+      this.extendAction = 'mouseover';
+    } else if (currentKey == 'y') {
+      this.extendAction = 'yankUrl';
+    } else {
+      this.extendAction = 'click';
+    }
+    this.extendMode = false;
+    return true;
+  } else if (elements.length == 0) {
+    if (currentKey == ';') {
+      this.extendMode = true;
+    } else {
+      // Search hint texts if there is no element matched hint key.
+      this.startSearching(currentKey);
+    }
     return true;
   }
 
@@ -61,6 +83,10 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   }
 };
 
+HintModeProcessor.prototype.getExtendAction = function() {
+  return this.extendAction;
+};
+
 /**
  * Confirm an element and invoke a callback method.
  * Return normal mode if the callback method returned false.
@@ -69,7 +95,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
  */
 HintModeProcessor.prototype.confirm = function(element) {
   // Invoke a callback method if an element is confirmed.
-  if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
+  if (this.chooseElementCallback && this.chooseElementCallback.call(this, element) !== false) {
     // Return normal mode if only callback didn't return false.
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
