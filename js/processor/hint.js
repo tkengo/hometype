@@ -8,10 +8,10 @@
 var HintModeProcessor = function() {
   this.chooseElementCallback   = null;
   this.notifyLeaveModeCallback = null;
-  this.hintElements = null;
-  this.headElements = [];
-  this.searching = false;
-  this.commandBox = null;
+  this.hintElements            = null;
+  this.commandBox              = null;
+  this.headElements            = [];
+  this.searching               = false;
 };
 
 /**
