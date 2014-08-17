@@ -12,14 +12,16 @@ var HintModeProcessor = function() {
   this.commandBox              = null;
   this.headElements            = [];
   this.searching               = false;
-  this.extendAction            = 'click';
+  this.extendAction            = null;
 };
 
 /**
  * Callback method that invoke when enter the hint mode.
  */
 HintModeProcessor.prototype.notifyEnterMode = function() {
-  this.extendAction = 'click';
+  if (!this.commandBox) {
+    this.commandBox = new HometypeCommandBox('SearchHints');
+  }
 };
 
 /**
@@ -28,7 +30,8 @@ HintModeProcessor.prototype.notifyEnterMode = function() {
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.chooseElementCallback = null;
   this.hintElements.removeAllHint();
-  this.searching = false;
+  this.searching    = false;
+  this.extendAction = null;
 
   if (this.commandBox) {
     this.commandBox.hide();
@@ -48,20 +51,25 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
  * @param KeyboradEvent e          event.
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
+  // Enter the extend hint mode.
+  if (!this.searching && (currentKey == ';' || this.commandBox.getHeaderText() == ';')) {
+    if (currentKey == ';') {
+      this.commandBox.setHeaderText(';').show();
+      return true;
+    } else if (this.extendAction = ActionMap[currentKey]) {
+      this.commandBox.setHeaderText(this.extendAction).setText('');
+      document.activeElement.blur();
+      return true;
+    } else {
+      this.commandBox.setHeaderText(this.getExtendAction());
+    }
+  }
+
   // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
-
-  if (this.extendMode) {
-    this.extendAction = ActionMap.get(currentKey);
-    this.extendMode = false;
-    return true;
-  } else if (elements.length == 0) {
-    if (currentKey == ';') {
-      this.extendMode = true;
-    } else {
-      // Search hint texts if there is no element matched hint key.
-      this.startSearching(currentKey);
-    }
+  if (elements.length == 0) {
+    // Search hint texts if there is no element matched hint key.
+    this.startSearching(currentKey);
     return true;
   }
 
@@ -78,7 +86,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
 };
 
 HintModeProcessor.prototype.getExtendAction = function() {
-  return this.extendAction;
+  return this.extendAction || ActionMap.default;
 };
 
 /**
@@ -133,13 +141,12 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
  */
 HintModeProcessor.prototype.startSearching = function(currentKey) {
   if (!this.searching) {
-    if (!this.commandBox) {
-      this.commandBox = new HometypeCommandBox('SearchHints');
-    }
-
-    this.commandBox.show();
-    this.commandBox.setText(currentKey);
+    this.commandBox.setHeaderText(this.getExtendAction());
     this.searching = true;
+  }
+
+  if (!this.commandBox.isFocused()) {
+    this.commandBox.show().setText(currentKey);
   }
 
   var context = this;
