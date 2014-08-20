@@ -25,7 +25,9 @@ RuntimeCommand.closeTab = function(sender, params, response) {
  * Open a url in the current tab or a new tab.
  */
 RuntimeCommand.openUrl = function(sender, params, response) {
-  if (params.newTab) {
+  if (params.newWindow) {
+    chrome.windows.create({ url: params.url, focused: true });
+  } else if (params.newTab) {
     chrome.tabs.create({ url: params.url, active: true });
   } else {
     chrome.tabs.update({ url: params.url });
