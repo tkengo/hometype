@@ -49,5 +49,14 @@ var HintAction = {
     if (element.tagName.toLowerCase() == 'a' && element.href) {
       chrome.runtime.sendMessage({ command: 'copyToClipboard', params: element.href });
     }
+  },
+
+  /**
+   * Open a url in a new window.
+   */
+  openNewWindow: function(element) {
+    if (element.tagName.toLowerCase() == 'a' && element.href) {
+      Utility.openUrlInNewWindow(element.href);
+    }
   }
 };
