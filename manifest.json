@@ -27,7 +27,7 @@
     "persistent": false,
     "scripts": [
       "lib/utility.js",
-      "lib/jquery-2.0.1.min.js",
+      "lib/jquery-2.1.3.min.js",
       "js/background/favicon.js",
       "js/background/history.js",
       "js/background/tab.js",
@@ -43,7 +43,7 @@
       "css/main.css"
     ],
     "js": [
-      "lib/jquery-2.0.1.min.js",
+      "lib/jquery-2.1.3.min.js",
       "lib/jquery.extend.js",
       "lib/utility.js",
       "lib/dom.js",
