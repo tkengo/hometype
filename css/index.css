@@ -9,7 +9,8 @@
     height: 360px;
     width: 610px;
     text-align: left;
-    background: url(../images/logo.png) 680px 105px no-repeat;
+    background: url(../images/logo.svg) 680px 105px no-repeat;
+    background-size: 285px 280px;
   }
     .title-inner h2 {
       font-size: 42px;
