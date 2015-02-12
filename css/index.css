@@ -75,13 +75,15 @@ table.introduction {
     float: left;
     margin-right: 45px;
     margin-bottom: 20px;
+    padding-top: 88px;
+    box-sizing: border-box;
   }
   .mode li:nth-child(3n) {
     margin-right: 0;
   }
   .mode h2 {
     font-size: 24px;
-    margin: 20px 0;
+    margin-bottom: 20px;
   }
 
 /* key bindings */
