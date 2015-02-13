@@ -81,6 +81,30 @@ table.introduction {
   .mode li:nth-child(3n) {
     margin-right: 0;
   }
+  .mode li.normal {
+    background: url(../images/normal_mode.svg) top center no-repeat;
+    background-size: 78px 68px;
+  }
+  .mode li.insert {
+    background: url(../images/insert_mode.svg) top center no-repeat;
+    background-size: 112px 68px;
+  }
+  .mode li.hint {
+    background: url(../images/hint_mode.svg) top center no-repeat;
+    background-size: 113px 68px;
+  }
+  .mode li.visual {
+    background: url(../images/visual_mode.svg) top center no-repeat;
+    background-size: 92px 68px;
+  }
+  .mode li.command {
+    background: url(../images/command_mode.svg) top center no-repeat;
+    background-size: 66px 68px;
+  }
+  .mode li.help {
+    background: url(../images/help_mode.svg) top center no-repeat;
+    background-size: 68px 68px;
+  }
   .mode h2 {
     font-size: 24px;
     margin-bottom: 20px;
