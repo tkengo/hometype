@@ -58,5 +58,14 @@ var HintAction = {
     if (element.tagName.toLowerCase() == 'a' && element.href) {
       Utility.openUrlInNewWindow(element.href);
     }
+  },
+
+  /**
+   * View source code of the link.
+   */
+  viewSource: function(element) {
+    if (element.tagName.toLowerCase() == 'a' && element.href) {
+      Utility.openUrl('view-source:' + element.href);
+    }
   }
 };
