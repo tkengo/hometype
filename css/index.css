@@ -9,7 +9,8 @@
     height: 360px;
     width: 610px;
     text-align: left;
-    background: url(../images/logo.png) 680px 105px no-repeat;
+    background: url(../images/logo.svg) 680px 105px no-repeat;
+    background-size: 285px 280px;
   }
     .title-inner h2 {
       font-size: 42px;
@@ -74,13 +75,39 @@ table.introduction {
     float: left;
     margin-right: 45px;
     margin-bottom: 20px;
+    padding-top: 88px;
+    box-sizing: border-box;
   }
   .mode li:nth-child(3n) {
     margin-right: 0;
   }
+  .mode li.normal {
+    background: url(../images/normal_mode.svg) top center no-repeat;
+    background-size: 78px 68px;
+  }
+  .mode li.insert {
+    background: url(../images/insert_mode.svg) top center no-repeat;
+    background-size: 112px 68px;
+  }
+  .mode li.hint {
+    background: url(../images/hint_mode.svg) top center no-repeat;
+    background-size: 113px 68px;
+  }
+  .mode li.visual {
+    background: url(../images/visual_mode.svg) top center no-repeat;
+    background-size: 92px 68px;
+  }
+  .mode li.command {
+    background: url(../images/command_mode.svg) top center no-repeat;
+    background-size: 66px 68px;
+  }
+  .mode li.help {
+    background: url(../images/help_mode.svg) top center no-repeat;
+    background-size: 68px 68px;
+  }
   .mode h2 {
     font-size: 24px;
-    margin: 20px 0;
+    margin-bottom: 20px;
   }
 
 /* key bindings */

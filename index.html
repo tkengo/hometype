@@ -8,12 +8,15 @@
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
   <link href="./css/common.css" media="all" rel="stylesheet" type="text/css">
   <link href="./css/index.css" media="all" rel="stylesheet" type="text/css">
-  <meta property="og:title" content="Hometype 2" />
-  <meta property="og:description" content="Hometype provides keyboard manipulation for Hackers. This is an extension to operate Google Chrome without touching a mouse." />
-  <meta property="og:url" content="http://tkengo.github.io/hometype/" />
-  <meta property="og:image" content="http://tkengo.github.io/hometype/images/ogp.png" />
-  <link rel="icon" href="./images/favicon.ico" />
-  <link rel="apple-touch-iconprecomposed" href="./images/apple-touch.png">
+  <meta property="og:title" content="Hometype 2">
+  <meta property="og:description" content="Hometype provides keyboard manipulation for Hackers. This is an extension to operate Google Chrome without touching a mouse.">
+  <meta property="og:url" content="http://tkengo.github.io/hometype/">
+  <meta property="og:image" content="http://tkengo.github.io/hometype/images/ogp.png">
+  <link rel="icon" href="./images/favicon.ico">
+  <link rel="apple-touch-icon" sizes="57x57"   href="./images/apple-touch-icon-57x57-precomposed.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="./images/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon" sizes="72x72"   href="./images/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="./images/apple-touch-icon-144x144-precomposed.png">
 </head>
 <body>
 
@@ -72,40 +75,34 @@
         </tr>
       </tbody>
     </table>
-    <img src="./images/screen.gif" alt="screen" />
+    <img src="./images/screen.gif" alt="screen">
   </section>
 
   <section class="container mode">
     <h1>Mode</h1>
     <p class="description">Hometype has like vim's modes. All modes can be switched with keyboard manipulation.</p>
     <ul>
-      <li>
-        <img src="./images/normal_mode.png" alt="Normal Mode" />
+      <li class="normal">
         <h2>Normal Mode</h2>
         <p>In most cases Hometype is in this mode. You can scroll to up or down on the page, and move to back or forward in the history.</p>
       </li>
-      <li>
-        <img src="./images/insert_mode.png" alt="Insert Mode" />
+      <li class="insert">
         <h2>Insert Mode</h2>
         <p>Hometype shifts the current mode automatically to this mode when a form is getting the focus. In insert mode don't bind a command to key because you have to input a text to form.</p>
       </li>
-      <li>
-        <img src="./images/hint_mode.png" alt="Hint Mode" />
+      <li class="hint">
         <h2>Hint Mode</h2>
         <p>Hint tip elements is shown for displayed elements. If hint tip's key is pushed, you can follow a link or focus an element.</p>
       </li>
-      <li>
-        <img src="./images/visual_mode.png" alt="Visual Mode" />
+      <li class="visual">
         <h2>Visual Mode</h2>
         <p>If the current mode shifts the visual mode, caret appears to select an element texts. Like a caret browsing in Firefox.</p>
       </li>
-      <li>
-        <img src="./images/command_mode.png" alt="Command Mode" />
+      <li class="command">
         <h2>Command Mode</h2>
         <p>The command bar to input and execute a command is shown on the bottom of the page. This bar also can search bookmarks, histories, and closed tabs.</p>
       </li>
-      <li>
-        <img src="./images/help_mode.png" alt="Help Mode" />
+      <li class="help">
         <h2>Help Mode</h2>
         <p>Key binding list that is used in Hometype is shown in the center of the page.</p>
       </li>
@@ -273,7 +270,7 @@
     &copy;&nbsp;Product design and development <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, Website design <a href="https://twitter.com/tkengo" target="_blank">@tkengo</a>, <a href="https://twitter.com/keita_kawamoto" target="_blank">@keita_kawamoto</a>
   </footer>
 
-  <script type="text/javascript">
+  <script>
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-35368510-1']);
     _gaq.push(['_trackPageview']);
