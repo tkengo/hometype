@@ -26,6 +26,9 @@
   "comfortable": {
     "message": "Comfortable"
   },
+  "custom": {
+    "message": "Custom"
+  },
   "letter_type": {
     "message": "Letter Type"
   },

@@ -26,6 +26,9 @@
   "comfortable": {
     "message": "コンフォータブル"
   },
+  "custom": {
+    "message": "カスタム"
+  },
   "letter_type": {
     "message": "文字種別"
   },

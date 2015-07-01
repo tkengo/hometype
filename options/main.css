@@ -170,6 +170,10 @@ dt, dd {
 .option-description {
   display: none;
 }
+.disabled {
+  color: #bbb;
+  background-color: #fafafa;
+}
 
 #key_bind_list {
   width: 396px;
