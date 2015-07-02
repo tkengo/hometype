@@ -12,22 +12,18 @@
  * @param array keys The string of hint keys.
  * @param boolean targetLength Length of hint for target.
  */
-var CustomHintAlgorithm = function(keys, targetLength) {
-  keys = convertLettersByOption(keys);
+var CustomHintAlgorithm = function(targetLength) {
+  var keys = convertLettersByOption(Opt.custom_hint_keys);
 
   var n = keys.length;
   var l = 1;
-  var needKeyLength = n;
-  while (needKeyLength < targetLength) {
-    needKeyLength = Math.pow(n, l);
+  while (n < targetLength) {
+    n *= ++l;
   }
 
   this.keys = keys;
-  this.needKeyLength = needKeyLength;
-  this.keysIndex = new Array(needKeyLength);
-  for (var i = 0; i < this.keysIndex; i++) {
-    this.keysIndex[i] = 0;
-  }
+  this.needKeyLength = l;
+  this.keysIndex = 0;
 };
 
 /**
@@ -36,7 +32,12 @@ var CustomHintAlgorithm = function(keys, targetLength) {
 CustomHintAlgorithm.prototype.pop = function() {
   var hintKey = '';
 
-  for (var i = 0; i < this.needKeyLength; i++) {
-    hintKey += this.keys[this.keysIndex[i]];
+  var keySize = this.keys.length;
+  for (var n = 0, len = this.needKeyLength; n < len; n++) {
+    var an = Math.floor(this.keysIndex / Math.pow(keySize, n)) % keySize;
+    hintKey += this.keys[an];
   }
+  this.keysIndex++;
+
+  return hintKey;
 };
