@@ -14,7 +14,7 @@ var HintAction = {
     var e = w(element);
 
     if (e.isEditable()) {
-      e.focus();
+      e.raw.focus();
     } else if (e.isSelect()) {
       var selectBox = new HometypeSelectBox($(e.raw));
       this.createHints('yellow', selectBox.getListElements());
