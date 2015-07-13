@@ -56,7 +56,8 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
     if (currentKey == ';') {
       this.commandBox.setHeaderText(';').show();
       return true;
-    } else if (this.extendAction = ActionMap[currentKey]) {
+    } else if (ActionMap[currentKey]) {
+      this.extendAction = ActionMap[currentKey];
       this.commandBox.setHeaderText(this.extendAction).setText('');
       document.activeElement.blur();
       return true;
