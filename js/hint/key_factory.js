@@ -5,6 +5,8 @@ var HintKeyFactory = {
         return new StandardHintAlgorithm(targetLength);
       case Constant.hint_key.algorithm.comfortable:
         return new ComfortableHintAlgorithm(targetLength);
+      case Constant.hint_key.algorithm.custom:
+        return new CustomHintAlgorithm(targetLength);
       default:
         return new StandardHintAlgorithm(targetLength);
     }

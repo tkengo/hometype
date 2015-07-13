@@ -64,6 +64,7 @@
       "js/hint/letter_conversion.js",
       "js/hint/algorithm/standard.js",
       "js/hint/algorithm/comfortable.js",
+      "js/hint/algorithm/custom.js",
       "js/hint/key_factory.js",
       "js/hint/element.js",
       "js/hint/element_collection.js",

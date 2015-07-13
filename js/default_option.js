@@ -8,6 +8,7 @@ var HometypeDefaultOptions = {
   tab_selection_hint_keys: '123456789QWERTYUIOPASDFGHJKLZXCVBNM',
   hint_key_algorithm: Constant.hint_key.algorithm.standard,
   hint_key_type: Constant.hint_key.letter_type.lowercase,
+  custom_hint_keys: 'jfhkgyuiopqwertnmzxcvblasd',
 
   /**
    * How to specify a command:
