@@ -19,7 +19,7 @@ var CustomHintAlgorithm = function(targetLength) {
   var l = 1;
   while (n < targetLength) {
     ++l;
-    n *= n;
+    n *= keys.length;
   }
 
   this.keys = keys;
