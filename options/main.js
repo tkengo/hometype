@@ -34,12 +34,18 @@ function load(options)
   controlCustomHintKeyField();
 
   var bindList = '';
-  $.each(options.key_bind, function(map, bind) {
-    $.each(bind, function(key, command) {
+  for (var map in options.key_bind.remap) {
+    for (var key in options.key_bind.remap[map]) {
+      var command = options.key_bind.remap[map][key];
       bindList += map + ' ' + key + ' ' + command + "\r\n";
-    });
-    bindList += "\r\n";
-  });
+    }
+  }
+  for (var map in options.key_bind.noremap) {
+    for (var key in options.key_bind.noremap[map]) {
+      var command = options.key_bind.noremap[map][key];
+      bindList += map.replace('map', 'noremap') + ' ' + key + ' ' + command + "\r\n";
+    }
+  }
   $('#key_bind_list').val(bindList);
 
   var ignoreList = '';
@@ -88,18 +94,25 @@ function saveOptions()
   });
 
   var bindList = $('#key_bind_list').val();
-  params.key_bind = {};
+  params.key_bind = {
+    remap: {},
+    noremap: {}
+  };
   $.each(bindList.split(/\r\n|\r|\n/), function(index, line) {
     if (line == '') {
       return true;
     }
-
     value = line.split(' ');
-    if (!params.key_bind[value[0]]) {
-      params.key_bind[value[0]] = {};
+
+    var map = value[0].replace('noremap', 'map');
+    var key = value[1];
+    var type = value[0].indexOf('noremap') > -1 ? 'noremap' : 'remap';
+
+    if (!params.key_bind[type][map]) {
+      params.key_bind[type][map] = {};
     }
 
-    params.key_bind[value[0]][value[1]] = value[2];
+    params.key_bind[type][map][key] = value[2];
   });
 
   var ignoreList = $('#ignore_url_list').val();

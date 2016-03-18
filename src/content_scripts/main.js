@@ -24,6 +24,7 @@ function initialize(options)
     return;
   }
 
+  KeyMap.setDefault(HometypeDefaultOptions.default_key_bind);
   bindCommand(options);
 
   // Set an event listener to the key sequence object when options have loaded.
@@ -88,8 +89,12 @@ function bindCommand(options)
 {
   KeyMap.clear();
 
-  KeyMap.bind(options.default_key_bind);
-  KeyMap.bind(options.key_bind);
+  for (var map in options.key_bind.remap) {
+    KeyMap.remap(ModeList.from(map), options.key_bind.remap[map]);
+  }
+  for (var map in options.key_bind.noremap) {
+    KeyMap.noremap(ModeList.from(map), options.key_bind.noremap[map]);
+  }
 }
 
 /**

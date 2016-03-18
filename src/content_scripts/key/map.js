@@ -25,7 +25,15 @@ var _map = {
   visual: {},
   command: {},
   help: {}
-}
+};
+var _defaultMap = {
+  normal: {},
+  insert: {},
+  hint: {},
+  visual: {},
+  command: {},
+  help: {}
+};
 
 /**
  * Assign key to command in specified mode.
@@ -113,34 +121,56 @@ KeyMap.assignedCommands = function() {
   return _map;
 };
 
-/**
- * Bind key to command from options. If a key has already a command, an assignment will be
- * overwritten.
- *
- * @param object options Key binding settings.
- */
-KeyMap.bind = function(options) {
-  for (var mode in options) {
-    var maps = options[mode];
+KeyMap.setDefault = function(defaults) {
+  for (var map in defaults) {
+    var maps = defaults[map];
     for (var key in maps) {
-      var bind = maps[key];
-      if (Command.isExists(bind)) {
-        KeyMap[mode](key, bind);
-      } else {
-        var command = KeyMap.assignedCommands()[ModeList.from(mode)][bind];
-        if (Command.isExists(command)) {
-          KeyMap[mode](key, command);
-        }
+      var command = maps[key];
+      if (Command.isExists(command)) {
+        _defaultMap[ModeList.from(map)][key] = command;
+      }
+    }
+  }
+};
+
+KeyMap.noremap = function(mode, maps) {
+  for (var key in maps) {
+    var bind = maps[key];
+    if (Command.isExists(bind)) {
+      KeyMap.assign(mode, key, bind);
+    } else {
+      var command = _defaultMap[mode][bind];
+      if (Command.isExists(command)) {
+        KeyMap.assign(mode, key, command);
+      }
+    }
+  }
+};
+
+KeyMap.remap = function(mode, maps) {
+  for (var key in maps) {
+    var bind = maps[key];
+    if (Command.isExists(bind)) {
+      KeyMap.assign(mode, key, bind);
+    } else {
+      var command = _map[mode][bind];
+      if (Command.isExists(command)) {
+        KeyMap.assign(mode, key, command);
       }
     }
   }
 };
 
 /**
- * Clear all key binding.
+ * Clear all key binding and set default key binding.
  */
 KeyMap.clear = function() {
-  $.each(_map, function(key, map) {
-    _map[key] = {};
-  });
+  for (var mode in _map) {
+    _map[mode] = {};
+  }
+  for (var mode in _defaultMap) {
+    for (var key in _defaultMap[mode]) {
+      _map[mode][key] = _defaultMap[mode][key];
+    }
+  }
 };

@@ -54,11 +54,10 @@ var HometypeOptions = (function() {
       load: function(callback) {
         chrome.storage.sync.get('options', function(results) {
           var options = $.extend({}, HometypeDefaultOptions, results.options);
-          setOptions(options);
-
           if (typeof callback == 'function') {
             callback(options);
           }
+          setOptions(options);
         });
       },
       /**
