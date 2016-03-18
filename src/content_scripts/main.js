@@ -25,7 +25,6 @@ function initialize(options)
   }
 
   KeyMap.setDefault(HometypeDefaultOptions.default_key_bind);
-  bindCommand(options);
 
   // Set an event listener to the key sequence object when options have loaded.
   var key = new KeySequence();

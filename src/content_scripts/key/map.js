@@ -126,7 +126,7 @@ KeyMap.setDefault = function(defaults) {
     var maps = defaults[map];
     for (var key in maps) {
       var command = maps[key];
-      if (Command.isExists(command)) {
+      if (Command.isExists(command.split(' ')[0])) {
         _defaultMap[ModeList.from(map)][key] = command;
       }
     }
@@ -140,7 +140,7 @@ KeyMap.noremap = function(mode, maps) {
       KeyMap.assign(mode, key, bind);
     } else {
       var command = _defaultMap[mode][bind];
-      if (Command.isExists(command)) {
+      if (Command.isExists(command.split(' ')[0])) {
         KeyMap.assign(mode, key, command);
       }
     }
@@ -154,7 +154,7 @@ KeyMap.remap = function(mode, maps) {
       KeyMap.assign(mode, key, bind);
     } else {
       var command = _map[mode][bind];
-      if (Command.isExists(command)) {
+      if (Command.isExists(command.split(' ')[0])) {
         KeyMap.assign(mode, key, command);
       }
     }
