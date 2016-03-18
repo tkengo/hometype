@@ -8,10 +8,20 @@
 var HintModeProcessor = function() {
   this.chooseElementCallback   = null;
   this.notifyLeaveModeCallback = null;
-  this.hintElements = null;
-  this.headElements = [];
-  this.searching = false;
-  this.commandBox = null;
+  this.hintElements            = null;
+  this.commandBox              = null;
+  this.headElements            = [];
+  this.searching               = false;
+  this.extendAction            = null;
+};
+
+/**
+ * Callback method that invoke when enter the hint mode.
+ */
+HintModeProcessor.prototype.notifyEnterMode = function() {
+  if (!this.commandBox) {
+    this.commandBox = new HometypeCommandBox('SearchHints');
+  }
 };
 
 /**
@@ -20,7 +30,8 @@ var HintModeProcessor = function() {
 HintModeProcessor.prototype.notifyLeaveMode = function() {
   this.chooseElementCallback = null;
   this.hintElements.removeAllHint();
-  this.searching = false;
+  this.searching    = false;
+  this.extendAction = null;
 
   if (this.commandBox) {
     this.commandBox.hide();
@@ -40,9 +51,23 @@ HintModeProcessor.prototype.notifyLeaveMode = function() {
  * @param KeyboradEvent e          event.
  */
 HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
+  // Enter the extend hint mode.
+  if (!this.searching && (currentKey == ';' || this.commandBox.getHeaderText() == ';')) {
+    if (currentKey == ';') {
+      this.commandBox.setHeaderText(';').show();
+      return true;
+    } else if (ActionMap[currentKey]) {
+      this.extendAction = ActionMap[currentKey];
+      this.commandBox.setHeaderText(this.extendAction).setText('');
+      document.activeElement.blur();
+      return true;
+    } else {
+      this.commandBox.setHeaderText(this.getExtendAction());
+    }
+  }
+
   // Get elements matched hint key.
   var elements = this.hintElements.getMatchedElements(stack);
-
   if (elements.length == 0) {
     // Search hint texts if there is no element matched hint key.
     this.startSearching(currentKey);
@@ -61,6 +86,10 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
   }
 };
 
+HintModeProcessor.prototype.getExtendAction = function() {
+  return this.extendAction || ActionMap.default;
+};
+
 /**
  * Confirm an element and invoke a callback method.
  * Return normal mode if the callback method returned false.
@@ -69,7 +98,7 @@ HintModeProcessor.prototype.onKeyDown = function(stack, currentKey, e) {
  */
 HintModeProcessor.prototype.confirm = function(element) {
   // Invoke a callback method if an element is confirmed.
-  if (this.chooseElementCallback && this.chooseElementCallback($(element)) !== false) {
+  if (this.chooseElementCallback && this.chooseElementCallback.call(this, element) !== false) {
     // Return normal mode if only callback didn't return false.
     Mode.changeMode(ModeList.NORMAL_MODE);
   }
@@ -113,13 +142,12 @@ HintModeProcessor.prototype.onNotifyLeaveMode = function(notifyLeaveModeCallback
  */
 HintModeProcessor.prototype.startSearching = function(currentKey) {
   if (!this.searching) {
-    if (!this.commandBox) {
-      this.commandBox = new HometypeCommandBox('SearchHints');
-    }
-
-    this.commandBox.show();
-    this.commandBox.setText(currentKey);
+    this.commandBox.setHeaderText(this.getExtendAction());
     this.searching = true;
+  }
+
+  if (!this.commandBox.isFocused()) {
+    this.commandBox.show().setText(currentKey);
   }
 
   var context = this;

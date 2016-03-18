@@ -15,9 +15,10 @@
  * @param string  hintTheme  Hint theme.
  */
 var HintElement = function(srcElement, index, key, hintTheme) {
-  this.className = 'hometype-hit-a-hint-' + hintTheme;
-  this.index     = index;
-  this.key       = key;
+  this.className    = 'hometype-hit-a-hint-' + hintTheme;
+  this.index        = index;
+  this.key          = key;
+  this.matchedIndex = 0;
 
   this.srcElement = srcElement;
   this.srcElement.className ?
@@ -102,7 +103,7 @@ HintElement.prototype.getKey = function() {
  * Pushed first hint key.
  */
 HintElement.prototype.setPushed = function() {
-  this.getTipElement().children[0].className = 'hometype-hit-a-hint-pushed';
+  this.getTipElement().children[this.matchedIndex++].className = 'hometype-hit-a-hint-pushed';
 };
 
 HintElement.prototype.highlight = function(targets) {

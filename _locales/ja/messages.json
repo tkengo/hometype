@@ -26,6 +26,9 @@
   "comfortable": {
     "message": "コンフォータブル"
   },
+  "custom": {
+    "message": "カスタム"
+  },
   "letter_type": {
     "message": "文字種別"
   },
@@ -59,6 +62,8 @@
         <dd><strong>jfhkgyuiopqwertnmzxcvblasd</strong> の文字の中から、先頭から1文字ずつ取り出した文字を組み合わせてヒントキーを生成します。</dd>
         <dt>2. コンフォータブル</dt>
         <dd>出来るだけ片手でキーを押下できるようにヒントキーを生成します。</dd>
+        <dt>3. カスタム</dt>
+        <dd>ヒントキーに現れる文字を自分で指定します。必ず2つ以上のキーを指定して下さい。</dd>
       </dl>
     "
   },
@@ -68,7 +73,7 @@
       <dl>
         <dt>1. 小文字</dt>
         <dd>生成されるヒントキーは<strong>小文字</strong>になります。</dd>
-        <dt>2. UPPERCASE</dt>
+        <dt>2. 大文字</dt>
         <dd>生成されるヒントキーは<strong>大文字</strong>になります。</dd>
       </dl>
     "

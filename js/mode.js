@@ -27,12 +27,12 @@ var HometypeMode = function() {
   this.callbacks = [];
 
   this.modeProcessors = {};
-  this.modeProcessors[ModeList.NORMAL_MODE]        = new NoopProcessor();
-  this.modeProcessors[ModeList.INSERT_MODE]        = new InsertModeProcessor();
-  this.modeProcessors[ModeList.HINT_MODE]          = new HintModeProcessor();
-  this.modeProcessors[ModeList.VISUAL_MODE]        = new VisualModeProcessor();
-  this.modeProcessors[ModeList.COMMAND_MODE]       = new CommandModeProcessor();
-  this.modeProcessors[ModeList.HELP_MODE]          = new HelpModeProcessor();
+  this.modeProcessors[ModeList.NORMAL_MODE]  = new NoopProcessor();
+  this.modeProcessors[ModeList.INSERT_MODE]  = new InsertModeProcessor();
+  this.modeProcessors[ModeList.HINT_MODE]    = new HintModeProcessor();
+  this.modeProcessors[ModeList.VISUAL_MODE]  = new VisualModeProcessor();
+  this.modeProcessors[ModeList.COMMAND_MODE] = new CommandModeProcessor();
+  this.modeProcessors[ModeList.HELP_MODE]    = new HelpModeProcessor();
 
   this.lockMode = false;
 };

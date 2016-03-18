@@ -334,31 +334,9 @@ Command.followLink = function(option) {
   }
 
   // enter the hint mode, and register event listener to handle choosen element.
-  // 1. If choosen element is form tag, focus to it.
-  // 2. If choosen element is select tag, open the select box.
-  // 3. Otherwise, emulate click event for an element.
   var processor = Mode.enterHintMode(theme, targets);
   processor.onChooseElement(function(element) {
-    if (Dom.isEditable(element.get(0))) {
-      element.focus();
-    } else if (element.is('select')) {
-      var selectBox = new HometypeSelectBox(element);
-      processor.createHints('yellow', selectBox.getListElements());
-      processor.onNotifyLeaveMode(function() { selectBox.remove(); });
-      return false;
-    } else {
-      if (option.continuous) {
-        var timer = setTimeout(function() { new Executer('@followLink').execute(); }, 300);
-        window.onbeforeunload = function() { clearInterval(timer); };
-      }
-      Utility.clickElement(element, newTab);
-      if (option.continuous) {
-        window.onbeforeunload = undefined;
-        return false;
-      }
-    }
-
-    return true;
+    return HintAction.run(this.getExtendAction(), element, processor, option);
   });
 };
 

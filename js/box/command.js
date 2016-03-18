@@ -57,6 +57,8 @@ HometypeCommandBox.prototype.show = function() {
   }).show();
 
   this.text.focus();
+
+  return this;
 };
 
 /**
@@ -193,7 +195,7 @@ HometypeCommandBox.prototype.getSelected = function() {
  * Get a text in the command box.
  */
 HometypeCommandBox.prototype.getText = function() {
-  return this.text.val().replace(':', '');
+  return this.text.val();
 };
 
 /**
@@ -209,4 +211,18 @@ HometypeCommandBox.prototype.setText = function(text) {
 HometypeCommandBox.prototype.setHeaderText = function(text) {
   this.header.text(text);
   return this;
+};
+
+/**
+ * Get a text in the header of the command box.
+ */
+HometypeCommandBox.prototype.getHeaderText = function() {
+  return this.header.text();
+};
+
+/**
+ * Check if text box has focus.
+ */
+HometypeCommandBox.prototype.isFocused = function() {
+  return document.activeElement == this.text.get(0);
 };
