@@ -88,11 +88,8 @@ function bindCommand(options)
 {
   KeyMap.clear();
 
-  $.each($.extend(true, {}, options.default_key_bind, options.key_bind), function(map, bind) {
-    $.each(bind, function(key, command) {
-      KeyMap[map](key, command);
-    });
-  });
+  KeyMap.bind(options.default_key_bind);
+  KeyMap.bind(options.key_bind);
 }
 
 /**

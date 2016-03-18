@@ -15,7 +15,23 @@ var ModeList = {
   HINT_MODE: 'hint',
   VISUAL_MODE: 'visual',
   COMMAND_MODE: 'command',
-  HELP_MODE: 'help'
+  HELP_MODE: 'help',
+
+  /**
+   * Convert map name (such like 'nmap', 'imap' ...) into mode name.
+   */
+  from: function(map) {
+    switch (map) {
+      case 'map':
+      case 'nmap': return this.NORMAL_MODE;
+      case 'imap': return this.INSERT_MODE;
+      case 'fmap': return this.HINT_MODE;
+      case 'vmap': return this.VISUAL_MODE;
+      case 'cmap': return this.COMMAND_MODE;
+      case 'hmap': return this.HELP_MODE;
+      default: return this.NORMAL_MODE;
+    }
+  }
 };
 
 /**

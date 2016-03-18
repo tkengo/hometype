@@ -114,6 +114,29 @@ KeyMap.assignedCommands = function() {
 };
 
 /**
+ * Bind key to command from options. If a key has already a command, an assignment will be
+ * overwritten.
+ *
+ * @param object options Key binding settings.
+ */
+KeyMap.bind = function(options) {
+  for (var mode in options) {
+    var maps = options[mode];
+    for (var key in maps) {
+      var bind = maps[key];
+      if (Command.isExists(bind)) {
+        KeyMap[mode](key, bind);
+      } else {
+        var command = KeyMap.assignedCommands()[ModeList.from(mode)][bind];
+        if (Command.isExists(command)) {
+          KeyMap[mode](key, command);
+        }
+      }
+    }
+  }
+};
+
+/**
  * Clear all key binding.
  */
 KeyMap.clear = function() {
