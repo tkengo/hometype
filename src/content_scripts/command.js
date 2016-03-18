@@ -8,6 +8,13 @@
 var Command = {};
 
 /**
+ * Check a command existence. Return true if a command exists, otherwise return false.
+ */
+Command.isExists = function(command) {
+  return !!this[command];
+};
+
+/**
  * Noop command.
  */
 Command.noop = function() { };
