@@ -42,7 +42,7 @@ KeySequence.prototype.onProcess = function(callback) {
  */
 KeySequence.prototype.processor = function(e) {
   // Return if pushed key is only meta key.
-  var id = e.keyIdentifier;
+  var id = e.keyIdentifier || e.key;
   if (id == 'Control' || id == 'Shift' || id == 'Alt' || id == 'Meta') {
     return false;
   }
@@ -75,7 +75,7 @@ KeySequence.prototype.processor = function(e) {
  * @return string A key mapping string.
  */
 KeySequence.prototype.getKeyChar = function(e) {
-  var key = KeyIdentifiers.toChar(e.keyIdentifier);
+  var key = KeyIdentifiers.toChar(e.keyIdentifier || e.key);
 
   if (e.shiftKey) {
     key = key.toUpperCase();
