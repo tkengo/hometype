@@ -9,14 +9,31 @@ var HometypeScreen = function() {
 };
 
 /**
+ * Get the top DOM element which can be scrolled.
+ * Referred to https://dev.opera.com/articles/fixing-the-scrolltop-bug/
+ *
+ * @return (HTMLElement | null) document.scrollingElement or document.body. It depends on an environment.
+ */
+HometypeScreen.prototype.scrollingArea = function() {
+  if ('scrollingElement' in document) {
+    return document.scrollingElement;
+  // Fallback for legacy browsers
+  } else if (navigator.userAgent.indexOf('WebKit') != -1) {
+    return document.body;
+  }
+
+  return document.documentElement;
+}();
+
+/**
  * Get the current scroll position.
  *
  * @return Object A hash that has top and left key.
  */
 HometypeScreen.prototype.getScrollPosition = function() {
   return {
-    top: document.body.scrollTop,
-    left: document.body.scrollLeft
+    top: this.scrollingArea.scrollTop,
+    left: this.scrollingArea.scrollLeft
   };
 };
 
@@ -51,8 +68,8 @@ HometypeScreen.prototype.getDocumentSize = function() {
  * @param integer y vertical position.
  */
 HometypeScreen.prototype.scrollTo = function(x, y) {
-  document.body.scrollTop = y;
-  document.body.scrollLeft = x;
+  this.scrollingArea.scrollTop = y;
+  this.scrollingArea.scrollLeft = x;
 };
 
 /**
