@@ -2,7 +2,7 @@
 
 require 'open-uri'
 require 'nkf'
-dict_url = 'http://openlab.jp/skk/skk/dic/SKK-JISYO.ML'
+dict_url = 'https://raw.githubusercontent.com/skk-users-jp/dic-mirror/gh-pages/SKK-JISYO.ML'
 
 target_regexp = {
   alphabet: /^>?[a-z].*$/i,
