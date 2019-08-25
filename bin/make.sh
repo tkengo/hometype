@@ -26,5 +26,8 @@ for ignore_file in $IGNORE_FILES; do
     rm -fr $PUBLISH_DIR/$ignore_file
 done
 
+sed -i '' -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' _locales/en/messages.json
+sed -i '' -e ':a' -e 'N' -e '$!ba' -e 's/\n/ /g' _locales/ja/messages.json
+
 cd $BASE_DIR && zip -r $ZIP_FILE ${PUBLISH_DIR##*/}
 rm -fr $PUBLISH_DIR
